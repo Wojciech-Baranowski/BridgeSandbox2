@@ -16,15 +16,17 @@ public class MeasurableTest {
         int[] z2 = {-6, -6, 2, -3, -5, -2, -1, 3, 4, -5, 3, -5, 5, 6, 9};
         int[] outputCheck = {-1, 0, -1, -1, 1, 0, 0, -1, -1, 1, 0, 1, 0, 0, -1};
         int[] output = new int[z1.length];
-
+        //when
         for(int i = 0; i < z1.length; i++){
-            //when
             when(mockedMeasurable.getZ()).thenReturn(z1[i]);
-            output[i] = mockedMeasurable.compareTo(z2[i]);
-            //then
+            output[i] = Integer.compare(mockedMeasurable.getZ(), z2[i]);
+        }
+        //then
+
+        for(int i = 0; i < output.length; i++){
             assertTrue((output[i] > 0 && outputCheck[i] > 0)
-                            || (output[i] == 0 && outputCheck[i] == 0)
-                            || (output[i] < 0 && outputCheck[i] < 0));
+                    || (output[i] == 0 && outputCheck[i] == 0)
+                    || (output[i] < 0 && outputCheck[i] < 0));
         }
     }
 

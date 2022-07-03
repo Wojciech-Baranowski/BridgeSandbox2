@@ -1,6 +1,15 @@
 import assets.Assets;
 import assets.AssetsBean;
+import assets.font.RasterFontSymbol;
+import assets.font.RasterFontTest;
 import org.junit.Test;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Objects;
 
 import static org.junit.Assert.*;
 
@@ -45,6 +54,43 @@ public class AssetsBeanTest {
         for(int i = inputValue.length; i < inputName.length; i++){
             assertNull(inputAssets.getColor(inputName[i]));
         }
+    }
+
+    @Test
+    public void add_and_get_font_test() {
+        //given
+        String inputName = "name";
+        String inputPath = "/testFont.png";
+        char[] inputSymbols = {'A', 'B', 'C', 'a', 'b', 'c', '1', '2', '3'};
+        BufferedImage inputImages = null;
+        try {
+            InputStream inputStream = RasterFontTest.class.getResourceAsStream("/testFont.png");
+            inputImages = ImageIO.read(Objects.requireNonNull(inputStream));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        int[] inputAllPixels = inputImages.getRGB(0, 0, 63, 9, null, 0, 63);
+        int[][] inputPixels = new int[inputSymbols.length][];
+        for(int i = 0; i < inputSymbols.length; i++){
+            inputPixels[i] = new int[63];
+            for(int j = 0; j < 7; j++){
+                for(int k = 0; k < 9; k++){
+                    inputPixels[i][j + 7 * k] = inputAllPixels[i * 7 + j + 63 * k];
+                }
+            }
+        }
+        Assets inputAssets = AssetsBean.getAssets();
+        //when
+        inputAssets.addFont(inputName, inputPath, inputSymbols);
+        //then
+        for(int i = 0; i < inputSymbols.length; i++){
+            assertArrayEquals(inputPixels[i], inputAssets.getFont(inputName).getSymbolRasterable(inputSymbols[i]).getP());
+            assertEquals(7, inputAssets.getFont(inputName).getSymbolRasterable(inputSymbols[i]).getW());
+            assertEquals(9, inputAssets.getFont(inputName).getSymbolRasterable(inputSymbols[i]).getH());
+        }
+        assertNull(inputAssets.getColor("g"));
+        assertNull(inputAssets.getFont("d"));
+        assertNull(inputAssets.getFont("4"));
     }
 
 }

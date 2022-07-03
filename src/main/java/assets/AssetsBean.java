@@ -3,6 +3,7 @@ package assets;
 import assets.color.ArgbColor;
 import assets.color.Color;
 import assets.color.ColorFactory;
+import assets.font.Font;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,5 +35,15 @@ public class AssetsBean implements Assets{
     public void addColor(String name, int value) {
         Color color = colorFactory.makeArgbColor(value);
         colors.put(name, color);
+    }
+
+    @Override
+    public Font getFont(String name) {
+        return null;
+    }
+
+    @Override
+    public void addFont(String name, String path, char[] symbols) {
+
     }
 }

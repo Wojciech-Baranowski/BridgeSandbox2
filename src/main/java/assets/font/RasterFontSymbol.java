@@ -16,16 +16,16 @@ public class RasterFontSymbol implements Rasterable {
 
     @Override
     public int[] getP() {
-        return new int[0];
+        return p;
     }
 
     @Override
     public int getW() {
-        return 0;
+        return w;
     }
 
     @Override
     public int getH() {
-        return 0;
+        return h;
     }
 }

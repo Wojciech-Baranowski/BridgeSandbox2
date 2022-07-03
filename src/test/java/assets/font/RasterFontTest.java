@@ -3,9 +3,9 @@ package assets.font;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -16,10 +16,11 @@ public class RasterFontTest {
     @Test
     public void get_symbol_drawable_test() {
         //given
-        char[] inputSymbols = {'a', 'b', 'c', 'A', 'B', 'C', '1', '2', '3'};
+        char[] inputSymbols = {'A', 'B', 'C', 'a', 'b', 'c', '1', '2', '3'};
         BufferedImage inputImages = null;
         try {
-            inputImages = ImageIO.read(Objects.requireNonNull(Image.class.getResourceAsStream(("testFont.png"))));
+            InputStream inputStream = RasterFontTest.class.getResourceAsStream("/testFont.png");
+            inputImages = ImageIO.read(Objects.requireNonNull(inputStream));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -29,7 +30,7 @@ public class RasterFontTest {
             int[] inputPixels = new int[63];
             for(int j = 0; j < 7; j++){
                 for(int k = 0; k < 9; k++){
-                    inputPixels[j + 63 * k] = inputAllPixels[i * 7 + j + 63 * k];
+                    inputPixels[j + 7 * k] = inputAllPixels[i * 7 + j + 63 * k];
                 }
             }
             inputRasterables[i] = new RasterFontSymbol(Arrays.copyOf(inputPixels, 63), 7, 9);

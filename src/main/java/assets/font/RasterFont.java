@@ -18,6 +18,6 @@ public class RasterFont implements Font{
 
     @Override
     public Rasterable getSymbolRasterable(char symbol) {
-        return null;
+        return symbols.get(symbol);
     }
 }

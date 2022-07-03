@@ -1,5 +1,6 @@
 package assets;
 
+import assets.color.ArgbColor;
 import assets.color.Color;
 import assets.color.ColorFactory;
 
@@ -13,20 +14,25 @@ public class AssetsBean implements Assets{
     private Map<String, Color> colors;
 
     private AssetsBean(){
-
+        colorFactory = new ColorFactory();
+        colors = new HashMap<>();
     }
 
     public static Assets getAssets() {
-        return null;
+        if(assets == null){
+            assets = new AssetsBean();
+        }
+        return assets;
     }
 
     @Override
     public Color getColor(String name) {
-        return null;
+        return colors.get(name);
     }
 
     @Override
     public void addColor(String name, int value) {
-
+        Color color = colorFactory.makeArgbColor(value);
+        colors.put(name, color);
     }
 }

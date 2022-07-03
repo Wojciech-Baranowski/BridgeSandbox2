@@ -1,6 +1,5 @@
 package assets;
 
-import assets.color.ArgbColor;
 import assets.color.Color;
 import assets.color.ColorFactory;
 import assets.font.Font;

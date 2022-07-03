@@ -1,6 +1,5 @@
 import assets.Assets;
 import assets.AssetsBean;
-import assets.font.RasterFontSymbol;
 import assets.font.RasterFontTest;
 import org.junit.Test;
 
@@ -8,7 +7,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.Objects;
 
 import static org.junit.Assert.*;

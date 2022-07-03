@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Objects;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class FontFactoryTest {
@@ -40,7 +41,9 @@ public class FontFactoryTest {
         Font output = inputFactory.makeRasterFont("/testFont.png", inputSymbols);
         //then
         for(int i = 0; i < inputSymbols.length; i++){
-            assertEquals(inputRasterables[i], output.getSymbolRasterable(inputSymbols[i]));
+            assertEquals(inputRasterables[i].getW(), output.getSymbolRasterable(inputSymbols[i]).getW());
+            assertEquals(inputRasterables[i].getH(), output.getSymbolRasterable(inputSymbols[i]).getH());
+            assertArrayEquals(inputRasterables[i].getP(), output.getSymbolRasterable(inputSymbols[i]).getP());
         }
     }
 

@@ -1,6 +1,5 @@
 package display.rectangle;
 
-import assets.color.ArgbColor;
 import assets.color.Color;
 import assets.color.ColorFactory;
 import org.junit.Test;

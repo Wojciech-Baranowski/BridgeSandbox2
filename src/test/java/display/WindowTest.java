@@ -1,10 +1,10 @@
 package display;
 
-import org.junit.Test;
-
 public class WindowTest {
 
-    @Test
+    public static void main(String[] args) {
+        new WindowTest().draw_manual_test();
+    }
     public void draw_manual_test() {
         //given
         int[] inputPixels = new int[Window.w * Window.h];
@@ -21,6 +21,7 @@ public class WindowTest {
         }
         Window window = new Window();
         //when
+        window.draw(inputPixels);
         window.draw(inputPixels);
         //then
         //three 100 x 100 squares placed vertically, colored red, green and blue

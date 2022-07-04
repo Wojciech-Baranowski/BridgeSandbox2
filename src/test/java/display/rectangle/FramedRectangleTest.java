@@ -7,7 +7,6 @@ import org.junit.Test;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
 
 public class FramedRectangleTest {
 
@@ -26,9 +25,9 @@ public class FramedRectangleTest {
         for(int i = 0; i < inputX.length; i++){
             inputPixels[i] = new int[inputW[i] * inputH[i]];
             Arrays.fill(inputPixels[i], inputFrameColorValues[i]);
-            for(int j = inputFrameThicknesses[i]; j < inputX[i] - inputFrameThicknesses[i]; j++){
-                for(int k = inputFrameThicknesses[i]; j < inputY[i] - inputFrameThicknesses[i]; k++){
-                    inputPixels[j][i] = inputColorValues[i];
+            for(int j = inputFrameThicknesses[i]; j < inputW[i] - inputFrameThicknesses[i]; j++){
+                for(int k = inputFrameThicknesses[i]; k < inputH[i] - inputFrameThicknesses[i]; k++){
+                    inputPixels[i][j + k * inputW[i]] = inputColorValues[i];
                 }
             }
         }

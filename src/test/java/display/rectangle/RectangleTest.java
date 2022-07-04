@@ -1,5 +1,6 @@
 package display.rectangle;
 
+import assets.color.ArgbColor;
 import assets.color.Color;
 import assets.color.ColorFactory;
 import org.junit.Test;
@@ -42,6 +43,26 @@ public class RectangleTest {
             assertEquals(inputW[i], output[i].getW());
             assertEquals(inputH[i], output[i].getH());
             assertArrayEquals(inputPixels[i], output[i].getP());
+        }
+    }
+
+    @Test
+    public void mutators_test() {
+        //given
+        ColorFactory colorFactory = new ColorFactory();
+        Rectangle rectangle = new Rectangle(0, 0, 0, 0, 0, colorFactory.makeArgbColor(0));
+        int[] inputX = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[] inputY = {1, 4, 4, 1, 7, 9, 3, 5, 6};
+        int[] inputZ = {2, 4, 5, 0, 6, 0, -3, -4, -7};
+        for(int i = 0; i < inputX.length; i++){
+            //when
+            rectangle.setX(inputX[i]);
+            rectangle.setY(inputY[i]);
+            rectangle.setZ(inputZ[i]);
+            //then
+            assertEquals(inputX[i], rectangle.getX());
+            assertEquals(inputY[i], rectangle.getY());
+            assertEquals(inputZ[i], rectangle.getZ());
         }
     }
 

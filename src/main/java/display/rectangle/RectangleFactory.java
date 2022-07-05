@@ -3,7 +3,6 @@ package display.rectangle;
 import assets.Assets;
 import assets.AssetsBean;
 import assets.color.Color;
-import assets.color.ColorFactory;
 
 public class RectangleFactory {
 
@@ -23,6 +22,7 @@ public class RectangleFactory {
         Color color = assets.getColor(colorName);
         Color frameColor = assets.getColor(frameColorName);
         return new FramedRectangle(x, y, z, w, h, frameThickness, color, frameColor);
+
     }
 
 }

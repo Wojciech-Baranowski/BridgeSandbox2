@@ -6,7 +6,7 @@ import assets.color.Color;
 
 public class RectangleFactory {
 
-    private Assets assets;
+    private final Assets assets;
 
     public RectangleFactory() {
         this.assets = AssetsBean.getAssets();

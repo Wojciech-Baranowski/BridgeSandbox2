@@ -6,12 +6,12 @@ import java.awt.image.BufferedImage;
 
 public class Image implements Drawable {
 
-    private int[] p;
+    private final int[] p;
     private int x;
     private int y;
     private int z;
-    private int w;
-    private int h;
+    private final int w;
+    private final int h;
 
     Image(BufferedImage image, int x, int y, int z, int w, int h) {
         p = image.getRGB(0, 0, w, h, null, 0, w);
@@ -24,46 +24,46 @@ public class Image implements Drawable {
 
     @Override
     public int[] getP() {
-        return new int[0];
+        return p;
     }
 
     @Override
     public int getX() {
-        return 0;
+        return x;
     }
 
     @Override
     public int getY() {
-        return 0;
+        return y;
     }
 
     @Override
     public int getZ() {
-        return 0;
+        return z;
     }
 
     @Override
     public int getW() {
-        return 0;
+        return w;
     }
 
     @Override
     public int getH() {
-        return 0;
+        return h;
     }
 
     @Override
     public void setX(int x) {
-
+        this.x = x;
     }
 
     @Override
     public void setY(int y) {
-
+        this.y = y;
     }
 
     @Override
     public void setZ(int z) {
-
+        this.z = z;
     }
 }

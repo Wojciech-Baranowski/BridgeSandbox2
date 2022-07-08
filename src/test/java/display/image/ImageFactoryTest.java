@@ -12,37 +12,42 @@ import java.util.Objects;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-public class ImageTest {
+public class ImageFactoryTest {
 
     @Test
-    public void accessors_test() {
+    public void make_image_test() {
         //given
+        String fileName = "/testFont.png";
         BufferedImage inputImage = null;
         try {
-            InputStream inputStream = RasterFontTest.class.getResourceAsStream("/testFont.png");
+            InputStream inputStream = RasterFontTest.class.getResourceAsStream(fileName);
             inputImage = ImageIO.read(Objects.requireNonNull(inputStream));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        int[] inputPixels = inputImage.getRGB(0, 0, 63, 9, null, 0, 63);
         int[] inputX = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[] inputY = {1, 3, 5, 7, 9, 2, 4, 6, 8};
         int[] inputZ = {-4, -3, -2, -1, 0, 1, 2, 3, 4};
         int[] inputW = {63, 63, 63, 63, 63, 63, 63, 63, 63};
         int[] inputH = {9, 9, 9, 9, 9, 9, 9, 9, 9};
         Image[] inputImages = new Image[inputX.length];
-        //when
         for(int i = 0; i < inputX.length; i++){
             inputImages[i] = new Image(inputImage, inputX[i], inputY[i], inputZ[i], inputW[i], inputH[i]);
         }
+        ImageFactory imageFactory = new ImageFactory();
+        Image[] output = new Image[inputX.length];
+        //when
+        for(int i = 0; i < inputX.length; i++){
+            output[i] = imageFactory.makeImage(fileName, inputX[i], inputY[i], inputZ[i]);
+        }
         //then
         for(int i = 0; i < inputX.length; i++) {
-            assertArrayEquals(inputPixels, inputImages[i].getP());
-            assertEquals(inputX[i], inputImages[i].getX());
-            assertEquals(inputY[i], inputImages[i].getY());
-            assertEquals(inputZ[i], inputImages[i].getZ());
-            assertEquals(inputW[i], inputImages[i].getW());
-            assertEquals(inputH[i], inputImages[i].getH());
+            assertArrayEquals(inputImages[i].getP(), output[i].getP());
+            assertEquals(inputImages[i].getX(), output[i].getX());
+            assertEquals(inputImages[i].getY(), output[i].getY());
+            assertEquals(inputImages[i].getZ(), output[i].getZ());
+            assertEquals(inputImages[i].getW(), output[i].getW());
+            assertEquals(inputImages[i].getH(), output[i].getH());
         }
     }
 

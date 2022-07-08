@@ -4,9 +4,9 @@ import common.Rasterable;
 
 public class RasterFontSymbol implements Rasterable {
 
-    private int[] p;
-    private int w;
-    private int h;
+    private final int[] p;
+    private final int w;
+    private final int h;
 
     RasterFontSymbol(int[] p, int w, int h) {
         this.p = p;

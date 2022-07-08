@@ -7,15 +7,14 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.util.Arrays;
 import java.util.EventListener;
 
 public class Window {
 
-    private BufferStrategy bufferStrategy;
-    private BufferedImage windowImage;
-    private Canvas canvas;
-    private Graphics2D graphics2D;
+    private final BufferStrategy bufferStrategy;
+    private final BufferedImage windowImage;
+    private final Canvas canvas;
+    private final Graphics2D graphics2D;
     private static final int x = 0;
     private static final int y = 0;
     static final int w = 800;

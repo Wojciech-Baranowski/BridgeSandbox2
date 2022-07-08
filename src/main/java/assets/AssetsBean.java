@@ -11,10 +11,10 @@ import java.util.Map;
 public class AssetsBean implements Assets{
 
     private static AssetsBean assets;
-    private ColorFactory colorFactory;
-    private FontFactory fontFactory;
-    private Map<String, Color> colors;
-    private Map<String, Font> fonts;
+    private final ColorFactory colorFactory;
+    private final FontFactory fontFactory;
+    private final Map<String, Color> colors;
+    private final Map<String, Font> fonts;
 
     private AssetsBean(){
         colorFactory = new ColorFactory();

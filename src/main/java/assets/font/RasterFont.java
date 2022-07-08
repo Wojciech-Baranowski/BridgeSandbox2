@@ -5,9 +5,9 @@ import common.Rasterable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RasterFont implements Font{
+public class RasterFont implements Font {
 
-    private Map<Character, Rasterable> symbols;
+    private final Map<Character, Rasterable> symbols;
 
     RasterFont(char[] symbols, Rasterable[] rasterables) {
         this.symbols = new HashMap<>();

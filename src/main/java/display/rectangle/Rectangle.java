@@ -7,13 +7,13 @@ import java.util.Arrays;
 
 public class Rectangle implements Drawable {
 
-    protected int[] p;
-    protected Color color;
+    protected final int[] p;
+    protected final Color color;
     protected int x;
     protected int y;
     protected int z;
-    protected int w;
-    protected int h;
+    protected final int w;
+    protected final int h;
 
     Rectangle(int x, int y, int z, int w, int h, Color color) {
         this.x = x;

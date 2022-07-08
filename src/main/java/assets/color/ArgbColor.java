@@ -2,7 +2,7 @@ package assets.color;
 
 public class ArgbColor implements Color {
 
-    int value;
+    private final int value;
 
     ArgbColor(int value) {
         this.value = value;

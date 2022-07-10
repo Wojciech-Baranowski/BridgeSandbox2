@@ -6,7 +6,7 @@ import assets.color.Color;
 import assets.font.Font;
 import org.junit.Test;
 
-import static assets.Assets.getExtendedAlphabet;
+import static assets.font.Font.getExtendedAlphabet;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 

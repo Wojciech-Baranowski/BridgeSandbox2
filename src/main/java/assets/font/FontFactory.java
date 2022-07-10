@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
-import static assets.Assets.getTransparentColorValue;
+import static assets.color.Color.getTransparentColorValue;
 
 public class FontFactory {
 

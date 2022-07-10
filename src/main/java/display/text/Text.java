@@ -9,7 +9,7 @@ import lombok.Setter;
 
 import java.util.Arrays;
 
-import static assets.Assets.getTransparentColorValue;
+import static assets.color.Color.getTransparentColorValue;
 import static java.lang.Math.max;
 
 public class Text implements Drawable {

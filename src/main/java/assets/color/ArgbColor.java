@@ -12,16 +12,17 @@ public class ArgbColor implements Color {
 
     @Override
     public Color blend(Color color) {
-        float alpha = ((color.getValue() & 0xFF000000) >>> 24) * (1.0f / 255.0f);
-        int red = (int)((((color.getValue() & 0x00FF0000) >>> 16) * alpha) + (((value & 0x00FF0000) >>> 16) * (1.0f - alpha)));
-        int green = (int)((((color.getValue() & 0x0000FF00) >>> 8) * alpha) + (((value & 0x0000FF00) >>> 8) * (1.0f - alpha)));
-        int blue = (int)(((color.getValue() & 0x000000FF) * alpha) + ((value & 0x000000FF) * (1.0f - alpha)));
+        int colorValue = color.getValue();
+        float alpha = ((colorValue & 0xFF000000) >>> 24) * (1.0f / 255.0f);
+        int red = (int)((((colorValue & 0x00FF0000) >>> 16) * alpha) + (((value & 0x00FF0000) >>> 16) * (1.0 - alpha)));
+        int green = (int)((((colorValue & 0x0000FF00) >>> 8) * alpha) + (((value & 0x0000FF00) >>> 8) * (1.0 - alpha)));
+        int blue = (int)(((colorValue & 0x000000FF) * alpha) + ((value & 0x000000FF) * (1.0 - alpha)));
         return new ArgbColor(0xFF << 24 | red << 16 | green << 8 | blue);
     }
 
     @Override
     public boolean isTransparent() {
-        return (value >>> 24) == 255;
+        return (value >>> 24) != 0xFF;
     }
 
 }

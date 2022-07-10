@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static assets.Assets.getExtendedAlphabet;
+import static assets.font.Font.getExtendedAlphabet;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 

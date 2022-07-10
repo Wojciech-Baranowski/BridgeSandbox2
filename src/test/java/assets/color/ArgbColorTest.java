@@ -50,7 +50,7 @@ public class ArgbColorTest {
     public void is_transparent_test() {
         //given
         int[] input = {0xFFFFFF00, 0xFE213769, 0xFFFFFFFF, 0x00000000, 0x12345678, 0xFFFF1234, 0x01010101};
-        boolean[] outputCheck = {true, false, true, false, false, true, false};
+        boolean[] outputCheck = {false, true, false, true, true, false, true};
         boolean[] output = new boolean[input.length];
 
         //when

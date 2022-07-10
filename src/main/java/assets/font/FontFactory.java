@@ -1,12 +1,12 @@
 package assets.font;
 
-import assets.Assets;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
+
+import static assets.Assets.getTransparentColorValue;
 
 public class FontFactory {
 
@@ -74,7 +74,7 @@ public class FontFactory {
 
     private boolean isColumnTransparent(int[] fontPixels, int x, int w, int h) {
         for(int y = 0; y < h; y++){
-            if(fontPixels[x + y * w] != Assets.getTransparentColorValue()){
+            if(fontPixels[x + y * w] != getTransparentColorValue()){
                 return false;
             }
         }

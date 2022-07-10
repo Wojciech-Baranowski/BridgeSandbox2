@@ -60,7 +60,7 @@ public class AssetsBeanTest {
         String inputName = "name";
         String inputPath = "/testFont.png";
         String inputSymbols = "ABCabc123";
-        BufferedImage inputImages = null;
+        BufferedImage inputImages;
         try {
             InputStream inputStream = RasterFontTest.class.getResourceAsStream("/testFont.png");
             inputImages = ImageIO.read(Objects.requireNonNull(inputStream));

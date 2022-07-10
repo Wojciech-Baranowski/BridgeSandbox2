@@ -6,6 +6,7 @@ import assets.color.Color;
 import assets.font.Font;
 import org.junit.Test;
 
+import static assets.Assets.getExtendedAlphabet;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -19,7 +20,7 @@ public class TextFactoryTest {
         int[] inputY = {20, 40, 60, 80};
         int[] inputZ = {-5, -4, 0, 2};
         Assets assets = AssetsBean.getAssets();
-        assets.addFont("HBE24", "/HelveticaBoldExtended24.png", Assets.getExtendedAlphabet());
+        assets.addFont("HBE24", "/HelveticaBoldExtended24.png", getExtendedAlphabet());
         assets.addColor("red", 0xFFFF0000);
         Font inputFont = assets.getFont("HBE24");
         Color inputColor = assets.getColor("red");

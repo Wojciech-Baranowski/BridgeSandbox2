@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
+import static assets.Assets.getExtendedAlphabet;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -111,7 +112,7 @@ public class DrawableFactoryTest {
         int[] inputY = {20, 40, 60, 80};
         int[] inputZ = {-5, -4, 0, 2};
         Assets assets = AssetsBean.getAssets();
-        assets.addFont("HBE24", "/HelveticaBoldExtended24.png", Assets.getExtendedAlphabet());
+        assets.addFont("HBE24", "/HelveticaBoldExtended24.png", getExtendedAlphabet());
         assets.addColor("red", 0xFFFF0000);
         Text[] inputTexts2 = new Text[inputX.length];
         TextFactory textFactory = new TextFactory();

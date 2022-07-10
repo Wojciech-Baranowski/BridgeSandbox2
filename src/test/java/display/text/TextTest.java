@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
+import static assets.Assets.getExtendedAlphabet;
 import static assets.Assets.getTransparentColorValue;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -25,7 +26,7 @@ public class TextTest {
         int[] inputW = {20, 47, 63, 114};
         int[] inputH = {27, 27, 81, 27};
         Assets assets = AssetsBean.getAssets();
-        assets.addFont("HBE24", "/HelveticaBoldExtended24.png", Assets.getExtendedAlphabet());
+        assets.addFont("HBE24", "/HelveticaBoldExtended24.png", getExtendedAlphabet());
         assets.addColor("red", 0xFFFF0000);
         Font inputFont = assets.getFont("HBE24");
         Color inputColor = assets.getColor("red");
@@ -82,7 +83,7 @@ public class TextTest {
         int inputW = 20;
         int inputH = 27;
         Assets assets = AssetsBean.getAssets();
-        assets.addFont("HBE24", "/HelveticaBoldExtended24.png", Assets.getExtendedAlphabet());
+        assets.addFont("HBE24", "/HelveticaBoldExtended24.png", getExtendedAlphabet());
         assets.addColor("red", 0xFFFF0000);
         Font inputFont = assets.getFont("HBE24");
         Color inputColor = assets.getColor("red");

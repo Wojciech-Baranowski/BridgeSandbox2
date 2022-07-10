@@ -8,7 +8,7 @@ import assets.font.FontFactory;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AssetsBean implements Assets{
+public class AssetsBean implements Assets {
 
     private static AssetsBean assets;
     private final ColorFactory colorFactory;

@@ -12,7 +12,7 @@ public interface Measurable extends Comparable<Integer> {
     void setZ(int z);
     @Override
     default int compareTo(Integer z) {
-        return Integer.compare(getZ(), z);
+        return Integer.compare(z, getZ());
     }
 
 }

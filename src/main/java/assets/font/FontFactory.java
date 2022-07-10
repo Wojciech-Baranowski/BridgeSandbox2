@@ -53,7 +53,7 @@ public class FontFactory {
         int lastX = 0;
         int currentSymbolNumber = 0;
         boolean currentColumnEmpty;
-        boolean lastColumnEmpty = false;
+        boolean lastColumnEmpty = true;
         for(int x = 1; x < w; x++){
             currentColumnEmpty = true;
             for(int y = 0; y < h; y++){

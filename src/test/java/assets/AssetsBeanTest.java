@@ -1,5 +1,5 @@
-import assets.Assets;
-import assets.AssetsBean;
+package assets;
+
 import assets.font.RasterFontTest;
 import org.junit.Test;
 

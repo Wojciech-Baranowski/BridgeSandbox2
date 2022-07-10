@@ -11,7 +11,8 @@ import java.util.Objects;
 public class FontFactory {
 
     public Font makeRasterFont(String path, char[] symbols) {
-        return new RasterFont(symbols, getFontRasterables(path, symbols.length));
+        RasterFontSymbol[] fontRasterables = getFontRasterables(path, symbols.length);
+        return new RasterFont(symbols, fontRasterables);
     }
 
     private RasterFontSymbol[] getFontRasterables(String path, int symbolsNumber) {

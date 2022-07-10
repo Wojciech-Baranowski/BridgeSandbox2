@@ -17,8 +17,8 @@ public class Window {
     private final Graphics2D graphics2D;
     private static final int x = 0;
     private static final int y = 0;
-    static final int w = 800;
-    static final int h = 640;
+    static final int w = 1200;
+    static final int h = 675;
 
     Window() {
         canvas = createCanvas();
@@ -26,7 +26,7 @@ public class Window {
         windowImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         bufferStrategy = canvas.getBufferStrategy();
         graphics2D = (Graphics2D)bufferStrategy.getDrawGraphics();
-        wait(69);
+        wait(420);
     }
 
     void draw(int[] pixels) {
@@ -77,3 +77,6 @@ public class Window {
     }
 
 }
+
+
+

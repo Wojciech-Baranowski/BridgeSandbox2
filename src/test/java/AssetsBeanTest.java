@@ -59,7 +59,7 @@ public class AssetsBeanTest {
         //given
         String inputName = "name";
         String inputPath = "/testFont.png";
-        char[] inputSymbols = {'A', 'B', 'C', 'a', 'b', 'c', '1', '2', '3'};
+        String inputSymbols = "ABCabc123";
         BufferedImage inputImages = null;
         try {
             InputStream inputStream = RasterFontTest.class.getResourceAsStream("/testFont.png");
@@ -68,8 +68,8 @@ public class AssetsBeanTest {
             throw new RuntimeException(e);
         }
         int[] inputAllPixels = inputImages.getRGB(0, 0, 63, 9, null, 0, 63);
-        int[][] inputPixels = new int[inputSymbols.length][];
-        for(int i = 0; i < inputSymbols.length; i++){
+        int[][] inputPixels = new int[inputSymbols.length()][];
+        for(int i = 0; i < inputSymbols.length(); i++){
             inputPixels[i] = new int[63];
             for(int j = 0; j < 7; j++){
                 for(int k = 0; k < 9; k++){
@@ -81,10 +81,10 @@ public class AssetsBeanTest {
         //when
         inputAssets.addFont(inputName, inputPath, inputSymbols);
         //then
-        for(int i = 0; i < inputSymbols.length; i++){
-            assertArrayEquals(inputPixels[i], inputAssets.getFont(inputName).getSymbolRasterable(inputSymbols[i]).getP());
-            assertEquals(7, inputAssets.getFont(inputName).getSymbolRasterable(inputSymbols[i]).getW());
-            assertEquals(9, inputAssets.getFont(inputName).getSymbolRasterable(inputSymbols[i]).getH());
+        for(int i = 0; i < inputSymbols.length(); i++){
+            assertArrayEquals(inputPixels[i], inputAssets.getFont(inputName).getSymbolRasterable(inputSymbols.charAt(i)).getP());
+            assertEquals(7, inputAssets.getFont(inputName).getSymbolRasterable(inputSymbols.charAt(i)).getW());
+            assertEquals(9, inputAssets.getFont(inputName).getSymbolRasterable(inputSymbols.charAt(i)).getH());
         }
         assertNull(inputAssets.getColor("g"));
         assertNull(inputAssets.getFont("d"));

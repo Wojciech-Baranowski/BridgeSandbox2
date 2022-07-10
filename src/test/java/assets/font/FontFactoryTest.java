@@ -17,7 +17,7 @@ public class FontFactoryTest {
     @Test
     public void make_raster_font_test() {
         //given
-        char[] inputSymbols = {'A', 'B', 'C', 'a', 'b', 'c', '1', '2', '3'};
+        String inputSymbols = "ABCabc123";
         BufferedImage inputImages = null;
         try {
             InputStream inputStream = RasterFontTest.class.getResourceAsStream("/testFont.png");
@@ -26,8 +26,8 @@ public class FontFactoryTest {
             throw new RuntimeException(e);
         }
         int[] inputAllPixels = inputImages.getRGB(0, 0, 63, 9, null, 0, 63);
-        RasterFontSymbol[] inputRasterables = new RasterFontSymbol[inputSymbols.length];
-        for(int i = 0; i < inputSymbols.length; i++){
+        RasterFontSymbol[] inputRasterables = new RasterFontSymbol[inputSymbols.length()];
+        for(int i = 0; i < inputSymbols.length(); i++){
             int[] inputPixels = new int[63];
             for(int j = 0; j < 7; j++){
                 for(int k = 0; k < 9; k++){
@@ -40,10 +40,10 @@ public class FontFactoryTest {
         //when
         Font output = inputFactory.makeRasterFont("/testFont.png", inputSymbols);
         //then
-        for(int i = 0; i < inputSymbols.length; i++){
-            assertEquals(inputRasterables[i].getW(), output.getSymbolRasterable(inputSymbols[i]).getW());
-            assertEquals(inputRasterables[i].getH(), output.getSymbolRasterable(inputSymbols[i]).getH());
-            assertArrayEquals(inputRasterables[i].getP(), output.getSymbolRasterable(inputSymbols[i]).getP());
+        for(int i = 0; i < inputSymbols.length(); i++){
+            assertEquals(inputRasterables[i].getW(), output.getSymbolRasterable(inputSymbols.charAt(i)).getW());
+            assertEquals(inputRasterables[i].getH(), output.getSymbolRasterable(inputSymbols.charAt(i)).getH());
+            assertArrayEquals(inputRasterables[i].getP(), output.getSymbolRasterable(inputSymbols.charAt(i)).getP());
         }
     }
 

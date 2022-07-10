@@ -47,7 +47,7 @@ public class AssetsBean implements Assets{
     }
 
     @Override
-    public void addFont(String name, String path, char[] symbols) {
+    public void addFont(String name, String path, String symbols) {
         Font font = fontFactory.makeRasterFont(path, symbols);
         fonts.put(name, font);
     }

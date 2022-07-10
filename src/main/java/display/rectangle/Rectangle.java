@@ -2,18 +2,21 @@ package display.rectangle;
 
 import assets.color.Color;
 import display.Drawable;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Arrays;
 
 public class Rectangle implements Drawable {
 
-    protected final int[] p;
+    @Getter protected final int[] p;
+
+    @Getter @Setter protected int x;
+    @Getter @Setter protected int y;
+    @Getter @Setter protected int z;
+    @Getter protected final int w;
+    @Getter protected final int h;
     protected final Color color;
-    protected int x;
-    protected int y;
-    protected int z;
-    protected final int w;
-    protected final int h;
 
     Rectangle(int x, int y, int z, int w, int h, Color color) {
         this.x = x;
@@ -26,48 +29,4 @@ public class Rectangle implements Drawable {
         Arrays.fill(p, color.getValue());
     }
 
-    @Override
-    public int[] getP() {
-        return p;
-    }
-
-    @Override
-    public int getX() {
-        return x;
-    }
-
-    @Override
-    public int getY() {
-        return y;
-    }
-
-    @Override
-    public int getZ() {
-        return z;
-    }
-
-    @Override
-    public int getW() {
-        return w;
-    }
-
-    @Override
-    public int getH() {
-        return h;
-    }
-
-    @Override
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    @Override
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    @Override
-    public void setZ(int z) {
-        this.z = z;
-    }
 }

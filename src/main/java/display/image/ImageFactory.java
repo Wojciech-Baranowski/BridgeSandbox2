@@ -1,7 +1,5 @@
 package display.image;
 
-import assets.Assets;
-import assets.AssetsBean;
 import assets.font.FontFactory;
 
 import javax.imageio.ImageIO;
@@ -11,12 +9,6 @@ import java.io.InputStream;
 import java.util.Objects;
 
 public class ImageFactory {
-
-    private final Assets assets;
-
-    public ImageFactory() {
-        this.assets = AssetsBean.getAssets();
-    }
 
     public Image makeImage(String path, int x, int y, int z) {
         BufferedImage image = getBufferedImage(path);

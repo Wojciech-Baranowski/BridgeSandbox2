@@ -9,10 +9,10 @@ public class RasterFont implements Font {
 
     private final Map<Character, Rasterable> symbols;
 
-    RasterFont(char[] symbols, Rasterable[] rasterables) {
+    RasterFont(String symbols, Rasterable[] rasterables) {
         this.symbols = new HashMap<>();
-        for(int i = 0; i < symbols.length; i++){
-            this.symbols.put(symbols[i], rasterables[i]);
+        for(int i = 0; i < symbols.length(); i++){
+            this.symbols.put(symbols.charAt(i), rasterables[i]);
         }
     }
 

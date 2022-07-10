@@ -1,16 +1,13 @@
 package assets.color;
 
+import lombok.Getter;
+
 public class ArgbColor implements Color {
 
-    private final int value;
+    @Getter  private final int value;
 
     ArgbColor(int value) {
         this.value = value;
-    }
-
-    @Override
-    public int getValue() {
-        return value;
     }
 
     @Override

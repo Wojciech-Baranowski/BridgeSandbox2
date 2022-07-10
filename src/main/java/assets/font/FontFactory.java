@@ -10,29 +10,34 @@ import java.util.Objects;
 
 public class FontFactory {
 
-    public Font makeRasterFont(String path, char[] symbols) {
-        RasterFontSymbol[] fontRasterables = getFontRasterables(path, symbols.length);
+    public Font makeRasterFont(String path, String symbols) {
+        RasterFontSymbol[] fontRasterables = getFontRasterables(path, symbols.length());
         return new RasterFont(symbols, fontRasterables);
     }
 
     private RasterFontSymbol[] getFontRasterables(String path, int symbolsNumber) {
+        RasterFontSymbol[] rasterFontSymbols = new RasterFontSymbol[symbolsNumber];
         int[] fontPixels = getFontPixels(path);
         int w = getFontWidth(path);
         int h = fontPixels.length / w;
         int[] symbolLengths = getSymbolsLengths(fontPixels, w, h, symbolsNumber);
-        RasterFontSymbol[] rasterFontSymbols = new RasterFontSymbol[symbolsNumber];
         int currentX = 0;
         for(int i = 0; i < symbolsNumber; i++){
-            int[] symbolPixels = new int[symbolLengths[i] * h];
-            for(int x = 0; x < symbolLengths[i]; x++){
-                for(int y = 0; y < h; y++){
-                    symbolPixels[x + y * symbolLengths[i]] = fontPixels[currentX + x + y * w];
-                }
-            }
-            currentX += symbolLengths[i];
+            int[] symbolPixels = getSymbolPixels(fontPixels, symbolLengths[i], currentX, w, h);
             rasterFontSymbols[i] = new RasterFontSymbol(symbolPixels, symbolLengths[i], h);
+            currentX += symbolLengths[i];
         }
         return rasterFontSymbols;
+    }
+
+    private int[] getSymbolPixels(int[] fontPixels, int symbolLength, int currentX, int w, int h) {
+        int[] symbolPixels = new int[symbolLength * h];
+        for(int x = 0; x < symbolLength; x++){
+            for(int y = 0; y < h; y++){
+                symbolPixels[x + y * symbolLength] = fontPixels[currentX + x + y * w];
+            }
+        }
+        return symbolPixels;
     }
 
     private int[] getFontPixels(String path) {
@@ -54,14 +59,8 @@ public class FontFactory {
         int currentSymbolNumber = 0;
         boolean currentColumnEmpty;
         boolean lastColumnEmpty = true;
-        for(int x = 1; x < w; x++){
-            currentColumnEmpty = true;
-            for(int y = 0; y < h; y++){
-                if(fontPixels[x + y * w] != Color.getTransparentColor()){
-                    currentColumnEmpty = false;
-                    break;
-                }
-            }
+        for(int x = 1; x < w && currentSymbolNumber < symbolsNumber; x++){
+            currentColumnEmpty = isColumnTransparent(fontPixels, x, w, h);
             if(currentColumnEmpty && !lastColumnEmpty){
                 symbolLengths[currentSymbolNumber++] = x - lastX + 1;
             }
@@ -71,6 +70,15 @@ public class FontFactory {
             lastColumnEmpty = currentColumnEmpty;
         }
         return symbolLengths;
+    }
+
+    private boolean isColumnTransparent(int[] fontPixels, int x, int w, int h) {
+        for(int y = 0; y < h; y++){
+            if(fontPixels[x + y * w] != Color.getTransparentColor()){
+                return false;
+            }
+        }
+        return true;
     }
 
     private int getFontWidth(String path) {

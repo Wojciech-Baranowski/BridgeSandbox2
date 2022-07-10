@@ -1,6 +1,5 @@
 package display.text;
 
-import assets.Assets;
 import assets.color.Color;
 import assets.font.Font;
 import common.Rasterable;
@@ -10,7 +9,7 @@ import lombok.Setter;
 
 import java.util.Arrays;
 
-import static assets.Assets.getTransparentColor;
+import static assets.Assets.getTransparentColorValue;
 import static java.lang.Math.max;
 
 public class Text implements Drawable {
@@ -78,7 +77,7 @@ public class Text implements Drawable {
 
     private int[] recalculatePixels() {
         int[] pixels = new int[w * h];
-        Arrays.fill(pixels, getTransparentColor());
+        Arrays.fill(pixels, getTransparentColorValue());
         int currentX = 0;
         int currentY = 0;
         int symbolsHeight = font.getSymbolRasterable('0').getH();
@@ -106,7 +105,7 @@ public class Text implements Drawable {
         for(int x = 0; x < symbol.getW(); x++){
             for(int y = 0; y < symbol.getH(); y++){
                 int pixel = symbolPixels[x + y * symbol.getW()];
-                pixels[currentX + x + (currentY + y) * w] = (pixel != getTransparentColor() ? color.getValue() : pixel);
+                pixels[currentX + x + (currentY + y) * w] = (pixel != getTransparentColorValue() ? color.getValue() : pixel);
             }
         }
     }

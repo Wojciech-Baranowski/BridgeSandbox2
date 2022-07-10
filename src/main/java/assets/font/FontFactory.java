@@ -74,7 +74,7 @@ public class FontFactory {
 
     private boolean isColumnTransparent(int[] fontPixels, int x, int w, int h) {
         for(int y = 0; y < h; y++){
-            if(fontPixels[x + y * w] != Assets.getTransparentColor()){
+            if(fontPixels[x + y * w] != Assets.getTransparentColorValue()){
                 return false;
             }
         }

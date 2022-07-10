@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static assets.Assets.getTransparentColor;
+import static assets.Assets.getTransparentColorValue;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -32,7 +32,7 @@ public class TextTest {
         int[][] inputPixels = new int[inputX.length][];
         for(int i = 0; i < inputX.length; i++){
             inputPixels[i] = new int[inputW[i] * inputH[i]];
-            Arrays.fill(inputPixels[i], getTransparentColor());
+            Arrays.fill(inputPixels[i], getTransparentColorValue());
             int currX = 0;
             int currY = 0;
             for(int j = 0; j < inputTexts[i].length(); j++){
@@ -49,7 +49,7 @@ public class TextTest {
                 for(int x = currX; x < currX + inputRasterable.getW(); x++){
                     for(int y = currY; y < currY + inputRasterable.getH(); y++){
                         int pixel = inputRasterable.getP()[x - currX + (y - currY) * inputRasterable.getW()];
-                        inputPixels[i][x + y * inputW[i]] = (pixel != getTransparentColor() ? inputColor.getValue() : pixel);
+                        inputPixels[i][x + y * inputW[i]] = (pixel != getTransparentColorValue() ? inputColor.getValue() : pixel);
                     }
                 }
                 currX += inputRasterable.getW() + 3;
@@ -88,11 +88,11 @@ public class TextTest {
         Color inputColor = assets.getColor("red");
         Rasterable inputRasterable = inputFont.getSymbolRasterable(inputText1.charAt(0));
         int[] inputPixels = new int[inputW * inputH];
-        Arrays.fill(inputPixels, getTransparentColor());
+        Arrays.fill(inputPixels, getTransparentColorValue());
         for(int x = 0; x < inputRasterable.getW(); x++){
             for(int y = 0; y < inputRasterable.getH(); y++){
                 int pixel = inputRasterable.getP()[x + y * inputRasterable.getW()];
-                inputPixels[x + y * inputW] = (pixel != getTransparentColor() ? inputColor.getValue() : pixel);
+                inputPixels[x + y * inputW] = (pixel != getTransparentColorValue() ? inputColor.getValue() : pixel);
             }
         }
         //when1

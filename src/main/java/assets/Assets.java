@@ -14,7 +14,7 @@ public interface Assets {
         return "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u2664\u2665\u2666\u2667\u2468\u2469";
     }
 
-    static int getTransparentColor(){
+    static int getTransparentColorValue(){
         return 0xFFFF00FF;
     }
 

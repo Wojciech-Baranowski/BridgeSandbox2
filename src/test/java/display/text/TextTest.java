@@ -7,6 +7,9 @@ import assets.font.Font;
 import common.Rasterable;
 import org.junit.Test;
 
+import java.util.Arrays;
+
+import static assets.Assets.getTransparentColor;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -29,6 +32,7 @@ public class TextTest {
         int[][] inputPixels = new int[inputX.length][];
         for(int i = 0; i < inputX.length; i++){
             inputPixels[i] = new int[inputW[i] * inputH[i]];
+            Arrays.fill(inputPixels[i], getTransparentColor());
             int currX = 0;
             int currY = 0;
             for(int j = 0; j < inputTexts[i].length(); j++){
@@ -44,7 +48,8 @@ public class TextTest {
                 Rasterable inputRasterable = inputFont.getSymbolRasterable(inputTexts[i].charAt(j));
                 for(int x = currX; x < currX + inputRasterable.getW(); x++){
                     for(int y = currY; y < currY + inputRasterable.getH(); y++){
-                        inputPixels[i][x + y * inputW[i]] = inputRasterable.getP()[x - currX + (y - currY) * inputRasterable.getW()];
+                        int pixel = inputRasterable.getP()[x - currX + (y - currY) * inputRasterable.getW()];
+                        inputPixels[i][x + y * inputW[i]] = (pixel != getTransparentColor() ? inputColor.getValue() : pixel);
                     }
                 }
                 currX += inputRasterable.getW() + 3;
@@ -57,12 +62,12 @@ public class TextTest {
         }
         //then
         for(int i = 0; i < inputX.length; i++) {
-            assertArrayEquals(inputPixels[i], output[i].getP());
             assertEquals(inputX[i], output[i].getX());
             assertEquals(inputY[i], output[i].getY());
             assertEquals(inputZ[i], output[i].getZ());
             assertEquals(inputW[i], output[i].getW());
             assertEquals(inputH[i], output[i].getH());
+            assertArrayEquals(inputPixels[i], output[i].getP());
         }
     }
 
@@ -83,14 +88,16 @@ public class TextTest {
         Color inputColor = assets.getColor("red");
         Rasterable inputRasterable = inputFont.getSymbolRasterable(inputText1.charAt(0));
         int[] inputPixels = new int[inputW * inputH];
+        Arrays.fill(inputPixels, getTransparentColor());
         for(int x = 0; x < inputRasterable.getW(); x++){
             for(int y = 0; y < inputRasterable.getH(); y++){
-                inputPixels[x + y * inputW] = inputRasterable.getP()[x + y * inputRasterable.getW()];
+                int pixel = inputRasterable.getP()[x + y * inputRasterable.getW()];
+                inputPixels[x + y * inputW] = (pixel != getTransparentColor() ? inputColor.getValue() : pixel);
             }
         }
         //when1
-        Text output = new Text(inputText1, 0, 0, 0, inputFont, inputColor);
-        output.setText(inputText2);
+        Text output = new Text(inputText2, 0, 0, 0, inputFont, inputColor);
+        output.setText(inputText1);
         //then1
         assertArrayEquals(inputPixels, output.getP());
         for(int i = 0; i < inputX.length; i++){

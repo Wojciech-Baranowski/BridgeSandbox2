@@ -53,6 +53,7 @@ public class FontFactory {
         int lastX = 0;
         int currentSymbolNumber = 0;
         boolean currentColumnEmpty;
+        boolean lastColumnEmpty = false;
         for(int x = 1; x < w; x++){
             currentColumnEmpty = true;
             for(int y = 0; y < h; y++){
@@ -61,10 +62,13 @@ public class FontFactory {
                     break;
                 }
             }
-            if(currentColumnEmpty){
-                symbolLengths[currentSymbolNumber++] = x++ - lastX + 1;
-                lastX = x;
+            if(currentColumnEmpty && !lastColumnEmpty){
+                symbolLengths[currentSymbolNumber++] = x - lastX + 1;
             }
+            else if(!currentColumnEmpty && lastColumnEmpty){
+                lastX = x - 1;
+            }
+            lastColumnEmpty = currentColumnEmpty;
         }
         return symbolLengths;
     }

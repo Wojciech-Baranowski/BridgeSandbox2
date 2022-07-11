@@ -16,7 +16,7 @@ public class AssetsBean implements Assets {
     private final Map<String, Color> colors;
     private final Map<String, Font> fonts;
 
-    private AssetsBean(){
+    private AssetsBean() {
         colorFactory = new ColorFactory();
         fontFactory = new FontFactory();
         colors = new HashMap<>();
@@ -24,7 +24,7 @@ public class AssetsBean implements Assets {
     }
 
     public static Assets getAssets() {
-        if(assets == null){
+        if (assets == null) {
             assets = new AssetsBean();
         }
         return assets;

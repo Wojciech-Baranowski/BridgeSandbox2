@@ -21,8 +21,7 @@ public class ImageFactory {
         try {
             InputStream imageStream = FontFactory.class.getResourceAsStream(path);
             return ImageIO.read(Objects.requireNonNull(imageStream));
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

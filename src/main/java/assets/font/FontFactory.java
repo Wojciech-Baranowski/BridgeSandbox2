@@ -23,7 +23,7 @@ public class FontFactory {
         int[] symbolLengths = getSymbolsLengths(fontPixels, w, h, symbolsNumber);
         int[] spacingLengths = getSpacingLengths(fontPixels, w, h, symbolsNumber);
         int currentX = spacingLengths[0];
-        for(int i = 0; i < symbolsNumber; i++){
+        for (int i = 0; i < symbolsNumber; i++) {
             int[] symbolPixels = getSymbolPixels(fontPixels, symbolLengths[i], currentX, w, h);
             rasterFontSymbols[i] = new RasterFontSymbol(symbolPixels, symbolLengths[i], h);
             currentX += symbolLengths[i] + spacingLengths[i + 1];
@@ -33,8 +33,8 @@ public class FontFactory {
 
     private int[] getSymbolPixels(int[] fontPixels, int symbolLength, int currentX, int w, int h) {
         int[] symbolPixels = new int[symbolLength * h];
-        for(int x = 0; x < symbolLength; x++){
-            for(int y = 0; y < h; y++){
+        for (int x = 0; x < symbolLength; x++) {
+            for (int y = 0; y < h; y++) {
                 symbolPixels[x + y * symbolLength] = fontPixels[currentX + x + y * w];
             }
         }
@@ -48,8 +48,7 @@ public class FontFactory {
             int w = image.getWidth();
             int h = image.getHeight();
             return image.getRGB(0, 0, w, h, null, 0, w);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -60,12 +59,11 @@ public class FontFactory {
         int currentSymbolNumber = 0;
         boolean currentColumnEmpty;
         boolean lastColumnEmpty = true;
-        for(int x = 1; x < w && currentSymbolNumber < symbolsNumber; x++){
+        for (int x = 1; x < w && currentSymbolNumber < symbolsNumber; x++) {
             currentColumnEmpty = isColumnTransparent(fontPixels, x, w, h);
-            if(currentColumnEmpty && !lastColumnEmpty){
+            if (currentColumnEmpty && !lastColumnEmpty) {
                 symbolLengths[currentSymbolNumber++] = x - lastX + 1;
-            }
-            else if(!currentColumnEmpty && lastColumnEmpty){
+            } else if (!currentColumnEmpty && lastColumnEmpty) {
                 lastX = x - 1;
             }
             lastColumnEmpty = currentColumnEmpty;
@@ -73,18 +71,18 @@ public class FontFactory {
         return symbolLengths;
     }
 
-    private int[] getSpacingLengths(int[] fontPixels, int w, int h, int symbolsNumber){
+    private int[] getSpacingLengths(int[] fontPixels, int w, int h, int symbolsNumber) {
         int[] spacingLengths = new int[symbolsNumber + 1];
         boolean currentColumnEmpty;
         boolean lastColumnEmpty = true;
         int currentSymbolNumber = 0;
         int lastX = 0;
-        for(int x = 1; x < w && currentSymbolNumber < symbolsNumber; x++){
+        for (int x = 1; x < w && currentSymbolNumber < symbolsNumber; x++) {
             currentColumnEmpty = isColumnTransparent(fontPixels, x, w, h);
-            if(currentColumnEmpty && !lastColumnEmpty){
+            if (currentColumnEmpty && !lastColumnEmpty) {
                 lastX = x + 1;
             }
-            if(!currentColumnEmpty && lastColumnEmpty){
+            if (!currentColumnEmpty && lastColumnEmpty) {
                 spacingLengths[currentSymbolNumber++] = x - lastX - 1;
             }
             lastColumnEmpty = currentColumnEmpty;
@@ -94,8 +92,8 @@ public class FontFactory {
     }
 
     private boolean isColumnTransparent(int[] fontPixels, int x, int w, int h) {
-        for(int y = 0; y < h; y++){
-            if(fontPixels[x + y * w] != getTransparentColorValue()){
+        for (int y = 0; y < h; y++) {
+            if (fontPixels[x + y * w] != getTransparentColorValue()) {
                 return false;
             }
         }

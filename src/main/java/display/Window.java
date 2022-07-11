@@ -25,7 +25,7 @@ public class Window {
         createWindow();
         windowImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         bufferStrategy = canvas.getBufferStrategy();
-        graphics2D = (Graphics2D)bufferStrategy.getDrawGraphics();
+        graphics2D = (Graphics2D) bufferStrategy.getDrawGraphics();
         wait(420);
     }
 
@@ -36,14 +36,14 @@ public class Window {
     }
 
     void addListener(EventListener eventListener) {
-        if(eventListener instanceof KeyListener){
-            canvas.addKeyListener((KeyListener)(eventListener));
+        if (eventListener instanceof KeyListener) {
+            canvas.addKeyListener((KeyListener) (eventListener));
         }
-        if(eventListener instanceof MouseMotionListener){
-            canvas.addMouseMotionListener((MouseMotionListener)(eventListener));
+        if (eventListener instanceof MouseMotionListener) {
+            canvas.addMouseMotionListener((MouseMotionListener) (eventListener));
         }
-        if(eventListener instanceof MouseListener){
-            canvas.addMouseListener((MouseListener)(eventListener));
+        if (eventListener instanceof MouseListener) {
+            canvas.addMouseListener((MouseListener) (eventListener));
         }
     }
 
@@ -68,7 +68,7 @@ public class Window {
         return canvas;
     }
 
-    private void wait(int time){
+    private void wait(int time) {
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) {

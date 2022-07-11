@@ -9,13 +9,22 @@ import java.util.Arrays;
 
 public class Rectangle implements Drawable {
 
-    @Getter protected final int[] p;
+    @Getter
+    protected final int[] p;
 
-    @Getter @Setter protected int x;
-    @Getter @Setter protected int y;
-    @Getter @Setter protected int z;
-    @Getter protected final int w;
-    @Getter protected final int h;
+    @Getter
+    @Setter
+    protected int x;
+    @Getter
+    @Setter
+    protected int y;
+    @Getter
+    @Setter
+    protected int z;
+    @Getter
+    protected final int w;
+    @Getter
+    protected final int h;
     protected final Color color;
 
     Rectangle(int x, int y, int z, int w, int h, Color color) {

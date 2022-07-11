@@ -17,12 +17,21 @@ public class Text implements Drawable {
     private final Font font;
     private final Color color;
     private String text;
-    @Getter private int[] p;
-    @Getter @Setter private int x;
-    @Getter @Setter private int y;
-    @Getter @Setter private int z;
-    @Getter private int w;
-    @Getter private int h;
+    @Getter
+    private int[] p;
+    @Getter
+    @Setter
+    private int x;
+    @Getter
+    @Setter
+    private int y;
+    @Getter
+    @Setter
+    private int z;
+    @Getter
+    private int w;
+    @Getter
+    private int h;
 
 
     Text(String text, int x, int y, int z, Font font, Color color) {
@@ -48,26 +57,26 @@ public class Text implements Drawable {
         int maxW = 0;
         int currentW = 0;
         int symbolsHeight = font.getSymbolRasterable('0').getH();
-        for(char symbol : text.toCharArray()){
-            if(symbol == '\n'){
+        for (char symbol : text.toCharArray()) {
+            if (symbol == '\n') {
                 maxW = max(maxW, currentW);
                 currentW = 0;
                 continue;
             }
-            if(symbol == ' '){
+            if (symbol == ' ') {
                 currentW += symbolsHeight / 2;
                 continue;
             }
             currentW += font.getSymbolRasterable(symbol).getW();
         }
-       return max(maxW, currentW);
+        return max(maxW, currentW);
     }
 
     private int recalculateHeight() {
         int numberOfLines = 1;
         int symbolHeight = font.getSymbolRasterable('0').getH();
-        for(char symbol : text.toCharArray()){
-            if(symbol == '\n'){
+        for (char symbol : text.toCharArray()) {
+            if (symbol == '\n') {
                 numberOfLines++;
             }
         }
@@ -80,12 +89,12 @@ public class Text implements Drawable {
         int currentX = 0;
         int currentY = 0;
         int symbolsHeight = font.getSymbolRasterable('0').getH();
-        for(char symbol : text.toCharArray()){
-            if(symbol == ' '){
+        for (char symbol : text.toCharArray()) {
+            if (symbol == ' ') {
                 currentX += symbolsHeight / 2;
                 continue;
             }
-            if(symbol == '\n'){
+            if (symbol == '\n') {
                 currentX = 0;
                 currentY += symbolsHeight;
                 continue;
@@ -100,8 +109,8 @@ public class Text implements Drawable {
     private void mergeSymbolIntoPixelArray(int[] pixels, Rasterable symbol, int currentX, int currentY) {
 
         int[] symbolPixels = symbol.getP();
-        for(int x = 0; x < symbol.getW(); x++){
-            for(int y = 0; y < symbol.getH(); y++){
+        for (int x = 0; x < symbol.getW(); x++) {
+            for (int y = 0; y < symbol.getH(); y++) {
                 int pixel = symbolPixels[x + y * symbol.getW()];
                 pixels[currentX + x + (currentY + y) * w] = (pixel != getTransparentColorValue() ? color.getValue() : pixel);
             }

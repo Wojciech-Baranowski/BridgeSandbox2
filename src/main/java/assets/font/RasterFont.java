@@ -11,7 +11,7 @@ public class RasterFont implements Font {
 
     RasterFont(String symbols, Rasterable[] rasterables) {
         this.symbols = new HashMap<>();
-        for(int i = 0; i < symbols.length(); i++){
+        for (int i = 0; i < symbols.length(); i++) {
             this.symbols.put(symbols.charAt(i), rasterables[i]);
         }
     }

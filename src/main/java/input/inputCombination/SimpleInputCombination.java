@@ -6,7 +6,7 @@ import input.MouseListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-public class SimpleInputCombination implements InputCombination{
+public class SimpleInputCombination implements InputCombination {
 
     private final KeyboardListener keyboardListener;
     private final MouseListener mouseListener;
@@ -21,10 +21,10 @@ public class SimpleInputCombination implements InputCombination{
 
     @Override
     public boolean isActive() {
-        if(element.getInputEvent() instanceof MouseEvent) {
+        if (element.getInputEvent() instanceof MouseEvent) {
             return mouseListener.isActivated(element);
         }
-        if(element.getInputEvent() instanceof KeyEvent) {
+        if (element.getInputEvent() instanceof KeyEvent) {
             return keyboardListener.isActivated(element);
         }
         return false;

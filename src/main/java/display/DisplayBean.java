@@ -49,7 +49,6 @@ public class DisplayBean implements Display{
             int width = min(drawable.getX() + drawable.getW(), Window.w - 1) - startX;
             int height = min(drawable.getY() + drawable.getH(), Window.h - 1) - startY;
             boolean isTransparent = Color.isTransparent(drawable.getP()[0]);
-
             if(isTransparent){
                 mergeTransparent(drawable.getP(), startX, startY, width, height, pWidth);
             } else{

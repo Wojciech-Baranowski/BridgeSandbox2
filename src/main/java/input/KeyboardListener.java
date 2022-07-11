@@ -14,11 +14,11 @@ import java.util.List;
 public class KeyboardListener implements Observable, KeyListener {
 
     private static final int KEY_NUMBER = 256;
-    private boolean[] upJust;
-    private boolean[] downJust;
-    private boolean[] upLast;
-    private boolean[] downLast;
-    private List<Observer> observers;
+    private final boolean[] upJust;
+    private final boolean[] downJust;
+    private final boolean[] upLast;
+    private final boolean[] downLast;
+    private final List<Observer> observers;
 
     KeyboardListener() {
         upJust = new boolean[KEY_NUMBER];

@@ -2,6 +2,6 @@ package input.inputCombination;
 
 public enum ActionType {
 
-    UP, DOWN, HELD
+    UP, DOWN, HELD, FREE
 
 }

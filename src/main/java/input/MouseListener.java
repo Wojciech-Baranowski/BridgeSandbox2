@@ -5,11 +5,14 @@ import common.Observer;
 import input.inputCombination.InputElement;
 import lombok.Getter;
 
+import java.awt.*;
+import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
+
+import static input.inputCombination.ActionType.*;
 
 public class MouseListener implements Observable, java.awt.event.MouseListener, MouseMotionListener {
 
@@ -36,6 +39,26 @@ public class MouseListener implements Observable, java.awt.event.MouseListener, 
         observers = new LinkedList<>();
         x = 0;
         y = 0;
+    }
+
+    public Set<InputElement> getActivatedInputElements() {
+        Set<InputElement> currentCombination = new HashSet<>();
+        for (int i = 0; i < BUTTONS_NUMBER; i++) {
+            InputEvent inputEvent = getMouseEventWithKeyCode(i);
+            if (upJust[i]) {
+                currentCombination.add(new InputElement(UP, inputEvent));
+            }
+            if (upLast[i]) {
+                currentCombination.add(new InputElement(FREE, inputEvent));
+            }
+            if (downJust[i]) {
+                currentCombination.add(new InputElement(DOWN, inputEvent));
+            }
+            if (downLast[i]) {
+                currentCombination.add(new InputElement(HELD, inputEvent));
+            }
+        }
+        return currentCombination;
     }
 
     public boolean isActivated(InputElement inputElement) {
@@ -107,6 +130,12 @@ public class MouseListener implements Observable, java.awt.event.MouseListener, 
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    private InputEvent getMouseEventWithKeyCode(int keycode) {
+        Component dummyComponent = new Button();
+        return new MouseEvent(
+                dummyComponent, 0, 0, 0, 0, 0, 0, false, keycode);
     }
 
 }

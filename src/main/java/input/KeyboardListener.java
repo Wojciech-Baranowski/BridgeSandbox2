@@ -4,17 +4,21 @@ import common.Observable;
 import common.Observer;
 import input.inputCombination.InputElement;
 
+import java.awt.*;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedList;
+import java.awt.event.MouseEvent;
+import java.util.*;
 import java.util.List;
+
+import static input.inputCombination.ActionType.*;
+import static input.inputCombination.ActionType.HELD;
 
 public class KeyboardListener implements Observable, KeyListener {
 
     private static final int KEY_NUMBER = 256;
-    private final boolean[] upJust;
+    private final boolean[]  upJust;
     private final boolean[] downJust;
     private final boolean[] upLast;
     private final boolean[] downLast;
@@ -30,6 +34,26 @@ public class KeyboardListener implements Observable, KeyListener {
         Arrays.fill(upLast, false);
         Arrays.fill(downLast, false);
         observers = new LinkedList<>();
+    }
+
+    public Set<InputElement> getActivatedInputElements() {
+        Set<InputElement> currentCombination = new HashSet<>();
+        for (int i = 0; i < KEY_NUMBER; i++) {
+            InputEvent inputEvent = getKeyboardEventWithKeyCode(i);
+            if (upJust[i]) {
+                currentCombination.add(new InputElement(UP, inputEvent));
+            }
+            if (upLast[i]) {
+                currentCombination.add(new InputElement(FREE, inputEvent));
+            }
+            if (downJust[i]) {
+                currentCombination.add(new InputElement(DOWN, inputEvent));
+            }
+            if (downLast[i]) {
+                currentCombination.add(new InputElement(HELD, inputEvent));
+            }
+        }
+        return currentCombination;
     }
 
     public boolean isActivated(InputElement inputElement) {
@@ -80,6 +104,11 @@ public class KeyboardListener implements Observable, KeyListener {
         downJust[keyCode] = false;
         upLast[keyCode] = upLast[keyCode] || upJust[keyCode];
         upJust[keyCode] = downLast[keyCode] && !upJust[keyCode];
+    }
+
+    private InputEvent getKeyboardEventWithKeyCode(int keycode) {
+        Component dummyComponent = new Button();
+        return new KeyEvent(dummyComponent, 0, 0, 0, keycode, '0', 0);
     }
 
 }

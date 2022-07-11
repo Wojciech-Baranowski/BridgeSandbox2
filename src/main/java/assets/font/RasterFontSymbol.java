@@ -1,31 +1,17 @@
 package assets.font;
 
 import common.Rasterable;
+import lombok.Getter;
 
 public class RasterFontSymbol implements Rasterable {
 
-    private final int[] p;
-    private final int w;
-    private final int h;
+    @Getter private final int[] p;
+    @Getter private final int w;
+    @Getter private final int h;
 
     RasterFontSymbol(int[] p, int w, int h) {
         this.p = p;
         this.w = w;
         this.h = h;
-    }
-
-    @Override
-    public int[] getP() {
-        return p;
-    }
-
-    @Override
-    public int getW() {
-        return w;
-    }
-
-    @Override
-    public int getH() {
-        return h;
     }
 }

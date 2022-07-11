@@ -21,11 +21,12 @@ public class FontFactory {
         int w = getFontWidth(path);
         int h = fontPixels.length / w;
         int[] symbolLengths = getSymbolsLengths(fontPixels, w, h, symbolsNumber);
-        int currentX = 0;
+        int[] spacingLengths = getSpacingLengths(fontPixels, w, h, symbolsNumber);
+        int currentX = spacingLengths[0];
         for(int i = 0; i < symbolsNumber; i++){
             int[] symbolPixels = getSymbolPixels(fontPixels, symbolLengths[i], currentX, w, h);
             rasterFontSymbols[i] = new RasterFontSymbol(symbolPixels, symbolLengths[i], h);
-            currentX += symbolLengths[i];
+            currentX += symbolLengths[i] + spacingLengths[i + 1];
         }
         return rasterFontSymbols;
     }
@@ -70,6 +71,26 @@ public class FontFactory {
             lastColumnEmpty = currentColumnEmpty;
         }
         return symbolLengths;
+    }
+
+    private int[] getSpacingLengths(int[] fontPixels, int w, int h, int symbolsNumber){
+        int[] spacingLengths = new int[symbolsNumber + 1];
+        boolean currentColumnEmpty;
+        boolean lastColumnEmpty = true;
+        int currentSymbolNumber = 0;
+        int lastX = 0;
+        for(int x = 1; x < w && currentSymbolNumber < symbolsNumber; x++){
+            currentColumnEmpty = isColumnTransparent(fontPixels, x, w, h);
+            if(currentColumnEmpty && !lastColumnEmpty){
+                lastX = x + 1;
+            }
+            if(!currentColumnEmpty && lastColumnEmpty){
+                spacingLengths[currentSymbolNumber++] = x - lastX - 1;
+            }
+            lastColumnEmpty = currentColumnEmpty;
+        }
+        spacingLengths[symbolsNumber] = 0;
+        return spacingLengths;
     }
 
     private boolean isColumnTransparent(int[] fontPixels, int x, int w, int h) {

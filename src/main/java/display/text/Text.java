@@ -47,7 +47,7 @@ public class Text implements Drawable {
     private int recalculateWidth() {
         int maxW = 0;
         int currentW = 0;
-        int spacing = font.getSymbolRasterable(text.charAt(0)).getH() / 8;
+        int symbolsHeight = font.getSymbolRasterable('0').getH();
         for(char symbol : text.toCharArray()){
             if(symbol == '\n'){
                 maxW = max(maxW, currentW);
@@ -55,10 +55,10 @@ public class Text implements Drawable {
                 continue;
             }
             if(symbol == ' '){
-                currentW += spacing * 2 + 2;
+                currentW += symbolsHeight / 2;
                 continue;
             }
-            currentW += font.getSymbolRasterable(symbol).getW() + spacing;
+            currentW += font.getSymbolRasterable(symbol).getW();
         }
        return max(maxW, currentW);
     }
@@ -66,13 +66,12 @@ public class Text implements Drawable {
     private int recalculateHeight() {
         int numberOfLines = 1;
         int symbolHeight = font.getSymbolRasterable('0').getH();
-        int spacing = symbolHeight / 8;
         for(char symbol : text.toCharArray()){
             if(symbol == '\n'){
                 numberOfLines++;
             }
         }
-        return (symbolHeight + spacing) * numberOfLines;
+        return symbolHeight * numberOfLines;
     }
 
     private int[] recalculatePixels() {
@@ -81,20 +80,19 @@ public class Text implements Drawable {
         int currentX = 0;
         int currentY = 0;
         int symbolsHeight = font.getSymbolRasterable('0').getH();
-        int spacing = symbolsHeight / 8;
         for(char symbol : text.toCharArray()){
             if(symbol == ' '){
-                currentX += spacing * 2 + 2;
+                currentX += symbolsHeight / 2;
                 continue;
             }
             if(symbol == '\n'){
                 currentX = 0;
-                currentY += symbolsHeight + spacing;
+                currentY += symbolsHeight;
                 continue;
             }
             Rasterable symbolRasterable = font.getSymbolRasterable(symbol);
             mergeSymbolIntoPixelArray(pixels, symbolRasterable, currentX, currentY);
-            currentX += symbolRasterable.getW() + spacing;
+            currentX += symbolRasterable.getW();
         }
         return pixels;
     }

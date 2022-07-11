@@ -4,6 +4,6 @@ public interface InputCombination {
 
     boolean includes(InputCombination inputCombination);
 
-    boolean isPressed();
+    boolean isActive();
 
 }

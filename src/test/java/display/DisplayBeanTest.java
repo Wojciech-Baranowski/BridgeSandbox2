@@ -2,9 +2,6 @@ package display;
 
 import assets.Assets;
 import assets.AssetsBean;
-import assets.color.Color;
-import assets.font.Font;
-import common.Rasterable;
 import display.rectangle.Rectangle;
 import display.text.Text;
 import org.junit.Test;

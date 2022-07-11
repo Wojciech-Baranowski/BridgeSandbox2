@@ -24,7 +24,7 @@ public class InputCombinationFactory {
 
     public InputCombination makeComplexInputCombination(ActionType[] actionTypes, InputEvent[] inputEvents) {
         Set<InputElement> inputElements = new HashSet<>();
-        for(int i = 0; i < min(actionTypes.length, inputEvents.length); i++) {
+        for (int i = 0; i < min(actionTypes.length, inputEvents.length); i++) {
             InputElement inputElement = new InputElement(actionTypes[i], inputEvents[i]);
             inputElements.add(inputElement);
         }

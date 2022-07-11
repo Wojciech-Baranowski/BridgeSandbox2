@@ -6,7 +6,7 @@ import input.inputCombination.InputCombinationFactory;
 
 public interface Input {
 
-    void addMMouseListener(Observer observer);
+    void addMouseListener(Observer observer);
 
     void addKeyboardListener(Observer observer);
 

@@ -106,7 +106,7 @@ public class KeyboardListener implements Observable, KeyListener {
         upJust[keyCode] = downLast[keyCode] && !upJust[keyCode];
     }
 
-    private InputEvent getKeyboardEventWithKeyCode(int keycode) {
+    public static InputEvent getKeyboardEventWithKeyCode(int keycode) {
         Component dummyComponent = new Button();
         return new KeyEvent(dummyComponent, 0, 0, 0, keycode, '0', 0);
     }

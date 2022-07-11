@@ -1,8 +1,13 @@
 package input;
 
 import common.Observer;
+import input.inputCombination.ComplexInputCombination;
 import input.inputCombination.InputCombination;
 import input.inputCombination.InputCombinationFactory;
+import input.inputCombination.InputElement;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class InputBean implements Input{
 
@@ -18,50 +23,51 @@ public class InputBean implements Input{
     }
 
     public static Input getInput() {
-        /*if(input == null){
+        if(input == null){
             input = new InputBean();
         }
-        return input;*/
-        return null;
+        return input;
     }
 
     @Override
     public void addMouseListener(Observer observer) {
-
+        mouseListener.attach(observer);
     }
 
     @Override
     public void addKeyboardListener(Observer observer) {
-
+        keyboardListener.attach(observer);
     }
 
     @Override
     public void removeMouseListener(Observer observer) {
-
+        mouseListener.detach(observer);
     }
 
     @Override
     public void removeKeyboardListener(Observer observer) {
-
+        keyboardListener.detach(observer);
     }
 
     @Override
     public int getMouseX() {
-        return 0;
+        return mouseListener.getX();
     }
 
     @Override
     public int getMouseY() {
-        return 0;
+        return mouseListener.getY();
     }
 
     @Override
     public InputCombination getCurrentInputCombination() {
-        return null;
+        Set<InputElement> inputElements = mouseListener.getActivatedInputElements();
+        inputElements.addAll(keyboardListener.getActivatedInputElements());
+        return new ComplexInputCombination(keyboardListener, mouseListener, inputElements);
     }
 
     @Override
     public InputCombinationFactory getInputCombinationFactory() {
-        return null;
+        return inputCombinationFactory;
     }
 }

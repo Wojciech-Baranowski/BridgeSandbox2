@@ -132,7 +132,7 @@ public class MouseListener implements Observable, java.awt.event.MouseListener, 
 
     }
 
-    private InputEvent getMouseEventWithKeyCode(int keycode) {
+    public static InputEvent getMouseEventWithKeyCode(int keycode) {
         Component dummyComponent = new Button();
         return new MouseEvent(
                 dummyComponent, 0, 0, 0, 0, 0, 0, false, keycode);

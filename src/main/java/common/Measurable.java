@@ -23,4 +23,8 @@ public interface Measurable extends Comparable<Integer> {
         return Integer.compare(getZ(), z);
     }
 
+    default boolean inBorders(int x, int y){
+        return (getX() <= x && x < getX() + getW()) && (getY() <= y && y < getY() + getH());
+    }
+
 }

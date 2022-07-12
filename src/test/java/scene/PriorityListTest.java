@@ -6,7 +6,6 @@ import java.util.List;
 
 import static java.lang.Math.max;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class PriorityListTest {
 
@@ -167,12 +166,12 @@ public class PriorityListTest {
         input[2] = new Integer[]{};
         PriorityList priorityList = new PriorityList();
         List<Comparable<Integer>> output;
-        for(int i = 0; i < input.length; i++){
+        for (int i = 0; i < input.length; i++) {
             //when
-            for(int j = 0; j < input[i].length; j++){
+            for (int j = 0; j < input[i].length; j++) {
                 priorityList.setOnHighest(input[i][j]);
             }
-            output = (List<Comparable<Integer>>)priorityList.getObjectCollection();
+            output = (List<Comparable<Integer>>) priorityList.getObjectCollection();
             //then
             assertEquals(0, output.size());
         }
@@ -194,7 +193,7 @@ public class PriorityListTest {
         for (int i = 0; i < input.length; i++) {
             //when
             priorityList.setOnLowest(input[i]);
-            output = (Integer)priorityList.getLowest();
+            output = (Integer) priorityList.getLowest();
             //then
             assertEquals(input[i], output);
         }
@@ -217,7 +216,7 @@ public class PriorityListTest {
         for (int i = 0; i < input.length; i++) {
             //when
             priorityList.setOnHighest(input[i]);
-            output = (Integer)priorityList.getHighest();
+            output = (Integer) priorityList.getHighest();
             //then
             assertEquals(input[i], output);
         }

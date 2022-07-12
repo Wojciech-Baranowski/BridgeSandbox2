@@ -101,13 +101,13 @@ public class PriorityListTest {
         //2 6 5 1 4
         //2 6 8 5 1 4
         //2 6 8 5 1 4
-        List<Integer> outputCheck = List.of(2, 6, 8, 1, 5, 4);
+        List<Integer> outputCheck = List.of(2, 6, 8, 5, 1, 4);
         PriorityList priorityList = new PriorityList();
         List<Comparable<Integer>> output;
         //when
         priorityList.setOnHighest(2);
         for (int i = 0; i < inputContained.length; i++) {
-            priorityList.setLowerThan(inputInserted[i], inputContained[i]);
+            priorityList.setHigherThan(inputInserted[i], inputContained[i]);
         }
         output = (List<Comparable<Integer>>) priorityList.getObjectCollection();
         //then
@@ -171,6 +171,7 @@ public class PriorityListTest {
             for (int j = 0; j < input[i].length; j++) {
                 priorityList.setOnHighest(input[i][j]);
             }
+            priorityList.clear();
             output = (List<Comparable<Integer>>) priorityList.getObjectCollection();
             //then
             assertEquals(0, output.size());
@@ -180,13 +181,12 @@ public class PriorityListTest {
     @Test
     public void get_lowest_test() {
         //given
-        Integer[] input = new Integer[]{2, 5, 4, 6, 1, 8, 2};
+        Integer[] input = new Integer[]{2, 5, 4, 6, 1, 8};
         //2
         //5 2
         //4 5 2
         //6 4 5 2
         //1 6 4 5 2
-        //8 1 6 4 5 2
         //8 1 6 4 5 2
         PriorityList priorityList = new PriorityList();
         Integer output;
@@ -202,13 +202,12 @@ public class PriorityListTest {
     @Test
     public void get_highest_test() {
         //given
-        Integer[] input = new Integer[]{2, 5, 4, 6, 1, 8, 2};
+        Integer[] input = new Integer[]{2, 5, 4, 6, 1, 8};
         //2
         //2 5
         //2 5 4
         //2 5 4 6
         //2 5 4 6 1
-        //2 5 4 6 1 8
         //2 5 4 6 1 8
         PriorityList priorityList = new PriorityList();
         Integer output;

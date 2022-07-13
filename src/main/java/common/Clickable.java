@@ -6,8 +6,6 @@ public interface Clickable extends Measurable {
 
     int getY();
 
-    int getZ();
-
     int getW();
 
     int getH();

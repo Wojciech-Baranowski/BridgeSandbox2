@@ -4,22 +4,22 @@ import java.util.Collection;
 
 public interface PriorityCollection {
 
-    void setLowerThan(Comparable<Integer> inserted, Comparable<Integer> contained);
+    void setLowerThan(Object inserted, Object contained);
 
-    void setHigherThan(Comparable<Integer> inserted, Comparable<Integer> contained);
+    void setHigherThan(Object inserted, Object contained);
 
-    void setOnLowest(Comparable<Integer> inserted);
+    void setOnLowest(Object inserted);
 
-    void setOnHighest(Comparable<Integer> inserted);
+    void setOnHighest(Object inserted);
 
     void clear();
 
-    void remove(Comparable<Integer> removed);
+    void remove(Object removed);
 
-    Collection<Comparable<Integer>> getObjectCollection();
+    Collection<Object> getObjectCollection();
 
-    Comparable<Integer> getLowest();
+    Object getLowest();
 
-    Comparable<Integer> getHighest();
+    Object getHighest();
 
 }

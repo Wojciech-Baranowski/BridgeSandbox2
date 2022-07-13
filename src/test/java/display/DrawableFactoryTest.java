@@ -23,7 +23,6 @@ public class DrawableFactoryTest {
         //given
         int[] inputX = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[] inputY = {1, 4, 4, 1, 7, 9, 3, 5, 6};
-        int[] inputZ = {2, 4, 5, 0, 6, 0, -3, -4, -7};
         int[] inputW = {5, 2, 8, 1, 2, 8, 4, 2, 3};
         int[] inputH = {3, 7, 1, 2, 8, 4, 4, 4, 3};
         String[] inputColorNames = {"n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8", "n9"};
@@ -35,20 +34,19 @@ public class DrawableFactoryTest {
         Rectangle[] inputRectangles = new Rectangle[inputX.length];
         RectangleFactory rectangleFactory = new RectangleFactory();
         for(int i = 0; i < inputX.length; i++){
-            inputRectangles[i] = rectangleFactory.makeRectangle(inputX[i], inputY[i], inputZ[i], inputW[i], inputH[i], inputColorNames[i]);
+            inputRectangles[i] = rectangleFactory.makeRectangle(inputX[i], inputY[i], inputW[i], inputH[i], inputColorNames[i]);
         }
         DrawableFactory drawableFactory = new DrawableFactory();
         Rectangle[] output = new Rectangle[inputX.length];
         //when
         for(int i = 0; i < inputX.length; i++) {
-            output[i] = drawableFactory.makeRectangle(inputX[i], inputY[i], inputZ[i], inputW[i], inputH[i], inputColorNames[i]);
+            output[i] = drawableFactory.makeRectangle(inputX[i], inputY[i], inputW[i], inputH[i], inputColorNames[i]);
         }
         //then
         for(int i = 0; i < inputX.length; i++) {
             assertArrayEquals(inputRectangles[i].getP(), output[i].getP());
             assertEquals(inputRectangles[i].getX(), output[i].getX());
             assertEquals(inputRectangles[i].getY(), output[i].getY());
-            assertEquals(inputRectangles[i].getZ(), output[i].getZ());
             assertEquals(inputRectangles[i].getW(), output[i].getW());
             assertEquals(inputRectangles[i].getH(), output[i].getH());
         }
@@ -85,20 +83,19 @@ public class DrawableFactoryTest {
         RectangleFactory rectangleFactory = new RectangleFactory();
         Rectangle[] inputRectangles = new Rectangle[inputX.length];
         for(int i = 0; i < inputX.length; i++){
-            inputRectangles[i] = rectangleFactory.makeFramedRectangle(inputX[i], inputY[i], inputZ[i], inputW[i], inputH[i], inputFrameThicknesses[i], inputColorNames[i], inputFrameColorNames[i]);
+            inputRectangles[i] = rectangleFactory.makeFramedRectangle(inputX[i], inputY[i], inputW[i], inputH[i], inputFrameThicknesses[i], inputColorNames[i], inputFrameColorNames[i]);
         }
         DrawableFactory drawableFactory = new DrawableFactory();
         Rectangle[] output = new Rectangle[inputX.length];
         //when
         for(int i = 0; i < inputX.length; i++) {
-            output[i] = drawableFactory.makeFramedRectangle(inputX[i], inputY[i], inputZ[i], inputW[i], inputH[i], inputFrameThicknesses[i], inputColorNames[i], inputFrameColorNames[i]);
+            output[i] = drawableFactory.makeFramedRectangle(inputX[i], inputY[i], inputW[i], inputH[i], inputFrameThicknesses[i], inputColorNames[i], inputFrameColorNames[i]);
         }
         //then
         for(int i = 0; i < inputX.length; i++) {
             assertArrayEquals(inputRectangles[i].getP(), output[i].getP());
             assertEquals(inputRectangles[i].getX(), output[i].getX());
             assertEquals(inputRectangles[i].getY(), output[i].getY());
-            assertEquals(inputRectangles[i].getZ(), output[i].getZ());
             assertEquals(inputRectangles[i].getW(), output[i].getW());
             assertEquals(inputRectangles[i].getH(), output[i].getH());
         }
@@ -110,27 +107,25 @@ public class DrawableFactoryTest {
         String[] inputTexts = new String[]{"A", "A ~", "123\n1234\n123", "A\u2664\u2665$\u2667"};
         int[] inputX = {10, 20, 30, 40};
         int[] inputY = {20, 40, 60, 80};
-        int[] inputZ = {-5, -4, 0, 2};
         Assets assets = AssetsBean.getAssets();
         assets.addFont("HBE24", "/HelveticaBoldExtended24.png", getExtendedAlphabet());
         assets.addColor("red", 0xFFFF0000);
         Text[] inputTexts2 = new Text[inputX.length];
         TextFactory textFactory = new TextFactory();
         for(int i = 0; i < inputX.length; i++){
-            inputTexts2[i] = textFactory.makeText(inputTexts[i], inputX[i], inputY[i], inputZ[i], "HBE24", "red");
+            inputTexts2[i] = textFactory.makeText(inputTexts[i], inputX[i], inputY[i], "HBE24", "red");
         }
         DrawableFactory drawableFactory = new DrawableFactory();
         Text[] output = new Text[inputX.length];
         //when
         for(int i = 0; i < inputX.length; i++){
-            output[i] = drawableFactory.makeText(inputTexts[i], inputX[i], inputY[i], inputZ[i], "HBE24", "red");
+            output[i] = drawableFactory.makeText(inputTexts[i], inputX[i], inputY[i], "HBE24", "red");
         }
         //then
         for(int i = 0; i < inputX.length; i++){
             assertArrayEquals(inputTexts2[i].getP(), output[i].getP());
             assertEquals(inputTexts2[i].getX(), output[i].getX());
             assertEquals(inputTexts2[i].getY(), output[i].getY());
-            assertEquals(inputTexts2[i].getZ(), output[i].getZ());
             assertEquals(inputTexts2[i].getW(), output[i].getW());
             assertEquals(inputTexts2[i].getH(), output[i].getH());
         }
@@ -142,24 +137,22 @@ public class DrawableFactoryTest {
         String fileName = "/testFont.png";
         int[] inputX = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[] inputY = {1, 3, 5, 7, 9, 2, 4, 6, 8};
-        int[] inputZ = {-4, -3, -2, -1, 0, 1, 2, 3, 4};
         ImageFactory imageFactory = new ImageFactory();
         Image[] inputImages = new Image[inputX.length];
         for(int i = 0; i < inputX.length; i++){
-            inputImages[i] = imageFactory.makeImage(fileName, inputX[i], inputY[i], inputZ[i]);
+            inputImages[i] = imageFactory.makeImage(fileName, inputX[i], inputY[i]);
         }
         DrawableFactory drawableFactory = new DrawableFactory();
         Image[] output = new Image[inputX.length];
         //when
         for(int i = 0; i < inputX.length; i++){
-            output[i] = drawableFactory.makeImage(fileName, inputX[i], inputY[i], inputZ[i]);
+            output[i] = drawableFactory.makeImage(fileName, inputX[i], inputY[i]);
         }
         //then
         for(int i = 0; i < inputX.length; i++){
             assertArrayEquals(inputImages[i].getP(), output[i].getP());
             assertEquals(inputImages[i].getX(), output[i].getX());
             assertEquals(inputImages[i].getY(), output[i].getY());
-            assertEquals(inputImages[i].getZ(), output[i].getZ());
             assertEquals(inputImages[i].getW(), output[i].getW());
             assertEquals(inputImages[i].getH(), output[i].getH());
         }

@@ -19,18 +19,14 @@ public class Rectangle implements Drawable {
     @Setter
     protected int y;
     @Getter
-    @Setter
-    protected int z;
-    @Getter
     protected final int w;
     @Getter
     protected final int h;
     protected final Color color;
 
-    Rectangle(int x, int y, int z, int w, int h, Color color) {
+    Rectangle(int x, int y, int w, int h, Color color) {
         this.x = x;
         this.y = y;
-        this.z = z;
         this.w = w;
         this.h = h;
         this.color = color;

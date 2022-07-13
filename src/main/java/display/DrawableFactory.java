@@ -19,21 +19,21 @@ public class DrawableFactory {
         imageFactory = new ImageFactory();
     }
 
-    public Rectangle makeRectangle(int x, int y, int z, int w, int h, String colorName) {
-        return rectangleFactory.makeRectangle(x, y, z, w, h, colorName);
+    public Rectangle makeRectangle(int x, int y, int w, int h, String colorName) {
+        return rectangleFactory.makeRectangle(x, y, w, h, colorName);
     }
 
-    public Rectangle makeFramedRectangle(int x, int y, int z, int w, int h, int frameThickness,
+    public Rectangle makeFramedRectangle(int x, int y, int w, int h, int frameThickness,
                                          String colorName, String frameColorName) {
-        return rectangleFactory.makeFramedRectangle(x, y, z, w, h, frameThickness, colorName, frameColorName);
+        return rectangleFactory.makeFramedRectangle(x, y, w, h, frameThickness, colorName, frameColorName);
     }
 
-    public Text makeText(String text, int x, int y, int z, String fontName, String colorName) {
-        return textFactory.makeText(text, x, y, z, fontName, colorName);
+    public Text makeText(String text, int x, int y, String fontName, String colorName) {
+        return textFactory.makeText(text, x, y, fontName, colorName);
     }
 
-    public Image makeImage(String path, int x, int y, int z) {
-        return imageFactory.makeImage(path, x, y, z);
+    public Image makeImage(String path, int x, int y) {
+        return imageFactory.makeImage(path, x, y);
     }
 
 }

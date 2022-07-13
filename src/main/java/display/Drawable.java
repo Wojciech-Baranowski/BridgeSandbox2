@@ -10,8 +10,6 @@ public interface Drawable extends Measurable {
 
     int getY();
 
-    int getZ();
-
     int getW();
 
     int getH();
@@ -19,7 +17,5 @@ public interface Drawable extends Measurable {
     void setX(int x);
 
     void setY(int y);
-
-    void setZ(int z);
 
 }

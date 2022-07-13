@@ -27,20 +27,18 @@ public class ImageTest {
         int[] inputPixels = inputImage.getRGB(0, 0, 63, 9, null, 0, 63);
         int[] inputX = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[] inputY = {1, 3, 5, 7, 9, 2, 4, 6, 8};
-        int[] inputZ = {-4, -3, -2, -1, 0, 1, 2, 3, 4};
         int[] inputW = {63, 63, 63, 63, 63, 63, 63, 63, 63};
         int[] inputH = {9, 9, 9, 9, 9, 9, 9, 9, 9};
         Image[] inputImages = new Image[inputX.length];
         //when
         for(int i = 0; i < inputX.length; i++){
-            inputImages[i] = new Image(inputImage, inputX[i], inputY[i], inputZ[i], inputW[i], inputH[i]);
+            inputImages[i] = new Image(inputImage, inputX[i], inputY[i], inputW[i], inputH[i]);
         }
         //then
         for(int i = 0; i < inputX.length; i++) {
             assertArrayEquals(inputPixels, inputImages[i].getP());
             assertEquals(inputX[i], inputImages[i].getX());
             assertEquals(inputY[i], inputImages[i].getY());
-            assertEquals(inputZ[i], inputImages[i].getZ());
             assertEquals(inputW[i], inputImages[i].getW());
             assertEquals(inputH[i], inputImages[i].getH());
         }

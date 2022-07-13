@@ -46,12 +46,10 @@ public class DisplayBeanTest {
     public void simple_draw_manual_test() {
         int inputX1 = 10;
         int inputY1 = 30;
-        int inputZ1 = 1;
         int inputW = 300;
         int inputH = 100;
         int inputX2 = 250;
         int inputY2 = 100;
-        int inputZ2 = 5;
         int inputThickness = 3;
         String inputText1 = "ABCD1234$$$\u2666\nqwer tyWWWW   WWW WW";
         Assets assets = AssetsBean.getAssets();
@@ -61,12 +59,11 @@ public class DisplayBeanTest {
         assets.addColor("blue", 0xFF0000FF);
         Display display = DisplayBean.getDisplay();
         DrawableFactory drawableFactory = display.getDrawableFactory();
-        Rectangle inputRectangle = drawableFactory.makeFramedRectangle(inputX1, inputY1, inputZ1, inputW, inputH, inputThickness, "red", "green");
-        Text inputText2 = drawableFactory.makeText(inputText1, inputX2, inputY2, inputZ2, "HBE32", "blue");
+        Rectangle inputRectangle = drawableFactory.makeFramedRectangle(inputX1, inputY1, inputW, inputH, inputThickness, "red", "green");
+        Text inputText2 = drawableFactory.makeText(inputText1, inputX2, inputY2, "HBE32", "blue");
         List<Drawable> inputList = new LinkedList<>();
         inputList.add(inputRectangle);
         inputList.add(inputText2);
-        inputList.sort((m1, m2) -> m1.compareTo(m2.getZ()));
         display.setObjectsToDraw(inputList);
         //when
         display.draw();
@@ -77,7 +74,6 @@ public class DisplayBeanTest {
     public void transparent_draw_manual_test() {
         int[] inputX = {10, 50, 80};
         int[] inputY = {410, 420, 430};
-        int[] inputZ = {1, 2, 3};
         int[] inputW = {100, 100, 100};
         int[] inputH = {40, 50, 60};
         String[] inputColorNames = new String[]{"red", "green", "blue"};
@@ -89,13 +85,12 @@ public class DisplayBeanTest {
         DrawableFactory drawableFactory = display.getDrawableFactory();
         Rectangle[] inputRectangles = new Rectangle[inputX.length];
         for(int i = 0; i < inputX.length; i++){
-            inputRectangles[i] = drawableFactory.makeRectangle(inputX[i], inputY[i], inputZ[i], inputW[i], inputH[i], inputColorNames[i]);
+            inputRectangles[i] = drawableFactory.makeRectangle(inputX[i], inputY[i], inputW[i], inputH[i], inputColorNames[i]);
         }
         List<Drawable> inputList = new LinkedList<>();
         for(int i = 0; i < inputX.length; i++){
             inputList.add(inputRectangles[i]);
         }
-        inputList.sort((m1, m2) -> m1.compareTo(m2.getZ()));
         display.setObjectsToDraw(inputList);
         //when
         display.draw();

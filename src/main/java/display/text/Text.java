@@ -26,19 +26,15 @@ public class Text implements Drawable {
     @Setter
     private int y;
     @Getter
-    @Setter
-    private int z;
-    @Getter
     private int w;
     @Getter
     private int h;
 
 
-    Text(String text, int x, int y, int z, Font font, Color color) {
+    Text(String text, int x, int y, Font font, Color color) {
         this.text = text;
         this.x = x;
         this.y = y;
-        this.z = z;
         this.font = font;
         this.color = color;
         this.w = recalculateWidth();

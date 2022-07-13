@@ -6,14 +6,14 @@ import java.util.List;
 
 public class PriorityList implements PriorityCollection {
 
-    private final List<Comparable<Integer>> objects;
+    private final List<Object> objects;
 
     PriorityList() {
         objects = new LinkedList<>();
     }
 
     @Override
-    public void setLowerThan(Comparable<Integer> inserted, Comparable<Integer> contained) {
+    public void setLowerThan(Object inserted, Object contained) {
         if(objects.contains(inserted)){
             return;
         }
@@ -26,7 +26,7 @@ public class PriorityList implements PriorityCollection {
     }
 
     @Override
-    public void setHigherThan(Comparable<Integer> inserted, Comparable<Integer> contained) {
+    public void setHigherThan(Object inserted, Object contained) {
         if(objects.contains(inserted)){
             return;
         }
@@ -39,7 +39,7 @@ public class PriorityList implements PriorityCollection {
     }
 
     @Override
-    public void setOnLowest(Comparable<Integer> inserted) {
+    public void setOnLowest(Object inserted) {
         if(objects.contains(inserted)){
             return;
         }
@@ -47,7 +47,7 @@ public class PriorityList implements PriorityCollection {
     }
 
     @Override
-    public void setOnHighest(Comparable<Integer> inserted) {
+    public void setOnHighest(Object inserted) {
         if(objects.contains(inserted)){
             return;
         }
@@ -60,22 +60,22 @@ public class PriorityList implements PriorityCollection {
     }
 
     @Override
-    public void remove(Comparable<Integer> removed) {
+    public void remove(Object removed) {
         objects.remove(removed);
     }
 
     @Override
-    public Collection<Comparable<Integer>> getObjectCollection() {
+    public Collection<Object> getObjectCollection() {
         return objects;
     }
 
     @Override
-    public Comparable<Integer> getLowest() {
+    public Object getLowest() {
         return objects.get(0);
     }
 
     @Override
-    public Comparable<Integer> getHighest() {
+    public Object getHighest() {
         return objects.get(objects.size() - 1);
     }
 }

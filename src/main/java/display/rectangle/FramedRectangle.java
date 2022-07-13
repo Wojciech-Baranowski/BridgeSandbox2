@@ -7,8 +7,8 @@ public class FramedRectangle extends Rectangle {
     private final int frameThickness;
     private final Color frameColor;
 
-    FramedRectangle(int x, int y, int z, int w, int h, int frameThickness, Color color, Color frameColor) {
-        super(x, y, z, w, h, color);
+    FramedRectangle(int x, int y, int w, int h, int frameThickness, Color color, Color frameColor) {
+        super(x, y, w, h, color);
         this.frameColor = frameColor;
         this.frameThickness = frameThickness;
         fillFrame();

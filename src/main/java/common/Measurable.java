@@ -1,12 +1,10 @@
 package common;
 
-public interface Measurable extends Comparable<Integer> {
+public interface Measurable {
 
     int getX();
 
     int getY();
-
-    int getZ();
 
     int getW();
 
@@ -15,13 +13,6 @@ public interface Measurable extends Comparable<Integer> {
     void setX(int x);
 
     void setY(int y);
-
-    void setZ(int z);
-
-    @Override
-    default int compareTo(Integer z) {
-        return Integer.compare(getZ(), z);
-    }
 
     default boolean inBorders(int x, int y) {
         return (getX() <= x && x < getX() + getW()) && (getY() <= y && y < getY() + getH());

@@ -27,25 +27,23 @@ public class ImageFactoryTest {
         }
         int[] inputX = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[] inputY = {1, 3, 5, 7, 9, 2, 4, 6, 8};
-        int[] inputZ = {-4, -3, -2, -1, 0, 1, 2, 3, 4};
         int[] inputW = {63, 63, 63, 63, 63, 63, 63, 63, 63};
         int[] inputH = {9, 9, 9, 9, 9, 9, 9, 9, 9};
         Image[] inputImages = new Image[inputX.length];
         for(int i = 0; i < inputX.length; i++){
-            inputImages[i] = new Image(inputImage, inputX[i], inputY[i], inputZ[i], inputW[i], inputH[i]);
+            inputImages[i] = new Image(inputImage, inputX[i], inputY[i], inputW[i], inputH[i]);
         }
         ImageFactory imageFactory = new ImageFactory();
         Image[] output = new Image[inputX.length];
         //when
         for(int i = 0; i < inputX.length; i++){
-            output[i] = imageFactory.makeImage(fileName, inputX[i], inputY[i], inputZ[i]);
+            output[i] = imageFactory.makeImage(fileName, inputX[i], inputY[i]);
         }
         //then
         for(int i = 0; i < inputX.length; i++) {
             assertArrayEquals(inputImages[i].getP(), output[i].getP());
             assertEquals(inputImages[i].getX(), output[i].getX());
             assertEquals(inputImages[i].getY(), output[i].getY());
-            assertEquals(inputImages[i].getZ(), output[i].getZ());
             assertEquals(inputImages[i].getW(), output[i].getW());
             assertEquals(inputImages[i].getH(), output[i].getH());
         }

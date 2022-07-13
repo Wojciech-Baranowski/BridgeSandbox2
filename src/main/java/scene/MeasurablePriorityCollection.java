@@ -13,9 +13,9 @@ public class MeasurablePriorityCollection implements PriorityCollection {
     }
 
     Measurable getTopObjectOnPosition(int x, int y) {
-        Collection<Comparable<Integer>> objects = priorityCollection.getObjectCollection();
+        Collection<Object> objects = priorityCollection.getObjectCollection();
         Measurable result = null;
-        for(Comparable<Integer> object : objects){
+        for(Object object : objects){
             Measurable measurable = (Measurable)object;
             if(measurable.inBorders(x, y)){
                 result = measurable;
@@ -25,22 +25,22 @@ public class MeasurablePriorityCollection implements PriorityCollection {
     }
 
     @Override
-    public void setLowerThan(Comparable<Integer> inserted, Comparable<Integer> contained) {
+    public void setLowerThan(Object inserted, Object contained) {
         priorityCollection.setLowerThan(inserted, contained);
     }
 
     @Override
-    public void setHigherThan(Comparable<Integer> inserted, Comparable<Integer> contained) {
+    public void setHigherThan(Object inserted, Object contained) {
         priorityCollection.setHigherThan(inserted, contained);
     }
 
     @Override
-    public void setOnLowest(Comparable<Integer> inserted) {
+    public void setOnLowest(Object inserted) {
         priorityCollection.setOnLowest(inserted);
     }
 
     @Override
-    public void setOnHighest(Comparable<Integer> inserted) {
+    public void setOnHighest(Object inserted) {
         priorityCollection.setOnHighest(inserted);
     }
 
@@ -50,22 +50,22 @@ public class MeasurablePriorityCollection implements PriorityCollection {
     }
 
     @Override
-    public void remove(Comparable<Integer> removed) {
+    public void remove(Object removed) {
         priorityCollection.remove(removed);
     }
 
     @Override
-    public Collection<Comparable<Integer>> getObjectCollection() {
+    public Collection<Object> getObjectCollection() {
         return priorityCollection.getObjectCollection();
     }
 
     @Override
-    public Comparable<Integer> getLowest() {
+    public Object getLowest() {
         return priorityCollection.getLowest();
     }
 
     @Override
-    public Comparable<Integer> getHighest() {
+    public Object getHighest() {
         return priorityCollection.getHighest();
     }
 

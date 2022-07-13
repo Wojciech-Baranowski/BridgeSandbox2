@@ -22,12 +22,12 @@ public class PriorityListTest {
         //8 1 6 4 5 2
         List<Integer> outputCheck = List.of(8, 1, 6, 4, 5, 2);
         PriorityList priorityList = new PriorityList();
-        List<Comparable<Integer>> output;
+        List<Object> output;
         //when
         for (int i = 0; i < input.length; i++) {
             priorityList.setOnLowest(input[i]);
         }
-        output = (List<Comparable<Integer>>) priorityList.getObjectCollection();
+        output = (List<Object>) priorityList.getObjectCollection();
         //then
         for (int i = 0; i < max(output.size(), outputCheck.size()); i++) {
             Integer outputObject = (Integer) output.get(i);
@@ -48,12 +48,12 @@ public class PriorityListTest {
         //2 5 4 6 1 8
         List<Integer> outputCheck = List.of(2, 5, 4, 6, 1, 8);
         PriorityList priorityList = new PriorityList();
-        List<Comparable<Integer>> output;
+        List<Object> output;
         //when
         for (int i = 0; i < input.length; i++) {
             priorityList.setOnHighest(input[i]);
         }
-        output = (List<Comparable<Integer>>) priorityList.getObjectCollection();
+        output = (List<Object>) priorityList.getObjectCollection();
         //then
         for (int i = 0; i < max(output.size(), outputCheck.size()); i++) {
             Integer outputObject = (Integer) output.get(i);
@@ -75,13 +75,13 @@ public class PriorityListTest {
         //4 1 5 8 6 2
         List<Integer> outputCheck = List.of(4, 1, 5, 8, 6, 2);
         PriorityList priorityList = new PriorityList();
-        List<Comparable<Integer>> output;
+        List<Object> output;
         //when
         priorityList.setOnLowest(2);
         for (int i = 0; i < inputContained.length; i++) {
             priorityList.setLowerThan(inputInserted[i], inputContained[i]);
         }
-        output = (List<Comparable<Integer>>) priorityList.getObjectCollection();
+        output = (List<Object>) priorityList.getObjectCollection();
         //then
         for (int i = 0; i < max(output.size(), outputCheck.size()); i++) {
             Integer outputObject = (Integer) output.get(i);
@@ -103,13 +103,13 @@ public class PriorityListTest {
         //2 6 8 5 1 4
         List<Integer> outputCheck = List.of(2, 6, 8, 5, 1, 4);
         PriorityList priorityList = new PriorityList();
-        List<Comparable<Integer>> output;
+        List<Object> output;
         //when
         priorityList.setOnHighest(2);
         for (int i = 0; i < inputContained.length; i++) {
             priorityList.setHigherThan(inputInserted[i], inputContained[i]);
         }
-        output = (List<Comparable<Integer>>) priorityList.getObjectCollection();
+        output = (List<Object>) priorityList.getObjectCollection();
         //then
         for (int i = 0; i < max(output.size(), outputCheck.size()); i++) {
             Integer outputObject = (Integer) output.get(i);
@@ -144,11 +144,11 @@ public class PriorityListTest {
         outputCheck[5] = new Integer[]{2};
         outputCheck[6] = new Integer[]{};
         outputCheck[7] = new Integer[]{};
-        List<Comparable<Integer>> output;
+        List<Object> output;
         for (int i = 0; i < inputRemoved.length; i++) {
             //when
             priorityList.remove(inputRemoved[i]);
-            output = (List<Comparable<Integer>>) priorityList.getObjectCollection();
+            output = (List<Object>) priorityList.getObjectCollection();
             //then
             for (int j = 0; j < max(output.size(), outputCheck[i].length); j++) {
                 Integer outputObject = (Integer) output.get(j);
@@ -165,14 +165,14 @@ public class PriorityListTest {
         input[1] = new Integer[]{3, 4, 5, 6};
         input[2] = new Integer[]{};
         PriorityList priorityList = new PriorityList();
-        List<Comparable<Integer>> output;
+        List<Object> output;
         for (int i = 0; i < input.length; i++) {
             //when
             for (int j = 0; j < input[i].length; j++) {
                 priorityList.setOnHighest(input[i][j]);
             }
             priorityList.clear();
-            output = (List<Comparable<Integer>>) priorityList.getObjectCollection();
+            output = (List<Object>) priorityList.getObjectCollection();
             //then
             assertEquals(0, output.size());
         }

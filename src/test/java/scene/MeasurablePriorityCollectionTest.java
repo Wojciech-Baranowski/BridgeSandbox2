@@ -19,8 +19,8 @@ public class MeasurablePriorityCollectionTest {
         assets.addColor("red", 0xFFFF0000);
         Display display = DisplayBean.getDisplay();
         DrawableFactory drawableFactory = display.getDrawableFactory();
-        Rectangle rectangle1 = drawableFactory.makeRectangle(0, 0, 0, 100, 100, "red");
-        Rectangle rectangle2 = drawableFactory.makeRectangle(50, 0, 0, 100, 100, "red");
+        Rectangle rectangle1 = drawableFactory.makeRectangle(0, 0, 100, 100, "red");
+        Rectangle rectangle2 = drawableFactory.makeRectangle(50, 0, 100, 100, "red");
         MeasurablePriorityCollection priorityCollection = new MeasurablePriorityCollection(new PriorityList());
         priorityCollection.setOnHighest(rectangle1);
         priorityCollection.setOnHighest(rectangle2);

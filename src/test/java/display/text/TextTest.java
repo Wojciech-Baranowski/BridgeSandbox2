@@ -22,7 +22,6 @@ public class TextTest {
         String[] inputTexts = new String[]{"A", "A ~", "123\n1234\n123", "A\u2664\u2665$\u2667"};
         int[] inputX = {10, 20, 30, 40};
         int[] inputY = {20, 40, 60, 80};
-        int[] inputZ = {-5, -4, 0, 2};
         int[] inputW = {20, 47, 63, 114};
         int[] inputH = {27, 27, 81, 27};
         Assets assets = AssetsBean.getAssets();
@@ -59,13 +58,12 @@ public class TextTest {
         Text[] output = new Text[inputX.length];
         //when
         for(int i = 0; i < inputX.length; i++){
-            output[i] = new Text(inputTexts[i], inputX[i], inputY[i], inputZ[i], inputFont, inputColor);
+            output[i] = new Text(inputTexts[i], inputX[i], inputY[i], inputFont, inputColor);
         }
         //then
         for(int i = 0; i < inputX.length; i++) {
             assertEquals(inputX[i], output[i].getX());
             assertEquals(inputY[i], output[i].getY());
-            assertEquals(inputZ[i], output[i].getZ());
             assertEquals(inputW[i], output[i].getW());
             assertEquals(inputH[i], output[i].getH());
             assertArrayEquals(inputPixels[i], output[i].getP());
@@ -77,7 +75,6 @@ public class TextTest {
         //given
         int[] inputX = {10, 20, 30, 40};
         int[] inputY = {20, 40, 60, 80};
-        int[] inputZ = {-5, -4, 0, 2};
         String inputText1 = "A";
         String inputText2 = "B";
         int inputW = 20;
@@ -97,7 +94,7 @@ public class TextTest {
             }
         }
         //when1
-        Text output = new Text(inputText2, 0, 0, 0, inputFont, inputColor);
+        Text output = new Text(inputText2, 0, 0, inputFont, inputColor);
         output.setText(inputText1);
         //then1
         assertArrayEquals(inputPixels, output.getP());
@@ -105,11 +102,9 @@ public class TextTest {
             //when2
             output.setX(inputX[i]);
             output.setY(inputY[i]);
-            output.setZ(inputZ[i]);
             //then2
             assertEquals(inputX[i], output.getX());
             assertEquals(inputY[i], output.getY());
-            assertEquals(inputZ[i], output.getZ());
         }
     }
 

@@ -1,24 +1,25 @@
 package scene;
 
 import common.Measurable;
+import display.Drawable;
 
 import java.util.Collection;
 
-public class MeasurablePriorityCollection implements PriorityCollection {
+public class DrawablePriorityCollection implements PriorityCollection {
 
     private final PriorityCollection priorityCollection;
 
-    MeasurablePriorityCollection(PriorityCollection priorityCollection) {
+    DrawablePriorityCollection(PriorityCollection priorityCollection) {
         this.priorityCollection = priorityCollection;
     }
 
-    Measurable getTopObjectOnPosition(int x, int y) {
+    Drawable getTopObjectOnPosition(int x, int y) {
         Collection<Object> objects = priorityCollection.getObjectCollection();
-        Measurable result = null;
+        Drawable result = null;
         for(Object object : objects){
-            Measurable measurable = (Measurable)object;
-            if(measurable.inBorders(x, y)){
-                result = measurable;
+            Drawable drawable = (Drawable)object;
+            if(drawable.inBorders(x, y) && !drawable.isPixelOnPositionTransparent(x, y)){
+                result = drawable;
             }
         }
         return result;

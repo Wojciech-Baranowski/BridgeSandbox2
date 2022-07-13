@@ -17,6 +17,9 @@ public interface Color {
     }
 
     static int blend(int value1, int value2) {
+        if(value2 == Color.getTransparentColorValue()){
+            return value1;
+        }
         float alpha = ((value2 & 0xFF000000) >>> 24) * (1.0f / 255.0f);
         int red = (int) ((((value2 & 0x00FF0000) >>> 16) * alpha) + (((value1 & 0x00FF0000) >>> 16) * (1.0 - alpha)));
         int green = (int) ((((value2 & 0x0000FF00) >>> 8) * alpha) + (((value1 & 0x0000FF00) >>> 8) * (1.0 - alpha)));

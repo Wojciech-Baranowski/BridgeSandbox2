@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.EventListener;
 import java.util.LinkedList;
 
+import static assets.color.Color.getTransparentColorValue;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
@@ -21,7 +22,6 @@ public class DisplayBean implements Display {
     private final int[] pixels;
     @Setter
     private Collection<Drawable> objectsToDraw;
-    private boolean isTransparent;
 
     private DisplayBean() {
         window = new Window();
@@ -54,34 +54,22 @@ public class DisplayBean implements Display {
             int pWidth = drawable.getW();
             int width = min(drawable.getX() + drawable.getW(), Window.w - 1) - startX;
             int height = min(drawable.getY() + drawable.getH(), Window.h - 1) - startY;
-            boolean isTransparent = Color.isTransparent(drawable.getP()[0]);
-            if (isTransparent) {
-                mergeTransparent(drawable.getP(), startX, startY, width, height, pWidth);
-            } else {
-                mergeNonTransparent(drawable.getP(), startX, startY, width, height, pWidth);
-            }
+            merge(drawable.getP(), startX, startY, width, height, pWidth);
         }
         window.draw(pixels);
     }
 
-    private void mergeNonTransparent(int[] p, int startX, int startY, int width, int height, int pWidth) {
-        int transparentColorValue = Color.getTransparentColorValue();
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                int pixelId = x + y * pWidth;
-                if (p[pixelId] != transparentColorValue) {
-                    pixels[startX + x + (startY + y) * Window.w] = p[pixelId];
-                }
-            }
-        }
-    }
-
-    private void mergeTransparent(int[] p, int startX, int startY, int width, int height, int pWidth) {
+    private void merge(int[] p, int startX, int startY, int width, int height, int pWidth) {
+        int transparentColorValue = getTransparentColorValue();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 int pixelId = startX + x + (startY + y) * Window.w;
-                int newColor = Color.blend(pixels[pixelId], p[x + y * pWidth]);
-                pixels[pixelId] = newColor;
+                if (p[x + y * pWidth] != transparentColorValue) {
+                    int newColor = (Color.isTransparent(p[x + y * pWidth])
+                            ? Color.blend(pixels[pixelId], p[x + y * pWidth])
+                            : p[x + y * pWidth]);
+                    pixels[pixelId] = newColor;
+                }
             }
         }
     }

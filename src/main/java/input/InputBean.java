@@ -6,10 +6,9 @@ import input.inputCombination.InputCombination;
 import input.inputCombination.InputCombinationFactory;
 import input.inputCombination.InputElement;
 
-import java.util.HashSet;
 import java.util.Set;
 
-public class InputBean implements Input{
+public class InputBean implements Input {
 
     private static InputBean input;
     private final MouseListener mouseListener;
@@ -23,7 +22,7 @@ public class InputBean implements Input{
     }
 
     public static Input getInput() {
-        if(input == null){
+        if (input == null) {
             input = new InputBean();
         }
         return input;

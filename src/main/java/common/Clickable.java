@@ -1,20 +1,8 @@
 package common;
 
-public interface Clickable extends Measurable {
+import display.Drawable;
 
-    int getX();
-
-    int getY();
-
-    int getW();
-
-    int getH();
-
-    void setX(int x);
-
-    void setY(int y);
-
-    void setZ(int z);
+public interface Clickable extends Drawable {
 
     void executeAction();
 

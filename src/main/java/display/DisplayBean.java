@@ -45,6 +45,9 @@ public class DisplayBean implements Display {
 
     @Override
     public void draw() {
+        if (objectsToDraw == null) {
+            return;
+        }
         for (Drawable drawable : objectsToDraw) {
             int startX = max(drawable.getX(), 0);
             int startY = max(drawable.getY(), 0);

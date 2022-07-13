@@ -27,7 +27,10 @@ public class SceneBean implements Scene {
     }
 
     public static Scene getScene() {
-        return null;
+        if(scene == null){
+            scene = new SceneBean();
+        }
+        return scene;
     }
 
     @Override

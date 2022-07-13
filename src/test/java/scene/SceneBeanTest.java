@@ -92,4 +92,37 @@ public class SceneBeanTest {
         }
     }
 
+    public static void main(String[] args) {
+        new SceneBeanTest().update_manual_test();
+    }
+
+    public void update_manual_test() {
+        //given
+        String inputName = "n1";
+        String inputName2= "n2";
+        Assets assets = AssetsBean.getAssets();
+        assets.addColor("red", 0xFFFF0000);
+        assets.addColor("green", 0xFF00FF00);
+        assets.addColor("blue", 0xFF0000FF);
+        Display display = DisplayBean.getDisplay();
+        DrawableFactory drawableFactory = display.getDrawableFactory();
+        Drawable inputDrawable = drawableFactory.makeRectangle(10, 10, 10, 10, "red");
+        Scene scene = SceneBean.getScene();
+        scene.addCollection(inputName);
+        scene.switchCollection(inputName);
+        scene.addOnHighest(inputDrawable);
+        inputDrawable = drawableFactory.makeRectangle(10, 10, 10, 10, "green");
+        scene.addOnLowest(inputDrawable);
+        inputDrawable = drawableFactory.makeRectangle(10, 10, 10, 10, "blue");
+        scene.addCollection(inputName2);
+        scene.switchCollection(inputName2);
+        scene.addOnHighest(inputDrawable);
+        scene.switchCollection(inputName);
+        //when
+        display.setObjectsToDraw(scene.getCurrentObjectCollection());
+        display.draw();
+        //then
+        //one red 10 x 10 square placed at (10; 10)
+    }
+
 }

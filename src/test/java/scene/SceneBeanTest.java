@@ -81,15 +81,22 @@ public class SceneBeanTest {
         Scene scene = SceneBean.getScene();
         for (int i = 0; i < inputNames.length; i++) {
             scene.addCollection(inputNames[i]);
+            scene.switchCollection(inputNames[i]);
+            scene.addOnHighest(inputDrawables[i]);
         }
         String[] inputSwitchNames = {"n1", "n2", "n2", "n3", "n1", "n4", "n4", "n5"};
-        int[] outputCheckIds = {0, 1, 1, 2, 0, 3, 3, 4};
+        int[] outputCheckIds = {0, 1, 1, 2, 0, 3, 3};
         for (int i = 0; i < inputSwitchNames.length; i++) {
             //when
             scene.switchCollection(inputSwitchNames[i]);
+            if (i == inputSwitchNames.length - 1) {
+                break;
+            }
             //then
             assertSame(inputDrawables[outputCheckIds[i]], scene.getCurrentObjectCollection().toArray()[0]);
         }
+        //then2
+        assertNull(scene.getCurrentObjectCollection());
     }
 
     public static void main(String[] args) {
@@ -99,7 +106,7 @@ public class SceneBeanTest {
     public void update_manual_test() {
         //given
         String inputName = "n1";
-        String inputName2= "n2";
+        String inputName2 = "n2";
         Assets assets = AssetsBean.getAssets();
         assets.addColor("red", 0xFFFF0000);
         assets.addColor("green", 0xFF00FF00);

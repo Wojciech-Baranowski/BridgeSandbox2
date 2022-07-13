@@ -5,7 +5,6 @@ import display.DisplayBean;
 import display.Drawable;
 import input.Input;
 import input.InputBean;
-import lombok.Getter;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,7 +26,7 @@ public class SceneBean implements Scene {
     }
 
     public static Scene getScene() {
-        if(scene == null){
+        if (scene == null) {
             scene = new SceneBean();
         }
         return scene;
@@ -35,62 +34,77 @@ public class SceneBean implements Scene {
 
     @Override
     public void update() {
-
+        display.setObjectsToDraw(scene.getCurrentObjectCollection());
+        display.draw();
     }
 
     @Override
     public void addObjectLowerThan(Drawable inserted, Drawable contained) {
-
+        currentObjectCollection.setLowerThan(inserted, contained);
     }
 
     @Override
     public void addObjectHigherThan(Drawable inserted, Drawable contained) {
-
+        currentObjectCollection.setHigherThan(inserted, contained);
     }
 
     @Override
     public void addOnHighest(Drawable inserted) {
-
+        currentObjectCollection.setOnHighest(inserted);
     }
 
     @Override
     public void addOnLowest(Drawable inserted) {
-
+        currentObjectCollection.setOnLowest(inserted);
     }
 
     @Override
     public void clear() {
-
+        currentObjectCollection.clear();
     }
 
     @Override
     public void removeObject(Drawable removed) {
-
+        currentObjectCollection.remove(removed);
     }
 
     @Override
-    public Collection<Drawable> getCurrentObjectCollection(){
-        return null;
+    public Collection<Drawable> getCurrentObjectCollection() {
+        if (currentObjectCollection == null) {
+            return null;
+        }
+        return (Collection) currentObjectCollection.getObjectCollection();
     }
 
     @Override
     public Drawable getTopObject() {
-        return null;
+        int x = input.getMouseX();
+        int y = input.getMouseY();
+        return currentObjectCollection.getTopObjectOnPosition(x, y);
     }
 
     @Override
     public void switchCollection(String collectionName) {
-
+        currentObjectCollection = objectCollections.get(collectionName);
     }
 
     @Override
     public void addCollection(String collectionName) {
-
+        objectCollections.put(collectionName, new DrawablePriorityCollection(new PriorityList()));
     }
 
     @Override
     public void removeCollection(String collectionName) {
-
+        if(!objectCollections.containsKey(collectionName)){
+            return;
+        }
+        if(currentObjectCollection != null &&
+                currentObjectCollection.equals(objectCollections.get(collectionName))){
+            currentObjectCollection.clear();
+            currentObjectCollection = null;
+        }
+        objectCollections.get(collectionName).clear();
+        objectCollections.remove(collectionName);
     }
 
 }

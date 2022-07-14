@@ -84,11 +84,11 @@ public class DisplayBeanTest {
         Display display = DisplayBean.getDisplay();
         DrawableFactory drawableFactory = display.getDrawableFactory();
         Rectangle[] inputRectangles = new Rectangle[inputX.length];
-        for(int i = 0; i < inputX.length; i++){
+        for (int i = 0; i < inputX.length; i++) {
             inputRectangles[i] = drawableFactory.makeRectangle(inputX[i], inputY[i], inputW[i], inputH[i], inputColorNames[i]);
         }
         List<Drawable> inputList = new LinkedList<>();
-        for(int i = 0; i < inputX.length; i++){
+        for (int i = 0; i < inputX.length; i++) {
             inputList.add(inputRectangles[i]);
         }
         display.setObjectsToDraw(inputList);

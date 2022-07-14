@@ -9,8 +9,8 @@ import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 import static input.inputCombination.ActionType.*;
 

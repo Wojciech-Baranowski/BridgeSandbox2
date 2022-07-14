@@ -30,17 +30,17 @@ public class ImageFactoryTest {
         int[] inputW = {63, 63, 63, 63, 63, 63, 63, 63, 63};
         int[] inputH = {9, 9, 9, 9, 9, 9, 9, 9, 9};
         Image[] inputImages = new Image[inputX.length];
-        for(int i = 0; i < inputX.length; i++){
+        for (int i = 0; i < inputX.length; i++) {
             inputImages[i] = new Image(inputImage, inputX[i], inputY[i], inputW[i], inputH[i]);
         }
         ImageFactory imageFactory = new ImageFactory();
         Image[] output = new Image[inputX.length];
         //when
-        for(int i = 0; i < inputX.length; i++){
+        for (int i = 0; i < inputX.length; i++) {
             output[i] = imageFactory.makeImage(fileName, inputX[i], inputY[i]);
         }
         //then
-        for(int i = 0; i < inputX.length; i++) {
+        for (int i = 0; i < inputX.length; i++) {
             assertArrayEquals(inputImages[i].getP(), output[i].getP());
             assertEquals(inputImages[i].getX(), output[i].getX());
             assertEquals(inputImages[i].getY(), output[i].getY());

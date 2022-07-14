@@ -26,10 +26,10 @@ public class RasterFontTest {
         }
         int[] inputAllPixels = inputImages.getRGB(0, 0, 63, 9, null, 0, 63);
         RasterFontSymbol[] inputRasterables = new RasterFontSymbol[inputSymbols.length()];
-        for(int i = 0; i < inputSymbols.length(); i++){
+        for (int i = 0; i < inputSymbols.length(); i++) {
             int[] inputPixels = new int[63];
-            for(int j = 0; j < 7; j++){
-                for(int k = 0; k < 9; k++){
+            for (int j = 0; j < 7; j++) {
+                for (int k = 0; k < 9; k++) {
                     inputPixels[j + 7 * k] = inputAllPixels[i * 7 + j + 63 * k];
                 }
             }
@@ -38,7 +38,7 @@ public class RasterFontTest {
         //when
         RasterFont output = new RasterFont(inputSymbols, inputRasterables);
         //then
-        for(int i = 0; i < inputSymbols.length(); i++){
+        for (int i = 0; i < inputSymbols.length(); i++) {
             assertEquals(inputRasterables[i], output.getSymbolRasterable(inputSymbols.charAt(i)));
         }
     }

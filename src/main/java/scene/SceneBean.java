@@ -95,11 +95,11 @@ public class SceneBean implements Scene {
 
     @Override
     public void removeCollection(String collectionName) {
-        if(!objectCollections.containsKey(collectionName)){
+        if (!objectCollections.containsKey(collectionName)) {
             return;
         }
-        if(currentObjectCollection != null &&
-                currentObjectCollection.equals(objectCollections.get(collectionName))){
+        if (currentObjectCollection != null &&
+                currentObjectCollection.equals(objectCollections.get(collectionName))) {
             currentObjectCollection.clear();
             currentObjectCollection = null;
         }

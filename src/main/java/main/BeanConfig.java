@@ -7,7 +7,8 @@ import scene.SceneBean;
 
 public class BeanConfig {
 
-    BeanConfig() {}
+    BeanConfig() {
+    }
 
     void buildBeans() {
         AssetsBean.getAssets();

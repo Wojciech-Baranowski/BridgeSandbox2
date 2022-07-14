@@ -12,11 +12,11 @@ public class ArgbColorTest {
         int[] input = {0xFFFFFF00, 0xFF213769, 0xFFFFFFFF, 0x00000000, 0x12345678, 0xFFFF1234, 0x01010101};
         int[] output = new int[input.length];
         //when
-        for(int i = 0; i < input.length; i++){
+        for (int i = 0; i < input.length; i++) {
             output[i] = new ArgbColor(input[i]).getValue();
         }
         //then
-        for(int i = 0; i < output.length; i++){
+        for (int i = 0; i < output.length; i++) {
             assertEquals(input[i], output[i]);
         }
     }
@@ -30,18 +30,18 @@ public class ArgbColorTest {
         Color[] inputColor = new ArgbColor[input.length];
         Color[] inputColor2 = new ArgbColor[input.length];
         ArgbColor[] outputCheck = new ArgbColor[input.length];
-        for(int i = 0; i < outputCheck.length; i++){
+        for (int i = 0; i < outputCheck.length; i++) {
             inputColor[i] = new ArgbColor(input[i]);
             inputColor2[i] = new ArgbColor(input2[i]);
             outputCheck[i] = new ArgbColor(outputCheckInt[i]);
         }
         ArgbColor[] output = new ArgbColor[input.length];
         //when
-        for(int i = 0; i < input.length; i++){
-            output[i] = (ArgbColor)inputColor[i].blend(inputColor2[i]);
+        for (int i = 0; i < input.length; i++) {
+            output[i] = (ArgbColor) inputColor[i].blend(inputColor2[i]);
         }
         //then
-        for(int i = 0; i < output.length; i++){
+        for (int i = 0; i < output.length; i++) {
             assertEquals(outputCheck[i].getValue(), output[i].getValue());
         }
     }
@@ -54,11 +54,11 @@ public class ArgbColorTest {
         boolean[] output = new boolean[input.length];
 
         //when
-        for(int i = 0; i < input.length; i++){
+        for (int i = 0; i < input.length; i++) {
             output[i] = new ArgbColor(input[i]).isTransparent();
         }
         //then
-        for(int i = 0; i < output.length; i++){
+        for (int i = 0; i < output.length; i++) {
             assertEquals(outputCheck[i], output[i]);
         }
     }

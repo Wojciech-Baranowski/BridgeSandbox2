@@ -24,17 +24,17 @@ public class TextFactoryTest {
         Font inputFont = assets.getFont("HBE24");
         Color inputColor = assets.getColor("red");
         Text[] inputTexts2 = new Text[inputX.length];
-        for(int i = 0; i < inputX.length; i++){
+        for (int i = 0; i < inputX.length; i++) {
             inputTexts2[i] = new Text(inputTexts[i], inputX[i], inputY[i], inputFont, inputColor);
         }
         TextFactory textFactory = new TextFactory();
         Text[] output = new Text[inputX.length];
         //when
-        for(int i = 0; i < inputX.length; i++){
+        for (int i = 0; i < inputX.length; i++) {
             output[i] = textFactory.makeText(inputTexts[i], inputX[i], inputY[i], "HBE24", "red");
         }
         //then
-        for(int i = 0; i < inputX.length; i++){
+        for (int i = 0; i < inputX.length; i++) {
             assertArrayEquals(inputTexts2[i].getP(), output[i].getP());
             assertEquals(inputTexts2[i].getX(), output[i].getX());
             assertEquals(inputTexts2[i].getY(), output[i].getY());

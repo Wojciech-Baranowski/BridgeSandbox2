@@ -31,11 +31,11 @@ public class ImageTest {
         int[] inputH = {9, 9, 9, 9, 9, 9, 9, 9, 9};
         Image[] inputImages = new Image[inputX.length];
         //when
-        for(int i = 0; i < inputX.length; i++){
+        for (int i = 0; i < inputX.length; i++) {
             inputImages[i] = new Image(inputImage, inputX[i], inputY[i], inputW[i], inputH[i]);
         }
         //then
-        for(int i = 0; i < inputX.length; i++) {
+        for (int i = 0; i < inputX.length; i++) {
             assertArrayEquals(inputPixels, inputImages[i].getP());
             assertEquals(inputX[i], inputImages[i].getX());
             assertEquals(inputY[i], inputImages[i].getY());

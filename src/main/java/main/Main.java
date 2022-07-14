@@ -14,8 +14,8 @@ public class Main {
 
         //test
 
-        AssetsBean.getAssets().addColor("red", 0xBBFF0000);
-        AssetsBean.getAssets().addColor("blue", 0xFF0000FF);
+        AssetsBean.getAssets().addColor("red", 0x33FF0000);
+        AssetsBean.getAssets().addColor("blue", 0xFFFF00FF);
         AssetsBean.getAssets().addColor("magenta", 0xFFFF00FE);
         AssetsBean.getAssets().addFont("HBE48", "/HelveticaBoldExtended48.png", Font.getExtendedAlphabet());
         Text text = DisplayBean.getDisplay().getDrawableFactory().makeText("Kocham Palinke \u2665", 100, 100, "HBE48", "red");

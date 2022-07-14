@@ -35,6 +35,7 @@ public class AssetsBeanTest {
         assertEquals(input3, input5);
         assertEquals(input4, input6);
     }
+
     @Test
     public void add_and_get_color_test() {
         //given
@@ -42,14 +43,14 @@ public class AssetsBeanTest {
         int[] inputValue = {0xFFFFFF00, 0xFF213769, 0xFF213769, 0x00000000, 0x12345678, 0xFFFF1234, 0x01010101};
         Assets inputAssets = AssetsBean.getAssets();
         //when
-        for(int i = 0; i < inputValue.length; i++){
+        for (int i = 0; i < inputValue.length; i++) {
             inputAssets.addColor(inputName[i], inputValue[i]);
         }
         //then
-        for(int i = 0; i < inputValue.length; i++){
+        for (int i = 0; i < inputValue.length; i++) {
             assertEquals(inputValue[i], inputAssets.getColor(inputName[i]).getValue());
         }
-        for(int i = inputValue.length; i < inputName.length; i++){
+        for (int i = inputValue.length; i < inputName.length; i++) {
             assertNull(inputAssets.getColor(inputName[i]));
         }
     }
@@ -69,10 +70,10 @@ public class AssetsBeanTest {
         }
         int[] inputAllPixels = inputImages.getRGB(0, 0, 63, 9, null, 0, 63);
         int[][] inputPixels = new int[inputSymbols.length()][];
-        for(int i = 0; i < inputSymbols.length(); i++){
+        for (int i = 0; i < inputSymbols.length(); i++) {
             inputPixels[i] = new int[63];
-            for(int j = 0; j < 7; j++){
-                for(int k = 0; k < 9; k++){
+            for (int j = 0; j < 7; j++) {
+                for (int k = 0; k < 9; k++) {
                     inputPixels[i][j + 7 * k] = inputAllPixels[i * 7 + j + 63 * k];
                 }
             }
@@ -81,7 +82,7 @@ public class AssetsBeanTest {
         //when
         inputAssets.addFont(inputName, inputPath, inputSymbols);
         //then
-        for(int i = 0; i < inputSymbols.length(); i++){
+        for (int i = 0; i < inputSymbols.length(); i++) {
             assertArrayEquals(inputPixels[i], inputAssets.getFont(inputName).getSymbolRasterable(inputSymbols.charAt(i)).getP());
             assertEquals(7, inputAssets.getFont(inputName).getSymbolRasterable(inputSymbols.charAt(i)).getW());
             assertEquals(9, inputAssets.getFont(inputName).getSymbolRasterable(inputSymbols.charAt(i)).getH());

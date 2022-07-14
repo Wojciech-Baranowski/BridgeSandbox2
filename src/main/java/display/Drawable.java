@@ -19,8 +19,8 @@ public interface Drawable extends Measurable {
 
     void setY(int y);
 
-    default boolean isPixelOnPositionTransparent(int x, int y){
-        if(!inBorders(x, y))
+    default boolean isPixelOnPositionTransparent(int x, int y) {
+        if (!inBorders(x, y))
             return true;
         int xPos = x - getX();
         int yPos = y - getY();

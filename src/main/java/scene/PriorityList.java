@@ -14,11 +14,11 @@ public class PriorityList implements PriorityCollection {
 
     @Override
     public void setLowerThan(Object inserted, Object contained) {
-        if(objects.contains(inserted)){
+        if (objects.contains(inserted)) {
             return;
         }
-        for(int i = 0; i < objects.size(); i++){
-            if(objects.get(i).equals(contained)){
+        for (int i = 0; i < objects.size(); i++) {
+            if (objects.get(i).equals(contained)) {
                 objects.add(i, inserted);
                 return;
             }
@@ -27,11 +27,11 @@ public class PriorityList implements PriorityCollection {
 
     @Override
     public void setHigherThan(Object inserted, Object contained) {
-        if(objects.contains(inserted)){
+        if (objects.contains(inserted)) {
             return;
         }
-        for(int i = 0; i < objects.size(); i++){
-            if(objects.get(i).equals(contained)){
+        for (int i = 0; i < objects.size(); i++) {
+            if (objects.get(i).equals(contained)) {
                 objects.add(i + 1, inserted);
                 return;
             }
@@ -40,7 +40,7 @@ public class PriorityList implements PriorityCollection {
 
     @Override
     public void setOnLowest(Object inserted) {
-        if(objects.contains(inserted)){
+        if (objects.contains(inserted)) {
             return;
         }
         objects.add(0, inserted);
@@ -48,7 +48,7 @@ public class PriorityList implements PriorityCollection {
 
     @Override
     public void setOnHighest(Object inserted) {
-        if(objects.contains(inserted)){
+        if (objects.contains(inserted)) {
             return;
         }
         objects.add(objects.size(), inserted);

@@ -1,6 +1,5 @@
 package scene;
 
-import common.Measurable;
 import display.Drawable;
 
 import java.util.Collection;
@@ -16,9 +15,9 @@ public class DrawablePriorityCollection implements PriorityCollection {
     Drawable getTopObjectOnPosition(int x, int y) {
         Collection<Object> objects = priorityCollection.getObjectCollection();
         Drawable result = null;
-        for(Object object : objects){
-            Drawable drawable = (Drawable)object;
-            if(drawable.inBorders(x, y) && !drawable.isPixelOnPositionTransparent(x, y)){
+        for (Object object : objects) {
+            Drawable drawable = (Drawable) object;
+            if (drawable.inBorders(x, y) && !drawable.isPixelOnPositionTransparent(x, y)) {
                 result = drawable;
             }
         }

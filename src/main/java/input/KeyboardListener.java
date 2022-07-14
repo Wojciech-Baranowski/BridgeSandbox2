@@ -8,17 +8,15 @@ import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 import static input.inputCombination.ActionType.*;
-import static input.inputCombination.ActionType.HELD;
 
 public class KeyboardListener implements Observable, KeyListener {
 
     private static final int KEY_NUMBER = 256;
-    private final boolean[]  upJust;
+    private final boolean[] upJust;
     private final boolean[] downJust;
     private final boolean[] upLast;
     private final boolean[] downLast;
@@ -57,7 +55,7 @@ public class KeyboardListener implements Observable, KeyListener {
     }
 
     public boolean isActivated(InputElement inputElement) {
-        int keyCode = ((KeyEvent)inputElement.getInputEvent()).getKeyCode();
+        int keyCode = ((KeyEvent) inputElement.getInputEvent()).getKeyCode();
         return switch (inputElement.getActionType()) {
             case UP -> upJust[keyCode];
             case FREE -> upLast[keyCode];

@@ -1,11 +1,8 @@
 package input;
 
-import assets.Assets;
-import assets.AssetsBean;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
 public class InputBeanTest {
 

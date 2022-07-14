@@ -13,11 +13,11 @@ public class ColorFactoryTest {
         Color[] output = new ArgbColor[input.length];
         ColorFactory colorFactory = new ColorFactory();
         //when
-        for(int i = 0; i < output.length; i++){
+        for (int i = 0; i < output.length; i++) {
             output[i] = colorFactory.makeArgbColor(input[i]);
         }
         //then
-        for(int i = 0; i < output.length; i++){
+        for (int i = 0; i < output.length; i++) {
             assertEquals(input[i], output[i].getValue());
         }
     }

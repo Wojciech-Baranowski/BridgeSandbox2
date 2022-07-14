@@ -93,6 +93,7 @@ public class KeyboardListener implements Observable, KeyListener {
         upJust[keyCode] = false;
         downLast[keyCode] = downLast[keyCode] || downJust[keyCode];
         downJust[keyCode] = upLast[keyCode] && !downJust[keyCode];
+        notifyObservers();
     }
 
     @Override
@@ -102,6 +103,7 @@ public class KeyboardListener implements Observable, KeyListener {
         downJust[keyCode] = false;
         upLast[keyCode] = upLast[keyCode] || upJust[keyCode];
         upJust[keyCode] = downLast[keyCode] && !upJust[keyCode];
+        notifyObservers();
     }
 
     public static InputEvent getKeyboardEventWithKeyCode(int keycode) {

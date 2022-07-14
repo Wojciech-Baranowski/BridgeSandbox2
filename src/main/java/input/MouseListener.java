@@ -95,6 +95,7 @@ public class MouseListener implements Observable, java.awt.event.MouseListener, 
         upJust[buttonCode] = false;
         downLast[buttonCode] = downLast[buttonCode] || downJust[buttonCode];
         downJust[buttonCode] = upLast[buttonCode] && !downJust[buttonCode];
+        notifyObservers();
     }
 
     @Override
@@ -104,12 +105,14 @@ public class MouseListener implements Observable, java.awt.event.MouseListener, 
         downJust[buttonCode] = false;
         upLast[buttonCode] = upLast[buttonCode] || upJust[buttonCode];
         upJust[buttonCode] = downLast[buttonCode] && !upJust[buttonCode];
+        notifyObservers();
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
         x = e.getX();
         y = e.getY();
+        notifyObservers();
     }
 
     @Override

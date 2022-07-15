@@ -1,7 +1,9 @@
 package scene.interactive;
 
+import common.Command;
+
 public interface Interactive {
 
-    void update();
+    void update(Command command);
 
 }

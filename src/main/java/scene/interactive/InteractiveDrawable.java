@@ -1,21 +1,38 @@
 package scene.interactive;
 
+import common.Command;
 import display.Drawable;
+import input.inputCombination.InputCombination;
 
-public class InteractiveDrawable implements Drawable, Interactive {
+import java.util.HashMap;
+import java.util.Map;
 
-    private Interactive parent;
-    private Drawable drawable;
+public class InteractiveDrawable implements Drawable {
 
-    public InteractiveDrawable(Drawable drawable, Interactive parent){
+    private final Interactive parent;
+    private final Drawable drawable;
+    private final Map<InputCombination, Command> actions;
+
+    public InteractiveDrawable(Drawable drawable, Interactive parent) {
         this.drawable = drawable;
         this.parent = parent;
+        actions = new HashMap<>();
     }
 
-
-    @Override
     public void update() {
-        parent.update();
+        for (InputCombination inputCombination : actions.keySet()) {
+            if (inputCombination.isActive()) {
+                parent.update(actions.get(inputCombination));
+            }
+        }
+    }
+
+    public void addAction(InputCombination inputCombination, Command command) {
+        actions.put(inputCombination, command);
+    }
+
+    public void removeAction(InputCombination inputCombination) {
+        actions.remove(inputCombination);
     }
 
     @Override
@@ -52,4 +69,5 @@ public class InteractiveDrawable implements Drawable, Interactive {
     public void setY(int y) {
         drawable.setY(y);
     }
+
 }

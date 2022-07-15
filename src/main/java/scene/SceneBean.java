@@ -1,11 +1,13 @@
 package scene;
 
-import common.Interactive;
 import display.Display;
 import display.DisplayBean;
 import display.Drawable;
 import input.Input;
 import input.InputBean;
+import scene.interactive.InteractiveDrawable;
+import scene.priorityCollection.DrawablePriorityCollection;
+import scene.priorityCollection.PriorityList;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -35,8 +37,8 @@ public class SceneBean implements Scene {
 
     @Override
     public void update() {
-        if (getTopObject() instanceof Interactive) {
-            ((Interactive) getTopObject()).update();
+        if (getTopObject() instanceof InteractiveDrawable) {
+            ((InteractiveDrawable) getTopObject()).update();
         }
         display.setObjectsToDraw(scene.getCurrentObjectCollection());
         display.draw();

@@ -1,4 +1,4 @@
-package scene;
+package scene.priorityCollection;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -8,7 +8,7 @@ public class PriorityList implements PriorityCollection {
 
     private final List<Object> objects;
 
-    PriorityList() {
+    public PriorityList() {
         objects = new LinkedList<>();
     }
 

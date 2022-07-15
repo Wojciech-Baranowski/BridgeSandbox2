@@ -1,6 +1,7 @@
 package scene;
 
 import org.junit.Test;
+import scene.priorityCollection.PriorityList;
 
 import java.util.List;
 

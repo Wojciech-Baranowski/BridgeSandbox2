@@ -1,4 +1,4 @@
-package common;
+package scene.interactive;
 
 public interface Interactive {
 

@@ -1,9 +1,8 @@
 package display;
 
 import assets.color.Color;
-import common.Measurable;
 
-public interface Drawable extends Measurable {
+public interface Drawable {
 
     int[] getP();
 
@@ -18,6 +17,10 @@ public interface Drawable extends Measurable {
     void setX(int x);
 
     void setY(int y);
+
+    default boolean inBorders(int x, int y) {
+        return (getX() <= x && x < getX() + getW()) && (getY() <= y && y < getY() + getH());
+    }
 
     default boolean isPixelOnPositionTransparent(int x, int y) {
         if (!inBorders(x, y))

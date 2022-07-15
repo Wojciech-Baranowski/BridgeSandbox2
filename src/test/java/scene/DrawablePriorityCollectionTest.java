@@ -7,6 +7,8 @@ import display.DisplayBean;
 import display.DrawableFactory;
 import display.rectangle.Rectangle;
 import org.junit.Test;
+import scene.priorityCollection.DrawablePriorityCollection;
+import scene.priorityCollection.PriorityList;
 
 import static org.junit.Assert.assertSame;
 

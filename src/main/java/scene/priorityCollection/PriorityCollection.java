@@ -1,4 +1,4 @@
-package scene;
+package scene.priorityCollection;
 
 import java.util.Collection;
 

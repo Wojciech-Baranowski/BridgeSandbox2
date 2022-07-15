@@ -1,4 +1,4 @@
-package scene;
+package scene.priorityCollection;
 
 import display.Drawable;
 
@@ -8,11 +8,11 @@ public class DrawablePriorityCollection implements PriorityCollection {
 
     private final PriorityCollection priorityCollection;
 
-    DrawablePriorityCollection(PriorityCollection priorityCollection) {
+    public DrawablePriorityCollection(PriorityCollection priorityCollection) {
         this.priorityCollection = priorityCollection;
     }
 
-    Drawable getTopObjectOnPosition(int x, int y) {
+    public Drawable getTopObjectOnPosition(int x, int y) {
         Collection<Object> objects = priorityCollection.getObjectCollection();
         Drawable result = null;
         for (Object object : objects) {

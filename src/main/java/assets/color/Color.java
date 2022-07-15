@@ -17,9 +17,6 @@ public interface Color {
     }
 
     static int blend(int value1, int value2) {
-        if (value2 == Color.getTransparentColorValue()) {
-            return value1;
-        }
         if (value1 == Color.getTransparentColorValue() || value1 == 0) {
             return value2 | 0xFF000000;
         }

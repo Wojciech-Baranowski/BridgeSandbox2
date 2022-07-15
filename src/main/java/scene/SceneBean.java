@@ -1,5 +1,6 @@
 package scene;
 
+import common.Interactive;
 import display.Display;
 import display.DisplayBean;
 import display.Drawable;
@@ -34,6 +35,9 @@ public class SceneBean implements Scene {
 
     @Override
     public void update() {
+        if (getTopObject() instanceof Interactive) {
+            ((Interactive) getTopObject()).update();
+        }
         display.setObjectsToDraw(scene.getCurrentObjectCollection());
         display.draw();
     }

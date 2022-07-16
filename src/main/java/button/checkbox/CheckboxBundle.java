@@ -16,15 +16,20 @@ public class CheckboxBundle {
     }
 
     public List<Boolean> getBundleState() {
-        return null;
+        return checkboxes.stream()
+                .map(Checkbox::isSelected)
+                .toList();
     }
 
     public void addCheckbox(Checkbox checkbox) {
-
+        if (checkboxes.contains(checkbox)) {
+            return;
+        }
+        checkboxes.add(checkbox);
     }
 
     public void removeCheckbox(Checkbox checkbox) {
-
+        checkboxes.remove(checkbox);
     }
 
 }

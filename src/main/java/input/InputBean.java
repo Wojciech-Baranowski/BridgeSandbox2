@@ -1,6 +1,8 @@
 package input;
 
 import common.Observer;
+import display.Display;
+import display.DisplayBean;
 import input.inputCombination.ComplexInputCombination;
 import input.inputCombination.InputCombination;
 import input.inputCombination.InputCombinationFactory;
@@ -68,5 +70,12 @@ public class InputBean implements Input {
     @Override
     public InputCombinationFactory getInputCombinationFactory() {
         return inputCombinationFactory;
+    }
+
+    @Override
+    public void initializeListeners() {
+        Display display = DisplayBean.getDisplay();
+        display.addWindowListener(keyboardListener);
+        display.addWindowListener(mouseListener);
     }
 }

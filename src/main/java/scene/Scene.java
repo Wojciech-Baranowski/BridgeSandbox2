@@ -31,4 +31,6 @@ public interface Scene extends Observer {
 
     void removeCollection(String collectionName);
 
+    void initializeListeners();
+
 }

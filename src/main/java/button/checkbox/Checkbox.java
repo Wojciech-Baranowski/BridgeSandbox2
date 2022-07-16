@@ -12,24 +12,24 @@ public class Checkbox implements Visual, Interactive {
     private final Drawable onDrawable;
     private final InputCombination activationCombination;
     @Getter
-    private boolean pressed;
+    private boolean selected;
 
     public Checkbox(Drawable offDrawable, Drawable onDrawable, InputCombination activationCombination) {
         this.offDrawable = offDrawable;
         this.onDrawable = onDrawable;
         this.activationCombination = activationCombination;
-        this.pressed = false;
+        this.selected = false;
     }
 
     @Override
     public void update() {
         if (activationCombination == null || activationCombination.isActive()) {
-            pressed = !pressed;
+            selected = !selected;
         }
     }
 
     @Override
     public Drawable getDrawable() {
-        return pressed ? onDrawable : offDrawable;
+        return selected ? onDrawable : offDrawable;
     }
 }

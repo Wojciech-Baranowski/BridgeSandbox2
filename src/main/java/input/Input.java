@@ -22,4 +22,6 @@ public interface Input {
 
     InputCombinationFactory getInputCombinationFactory();
 
+    void initializeListeners();
+
 }

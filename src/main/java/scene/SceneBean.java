@@ -26,8 +26,6 @@ public class SceneBean implements Scene {
     private SceneBean() {
         this.display = DisplayBean.getDisplay();
         this.input = InputBean.getInput();
-        input.addMouseListener(this);
-        input.addKeyboardListener(this);
         objectCollections = new HashMap<>();
     }
 
@@ -95,7 +93,10 @@ public class SceneBean implements Scene {
     public Visual getTopObject() {
         int x = input.getMouseX();
         int y = input.getMouseY();
-        return currentObjectCollection.getTopObjectOnPosition(x, y);
+        if(currentObjectCollection != null) {
+            return currentObjectCollection.getTopObjectOnPosition(x, y);
+        }
+        return null;
     }
 
     @Override
@@ -120,6 +121,12 @@ public class SceneBean implements Scene {
         }
         objectCollections.get(collectionName).clear();
         objectCollections.remove(collectionName);
+    }
+
+    @Override
+    public void initializeListeners() {
+        input.addMouseListener(this);
+        input.addKeyboardListener(this);
     }
 
 }

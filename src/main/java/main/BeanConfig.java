@@ -15,6 +15,8 @@ public class BeanConfig {
         DisplayBean.getDisplay();
         InputBean.getInput();
         SceneBean.getScene();
+        InputBean.getInput().initializeListeners();
+        SceneBean.getScene().initializeListeners();
     }
 
 }

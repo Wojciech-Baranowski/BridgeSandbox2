@@ -21,8 +21,6 @@ public class KeyboardListener implements Observable, KeyListener {
     private final List<Observer> observers;
 
     KeyboardListener() {
-        Display display = DisplayBean.getDisplay();
-        display.addWindowListener(this);
         pressed = new boolean[KEY_NUMBER];
         Arrays.fill(pressed, false);
         observers = new LinkedList<>();

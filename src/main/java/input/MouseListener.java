@@ -26,8 +26,6 @@ public class MouseListener implements Observable, java.awt.event.MouseListener, 
     private int y;
 
     MouseListener() {
-        Display display = DisplayBean.getDisplay();
-        display.addWindowListener(this);
         pressed = new boolean[BUTTONS_NUMBER];
         Arrays.fill(pressed, false);
         observers = new LinkedList<>();

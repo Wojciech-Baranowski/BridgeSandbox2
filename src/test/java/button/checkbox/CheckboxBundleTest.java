@@ -13,6 +13,7 @@ import input.inputCombination.InputCombinationFactory;
 import scene.Scene;
 import scene.SceneBean;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class CheckboxBundleTest {
@@ -46,21 +47,29 @@ public class CheckboxBundleTest {
         scene.addOnHighest(checkbox1);
         scene.addOnHighest(checkbox2);
         scene.addOnHighest(checkbox3);
-        CheckboxBundle checkboxBundle = new CheckboxBundle(List.of(checkbox1, checkbox2));
+        List<Checkbox> inputCheckboxList = new LinkedList<>();
+        inputCheckboxList.add(checkbox1);
+        inputCheckboxList.add(checkbox2);
+        CheckboxBundle checkboxBundle = new CheckboxBundle(inputCheckboxList);
         checkboxBundle.addCheckbox(checkbox3);
-        checkboxBundle.removeCheckbox(checkbox1);
-        checkboxBundle.removeCheckbox(checkbox1);
-        checkboxBundle.addCheckbox(checkbox1);
-        checkboxBundle.addCheckbox(checkbox1);
+        checkboxBundle.removeCheckbox(checkbox3);
+        checkboxBundle.removeCheckbox(checkbox3);
+        checkboxBundle.addCheckbox(checkbox3);
+        checkboxBundle.addCheckbox(checkbox3);
         SimpleButton button = new SimpleButton(inputButtonRectangle, inputCombinationFactory.makeLmbCombination(), () -> {
             for(Boolean state : checkboxBundle.getBundleState()) {
-                System.out.println(state ? "T" : "F" + " ");
+                System.out.print((state ? "T" : "F") + " ");
             }
+            System.out.println();
         });
         scene.addOnHighest(button);
         //when
+        InputBean.getInput().initializeListeners();
+        SceneBean.getScene().initializeListeners();
         scene.update();
-
+        //then
+        //whenever some combination of bundle's checkboxes in chosen, pressing right side button should
+        //show current checkboxes states in console logs (T - is selected, F - is not selected)
     }
 
 }

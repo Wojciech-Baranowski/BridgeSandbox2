@@ -21,11 +21,13 @@ public class SimpleButton implements Visual, Interactive {
 
     @Override
     public void update() {
-
+        if (activationCombination.isActive()) {
+            action.execute();
+        }
     }
 
     @Override
     public Drawable getDrawable() {
-        return null;
+        return drawable;
     }
 }

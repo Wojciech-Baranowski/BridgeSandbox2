@@ -55,7 +55,7 @@ public class SimpleButtonTest {
         //when
         scene.update();
         //then
-        //"Hellothere!" should appear in console logs
+        //"Hellothere!" should appear in console logs after pressin left mouse button
     }
 
 }

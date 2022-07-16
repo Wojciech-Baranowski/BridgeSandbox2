@@ -7,22 +7,18 @@ import display.DisplayBean;
 import input.inputCombination.InputElement;
 import lombok.Getter;
 
-import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.util.List;
 import java.util.*;
 
-import static input.inputCombination.ActionType.*;
+import static input.inputCombination.ActionType.DOWN;
+import static input.inputCombination.ActionType.UP;
 
 public class MouseListener implements Observable, java.awt.event.MouseListener, MouseMotionListener {
 
     private static final int BUTTONS_NUMBER = 5;
-    private final boolean[] upJust;
-    private final boolean[] downJust;
-    private final boolean[] upLast;
-    private final boolean[] downLast;
+    private final boolean[] pressed;
     private final List<Observer> observers;
     @Getter
     private int x;
@@ -32,14 +28,8 @@ public class MouseListener implements Observable, java.awt.event.MouseListener, 
     MouseListener() {
         Display display = DisplayBean.getDisplay();
         display.addWindowListener(this);
-        upJust = new boolean[BUTTONS_NUMBER];
-        downJust = new boolean[BUTTONS_NUMBER];
-        upLast = new boolean[BUTTONS_NUMBER];
-        downLast = new boolean[BUTTONS_NUMBER];
-        Arrays.fill(upJust, true);
-        Arrays.fill(downJust, false);
-        Arrays.fill(upLast, false);
-        Arrays.fill(downLast, false);
+        pressed = new boolean[BUTTONS_NUMBER];
+        Arrays.fill(pressed, false);
         observers = new LinkedList<>();
         x = 0;
         y = 0;
@@ -49,18 +39,7 @@ public class MouseListener implements Observable, java.awt.event.MouseListener, 
         Set<InputElement> currentCombination = new HashSet<>();
         for (int i = 0; i < BUTTONS_NUMBER; i++) {
             InputEvent inputEvent = InputElement.getMouseInputEventByKeycode(i);
-            if (upJust[i]) {
-                currentCombination.add(new InputElement(UP, inputEvent));
-            }
-            if (upLast[i]) {
-                currentCombination.add(new InputElement(FREE, inputEvent));
-            }
-            if (downJust[i]) {
-                currentCombination.add(new InputElement(DOWN, inputEvent));
-            }
-            if (downLast[i]) {
-                currentCombination.add(new InputElement(HELD, inputEvent));
-            }
+            currentCombination.add(new InputElement(pressed[i] ? DOWN : UP, inputEvent));
         }
         return currentCombination;
     }
@@ -68,10 +47,8 @@ public class MouseListener implements Observable, java.awt.event.MouseListener, 
     public boolean isActivated(InputElement inputElement) {
         int buttonCode = ((MouseEvent) inputElement.getInputEvent()).getButton();
         return switch (inputElement.getActionType()) {
-            case UP -> upJust[buttonCode];
-            case FREE -> upLast[buttonCode];
-            case HELD -> downLast[buttonCode];
-            case DOWN -> downJust[buttonCode];
+            case UP -> !pressed[buttonCode];
+            case DOWN -> pressed[buttonCode];
         };
     }
 
@@ -95,20 +72,14 @@ public class MouseListener implements Observable, java.awt.event.MouseListener, 
     @Override
     public void mousePressed(MouseEvent e) {
         int buttonCode = e.getButton();
-        upLast[buttonCode] = !downLast[buttonCode] && !downJust[buttonCode];
-        upJust[buttonCode] = false;
-        downLast[buttonCode] = downLast[buttonCode] || downJust[buttonCode];
-        downJust[buttonCode] = upLast[buttonCode] && !downJust[buttonCode];
+        pressed[buttonCode] = true;
         notifyObservers();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         int buttonCode = e.getButton();
-        downLast[buttonCode] = !upLast[buttonCode] && !upJust[buttonCode];
-        downJust[buttonCode] = false;
-        upLast[buttonCode] = upLast[buttonCode] || upJust[buttonCode];
-        upJust[buttonCode] = downLast[buttonCode] && !upJust[buttonCode];
+        pressed[buttonCode] = false;
         notifyObservers();
     }
 
@@ -116,6 +87,7 @@ public class MouseListener implements Observable, java.awt.event.MouseListener, 
     public void mouseMoved(MouseEvent e) {
         x = e.getX();
         y = e.getY();
+        //notifyObservers();
     }
 
     @Override

@@ -21,7 +21,7 @@ public class SimpleButton implements Visual, Interactive {
 
     @Override
     public void update() {
-        if (activationCombination.isActive()) {
+        if (activationCombination == null || activationCombination.isActive()) {
             action.execute();
         }
     }

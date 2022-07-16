@@ -10,7 +10,7 @@ public class InputElementTest {
     @Test
     public void accessors_test() {
         //given
-        ActionType[] inputActions = new ActionType[]{UP, UP, DOWN, DOWN, HELD, FREE};
+        ActionType[] inputActions = new ActionType[]{UP, UP, DOWN, DOWN, DOWN, UP};
         InputElement[] output = new InputElement[inputActions.length];
         //when
         for (int i = 0; i < inputActions.length; i++) {

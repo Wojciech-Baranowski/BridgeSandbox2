@@ -87,7 +87,7 @@ public class MouseListener implements Observable, java.awt.event.MouseListener, 
     public void mouseMoved(MouseEvent e) {
         x = e.getX();
         y = e.getY();
-        //notifyObservers();
+        notifyObservers();
     }
 
     @Override

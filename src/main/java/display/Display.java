@@ -1,7 +1,6 @@
 package display;
 
 import common.Visual;
-import display.drawable.DrawableFactory;
 
 import java.util.Collection;
 import java.util.EventListener;

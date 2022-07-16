@@ -1,6 +1,6 @@
 package common;
 
-import display.drawable.Drawable;
+import display.Drawable;
 
 public interface Visual {
 

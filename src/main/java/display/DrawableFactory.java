@@ -1,4 +1,4 @@
-package display.drawable;
+package display;
 
 import display.image.Image;
 import display.image.ImageFactory;

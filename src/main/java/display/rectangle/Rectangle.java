@@ -1,7 +1,7 @@
 package display.rectangle;
 
 import assets.color.Color;
-import display.drawable.Drawable;
+import display.Drawable;
 import lombok.Getter;
 import lombok.Setter;
 

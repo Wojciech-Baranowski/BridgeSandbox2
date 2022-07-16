@@ -2,8 +2,6 @@ package display;
 
 import assets.color.Color;
 import common.Visual;
-import display.drawable.Drawable;
-import display.drawable.DrawableFactory;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -2,8 +2,6 @@ package display;
 
 import assets.Assets;
 import assets.AssetsBean;
-import display.drawable.DrawableComposition;
-import display.drawable.DrawableFactory;
 import display.rectangle.Rectangle;
 import org.junit.Test;
 

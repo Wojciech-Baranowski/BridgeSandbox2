@@ -1,8 +1,6 @@
 package display;
 
 import assets.color.Color;
-import common.Visual;
-import display.drawable.Drawable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +8,7 @@ import java.util.Arrays;
 
 public class HoverMark implements Drawable {
 
-    private static Visual hoverMark;
+    private static HoverMark hoverMark;
     @Getter
     private int[] p;
     @Getter
@@ -31,7 +29,7 @@ public class HoverMark implements Drawable {
         w = h = 1;
     }
 
-    public static Visual getHoverMark() {
+    public static HoverMark getHoverMark() {
         if (hoverMark == null) {
             hoverMark = new HoverMark();
         }

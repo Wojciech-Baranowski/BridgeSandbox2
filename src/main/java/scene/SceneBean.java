@@ -44,6 +44,7 @@ public class SceneBean implements Scene {
         Visual topObject = getTopObject();
         if (topObject instanceof Interactive) {
             ((Interactive) topObject).update();
+            HoverMark.getHoverMark().fitHoverMarkToDrawable(topObject.getDrawable());
             currentObjectCollection.setHigherThan(HoverMark.getHoverMark(), topObject);
         }
         display.setObjectsToDraw(scene.getCurrentObjectCollection());

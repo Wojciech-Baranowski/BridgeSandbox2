@@ -3,7 +3,7 @@ package display.text;
 import assets.color.Color;
 import assets.font.Font;
 import common.Rasterable;
-import display.drawable.Drawable;
+import display.Drawable;
 import lombok.Getter;
 import lombok.Setter;
 

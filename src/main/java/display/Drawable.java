@@ -1,4 +1,4 @@
-package display.drawable;
+package display;
 
 import assets.color.Color;
 import common.Visual;

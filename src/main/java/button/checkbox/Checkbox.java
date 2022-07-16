@@ -1,4 +1,4 @@
-package button;
+package button.checkbox;
 
 import common.Interactive;
 import common.Visual;

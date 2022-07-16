@@ -1,9 +1,10 @@
 package scene;
 
 import common.Interactive;
+import common.Visual;
 import display.Display;
 import display.DisplayBean;
-import common.Visual;
+import display.HoverMark;
 import input.Input;
 import input.InputBean;
 import scene.priorityCollection.PriorityList;
@@ -39,8 +40,11 @@ public class SceneBean implements Scene {
 
     @Override
     public void update() {
-        if (getTopObject() instanceof Interactive) {
-            ((Interactive) getTopObject()).update();
+        currentObjectCollection.remove(HoverMark.getHoverMark());
+        Visual topObject = getTopObject();
+        if (topObject instanceof Interactive) {
+            ((Interactive) topObject).update();
+            currentObjectCollection.setHigherThan(HoverMark.getHoverMark(), topObject);
         }
         display.setObjectsToDraw(scene.getCurrentObjectCollection());
         display.draw();

@@ -2,6 +2,7 @@ package display;
 
 import assets.Assets;
 import assets.AssetsBean;
+import display.drawable.DrawableFactory;
 import display.image.Image;
 import display.image.ImageFactory;
 import display.rectangle.Rectangle;

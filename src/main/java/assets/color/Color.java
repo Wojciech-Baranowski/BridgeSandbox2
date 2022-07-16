@@ -12,6 +12,10 @@ public interface Color {
         return 0xFFFF00FF;
     }
 
+    static int getHoverMarkColorValue() {
+        return 0x220000FF;
+    }
+
     static boolean isTransparent(int value) {
         return (value >>> 24) != 0xFF;
     }

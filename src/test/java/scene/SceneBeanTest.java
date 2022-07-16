@@ -4,8 +4,8 @@ import assets.Assets;
 import assets.AssetsBean;
 import display.Display;
 import display.DisplayBean;
-import display.Drawable;
-import display.DrawableFactory;
+import display.drawable.Drawable;
+import display.drawable.DrawableFactory;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNull;

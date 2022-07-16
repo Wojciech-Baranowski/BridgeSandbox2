@@ -4,7 +4,7 @@ import assets.Assets;
 import assets.AssetsBean;
 import display.Display;
 import display.DisplayBean;
-import display.DrawableFactory;
+import display.drawable.DrawableFactory;
 import display.rectangle.Rectangle;
 import org.junit.Test;
 

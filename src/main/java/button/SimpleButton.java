@@ -3,7 +3,7 @@ package button;
 import common.Command;
 import common.Interactive;
 import common.Visual;
-import display.Drawable;
+import display.drawable.Drawable;
 import input.inputCombination.InputCombination;
 
 public class SimpleButton implements Visual, Interactive {

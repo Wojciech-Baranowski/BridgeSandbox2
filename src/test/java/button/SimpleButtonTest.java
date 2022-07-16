@@ -2,11 +2,10 @@ package button;
 
 import assets.Assets;
 import assets.AssetsBean;
-import common.Command;
 import display.Display;
 import display.DisplayBean;
-import display.Drawable;
-import display.DrawableFactory;
+import display.drawable.Drawable;
+import display.drawable.DrawableFactory;
 import display.rectangle.Rectangle;
 import input.Input;
 import input.InputBean;

@@ -1,6 +1,6 @@
 package display.image;
 
-import display.Drawable;
+import display.drawable.Drawable;
 import lombok.Getter;
 import lombok.Setter;
 

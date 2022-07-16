@@ -2,6 +2,8 @@ package input;
 
 import common.Observable;
 import common.Observer;
+import display.Display;
+import display.DisplayBean;
 import input.inputCombination.InputElement;
 
 import java.awt.*;
@@ -23,6 +25,8 @@ public class KeyboardListener implements Observable, KeyListener {
     private final List<Observer> observers;
 
     KeyboardListener() {
+        Display display = DisplayBean.getDisplay();
+        display.addWindowListener(this);
         upJust = new boolean[KEY_NUMBER];
         downJust = new boolean[KEY_NUMBER];
         upLast = new boolean[KEY_NUMBER];
@@ -37,7 +41,7 @@ public class KeyboardListener implements Observable, KeyListener {
     public Set<InputElement> getActivatedInputElements() {
         Set<InputElement> currentCombination = new HashSet<>();
         for (int i = 0; i < KEY_NUMBER; i++) {
-            InputEvent inputEvent = getKeyboardEventWithKeyCode(i);
+            InputEvent inputEvent = InputElement.getKeyboardInputEventByKeycode(i);
             if (upJust[i]) {
                 currentCombination.add(new InputElement(UP, inputEvent));
             }
@@ -77,7 +81,7 @@ public class KeyboardListener implements Observable, KeyListener {
     @Override
     public void notifyObservers() {
         for (Observer observer : observers) {
-            observer.notify();
+            observer.update();
         }
     }
 
@@ -103,12 +107,11 @@ public class KeyboardListener implements Observable, KeyListener {
         downJust[keyCode] = false;
         upLast[keyCode] = upLast[keyCode] || upJust[keyCode];
         upJust[keyCode] = downLast[keyCode] && !upJust[keyCode];
+        downLast[keyCode] = !upLast[keyCode] && !upJust[keyCode];
+        downJust[keyCode] = false;
+        upLast[keyCode] = upLast[keyCode] || upJust[keyCode];
+        upJust[keyCode] = downLast[keyCode] && !upJust[keyCode];
         notifyObservers();
-    }
-
-    public static InputEvent getKeyboardEventWithKeyCode(int keycode) {
-        Component dummyComponent = new Button();
-        return new KeyEvent(dummyComponent, 0, 0, 0, keycode, '0', 0);
     }
 
 }

@@ -54,8 +54,8 @@ public class ComplexButtonTest {
         InputCombinationFactory inputCombinationFactory = input.getInputCombinationFactory();
         DrawableFactory drawableFactory = display.getDrawableFactory();
         Rectangle inputRectangle = drawableFactory.makeRectangle(10, 10, 100, 100, "n1");
-        InputEvent inputEvent  = InputElement.getKeyboardInputEventByKeycode(KeyEvent.VK_CONTROL);
-        InputCombination inputCombination1 = inputCombinationFactory.makeSimpleInputCombination(ActionType.HELD, inputEvent);
+        InputEvent inputEvent  = InputElement.getKeyboardInputEventByKeycode(KeyEvent.VK_E);
+        InputCombination inputCombination1 = inputCombinationFactory.makeSimpleInputCombination(ActionType.DOWN, inputEvent);
         InputCombination inputCombination2 = inputCombinationFactory.makeLmbCombination();
         InputCombination[] inputCombinations = new InputCombination[]{inputCombination1, inputCombination2};
         Command[] commands = new Command[]{() -> System.out.println("Hellothere!"), () -> System.out.println("General Kenobi!!!!")};
@@ -67,7 +67,7 @@ public class ComplexButtonTest {
         //when
         scene.update();
         //then
-        //"Hellothere!" should appear in console logs after pressing left control and
+        //"Hellothere!" should appear in console logs after pressing 'E' and
         //"General Kenobi!!!! should appear in console logs after pressing left mouse button"
     }
 

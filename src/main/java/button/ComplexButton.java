@@ -19,7 +19,7 @@ public class ComplexButton implements Visual, Interactive {
     public ComplexButton(Drawable drawable, InputCombination[] activationCombinations, Command[] actions) {
         this.drawable = drawable;
         this.actions = new HashMap<>();
-        for(int i = 0; i < min(activationCombinations.length, actions.length); i++) {
+        for (int i = 0; i < min(activationCombinations.length, actions.length); i++) {
             this.actions.put(activationCombinations[i], actions[i]);
         }
     }
@@ -27,11 +27,15 @@ public class ComplexButton implements Visual, Interactive {
 
     @Override
     public void update() {
-
+        for (InputCombination inputCombination : actions.keySet()) {
+            if (inputCombination.isActive()) {
+                actions.get(inputCombination).execute();
+            }
+        }
     }
 
     @Override
     public Drawable getDrawable() {
-        return null;
+        return drawable;
     }
 }

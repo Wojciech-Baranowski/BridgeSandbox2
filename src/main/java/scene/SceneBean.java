@@ -25,6 +25,8 @@ public class SceneBean implements Scene {
     private SceneBean() {
         this.display = DisplayBean.getDisplay();
         this.input = InputBean.getInput();
+        input.addMouseListener(this);
+        input.addKeyboardListener(this);
         objectCollections = new HashMap<>();
     }
 

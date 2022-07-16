@@ -21,7 +21,7 @@ public class DisplayBean implements Display {
     private final DrawableFactory drawableFactory;
     private final int[] pixels;
     @Setter
-    private Collection<Drawable> objectsToDraw;
+    private Collection<Visual> objectsToDraw;
 
     private DisplayBean() {
         window = new Window();
@@ -48,7 +48,8 @@ public class DisplayBean implements Display {
         if (objectsToDraw == null) {
             return;
         }
-        for (Drawable drawable : objectsToDraw) {
+        for (Visual visual : objectsToDraw) {
+            Drawable drawable = visual.getDrawable();
             int startX = max(drawable.getX(), 0);
             int startY = max(drawable.getY(), 0);
             int pWidth = drawable.getW();

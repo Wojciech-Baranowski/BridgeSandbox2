@@ -1,4 +1,4 @@
-package scene;
+package scene.priorityCollection;
 
 import org.junit.Test;
 import scene.priorityCollection.PriorityList;

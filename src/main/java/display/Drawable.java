@@ -2,7 +2,7 @@ package display;
 
 import assets.color.Color;
 
-public interface Drawable {
+public interface Drawable extends Visual {
 
     int[] getP();
 
@@ -28,6 +28,10 @@ public interface Drawable {
         int xPos = x - getX();
         int yPos = y - getY();
         return getP()[xPos + yPos * getW()] == Color.getTransparentColorValue();
+    }
+
+    default Drawable getDrawable() {
+        return this;
     }
 
 }

@@ -1,7 +1,7 @@
 package scene;
 
 import common.Observer;
-import display.Drawable;
+import display.Visual;
 
 import java.util.Collection;
 
@@ -9,21 +9,21 @@ public interface Scene extends Observer {
 
     void update();
 
-    void addObjectLowerThan(Drawable inserted, Drawable contained);
+    void addObjectLowerThan(Visual inserted, Visual contained);
 
-    void addObjectHigherThan(Drawable inserted, Drawable contained);
+    void addObjectHigherThan(Visual inserted, Visual contained);
 
-    void addOnHighest(Drawable inserted);
+    void addOnHighest(Visual inserted);
 
-    void addOnLowest(Drawable inserted);
+    void addOnLowest(Visual inserted);
 
     void clear();
 
-    void removeObject(Drawable removed);
+    void removeObject(Visual removed);
 
-    Collection<Drawable> getCurrentObjectCollection();
+    Collection<Visual> getCurrentObjectCollection();
 
-    Drawable getTopObject();
+    Visual getTopObject();
 
     void switchCollection(String collectionName);
 

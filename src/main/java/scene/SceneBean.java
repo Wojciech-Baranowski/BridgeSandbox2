@@ -2,12 +2,11 @@ package scene;
 
 import display.Display;
 import display.DisplayBean;
-import display.Drawable;
+import display.Visual;
 import input.Input;
 import input.InputBean;
-import scene.interactive.InteractiveDrawable;
-import scene.priorityCollection.DrawablePriorityCollection;
 import scene.priorityCollection.PriorityList;
+import scene.priorityCollection.SceneCollection;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -19,8 +18,8 @@ public class SceneBean implements Scene {
     private final Display display;
     private final Input input;
 
-    private DrawablePriorityCollection currentObjectCollection;
-    private final Map<String, DrawablePriorityCollection> objectCollections;
+    private SceneCollection currentObjectCollection;
+    private final Map<String, SceneCollection> objectCollections;
 
     private SceneBean() {
         this.display = DisplayBean.getDisplay();
@@ -37,30 +36,30 @@ public class SceneBean implements Scene {
 
     @Override
     public void update() {
-        if (getTopObject() instanceof InteractiveDrawable) {
-            ((InteractiveDrawable) getTopObject()).update();
+        if (getTopObject() instanceof Interactive) {
+            ((Interactive) getTopObject()).update();
         }
         display.setObjectsToDraw(scene.getCurrentObjectCollection());
         display.draw();
     }
 
     @Override
-    public void addObjectLowerThan(Drawable inserted, Drawable contained) {
+    public void addObjectLowerThan(Visual inserted, Visual contained) {
         currentObjectCollection.setLowerThan(inserted, contained);
     }
 
     @Override
-    public void addObjectHigherThan(Drawable inserted, Drawable contained) {
+    public void addObjectHigherThan(Visual inserted, Visual contained) {
         currentObjectCollection.setHigherThan(inserted, contained);
     }
 
     @Override
-    public void addOnHighest(Drawable inserted) {
+    public void addOnHighest(Visual inserted) {
         currentObjectCollection.setOnHighest(inserted);
     }
 
     @Override
-    public void addOnLowest(Drawable inserted) {
+    public void addOnLowest(Visual inserted) {
         currentObjectCollection.setOnLowest(inserted);
     }
 
@@ -70,20 +69,20 @@ public class SceneBean implements Scene {
     }
 
     @Override
-    public void removeObject(Drawable removed) {
+    public void removeObject(Visual removed) {
         currentObjectCollection.remove(removed);
     }
 
     @Override
-    public Collection<Drawable> getCurrentObjectCollection() {
+    public Collection<Visual> getCurrentObjectCollection() {
         if (currentObjectCollection == null) {
             return null;
         }
-        return (Collection) currentObjectCollection.getObjectCollection();
+        return currentObjectCollection.getObjectCollection();
     }
 
     @Override
-    public Drawable getTopObject() {
+    public Visual getTopObject() {
         int x = input.getMouseX();
         int y = input.getMouseY();
         return currentObjectCollection.getTopObjectOnPosition(x, y);
@@ -96,7 +95,7 @@ public class SceneBean implements Scene {
 
     @Override
     public void addCollection(String collectionName) {
-        objectCollections.put(collectionName, new DrawablePriorityCollection(new PriorityList()));
+        objectCollections.put(collectionName, new SceneCollection(new PriorityList()));
     }
 
     @Override

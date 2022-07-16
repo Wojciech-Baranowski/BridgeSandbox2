@@ -7,7 +7,7 @@ public interface Display {
 
     void draw();
 
-    void setObjectsToDraw(Collection<Drawable> objects);
+    void setObjectsToDraw(Collection<Visual> objects);
 
     void addWindowListener(EventListener listener);
 

@@ -1,4 +1,4 @@
-package scene;
+package scene.priorityCollection;
 
 import assets.Assets;
 import assets.AssetsBean;
@@ -7,12 +7,10 @@ import display.DisplayBean;
 import display.DrawableFactory;
 import display.rectangle.Rectangle;
 import org.junit.Test;
-import scene.priorityCollection.DrawablePriorityCollection;
-import scene.priorityCollection.PriorityList;
 
 import static org.junit.Assert.assertSame;
 
-public class DrawablePriorityCollectionTest {
+public class SceneCollectionTest {
 
     @Test
     public void get_top_object_on_position_test() {
@@ -25,7 +23,7 @@ public class DrawablePriorityCollectionTest {
         Rectangle rectangle1 = drawableFactory.makeRectangle(0, 0, 100, 100, "red");
         Rectangle rectangle2 = drawableFactory.makeRectangle(50, 0, 100, 100, "red");
         Rectangle rectangle3 = drawableFactory.makeRectangle(20, 0, 20, 20, "magenta");
-        DrawablePriorityCollection priorityCollection = new DrawablePriorityCollection(new PriorityList());
+        SceneCollection priorityCollection = new SceneCollection(new PriorityList());
         priorityCollection.setOnHighest(rectangle1);
         priorityCollection.setOnHighest(rectangle2);
         priorityCollection.setOnHighest(rectangle3);

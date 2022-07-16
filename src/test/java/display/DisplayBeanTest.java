@@ -61,7 +61,7 @@ public class DisplayBeanTest {
         DrawableFactory drawableFactory = display.getDrawableFactory();
         Rectangle inputRectangle = drawableFactory.makeFramedRectangle(inputX1, inputY1, inputW, inputH, inputThickness, "red", "green");
         Text inputText2 = drawableFactory.makeText(inputText1, inputX2, inputY2, "HBE32", "blue");
-        List<Drawable> inputList = new LinkedList<>();
+        List<Visual> inputList = new LinkedList<>();
         inputList.add(inputRectangle);
         inputList.add(inputText2);
         display.setObjectsToDraw(inputList);
@@ -87,7 +87,7 @@ public class DisplayBeanTest {
         for (int i = 0; i < inputX.length; i++) {
             inputRectangles[i] = drawableFactory.makeRectangle(inputX[i], inputY[i], inputW[i], inputH[i], inputColorNames[i]);
         }
-        List<Drawable> inputList = new LinkedList<>();
+        List<Visual> inputList = new LinkedList<>();
         for (int i = 0; i < inputX.length; i++) {
             inputList.add(inputRectangles[i]);
         }

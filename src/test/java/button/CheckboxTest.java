@@ -9,18 +9,11 @@ import display.DrawableFactory;
 import display.rectangle.Rectangle;
 import input.Input;
 import input.InputBean;
-import input.inputCombination.ActionType;
 import input.inputCombination.InputCombinationFactory;
-import input.inputCombination.InputElement;
 import org.junit.Test;
 import scene.Scene;
 import scene.SceneBean;
 
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-
-import static input.inputCombination.ActionType.DOWN;
 import static org.junit.Assert.assertSame;
 
 public class CheckboxTest {
@@ -63,6 +56,10 @@ public class CheckboxTest {
         scene.addCollection("c1");
         scene.switchCollection("c1");
         scene.addOnHighest(checkbox);
+        //when
+        scene.update();
+        //then
+        //after each left click on square it should alternate between red and blue colors, starting from red
     }
 
 }

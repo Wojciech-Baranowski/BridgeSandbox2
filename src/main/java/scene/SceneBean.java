@@ -40,7 +40,9 @@ public class SceneBean implements Scene {
 
     @Override
     public void update() {
-        currentObjectCollection.remove(HoverMark.getHoverMark());
+        if(currentObjectCollection != null) {
+            currentObjectCollection.remove(HoverMark.getHoverMark());
+        }
         Visual topObject = getTopObject();
         if (topObject instanceof Interactive) {
             ((Interactive) topObject).update();

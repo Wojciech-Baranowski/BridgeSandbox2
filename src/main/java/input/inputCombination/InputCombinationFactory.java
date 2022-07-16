@@ -36,13 +36,17 @@ public class InputCombinationFactory {
         return new SimpleInputCombination(keyboardListener, mouseListener, inputElement);
     }
 
-    public InputCombination makeLMBCombination() {
+    public InputCombination makeLmbCombination() {
         int keyCode = MouseEvent.BUTTON1;
         Component dummyComponent = new Button();
         InputEvent inputEvent = new MouseEvent(
                 dummyComponent, 0, 0, 0, 0, 0, 0, false, keyCode);
         InputElement inputElement = new InputElement(DOWN, inputEvent);
         return new SimpleInputCombination(keyboardListener, mouseListener, inputElement);
+    }
+
+    public InputCombination makeNullCombination() {
+        return new SimpleInputCombination(keyboardListener, mouseListener, null);
     }
 
 }

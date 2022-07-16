@@ -22,12 +22,7 @@ public class HoverMark implements Drawable {
     @Getter
     private int h;
 
-    private HoverMark() {
-        p = new int[1];
-        p[0] = Color.getHoverMarkColorValue();
-        x = y = 0;
-        w = h = 1;
-    }
+    private HoverMark() {}
 
     public static HoverMark getHoverMark() {
         if (hoverMark == null) {

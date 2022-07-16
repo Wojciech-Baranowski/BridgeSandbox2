@@ -1,5 +1,7 @@
 package display;
 
+import common.Visual;
+
 import java.util.Collection;
 import java.util.EventListener;
 

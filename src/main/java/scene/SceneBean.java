@@ -1,8 +1,9 @@
 package scene;
 
+import common.Interactive;
 import display.Display;
 import display.DisplayBean;
-import display.Visual;
+import common.Visual;
 import input.Input;
 import input.InputBean;
 import scene.priorityCollection.PriorityList;

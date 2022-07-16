@@ -1,6 +1,6 @@
 package scene.priorityCollection;
 
-import display.Visual;
+import common.Visual;
 
 import java.util.Collection;
 

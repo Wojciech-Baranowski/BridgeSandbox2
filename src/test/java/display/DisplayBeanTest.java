@@ -2,6 +2,7 @@ package display;
 
 import assets.Assets;
 import assets.AssetsBean;
+import common.Visual;
 import display.rectangle.Rectangle;
 import display.text.Text;
 import org.junit.Test;

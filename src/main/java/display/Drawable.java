@@ -1,6 +1,7 @@
 package display;
 
 import assets.color.Color;
+import common.Visual;
 
 public interface Drawable extends Visual {
 

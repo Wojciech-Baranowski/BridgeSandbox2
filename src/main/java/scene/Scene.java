@@ -1,7 +1,7 @@
 package scene;
 
 import common.Observer;
-import display.Visual;
+import common.Visual;
 
 import java.util.Collection;
 

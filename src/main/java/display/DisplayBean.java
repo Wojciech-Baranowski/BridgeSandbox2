@@ -1,6 +1,7 @@
 package display;
 
 import assets.color.Color;
+import common.Visual;
 import lombok.Getter;
 import lombok.Setter;
 

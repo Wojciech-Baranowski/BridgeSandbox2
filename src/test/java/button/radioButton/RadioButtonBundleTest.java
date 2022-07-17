@@ -3,20 +3,16 @@ package button.radioButton;
 import assets.Assets;
 import assets.AssetsBean;
 import button.SimpleButton;
-import button.checkbox.Checkbox;
-import button.checkbox.CheckboxBundle;
 import display.Display;
 import display.DisplayBean;
 import display.DrawableFactory;
 import display.rectangle.Rectangle;
 import input.Input;
 import input.InputBean;
-import input.inputCombination.InputCombination;
 import input.inputCombination.InputCombinationFactory;
 import scene.Scene;
 import scene.SceneBean;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -61,7 +57,7 @@ public class RadioButtonBundleTest {
         radioButtonBundle.addRadioButton(radioButton3);
         radioButtonBundle.addRadioButton(radioButton3);
         SimpleButton button = new SimpleButton(inputButtonRectangle, inputCombinationFactory.makeLmbCombination(), () -> {
-            for(Boolean state : radioButtonBundle.getBundleState()) {
+            for (Boolean state : radioButtonBundle.getBundleState()) {
                 System.out.print((state ? "T" : "F") + " ");
             }
             System.out.println();

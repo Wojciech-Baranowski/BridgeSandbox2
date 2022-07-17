@@ -1,15 +1,12 @@
 package button.radioButton;
 
-import lombok.Getter;
-
 import java.util.LinkedList;
 import java.util.List;
 
 public class RadioButtonBundle {
 
     private final List<RadioButton> radioButtons;
-    @Getter
-    private int selectedRadioButtonIndex;
+    private RadioButton selectedRadioButton;
 
     public RadioButtonBundle() {
         this.radioButtons = new LinkedList<>();
@@ -17,22 +14,44 @@ public class RadioButtonBundle {
 
     public RadioButtonBundle(List<RadioButton> radioButtons) {
         this.radioButtons = radioButtons;
-        for(RadioButton radioButton : radioButtons) {
+        for (RadioButton radioButton : radioButtons) {
             radioButton.setRadioButtonBundle(this);
         }
-        selectedRadioButtonIndex = -1;
+    }
+
+    public void update(RadioButton currentlySelected) {
+        if (selectedRadioButton != null) {
+            selectedRadioButton.setSelected(false);
+        }
+        currentlySelected.setSelected(true);
+        selectedRadioButton = currentlySelected;
     }
 
     public List<Boolean> getBundleState() {
-        return null;
+        return radioButtons.stream()
+                .map(RadioButton::isSelected)
+                .toList();
+    }
+
+    public int getSelectedRadioButtonIndex() {
+        for (int i = 0; i < radioButtons.size(); i++) {
+            if (radioButtons.get(i).equals(selectedRadioButton)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public void addRadioButton(RadioButton radioButton) {
-
+        if (radioButtons.contains(radioButton)) {
+            return;
+        }
+        radioButton.setRadioButtonBundle(this);
+        radioButtons.add(radioButton);
     }
 
     public void removeRadioButton(RadioButton radioButton) {
-
+        radioButtons.remove(radioButton);
     }
 
 }

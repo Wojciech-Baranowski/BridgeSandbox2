@@ -38,17 +38,22 @@ public class SceneBean implements Scene {
 
     @Override
     public void update() {
-        if (currentObjectCollection != null) {
-            currentObjectCollection.remove(HoverMark.getHoverMark());
-        }
+        updateTopObject();
+        currentObjectCollection.updateGloballyActivatedObjects();
+        display.setObjectsToDraw(scene.getCurrentObjectCollection());
+        display.draw();
+    }
+
+    private void updateTopObject() {
         Visual topObject = getTopObject();
         if (topObject instanceof Interactive) {
             ((Interactive) topObject).update();
             HoverMark.getHoverMark().fitHoverMarkToDrawable(topObject.getDrawable());
             currentObjectCollection.setHigherThan(HoverMark.getHoverMark(), topObject);
         }
-        display.setObjectsToDraw(scene.getCurrentObjectCollection());
-        display.draw();
+        else if (currentObjectCollection != null) {
+            currentObjectCollection.remove(HoverMark.getHoverMark());
+        }
     }
 
     @Override

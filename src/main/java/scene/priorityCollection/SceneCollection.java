@@ -4,6 +4,7 @@ import common.Interactive;
 import common.Visual;
 import display.Drawable;
 import input.inputCombination.InputCombination;
+import lombok.Getter;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.Set;
 public class SceneCollection {
 
     private final PriorityCollection priorityCollection;
+
     private final Map<InputCombination, Interactive> globallyActivatedObjects;
 
     public SceneCollection(PriorityCollection priorityCollection) {
@@ -66,6 +68,14 @@ public class SceneCollection {
 
     public Visual getHighest() {
         return (Visual) priorityCollection.getHighest();
+    }
+
+    public void updateGloballyActivatedObjects() {
+        for(InputCombination activationCombination : globallyActivatedObjects.keySet()) {
+            if(activationCombination.isActive()) {
+                globallyActivatedObjects.get(activationCombination).update();
+            }
+        }
     }
 
     public void addGloballyActivatedObject(InputCombination activationCombination, Interactive object) {

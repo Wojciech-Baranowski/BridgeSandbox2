@@ -63,6 +63,8 @@ public class SimpleButtonTest {
         scene.switchCollection("c1");
         scene.addOnHighest(simpleButton);
         //when
+        scene.initializeListeners();
+        input.initializeListeners();
         scene.update();
         //then
         //"Hellothere!" should appear in console logs after pressing left mouse button

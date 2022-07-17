@@ -11,7 +11,6 @@ public class Rectangle implements Drawable {
 
     @Getter
     protected final int[] p;
-
     @Getter
     @Setter
     protected int x;

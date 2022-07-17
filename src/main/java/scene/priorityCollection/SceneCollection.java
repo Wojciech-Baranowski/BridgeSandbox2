@@ -1,15 +1,23 @@
 package scene.priorityCollection;
 
+import common.Interactive;
 import common.Visual;
+import display.Drawable;
+import input.inputCombination.InputCombination;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class SceneCollection {
 
     private final PriorityCollection priorityCollection;
+    private final Map<InputCombination, Interactive> globallyActivatedObjects;
 
     public SceneCollection(PriorityCollection priorityCollection) {
         this.priorityCollection = priorityCollection;
+        this.globallyActivatedObjects = new HashMap<>();
     }
 
     public Visual getTopObjectOnPosition(int x, int y) {
@@ -58,6 +66,14 @@ public class SceneCollection {
 
     public Visual getHighest() {
         return (Visual) priorityCollection.getHighest();
+    }
+
+    public void addGloballyActivatedObject(InputCombination activationCombination, Interactive object) {
+        globallyActivatedObjects.put(activationCombination, object);
+    }
+
+    public void removeGloballyActivatedObject(Interactive object) {
+        globallyActivatedObjects.values().remove(object);
     }
 
 }

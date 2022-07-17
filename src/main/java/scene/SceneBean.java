@@ -7,6 +7,7 @@ import display.DisplayBean;
 import display.HoverMark;
 import input.Input;
 import input.InputBean;
+import input.inputCombination.InputCombination;
 import scene.priorityCollection.PriorityList;
 import scene.priorityCollection.SceneCollection;
 
@@ -19,9 +20,8 @@ public class SceneBean implements Scene {
     private static SceneBean scene;
     private final Display display;
     private final Input input;
-
-    private SceneCollection currentObjectCollection;
     private final Map<String, SceneCollection> objectCollections;
+    private SceneCollection currentObjectCollection;
 
     private SceneBean() {
         this.display = DisplayBean.getDisplay();
@@ -38,7 +38,7 @@ public class SceneBean implements Scene {
 
     @Override
     public void update() {
-        if(currentObjectCollection != null) {
+        if (currentObjectCollection != null) {
             currentObjectCollection.remove(HoverMark.getHoverMark());
         }
         Visual topObject = getTopObject();
@@ -49,6 +49,12 @@ public class SceneBean implements Scene {
         }
         display.setObjectsToDraw(scene.getCurrentObjectCollection());
         display.draw();
+    }
+
+    @Override
+    public void initializeListeners() {
+        input.addMouseListener(this);
+        input.addKeyboardListener(this);
     }
 
     @Override
@@ -93,7 +99,7 @@ public class SceneBean implements Scene {
     public Visual getTopObject() {
         int x = input.getMouseX();
         int y = input.getMouseY();
-        if(currentObjectCollection != null) {
+        if (currentObjectCollection != null) {
             return currentObjectCollection.getTopObjectOnPosition(x, y);
         }
         return null;
@@ -114,8 +120,7 @@ public class SceneBean implements Scene {
         if (!objectCollections.containsKey(collectionName)) {
             return;
         }
-        if (currentObjectCollection != null &&
-                currentObjectCollection.equals(objectCollections.get(collectionName))) {
+        if (currentObjectCollection != null && currentObjectCollection.equals(objectCollections.get(collectionName))) {
             currentObjectCollection.clear();
             currentObjectCollection = null;
         }
@@ -124,9 +129,13 @@ public class SceneBean implements Scene {
     }
 
     @Override
-    public void initializeListeners() {
-        input.addMouseListener(this);
-        input.addKeyboardListener(this);
+    public void addGloballyActivatedObject(InputCombination activationCombination, Interactive object) {
+        currentObjectCollection.addGloballyActivatedObject(activationCombination, object);
+    }
+
+    @Override
+    public void removeGloballyActivatedObject(Interactive object) {
+        currentObjectCollection.removeGloballyActivatedObject(object);
     }
 
 }

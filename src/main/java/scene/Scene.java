@@ -1,7 +1,9 @@
 package scene;
 
+import common.Interactive;
 import common.Observer;
 import common.Visual;
+import input.inputCombination.InputCombination;
 
 import java.util.Collection;
 
@@ -32,5 +34,9 @@ public interface Scene extends Observer {
     void removeCollection(String collectionName);
 
     void initializeListeners();
+
+    void addGloballyActivatedObject(InputCombination activationCombination, Interactive object);
+
+    void removeGloballyActivatedObject(Interactive object);
 
 }

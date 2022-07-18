@@ -18,7 +18,6 @@ public class SimpleButton implements Visual, Interactive {
         this.action = action;
     }
 
-
     @Override
     public void update() {
         if (activationCombination == null || activationCombination.isActive()) {

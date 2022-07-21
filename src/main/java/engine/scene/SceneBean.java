@@ -38,10 +38,12 @@ public class SceneBean implements Scene {
 
     @Override
     public void update() {
-        updateTopObject();
-        currentObjectCollection.updateGloballyActivatedObjects();
-        display.setObjectsToDraw(scene.getCurrentObjectCollection());
-        display.draw();
+        if(currentObjectCollection != null) {
+            updateTopObject();
+            currentObjectCollection.updateGloballyActivatedObjects();
+            display.setObjectsToDraw(scene.getCurrentObjectCollection());
+            display.draw();
+        }
     }
 
     private void updateTopObject() {

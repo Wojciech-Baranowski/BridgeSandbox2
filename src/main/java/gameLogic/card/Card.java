@@ -5,8 +5,8 @@ import lombok.Getter;
 @Getter
 public class Card {
 
-    private Figure figure;
-    private Color color;
+    private final Figure figure;
+    private final Color color;
 
     Card(int id) {
         this.figure = Figure.values()[id % 13];

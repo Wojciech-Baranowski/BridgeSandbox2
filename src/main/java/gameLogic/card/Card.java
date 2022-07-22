@@ -2,6 +2,8 @@ package gameLogic.card;
 
 import lombok.Getter;
 
+import static gameLogic.GameConstants.FIGURE_NUMBER;
+
 @Getter
 public class Card {
 
@@ -9,8 +11,8 @@ public class Card {
     private final Color color;
 
     Card(int id) {
-        this.figure = Figure.values()[id % 13];
-        this.color = Color.values()[id / 13];
+        this.figure = Figure.values()[id % FIGURE_NUMBER];
+        this.color = Color.values()[id / FIGURE_NUMBER];
     }
 
     Card(Figure figure, Color color) {
@@ -19,7 +21,7 @@ public class Card {
     }
 
     public int getId() {
-        return figure.ordinal() + color.ordinal() * 13;
+        return figure.ordinal() + color.ordinal() * FIGURE_NUMBER;
     }
 
 }

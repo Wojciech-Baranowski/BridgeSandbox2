@@ -8,14 +8,14 @@ import static org.junit.Assert.assertEquals;
 public class ColorTest {
 
     @Test
-    public void get_ascii_test() {
+    public void get_symbol_test() {
         //given
         Color[] inputColor = new Color[]{CLUB, DIAMOND, HEART, SPADE, NOATU, SPADE, SPADE};
         char[] outputCheck = new char[]{'\u2667', '\u2666', '\u2665', '\u2664', '\u2668', '\u2664', '\u2664' };
         char[] output = new char[inputColor.length];
         //when
         for (int i = 0; i < inputColor.length; i++) {
-            output[i] = inputColor[i].getAscii();
+            output[i] = inputColor[i].getSymbol();
         }
         //then
         for (int i = 0; i < inputColor.length; i++) {

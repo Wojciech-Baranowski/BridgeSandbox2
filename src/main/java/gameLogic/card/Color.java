@@ -11,10 +11,10 @@ public enum Color {
     SPADE('\u2664');
 
     @Getter
-    private final char ascii;
+    private final char symbol;
 
-    Color(char ascii) {
-        this.ascii = ascii;
+    Color(char symbol) {
+        this.symbol = symbol;
     }
 
 }

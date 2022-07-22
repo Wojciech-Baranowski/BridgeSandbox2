@@ -23,4 +23,20 @@ public class ColorTest {
         }
     }
 
+    @Test
+    public void ordinal_test() {
+        //given
+        Color[] inputColor = new Color[]{CLUB, DIAMOND, HEART, SPADE, NOATU, SPADE, SPADE};
+        int[] outputCheck = new int[]{0, 1, 2, 3, 4, 3, 3};
+        int[] output = new int[inputColor.length];
+        //when
+        for (int i = 0; i < inputColor.length; i++) {
+            output[i] = inputColor[i].ordinal();
+        }
+        //then
+        for (int i = 0; i < inputColor.length; i++) {
+            assertEquals(outputCheck[i], output[i]);
+        }
+    }
+
 }

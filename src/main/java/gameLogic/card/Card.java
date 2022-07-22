@@ -9,15 +9,17 @@ public class Card {
     private Color color;
 
     Card(int id) {
-
+        this.figure = Figure.values()[id % 13];
+        this.color = Color.values()[id / 13];
     }
 
     Card(Figure figure, Color color) {
-
+        this.figure = figure;
+        this.color = color;
     }
 
     public int getId() {
-        return 0;
+        return figure.ordinal() + color.ordinal() * 13;
     }
 
 }

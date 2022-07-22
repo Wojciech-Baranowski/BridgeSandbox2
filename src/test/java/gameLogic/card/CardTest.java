@@ -30,13 +30,13 @@ public class CardTest {
         Color[] outputColors = new Color[size];
         int[] outputIds = new int[size];
         //when
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             outputFigures[i] = inputCards[i].getFigure();
             outputColors[i] = inputCards[i].getColor();
             outputIds[i] = inputCards[i].getId();
         }
         //then
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             assertEquals(outputFiguresCheck[i], outputFigures[i]);
             assertEquals(outputColorsCheck[i], outputColors[i]);
             assertEquals(outputIdsCheck[i], outputIds[i]);

@@ -2,6 +2,8 @@ package engine.input.inputCombination;
 
 import org.junit.Test;
 
+import static engine.input.inputCombination.ActionType.DOWN;
+import static engine.input.inputCombination.ActionType.UP;
 import static org.junit.Assert.assertEquals;
 
 public class InputElementTest {

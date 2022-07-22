@@ -3,7 +3,6 @@ package engine.display;
 import engine.assets.Assets;
 import engine.assets.AssetsBean;
 import engine.assets.color.Color;
-import display.*;
 import org.junit.Test;
 
 import java.util.Arrays;

@@ -11,7 +11,7 @@ public class MoveValidator {
     }
 
     boolean isMoveValid(List<Card> currentPlayerCards, Color colorOfFirstCardPlayed, Card card) {
-        return  isCardInPlayerHand(currentPlayerCards, card)
+        return isCardInPlayerHand(currentPlayerCards, card)
                 && isCardInSuitableColor(currentPlayerCards, colorOfFirstCardPlayed, card);
     }
 

@@ -16,4 +16,13 @@ public enum Player {
         this.symbol = symbol;
     }
 
+    Player nextPlayer() {
+        return switch(this) {
+            case N -> E;
+            case E -> S;
+            case S -> W;
+            case W -> N;
+        };
+    }
+
 }

@@ -39,4 +39,20 @@ public class PlayerTest {
         }
     }
 
+    @Test
+    public void next_player_test() {
+        //given
+        Player[] input = {N, W, E, S, S, N};
+        Player[] outputCheck = {E, N, S, W, W, E};
+        Player[] output = new Player[input.length];
+        //when
+        for(int i = 0; i < input.length; i++) {
+            output[i] = input[i].nextPlayer();
+        }
+        //then
+        for(int i = 0; i < input.length; i++) {
+            assertEquals(outputCheck[i], output[i]);
+        }
+    }
+
 }

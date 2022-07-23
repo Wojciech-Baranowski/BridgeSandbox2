@@ -1,6 +1,6 @@
 package gameLogic.game;
 
-import gameLogic.Player;
+import gameLogic.player.Player;
 import gameLogic.card.Card;
 import gameLogic.card.Color;
 

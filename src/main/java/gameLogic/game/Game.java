@@ -1,6 +1,6 @@
 package gameLogic.game;
 
-import gameLogic.Player;
+import gameLogic.player.Player;
 import gameLogic.card.Card;
 import gameLogic.card.Color;
 import gameLogic.card.Deck;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import static gameLogic.Player.N;
+import static gameLogic.player.Player.N;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
 public class Game {

@@ -1,8 +1,9 @@
-package gameLogic;
+package gameLogic.player;
 
+import gameLogic.player.Player;
 import org.junit.Test;
 
-import static gameLogic.Player.*;
+import static gameLogic.player.Player.*;
 import static org.junit.Assert.assertEquals;
 
 public class PlayerTest {

@@ -1,6 +1,6 @@
 package gameLogic.game;
 
-import gameLogic.Player;
+import gameLogic.player.Player;
 import gameLogic.card.Card;
 import gameLogic.card.Color;
 import gameLogic.card.Deck;
@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static gameLogic.Player.*;
+import static gameLogic.player.Player.*;
 import static gameLogic.card.Color.DIAMOND;
 import static gameLogic.card.Color.HEART;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;

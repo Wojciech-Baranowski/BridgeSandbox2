@@ -1,6 +1,6 @@
 package gameLogic.game;
 
-import gameLogic.Player;
+import gameLogic.player.Player;
 import gameLogic.card.Card;
 import gameLogic.card.Color;
 import gameLogic.card.Deck;
@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static gameLogic.Player.*;
+import static gameLogic.player.Player.*;
 import static gameLogic.card.Color.*;
 import static org.junit.Assert.assertEquals;
 

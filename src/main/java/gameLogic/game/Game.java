@@ -50,19 +50,20 @@ public class Game {
     }
 
     public void playCard(Card card) {
-        List<Card> playerCards = cards[currentPlayer.ordinal()];
-        Color colorOfFirstCardPlayed = playerCards.isEmpty() ? null : playedCards.get(0).getColor();
+        List<Card> playerCards = new LinkedList<>(cards[currentPlayer.ordinal()]);
+        Color colorOfFirstCardPlayed = playedCards.isEmpty() ? null : playedCards.get(0).getColor();
         if (moveValidator.isMoveValid(playerCards, colorOfFirstCardPlayed, card)) {
-            makeMove(card);
+            makeMove(playerCards, card);
         }
-        if (playerCards.size() == PLAYER_NUMBER) {
+        if (playedCards.size() == PLAYER_NUMBER) {
             summarizeRound();
         }
     }
 
-    private void makeMove(Card card) {
+    private void makeMove(List<Card> playerCards, Card card) {
         playedCards.add(card);
-        cards[currentPlayer.ordinal()].remove(card);
+        playerCards.remove(card);
+        cards[currentPlayer.ordinal()] = playerCards;
         currentPlayer = currentPlayer.nextPlayer();
     }
 

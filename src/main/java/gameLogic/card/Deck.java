@@ -2,10 +2,7 @@ package gameLogic.card;
 
 import lombok.Getter;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static gameLogic.game.GameConstants.*;
 import static java.lang.Math.min;
@@ -44,7 +41,7 @@ public class Deck {
     }
 
     private List<Card> getShuffledCards() {
-        List<Card> shuffledCards = Arrays.asList(cards);
+        List<Card> shuffledCards = new ArrayList<>(List.of(cards));
         Collections.shuffle(shuffledCards);
         return shuffledCards;
     }

@@ -1,5 +1,7 @@
 package gameLogic.card;
 
+import engine.assets.Assets;
+import engine.assets.AssetsBean;
 import org.junit.Test;
 
 import java.util.List;
@@ -9,15 +11,32 @@ import static gameLogic.GameConstants.PLAYER_NUMBER;
 import static gameLogic.card.Color.*;
 import static gameLogic.card.Figure.*;
 import static java.lang.Math.min;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
 
 public class DeckTest {
 
     @Test
+    public void get_deck_test() {
+        //given
+        Deck input1 = null;
+        Deck input2 = null;
+        Deck input3;
+        Deck input4;
+        //when
+        input3 = Deck.getDeck();
+        input4 = Deck.getDeck();
+        //then
+        assertNull(input1);
+        assertNull(input2);
+        assertNotNull(input3);
+        assertNotNull(input4);
+    }
+
+    @Test
     public void accessors_test() {
         //given
-        Deck deck = new Deck();
+        Deck deck = Deck.getDeck();
         Figure[] inputFigures = new Figure[]{_2, _10, J, A};
         Color[] inputColors = new Color[]{CLUB, CLUB, HEART, SPADE};
         int[] inputIds = {14, 27, 33, 51};
@@ -44,7 +63,7 @@ public class DeckTest {
     public void deal_cards_test() {
         //given
         int[] inputNumberOfCardsPerPlayer = {6, 13, 15};
-        Deck deck = new Deck();
+        Deck deck = Deck.getDeck();
         List<Card>[][] output;
         output = new List[inputNumberOfCardsPerPlayer.length][];
         //when

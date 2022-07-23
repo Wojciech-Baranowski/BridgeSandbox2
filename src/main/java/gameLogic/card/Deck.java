@@ -13,13 +13,21 @@ import static java.lang.Math.min;
 @Getter
 public class Deck {
 
+    private static Deck deck;
     private final Card[] cards;
 
-    public Deck() {
+    private Deck() {
         cards = new Card[DECK_SIZE];
         for (int i = 0; i < DECK_SIZE; i++) {
             cards[i] = new Card(i);
         }
+    }
+
+    public static Deck getDeck() {
+        if(deck == null) {
+            deck = new Deck();
+        }
+        return deck;
     }
 
     public List<Card>[] dealCards(int numberOfCardsPerPlayer) {

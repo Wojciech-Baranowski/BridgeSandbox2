@@ -19,10 +19,11 @@ public class GameTest {
         //given
         Game inputGame = new Game();
         Deck deck = Deck.getDeck();
-        List<Card>[] inputCards = deck.dealCards(7);
+        int numberOfCardsPerPlayer = 7;
+        List<Card>[] inputCards = deck.dealCards(numberOfCardsPerPlayer);
         Color inputAtu = DIAMOND;
         //when
-        inputGame.initializeGame(inputCards, inputAtu);
+        inputGame.initializeGame(inputAtu, inputCards);
         //then
         assertSame(Deck.getDeck(), inputGame.getDeck());
         assertSame(inputCards, inputGame.getCards());

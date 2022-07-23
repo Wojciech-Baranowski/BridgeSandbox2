@@ -17,7 +17,7 @@ public enum Player {
     }
 
     public Player nextPlayer() {
-        return switch(this) {
+        return switch (this) {
             case N -> E;
             case E -> S;
             case S -> W;

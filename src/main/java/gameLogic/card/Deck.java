@@ -2,7 +2,10 @@ package gameLogic.card;
 
 import lombok.Getter;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 import static gameLogic.game.GameConstants.*;
 import static java.lang.Math.min;
@@ -21,7 +24,7 @@ public class Deck {
     }
 
     public static Deck getDeck() {
-        if(deck == null) {
+        if (deck == null) {
             deck = new Deck();
         }
         return deck;

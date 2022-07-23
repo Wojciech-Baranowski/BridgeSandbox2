@@ -11,7 +11,7 @@ public class ColorTest {
     public void get_symbol_test() {
         //given
         Color[] inputColor = new Color[]{CLUB, DIAMOND, HEART, SPADE, NOATU, SPADE, SPADE};
-        char[] outputCheck = new char[]{'\u2667', '\u2666', '\u2665', '\u2664', '\u2668', '\u2664', '\u2664' };
+        char[] outputCheck = new char[]{'\u2667', '\u2666', '\u2665', '\u2664', '\u2668', '\u2664', '\u2664'};
         char[] output = new char[inputColor.length];
         //when
         for (int i = 0; i < inputColor.length; i++) {

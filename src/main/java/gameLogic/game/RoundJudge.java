@@ -1,8 +1,8 @@
 package gameLogic.game;
 
-import gameLogic.player.Player;
 import gameLogic.card.Card;
 import gameLogic.card.Color;
+import gameLogic.player.Player;
 
 import java.util.Comparator;
 import java.util.List;

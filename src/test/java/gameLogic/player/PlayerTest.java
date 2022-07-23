@@ -1,6 +1,5 @@
 package gameLogic.player;
 
-import gameLogic.player.Player;
 import org.junit.Test;
 
 import static gameLogic.player.Player.*;
@@ -12,7 +11,7 @@ public class PlayerTest {
     public void get_symbol_test() {
         //given
         Player[] inputPlayer = new Player[]{N, E, W, W, S, N};
-        char[] outputCheck = new char[]{'N', 'E', 'W', 'W', 'S', 'N' };
+        char[] outputCheck = new char[]{'N', 'E', 'W', 'W', 'S', 'N'};
         char[] output = new char[inputPlayer.length];
         //when
         for (int i = 0; i < inputPlayer.length; i++) {
@@ -47,11 +46,11 @@ public class PlayerTest {
         Player[] outputCheck = {E, N, S, W, W, E};
         Player[] output = new Player[input.length];
         //when
-        for(int i = 0; i < input.length; i++) {
+        for (int i = 0; i < input.length; i++) {
             output[i] = input[i].nextPlayer();
         }
         //then
-        for(int i = 0; i < input.length; i++) {
+        for (int i = 0; i < input.length; i++) {
             assertEquals(outputCheck[i], output[i]);
         }
     }

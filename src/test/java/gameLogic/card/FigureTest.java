@@ -11,7 +11,7 @@ public class FigureTest {
     public void get_symbol_test() {
         //given
         Figure[] inputFigure = new Figure[]{_2, _4, _9, _10, J, Q, K, A, A};
-        char[] outputCheck = new char[]{'2', '4', '9', '\u2669', 'J', 'Q', 'K', 'A', 'A' };
+        char[] outputCheck = new char[]{'2', '4', '9', '\u2669', 'J', 'Q', 'K', 'A', 'A'};
         char[] output = new char[inputFigure.length];
         //when
         for (int i = 0; i < inputFigure.length; i++) {
@@ -27,7 +27,7 @@ public class FigureTest {
     public void ordinal_test() {
         //given
         Figure[] inputFigure = new Figure[]{_2, _4, _9, _10, J, Q, K, A, A};
-        int[] outputCheck = new int[] {0, 2, 7, 8, 9, 10, 11, 12, 12};
+        int[] outputCheck = new int[]{0, 2, 7, 8, 9, 10, 11, 12, 12};
         int[] output = new int[inputFigure.length];
         //when
         for (int i = 0; i < inputFigure.length; i++) {

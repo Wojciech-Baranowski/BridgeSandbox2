@@ -4,13 +4,12 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static gameLogic.game.GameConstants.FIGURE_NUMBER;
-import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 import static gameLogic.card.Color.*;
 import static gameLogic.card.Figure.*;
+import static gameLogic.game.GameConstants.FIGURE_NUMBER;
+import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 import static java.lang.Math.min;
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNull;
 
 public class DeckTest {
 

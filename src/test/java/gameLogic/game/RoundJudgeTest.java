@@ -1,15 +1,15 @@
 package gameLogic.game;
 
-import gameLogic.player.Player;
 import gameLogic.card.Card;
 import gameLogic.card.Color;
 import gameLogic.card.Deck;
+import gameLogic.player.Player;
 import org.junit.Test;
 
 import java.util.List;
 
-import static gameLogic.player.Player.*;
 import static gameLogic.card.Color.*;
+import static gameLogic.player.Player.*;
 import static org.junit.Assert.assertEquals;
 
 public class RoundJudgeTest {

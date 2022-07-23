@@ -1,19 +1,19 @@
 package gameLogic.game;
 
-import gameLogic.player.Player;
 import gameLogic.card.Card;
 import gameLogic.card.Color;
 import gameLogic.card.Deck;
+import gameLogic.player.Player;
 import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static gameLogic.player.Player.*;
 import static gameLogic.card.Color.DIAMOND;
 import static gameLogic.card.Color.HEART;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
+import static gameLogic.player.Player.*;
 import static org.junit.Assert.*;
 
 public class GameTest {

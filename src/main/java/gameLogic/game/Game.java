@@ -5,7 +5,6 @@ import gameLogic.card.Card;
 import gameLogic.card.Color;
 import gameLogic.card.Deck;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -14,18 +13,22 @@ import java.util.List;
 import static gameLogic.Player.N;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
-@Getter
-@Setter
 public class Game {
 
     private final MoveValidator moveValidator;
     private final RoundJudge roundJudge;
     private final Deck deck;
+    @Getter
     private List<Card>[] cards;
+    @Getter
     private int[] points;
+    @Getter
     private Color atu;
+    @Getter
     private Player currentPlayer;
+    @Getter
     private Player startingPlayer;
+    @Getter
     private List<Card> playedCards;
 
     public Game() {
@@ -36,15 +39,15 @@ public class Game {
 
     public void initializeGame(Color atu, int numberOfCardsPerPlayer) {
         List<Card>[] cards = deck.dealCards(numberOfCardsPerPlayer);
-        initializeGame(atu, cards);
+        initializeGame(atu, cards, N);
     }
 
-    public void initializeGame(Color atu, List<Card>[] cards) {
+    public void initializeGame(Color atu, List<Card>[] cards, Player startingPlayer) {
         this.cards = cards;
         this.points = new int[PLAYER_NUMBER / 2];
         this.atu = atu;
-        this.currentPlayer = N;
-        this.startingPlayer = N;
+        this.currentPlayer = startingPlayer;
+        this.startingPlayer = startingPlayer;
         this.playedCards = new LinkedList<>();
         Arrays.fill(points, 0);
     }

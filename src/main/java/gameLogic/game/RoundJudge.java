@@ -8,7 +8,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
-import static gameLogic.utils.ModuloOperator.modAdd;
 
 public class RoundJudge {
 
@@ -51,7 +50,7 @@ public class RoundJudge {
     private int getIndexOfWinningPlayer(List<Card> playedCards, Player startingPlayer, Card winningCard) {
         int indexOfWinningCard = playedCards.indexOf(winningCard);
         int indexOfStartingPlayer = startingPlayer.ordinal();
-        return modAdd(indexOfWinningCard, indexOfStartingPlayer, PLAYER_NUMBER);
+        return (indexOfWinningCard + indexOfStartingPlayer) % PLAYER_NUMBER;
     }
 
 }

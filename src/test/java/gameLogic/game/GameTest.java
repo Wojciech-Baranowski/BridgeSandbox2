@@ -27,9 +27,8 @@ public class GameTest {
         List<Card>[] inputCards = deck.dealCards(numberOfCardsPerPlayer);
         Color inputAtu = DIAMOND;
         //when
-        inputGame.initializeGame(inputAtu, inputCards);
+        inputGame.initializeGame(inputAtu, inputCards, N);
         //then
-        assertSame(Deck.getDeck(), inputGame.getDeck());
         assertSame(inputCards, inputGame.getCards());
         assertNotNull(inputGame.getPoints());
         assertEquals(PLAYER_NUMBER / 2, inputGame.getPoints().length);
@@ -52,17 +51,16 @@ public class GameTest {
         Game inputGame = new Game();
         Deck deck = Deck.getDeck();
         Color inputAtu = HEART;
-        inputGame.initializeGame(inputAtu, 1);
         List<Card>[] inputCards = new List[PLAYER_NUMBER];
         inputCards[0] = Stream.of(5, 15, 38).map(deck::getCard).toList();
         inputCards[1] = Stream.of(14, 26, 35).map(deck::getCard).toList();
         inputCards[2] = Stream.of(10, 19, 44).map(deck::getCard).toList();
         inputCards[3] = Stream.of(27, 41, 50).map(deck::getCard).toList();
-        inputGame.setCards(inputCards);
+        inputGame.initializeGame(inputAtu, inputCards, N);
         int size = 15;
         List<Card> inputCardList = Stream.of(15, 14, 19, 27, 50, 15, 16, 38, 26, 10, 44, 5, 35, 10, 41).map(deck::getCard).toList();
         Card[] inputCard = new Card[size];
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             inputCard[i] = inputCardList.get(i);
         }
         Game[] outputCheckGames = new Game[size];
@@ -177,22 +175,22 @@ public class GameTest {
         outputCheckPlayedCards[13] = Stream.of(5, 35, 10).map(deck::getCard).toList();
         outputCheckPlayedCards[14] = new LinkedList<>();
 
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             //when
             inputGame.playCard(inputCard[i]);
             //then
-            for(int j = 0; j < PLAYER_NUMBER; j++) {
-                for(int k = 0; k < inputGame.getCards()[j].size(); k++) {
+            for (int j = 0; j < PLAYER_NUMBER; j++) {
+                for (int k = 0; k < inputGame.getCards()[j].size(); k++) {
                     assertSame(outputCheckCards[i][j].get(k), inputGame.getCards()[j].get(k));
                 }
             }
-            for(int j = 0; j < PLAYER_NUMBER / 2; j++) {
+            for (int j = 0; j < PLAYER_NUMBER / 2; j++) {
                 assertEquals(outputCheckPoints[i][j], inputGame.getPoints()[j]);
             }
             assertEquals(outputCheckCurrentPlayer[i], inputGame.getCurrentPlayer());
             assertEquals(outputCheckStartingPlayer[i], inputGame.getStartingPlayer());
             assertEquals(outputCheckPlayedCards[i].size(), inputGame.getPlayedCards().size());
-            for(int j = 0; j < outputCheckPlayedCards[i].size(); j++) {
+            for (int j = 0; j < outputCheckPlayedCards[i].size(); j++) {
                 assertSame(outputCheckPlayedCards[i].get(j), inputGame.getPlayedCards().get(j));
             }
         }

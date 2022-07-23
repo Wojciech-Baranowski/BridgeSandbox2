@@ -11,7 +11,7 @@ public class MoveValidator {
     }
 
     boolean isMoveValid(List<Card> currentPlayerCards, Color colorOfFirstCardPlayed, Card card) {
-        return isCardInPlayerHand(currentPlayerCards, card)
+        return  isCardInPlayerHand(currentPlayerCards, card)
                 && isCardInSuitableColor(currentPlayerCards, colorOfFirstCardPlayed, card);
     }
 
@@ -20,8 +20,13 @@ public class MoveValidator {
     }
 
     private boolean isCardInSuitableColor(List<Card> currentPlayerCards, Color colorOfFirstCardPlayed, Card card) {
-        return isNoneOfPlayerCardsStartingCardColor(currentPlayerCards, colorOfFirstCardPlayed)
-                || isCardInFirstCardColor(colorOfFirstCardPlayed, card);
+        return isCardFirstInRound(colorOfFirstCardPlayed)
+                || isNoneOfPlayerCardsStartingCardColor(currentPlayerCards, colorOfFirstCardPlayed)
+                || isCardInStartingCardColor(colorOfFirstCardPlayed, card);
+    }
+
+    private boolean isCardFirstInRound(Color colorOfFirstCardPlayed) {
+        return colorOfFirstCardPlayed == null;
     }
 
     private boolean isNoneOfPlayerCardsStartingCardColor(List<Card> currentPlayerCards, Color colorOfFirstCardPlayed) {
@@ -30,7 +35,7 @@ public class MoveValidator {
                 .noneMatch(c -> c.equals(colorOfFirstCardPlayed));
     }
 
-    private boolean isCardInFirstCardColor(Color colorOfFirstCardPlayed, Card card) {
+    private boolean isCardInStartingCardColor(Color colorOfFirstCardPlayed, Card card) {
         return card.getColor().equals(colorOfFirstCardPlayed);
     }
 

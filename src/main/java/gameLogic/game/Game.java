@@ -20,6 +20,7 @@ import static gameLogic.Player.N;
 @Setter
 public class Game {
 
+    private final MoveValidator moveValidator;
     private final Deck deck;
     private List<Card>[] cards;
     private int[] points;
@@ -30,6 +31,7 @@ public class Game {
 
     public Game() {
         deck = Deck.getDeck();
+        this.moveValidator = new MoveValidator(this);
     }
 
     public void initializeGame(Color atu, int numberOfCardsPerPlayer) {
@@ -61,21 +63,6 @@ public class Game {
         currentPlayer = startingPlayer = chooseWinningPlayer();
         points[currentPlayer.ordinal() % (PLAYER_NUMBER / 2)]++;
         playedCards.clear();
-    }
-
-    private boolean isMoveValid(Card card) {
-        List<Card> currentPlayerCards = cards[currentPlayer.ordinal()];
-        Color colorOfFirstCardPlayed = playedCards.get(startingPlayer.ordinal()).getColor();
-        if (!currentPlayerCards.contains(card)) {
-            return false;
-        }
-        boolean noneOfPlayerCardsMatchesStartingCardColor = currentPlayerCards.stream()
-                .map(Card::getColor)
-                .noneMatch(c -> c.equals(colorOfFirstCardPlayed));
-        if (noneOfPlayerCardsMatchesStartingCardColor) {
-            return true;
-        }
-        return card.getColor().equals(colorOfFirstCardPlayed);
     }
 
     private Player chooseWinningPlayer() {

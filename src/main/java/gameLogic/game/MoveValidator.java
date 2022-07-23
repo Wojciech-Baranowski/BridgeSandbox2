@@ -7,15 +7,8 @@ import java.util.List;
 
 public class MoveValidator {
 
-    private final Game game;
-
-    MoveValidator(Game game) {
-        this.game = game;
-    }
-
-    boolean isMoveValid(Card card) {
-        List<Card> currentPlayerCards = game.getCards()[game.getCurrentPlayer().ordinal()];
-        Color colorOfFirstCardPlayed = game.getPlayedCards().get(game.getStartingPlayer().ordinal()).getColor();
+    MoveValidator(){}
+    boolean isMoveValid(List<Card> currentPlayerCards, Color colorOfFirstCardPlayed, Card card) {
         return isCardInPlayerHand(currentPlayerCards, card)
                 && isCardInSuitableColor(currentPlayerCards, colorOfFirstCardPlayed, card);
     }

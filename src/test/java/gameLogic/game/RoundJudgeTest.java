@@ -29,7 +29,7 @@ public class RoundJudgeTest {
         inputPlayedCardsIds[6] = List.of(4, 25, 37, 1);
         inputPlayedCardsIds[7] = List.of(14, 22, 19, 13);
         List<Card>[] inputPlayedCards = new List[size];
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             inputPlayedCards[i] = inputPlayedCardsIds[i].stream().map(deck::getCard).toList();
         }
         Player[] inputStartingPlayers = new Player[]{N, N, N, N, N, N, N, E};
@@ -38,11 +38,11 @@ public class RoundJudgeTest {
         Player[] outputCheck = new Player[]{E, W, E, W, S, W, N, S};
         Player[] output = new Player[size];
         //when
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             output[i] = roundJudge.chooseWinningPlayer(inputPlayedCards[i], inputStartingPlayers[i], inputAtu[i]);
         }
         //then
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             assertEquals(outputCheck[i], output[i]);
         }
     }

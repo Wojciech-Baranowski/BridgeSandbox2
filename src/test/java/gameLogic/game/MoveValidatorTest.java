@@ -21,18 +21,18 @@ public class MoveValidatorTest {
         Color[] inputColorsOfFirstCardPlayed = new Color[]{SPADE, HEART, SPADE, CLUB};
         int[] inputCardIds = {40, 15, 43, 30};
         Card[] inputCards = new Card[inputCardIds.length];
-        for(int i = 0; i < inputCardIds.length; i++) {
+        for (int i = 0; i < inputCardIds.length; i++) {
             inputCards[i] = deck.getCard(inputCardIds[i]);
         }
         MoveValidator moveValidator = new MoveValidator();
         boolean[] outputCheck = {true, true, false, false};
         boolean[] output = new boolean[inputCards.length];
         //when
-        for(int i = 0; i < inputCardIds.length; i++) {
+        for (int i = 0; i < inputCardIds.length; i++) {
             output[i] = moveValidator.isMoveValid(inputPlayerCards, inputColorsOfFirstCardPlayed[i], inputCards[i]);
         }
         //then
-        for(int i = 0; i < inputCardIds.length; i++) {
+        for (int i = 0; i < inputCardIds.length; i++) {
             assertEquals(outputCheck[i], output[i]);
         }
     }

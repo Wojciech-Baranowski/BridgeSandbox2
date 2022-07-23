@@ -1,4 +1,4 @@
-package gameLogic;
+package gameLogic.utils;
 
 public class ModuloOperator {
 

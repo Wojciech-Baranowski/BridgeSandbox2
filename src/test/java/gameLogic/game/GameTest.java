@@ -1,13 +1,14 @@
-package gameLogic;
+package gameLogic.game;
 
 import gameLogic.card.Card;
 import gameLogic.card.Color;
 import gameLogic.card.Deck;
+import gameLogic.game.Game;
 import org.junit.Test;
 
 import java.util.List;
 
-import static gameLogic.GameConstants.PLAYER_NUMBER;
+import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 import static gameLogic.Player.N;
 import static gameLogic.card.Color.DIAMOND;
 import static org.junit.Assert.*;

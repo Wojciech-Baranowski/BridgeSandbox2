@@ -1,13 +1,11 @@
 package gameLogic.card;
 
-import engine.assets.Assets;
-import engine.assets.AssetsBean;
 import org.junit.Test;
 
 import java.util.List;
 
-import static gameLogic.GameConstants.FIGURE_NUMBER;
-import static gameLogic.GameConstants.PLAYER_NUMBER;
+import static gameLogic.game.GameConstants.FIGURE_NUMBER;
+import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 import static gameLogic.card.Color.*;
 import static gameLogic.card.Figure.*;
 import static java.lang.Math.min;

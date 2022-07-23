@@ -16,7 +16,7 @@ public enum Player {
         this.symbol = symbol;
     }
 
-    Player nextPlayer() {
+    public Player nextPlayer() {
         return switch(this) {
             case N -> E;
             case E -> S;

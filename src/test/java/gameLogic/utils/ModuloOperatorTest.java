@@ -1,9 +1,9 @@
-package gameLogic;
+package gameLogic.utils;
 
 import org.junit.Test;
 
-import static gameLogic.ModuloOperator.modAdd;
-import static gameLogic.ModuloOperator.modSub;
+import static gameLogic.utils.ModuloOperator.modAdd;
+import static gameLogic.utils.ModuloOperator.modSub;
 import static org.junit.Assert.assertEquals;
 
 public class ModuloOperatorTest {

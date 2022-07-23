@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import static gameLogic.GameConstants.*;
+import static gameLogic.game.GameConstants.*;
 import static java.lang.Math.min;
 
 @Getter

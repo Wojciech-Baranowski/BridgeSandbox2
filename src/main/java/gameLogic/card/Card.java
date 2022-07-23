@@ -2,7 +2,7 @@ package gameLogic.card;
 
 import lombok.Getter;
 
-import static gameLogic.GameConstants.FIGURE_NUMBER;
+import static gameLogic.game.GameConstants.FIGURE_NUMBER;
 
 @Getter
 public class Card {

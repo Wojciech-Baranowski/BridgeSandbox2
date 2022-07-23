@@ -1,4 +1,4 @@
-package gameLogic;
+package gameLogic.game;
 
 public class GameConstants {
 

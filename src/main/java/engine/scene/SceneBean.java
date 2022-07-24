@@ -47,14 +47,14 @@ public class SceneBean implements Scene {
     }
 
     private void updateTopObject() {
+        if(currentObjectCollection != null) {
+            currentObjectCollection.remove(HoverMark.getHoverMark());
+        }
         Visual topObject = getTopObject();
         if (topObject instanceof Interactive) {
             ((Interactive) topObject).update();
             HoverMark.getHoverMark().fitHoverMarkToDrawable(topObject.getDrawable());
             currentObjectCollection.setHigherThan(HoverMark.getHoverMark(), topObject);
-        }
-        else if (currentObjectCollection != null) {
-            currentObjectCollection.remove(HoverMark.getHoverMark());
         }
     }
 

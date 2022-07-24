@@ -1,5 +1,6 @@
 package engine.main;
 
+import engine.input.InputBean;
 import engine.scene.SceneBean;
 
 public class Engine {
@@ -11,6 +12,7 @@ public class Engine {
     }
 
     public void initializeListeners() {
+        InputBean.getInput().initializeListeners();
         SceneBean.getScene().initializeListeners();
     }
 

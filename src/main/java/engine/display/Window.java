@@ -12,7 +12,7 @@ import java.util.EventListener;
 public class Window {
 
     private final BufferStrategy bufferStrategy;
-    private final BufferedImage windowImage;
+    private BufferedImage windowImage;
     private final Canvas canvas;
     private final Graphics2D graphics2D;
     private static final int x = 0;

@@ -3,7 +3,6 @@ package engine.main;
 import engine.assets.AssetsBean;
 import engine.display.DisplayBean;
 import engine.input.InputBean;
-import engine.scene.SceneBean;
 
 public class BeanConfig {
 
@@ -14,9 +13,6 @@ public class BeanConfig {
         AssetsBean.getAssets();
         DisplayBean.getDisplay();
         InputBean.getInput();
-        SceneBean.getScene();
-        InputBean.getInput().initializeListeners();
-        SceneBean.getScene().initializeListeners();
     }
 
 }

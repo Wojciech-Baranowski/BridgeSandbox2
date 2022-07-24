@@ -1,15 +1,31 @@
 package engine.main;
 
+import engine.scene.SceneBean;
+
 public class Engine {
 
-    public static void initializeEngine() {
+    private static Engine engine;
+
+    public void initializeEngine() {
         new BeanConfig().buildBeans();
     }
 
-    private Engine(){}
+    public void initializeListeners() {
+        SceneBean.getScene().initializeListeners();
+    }
+
+    public static Engine getEngine() {
+        if (engine == null) {
+            engine = new Engine();
+        }
+        return engine;
+    }
+
+    private Engine() {
+    }
 
     public static void main(String[] args) {
-        initializeEngine();
+        new Engine().initializeEngine();
     }
 
 }

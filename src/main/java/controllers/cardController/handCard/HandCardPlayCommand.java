@@ -26,6 +26,7 @@ public class HandCardPlayCommand implements Command {
             cardController.repositionPlayerCards(game.getCurrentPlayer());
             cardController.addPlayedCard(card, game.getCurrentPlayer());
             game.playCard(card);
+            cardController.updateOverlays();
             if (game.hasRoundEnded()) {
                 cardController.removePlayedCards();
                 game.summarizeRound();

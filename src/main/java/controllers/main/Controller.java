@@ -66,6 +66,7 @@ public class Controller {
         assets.addColor("yellow", 0xFFFFCE00);
         assets.addColor("gray", 0xFFCBCBCB);
         assets.addColor("darkGray", 0xFF989898);
+        assets.addColor("transparentGray", 0x44444444);
     }
 
     private void initializeFonts() {
@@ -92,6 +93,7 @@ public class Controller {
         backgroundController = getBackgroundController();
         cardController = getCardController();
         cardController.initializeHandCards();
+        cardController.updateOverlays();
     }
 
     public static void main(String[] args) {

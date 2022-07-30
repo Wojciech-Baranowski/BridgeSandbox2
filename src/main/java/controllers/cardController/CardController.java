@@ -36,6 +36,10 @@ public class CardController {
         handCards.repositionPlayerCards(player);
     }
 
+    public void updateOverlays() {
+        handCards.updateOverlays();
+    }
+
     public void addPlayedCard(Card card, Player player) {
         playedCards.addPlayedCard(card, player);
     }

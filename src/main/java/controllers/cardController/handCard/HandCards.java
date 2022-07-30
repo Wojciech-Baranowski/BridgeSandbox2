@@ -54,6 +54,18 @@ public class HandCards {
         }
     }
 
+    public void updateOverlays() {
+        for(int i = 0; i < PLAYER_NUMBER; i++) {
+            for(HandCard handCard : handCards[i]) {
+                if(getGame().isMoveValid(handCard.getCard())) {
+                    handCard.deactivateOverlay();
+                } else {
+                    handCard.activateOverlay();
+                }
+            }
+        }
+    }
+
     private void initializeHandCards(int handId) {
         List<Card> playerCards = getGame().getCards()[handId];
         playerCards.sort(cardOrder);

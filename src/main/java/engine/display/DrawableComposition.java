@@ -39,7 +39,9 @@ public class DrawableComposition implements Drawable {
         int endY = startY + drawable.getH();
         for (int x = startX; x < endX; x++) {
             for (int y = startY; y < endY; y++) {
-                p[x + y * w] = drawable.getP()[x - startX + (y - startY) * drawable.getW()];
+                if(drawable.getP()[x - startX + (y - startY) * drawable.getW()] != Color.getTransparentColorValue()) {
+                    p[x + y * w] = drawable.getP()[x - startX + (y - startY) * drawable.getW()];
+                }
             }
         }
     }

@@ -52,13 +52,22 @@ public class Game {
         Arrays.fill(points, 0);
     }
 
-    public void playCard(Card card) {
+    public boolean isMoveValid(Card card) {
         List<Card> playerCards = new LinkedList<>(cards[currentPlayer.ordinal()]);
         Color colorOfFirstCardPlayed = playedCards.isEmpty() ? null : playedCards.get(0).getColor();
-        if (moveValidator.isMoveValid(playerCards, colorOfFirstCardPlayed, card)) {
+        return moveValidator.isMoveValid(playerCards, colorOfFirstCardPlayed, card);
+    }
+
+    public boolean hasRoundEnded() {
+        return playedCards.size() == PLAYER_NUMBER;
+    }
+
+    public void playCard(Card card) {
+        List<Card> playerCards = new LinkedList<>(cards[currentPlayer.ordinal()]);
+        if (isMoveValid(card)) {
             makeMove(playerCards, card);
         }
-        if (playedCards.size() == PLAYER_NUMBER) {
+        if (hasRoundEnded()) {
             summarizeRound();
         }
     }

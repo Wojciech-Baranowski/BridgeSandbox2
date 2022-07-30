@@ -1,4 +1,4 @@
-package controllers.background;
+package controllers.backgroundController;
 
 import engine.display.DisplayBean;
 import engine.display.DrawableFactory;

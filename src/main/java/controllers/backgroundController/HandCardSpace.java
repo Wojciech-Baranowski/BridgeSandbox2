@@ -1,4 +1,4 @@
-package controllers.background;
+package controllers.backgroundController;
 
 import engine.common.Visual;
 import engine.display.Drawable;

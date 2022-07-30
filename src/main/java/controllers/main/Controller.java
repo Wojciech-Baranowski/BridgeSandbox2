@@ -1,39 +1,47 @@
 package controllers.main;
 
+import controllers.main.assets.CardDrawables;
 import engine.assets.Assets;
 import engine.assets.AssetsBean;
 import engine.assets.font.Font;
 import engine.display.Display;
 import engine.display.DisplayBean;
+import engine.display.Drawable;
 import engine.scene.Scene;
 import engine.scene.SceneBean;
-import controllers.background.BackgroundController;
+import controllers.backgroundController.BackgroundController;
+import gameLogic.game.Game;
 
-public class View {
+import static gameLogic.game.GameConstants.DECK_SIZE;
 
-    private static View view;
+public class Controller {
+
+    private static Controller controller;
     private final Assets assets;
     private final Display display;
     private final Scene scene;
 
-    private View() {
+    private Game game;
+
+    private Controller() {
         assets = AssetsBean.getAssets();
         display = DisplayBean.getDisplay();
         scene = SceneBean.getScene();
+        game = new Game();
     }
 
-    public static View getView() {
-        if (view == null) {
-            view = new View();
+    public static Controller getController() {
+        if (controller == null) {
+            controller = new Controller();
         }
-        return view;
+        return controller;
     }
 
-    public void initializeView() {
+    public void initializeController() {
         initializeColors();
         initializeFonts();
         initializeScenes();
-        initializeGameObjects();
+        initializeObjects();
         scene.update();
     }
 
@@ -59,13 +67,15 @@ public class View {
         scene.addCollection("game");
     }
 
-    private void initializeGameObjects() {
+    private void initializeObjects() {
         scene.switchCollection("game");
+        CardDrawables.getCardDrawable(0);
+
         new BackgroundController();
     }
 
     public static void main(String[] args) {
-        new View().initializeView();
+        new Controller().initializeController();
     }
 
 }

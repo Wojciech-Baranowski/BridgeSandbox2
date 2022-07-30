@@ -25,4 +25,8 @@ public enum Figure {
         this.symbol = symbol;
     }
 
+    public String getSymbolString() {
+        return String.valueOf(symbol);
+    }
+
 }

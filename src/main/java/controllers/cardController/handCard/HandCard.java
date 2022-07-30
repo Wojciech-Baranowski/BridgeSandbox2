@@ -5,7 +5,6 @@ import engine.common.Command;
 import engine.display.Drawable;
 import engine.input.inputCombination.InputCombination;
 import gameLogic.card.Card;
-import gameLogic.player.Player;
 import lombok.Getter;
 
 import static controllers.main.assets.CardDrawables.getCardDrawable;
@@ -18,12 +17,9 @@ public class HandCard {
     private final SimpleButton button;
     @Getter
     private final Card card;
-    @Getter
-    private final Player owner;
 
-    HandCard(Card card, Player owner) {
+    HandCard(Card card) {
         this.card = card;
-        this.owner = owner;
         Drawable drawable = getCardDrawable(card.getId());
         InputCombination activationCombination = getInput().getInputCombinationFactory().makeLmbCombination();
         Command command = new HandCardPlayCommand(this);

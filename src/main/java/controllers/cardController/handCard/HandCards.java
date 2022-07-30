@@ -47,7 +47,7 @@ public class HandCards {
 
     public void repositionPlayerCards(Player player) {
         List<HandCard> playerCards = handCards[player.ordinal()];
-        for(int i = 0; i < playerCards.size(); i++) {
+        for (int i = 0; i < playerCards.size(); i++) {
             int x = xPos[player.ordinal()][i];
             int y = yPos[player.ordinal()][i];
             playerCards.get(i).move(x, y);
@@ -64,7 +64,7 @@ public class HandCards {
     }
 
     private void initializeHandCard(List<Card> playerCards, HandCardSpace handCardSpace, int handId, int cardInHandId) {
-        HandCard handCard = new HandCard(playerCards.get(cardInHandId), Player.values()[handId]);
+        HandCard handCard = new HandCard(playerCards.get(cardInHandId));
         handCard.move(xPos[handId][cardInHandId], yPos[handId][cardInHandId]);
         handCards[handId].add(handCard);
         getScene().addObjectHigherThan(handCard.getButton(), (cardInHandId == 0)

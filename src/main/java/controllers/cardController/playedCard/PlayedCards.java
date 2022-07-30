@@ -1,6 +1,5 @@
 package controllers.cardController.playedCard;
 
-import controllers.backgroundController.HandCardSpace;
 import controllers.backgroundController.PlayedCardSpace;
 import engine.display.Drawable;
 import gameLogic.card.Card;
@@ -36,7 +35,7 @@ public class PlayedCards {
     }
 
     public void removePlayedCards() {
-        for(PlayedCard playedCard : playedCards) {
+        for (PlayedCard playedCard : playedCards) {
             getScene().removeObject(playedCard.getDrawable());
         }
         playedCards.clear();

@@ -53,7 +53,6 @@ public class Controller {
         initializeAssets();
         initializeGame();
         initializeControllers();
-        cardController.initializeHandCards();
         scene.update();
     }
 
@@ -92,6 +91,7 @@ public class Controller {
     private void initializeControllers() {
         backgroundController = getBackgroundController();
         cardController = getCardController();
+        cardController.initializeHandCards();
     }
 
     public static void main(String[] args) {

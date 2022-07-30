@@ -13,10 +13,10 @@ public class TableCenter {
 
     TableCenter(DrawableFactory drawableFactory, Drawable table) {
         tableCenter = drawableFactory.makeFramedRectangle(
-                table.getX() + 286,
-                table.getY() + 123,
-                263,
-                217,
+                table.getX() + 291,
+                table.getY() + 113,
+                253,
+                239,
                 2,
                 "green",
                 "lightBlue");

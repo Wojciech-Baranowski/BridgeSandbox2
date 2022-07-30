@@ -1,18 +1,22 @@
 package controllers.main;
 
+import controllers.backgroundController.BackgroundController;
+import controllers.cardController.CardController;
 import controllers.main.assets.CardDrawables;
 import engine.assets.Assets;
 import engine.assets.AssetsBean;
 import engine.assets.font.Font;
 import engine.display.Display;
 import engine.display.DisplayBean;
-import engine.display.Drawable;
 import engine.scene.Scene;
 import engine.scene.SceneBean;
-import controllers.backgroundController.BackgroundController;
+import gameLogic.card.Color;
 import gameLogic.game.Game;
 
-import static gameLogic.game.GameConstants.DECK_SIZE;
+import java.util.Random;
+
+import static gameLogic.game.GameConstants.MAX_CARDS_PER_PLAYER;
+import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
 public class Controller {
 
@@ -20,6 +24,9 @@ public class Controller {
     private final Assets assets;
     private final Display display;
     private final Scene scene;
+    private CardDrawables cardDrawables;
+    private BackgroundController backgroundController;
+    private CardController cardController;
 
     private Game game;
 
@@ -41,7 +48,9 @@ public class Controller {
         initializeColors();
         initializeFonts();
         initializeScenes();
-        initializeObjects();
+        initializeAssets();
+        initializeGame();
+        initializeControllers();
         scene.update();
     }
 
@@ -65,13 +74,21 @@ public class Controller {
 
     private void initializeScenes() {
         scene.addCollection("game");
+        scene.switchCollection("game");
     }
 
-    private void initializeObjects() {
-        scene.switchCollection("game");
-        CardDrawables.getCardDrawable(0);
+    private void initializeAssets() {
+        cardDrawables = CardDrawables.getCardDrawables();
+    }
 
-        new BackgroundController();
+    private void initializeGame() {
+        Color atu = Color.values()[new Random().nextInt(PLAYER_NUMBER)];
+        game.initializeGame(atu, MAX_CARDS_PER_PLAYER);
+    }
+
+    private void initializeControllers() {
+        backgroundController = new BackgroundController();
+        cardController = new CardController(game, backgroundController.getHandCardSpace());
     }
 
     public static void main(String[] args) {

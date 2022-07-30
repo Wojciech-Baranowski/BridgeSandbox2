@@ -17,36 +17,36 @@ public class HandCardSpace {
         handCardSlots = new Drawable[PLAYER_NUMBER];
 
         handCardSlots[0] = drawableFactory.makeFramedRectangle(
-                287 + table.getX(),
-                10 + table.getY(),
-                261,
+                281 + table.getX(),
+                9 + table.getY(),
+                273,
                 95,
                 2,
                 "darkGreen",
                 "lightBlue");
 
         handCardSlots[1] = drawableFactory.makeFramedRectangle(
-                564 + table.getX(),
+                553 + table.getX(),
                 185 + table.getY(),
-                261,
+                273,
                 95,
                 2,
                 "darkGreen",
                 "lightBlue");
 
         handCardSlots[2] = drawableFactory.makeFramedRectangle(
-                287 + table.getX(),
-                360 + table.getY(),
-                261,
+                281 + table.getX(),
+                361 + table.getY(),
+                273,
                 95,
                 2,
                 "darkGreen",
                 "lightBlue");
 
         handCardSlots[3] = drawableFactory.makeFramedRectangle(
-                10 + table.getX(),
+                9 + table.getX(),
                 185 + table.getY(),
-                261,
+                273,
                 95,
                 2,
                 "darkGreen",

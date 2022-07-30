@@ -2,13 +2,16 @@ package controllers.backgroundController;
 
 import engine.display.DisplayBean;
 import engine.display.DrawableFactory;
+import lombok.Getter;
 
 public class BackgroundController {
     private static final DrawableFactory drawableFactory = DisplayBean.getDisplay().getDrawableFactory();
     private final Background background;
     private final Table table;
     private final TableCenter tableCenter;
+    @Getter
     private final PlayedCardSpace playedCardSpace;
+    @Getter
     private HandCardSpace handCardSpace;
 
 

@@ -13,7 +13,7 @@ import static gameLogic.game.GameConstants.FIGURE_NUMBER;
 public class CardDrawables {
 
     private final static DrawableFactory drawableFactory = getDisplay().getDrawableFactory();
-    private static CardDrawables visualDeck;
+    private static CardDrawables cardDrawables;
     private final Drawable[] cards;
 
     private CardDrawables() {
@@ -23,11 +23,26 @@ public class CardDrawables {
         }
     }
 
-    public static Drawable getCardDrawable(int cardId) {
-        if (visualDeck == null) {
-            visualDeck = new CardDrawables();
+    public static CardDrawables getCardDrawables() {
+        if (cardDrawables == null) {
+            cardDrawables = new CardDrawables();
         }
-        return visualDeck.cards[cardId];
+        return cardDrawables;
+    }
+
+    public static Drawable getCardDrawable(int cardId) {
+        if (cardDrawables == null) {
+            cardDrawables = new CardDrawables();
+        }
+        return cardDrawables.cards[cardId];
+    }
+
+    public static Drawable getCardDrawable(Figure figure, Color color) {
+        if (cardDrawables == null) {
+            cardDrawables = new CardDrawables();
+        }
+        int cardId = cardDrawables.getCardId(figure, color);
+        return cardDrawables.cards[cardId];
     }
 
     private void initializeDrawable(int cardId) {
@@ -36,11 +51,11 @@ public class CardDrawables {
         String color = getCardColorNameFromCardId(cardId);
 
         cards[cardId] =
-                drawableFactory.makeFramedRectangle(0, 0, 69, 95, 2, "white", color);
-        Drawable upperLeftCardFigure = drawableFactory.makeText(figureSymbol,4, 4, "HBE24", color);
-        Drawable upperLeftCardColor = drawableFactory.makeText(colorSymbol,4, 22, "HBE24",  color);
-        Drawable bottomRightCardColor = drawableFactory.makeText(colorSymbol,51, 48, "HBE24",  color);
-        Drawable bottomRightCardFigure = drawableFactory.makeText(figureSymbol,51, 69, "HBE24",  color);
+                drawableFactory.makeFramedRectangle(0, 0, 65, 91, 2, "white", color);
+        Drawable upperLeftCardFigure = drawableFactory.makeText(figureSymbol,2, 4, "HBE24", color);
+        Drawable upperLeftCardColor = drawableFactory.makeText(colorSymbol,2, 22, "HBE24",  color);
+        Drawable bottomRightCardColor = drawableFactory.makeText(colorSymbol,49, 44, "HBE24",  color);
+        Drawable bottomRightCardFigure = drawableFactory.makeText(figureSymbol,49, 65, "HBE24",  color);
 
         cards[cardId] = new DrawableComposition(cards[cardId], upperLeftCardFigure);
         cards[cardId] = new DrawableComposition(cards[cardId], upperLeftCardColor);
@@ -50,6 +65,10 @@ public class CardDrawables {
 
     private String getCardColorNameFromCardId(int cardId) {
         return cardId < FIGURE_NUMBER || cardId >= FIGURE_NUMBER * 3 ? "black" : "red";
+    }
+
+    private int getCardId(Figure figure, Color color) {
+        return figure.ordinal() + color.ordinal() * FIGURE_NUMBER;
     }
 
 }

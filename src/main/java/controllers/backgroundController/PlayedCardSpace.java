@@ -17,8 +17,8 @@ public class PlayedCardSpace {
         playedCardSlots = new Drawable[PLAYER_NUMBER];
 
         playedCardSlots[0] = drawableFactory.makeFramedRectangle(
-                97 + tableCenter.getX(),
-                9 + tableCenter.getY(),
+                92 + tableCenter.getX(),
+                14 + tableCenter.getY(),
                 69,
                 95,
                 2,
@@ -26,8 +26,8 @@ public class PlayedCardSpace {
                 "lightBlue");
 
         playedCardSlots[1] = drawableFactory.makeFramedRectangle(
-                175 + tableCenter.getX(),
-                62 + tableCenter.getY(),
+                170 + tableCenter.getX(),
+                72 + tableCenter.getY(),
                 69,
                 95,
                 2,
@@ -35,8 +35,8 @@ public class PlayedCardSpace {
                 "lightBlue");
 
         playedCardSlots[2] = drawableFactory.makeFramedRectangle(
-                97 + tableCenter.getX(),
-                113 + tableCenter.getY(),
+                92 + tableCenter.getX(),
+                130 + tableCenter.getY(),
                 69,
                 95,
                 2,
@@ -44,8 +44,8 @@ public class PlayedCardSpace {
                 "lightBlue");
 
         playedCardSlots[3] = drawableFactory.makeFramedRectangle(
-                20 + tableCenter.getX(),
-                63 + tableCenter.getY(),
+                14 + tableCenter.getX(),
+                72 + tableCenter.getY(),
                 69,
                 95,
                 2,

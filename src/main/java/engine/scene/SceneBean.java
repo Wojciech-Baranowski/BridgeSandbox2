@@ -66,12 +66,12 @@ public class SceneBean implements Scene {
 
     @Override
     public void addObjectLowerThan(Visual inserted, Visual contained) {
-        currentObjectCollection.setLowerThan(inserted, contained);
+        currentObjectCollection.setLowerThan(inserted.getDrawable(), contained.getDrawable());
     }
 
     @Override
     public void addObjectHigherThan(Visual inserted, Visual contained) {
-        currentObjectCollection.setHigherThan(inserted, contained);
+        currentObjectCollection.setHigherThan(inserted.getDrawable(), contained.getDrawable());
     }
 
     @Override

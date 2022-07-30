@@ -1,5 +1,5 @@
 import engine.main.Engine;
-import view.main.View;
+import controllers.main.View;
 
 public class Main {
 

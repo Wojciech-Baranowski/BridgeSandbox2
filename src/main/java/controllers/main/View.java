@@ -1,4 +1,4 @@
-package view.main;
+package controllers.main;
 
 import engine.assets.Assets;
 import engine.assets.AssetsBean;
@@ -7,7 +7,7 @@ import engine.display.Display;
 import engine.display.DisplayBean;
 import engine.scene.Scene;
 import engine.scene.SceneBean;
-import view.background.Background;
+import controllers.background.BackgroundController;
 
 public class View {
 
@@ -61,7 +61,7 @@ public class View {
 
     private void initializeGameObjects() {
         scene.switchCollection("game");
-        new Background();
+        new BackgroundController();
     }
 
     public static void main(String[] args) {

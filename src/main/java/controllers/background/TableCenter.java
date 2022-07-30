@@ -1,6 +1,5 @@
 package controllers.background;
 
-import engine.common.Visual;
 import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import lombok.Getter;

@@ -4,7 +4,9 @@ import controllers.backgroundController.HandCardSpace;
 import engine.display.Drawable;
 import gameLogic.card.Card;
 import gameLogic.player.Player;
+import lombok.Setter;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,9 +22,13 @@ public class HandCards {
     private final int[][] yPos;
     private final List<HandCard>[] handCards;
 
+    @Setter
+    private Comparator<Card> cardOrder;
+
     public HandCards() {
         xPos = new int[PLAYER_NUMBER][FIGURE_NUMBER];
         yPos = new int[PLAYER_NUMBER][FIGURE_NUMBER];
+        cardOrder = Comparator.comparingInt(Card::getId);
         initializePositions();
         handCards = new List[PLAYER_NUMBER];
     }
@@ -48,18 +54,22 @@ public class HandCards {
         }
     }
 
-    private void initializeHandCards(int i) {
-        Player player = Player.values()[i];
-        List<Card> playerCards = getGame().getCards()[i];
+    private void initializeHandCards(int handId) {
+        List<Card> playerCards = getGame().getCards()[handId];
+        playerCards.sort(cardOrder);
         HandCardSpace handCardSpace = getBackgroundController().getHandCardSpace();
         for (int j = 0; j < playerCards.size(); j++) {
-            HandCard handCard = new HandCard(playerCards.get(j), player);
-            handCard.move(xPos[i][j], yPos[i][j]);
-            handCards[i].add(handCard);
-            getScene().addObjectHigherThan(handCard.getButton(), (j == 0)
-                    ? handCardSpace.getHandCardSlots()[i].getDrawable()
-                    : handCards[i].get(j - 1).getButton());
+            initializeHandCard(playerCards, handCardSpace, handId, j);
         }
+    }
+
+    private void initializeHandCard(List<Card> playerCards, HandCardSpace handCardSpace, int handId, int cardInHandId) {
+        HandCard handCard = new HandCard(playerCards.get(cardInHandId), Player.values()[handId]);
+        handCard.move(xPos[handId][cardInHandId], yPos[handId][cardInHandId]);
+        handCards[handId].add(handCard);
+        getScene().addObjectHigherThan(handCard.getButton(), (cardInHandId == 0)
+                ? handCardSpace.getHandCardSlots()[handId].getDrawable()
+                : handCards[handId].get(cardInHandId - 1).getButton());
     }
 
     private void initializePositions() {

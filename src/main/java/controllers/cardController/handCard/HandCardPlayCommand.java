@@ -23,6 +23,7 @@ public class HandCardPlayCommand implements Command {
         Card card = handCard.getCard();
         if (game.isMoveValid(card)) {
             cardController.removeHandCard(handCard, game.getCurrentPlayer());
+            cardController.repositionPlayerCards(game.getCurrentPlayer());
             cardController.addPlayedCard(card, game.getCurrentPlayer());
             game.playCard(card);
             if(game.hasRoundEnded()) {

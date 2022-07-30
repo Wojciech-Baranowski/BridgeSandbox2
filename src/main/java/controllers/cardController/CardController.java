@@ -36,6 +36,10 @@ public class CardController {
         handCards.removeHandCard(handCard, player);
     }
 
+    public void repositionPlayerCards(Player player) {
+        handCards.repositionPlayerCards(player);
+    }
+
     public void addPlayedCard(Card card, Player player) {
         playedCards.addPlayedCard(card, player);
     }

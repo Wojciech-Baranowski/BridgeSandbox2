@@ -39,6 +39,15 @@ public class HandCards {
         getScene().removeObject(handCard.getButton());
     }
 
+    public void repositionPlayerCards(Player player) {
+        List<HandCard> playerCards = handCards[player.ordinal()];
+        for(int i = 0; i < playerCards.size(); i++) {
+            int x = xPos[player.ordinal()][i];
+            int y = yPos[player.ordinal()][i];
+            playerCards.get(i).move(x, y);
+        }
+    }
+
     private void initializeHandCards(int i) {
         Player player = Player.values()[i];
         List<Card> playerCards = getGame().getCards()[i];

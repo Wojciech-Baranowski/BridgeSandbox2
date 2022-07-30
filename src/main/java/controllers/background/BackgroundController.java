@@ -1,11 +1,7 @@
 package controllers.background;
 
-import engine.common.Visual;
 import engine.display.DisplayBean;
 import engine.display.DrawableFactory;
-
-import static engine.scene.SceneBean.getScene;
-import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
 public class BackgroundController {
     private static final DrawableFactory drawableFactory = DisplayBean.getDisplay().getDrawableFactory();

@@ -15,6 +15,7 @@ import static gameLogic.player.Player.N;
 
 public class Game {
 
+    private static Game game;
     private final MoveValidator moveValidator;
     private final RoundJudge roundJudge;
     private final Deck deck;
@@ -31,10 +32,17 @@ public class Game {
     @Getter
     private List<Card> playedCards;
 
-    public Game() {
+    private Game() {
         deck = Deck.getDeck();
         this.moveValidator = new MoveValidator();
         this.roundJudge = new RoundJudge();
+    }
+
+    public static Game getGame() {
+        if(game == null) {
+            game = new Game();
+        }
+        return game;
     }
 
     public void initializeGame(Color atu, int numberOfCardsPerPlayer) {
@@ -64,12 +72,13 @@ public class Game {
 
     public void playCard(Card card) {
         List<Card> playerCards = new LinkedList<>(cards[currentPlayer.ordinal()]);
-        if (isMoveValid(card)) {
-            makeMove(playerCards, card);
-        }
-        if (hasRoundEnded()) {
-            summarizeRound();
-        }
+        makeMove(playerCards, card);
+    }
+
+    public void summarizeRound() {
+        currentPlayer = startingPlayer = roundJudge.chooseWinningPlayer(playedCards, startingPlayer, atu);
+        points[currentPlayer.ordinal() % (PLAYER_NUMBER / 2)]++;
+        playedCards.clear();
     }
 
     private void makeMove(List<Card> playerCards, Card card) {
@@ -77,12 +86,6 @@ public class Game {
         playerCards.remove(card);
         cards[currentPlayer.ordinal()] = playerCards;
         currentPlayer = currentPlayer.nextPlayer();
-    }
-
-    private void summarizeRound() {
-        currentPlayer = startingPlayer = roundJudge.chooseWinningPlayer(playedCards, startingPlayer, atu);
-        points[currentPlayer.ordinal() % (PLAYER_NUMBER / 2)]++;
-        playedCards.clear();
     }
 
 }

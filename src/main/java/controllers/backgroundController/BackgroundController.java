@@ -6,6 +6,8 @@ import lombok.Getter;
 
 public class BackgroundController {
     private static final DrawableFactory drawableFactory = DisplayBean.getDisplay().getDrawableFactory();
+
+    private static BackgroundController backgroundController;
     private final Background background;
     private final Table table;
     private final TableCenter tableCenter;
@@ -15,12 +17,19 @@ public class BackgroundController {
     private HandCardSpace handCardSpace;
 
 
-    public BackgroundController() {
+    private BackgroundController() {
         background = new Background(drawableFactory);
         table = new Table(drawableFactory, background.getBackground());
         tableCenter = new TableCenter(drawableFactory, table.getTable());
         handCardSpace = new HandCardSpace(drawableFactory, table.getTable());
         playedCardSpace = new PlayedCardSpace(drawableFactory, tableCenter.getTableCenter());
+    }
+
+    public static BackgroundController getBackgroundController() {
+        if (backgroundController == null) {
+            backgroundController = new BackgroundController();
+        }
+        return backgroundController;
     }
 
 }

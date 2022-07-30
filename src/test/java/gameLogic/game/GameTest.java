@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 
 import static gameLogic.card.Color.DIAMOND;
 import static gameLogic.card.Color.HEART;
+import static gameLogic.game.Game.getGame;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 import static gameLogic.player.Player.*;
 import static org.junit.Assert.*;
@@ -21,7 +22,7 @@ public class GameTest {
     @Test
     public void initialize_game_test() {
         //given
-        Game inputGame = new Game();
+        Game inputGame = getGame();
         Deck deck = Deck.getDeck();
         int numberOfCardsPerPlayer = 7;
         List<Card>[] inputCards = deck.dealCards(numberOfCardsPerPlayer);
@@ -48,7 +49,7 @@ public class GameTest {
     @Test
     public void play_card_test() {
         //given
-        Game inputGame = new Game();
+        Game inputGame = getGame();
         Deck deck = Deck.getDeck();
         Color inputAtu = HEART;
         List<Card>[] inputCards = new List[PLAYER_NUMBER];

@@ -4,17 +4,20 @@ import controllers.backgroundController.BackgroundController;
 import controllers.cardController.CardController;
 import controllers.main.assets.CardDrawables;
 import engine.assets.Assets;
-import engine.assets.AssetsBean;
 import engine.assets.font.Font;
 import engine.display.Display;
-import engine.display.DisplayBean;
 import engine.scene.Scene;
-import engine.scene.SceneBean;
 import gameLogic.card.Color;
 import gameLogic.game.Game;
 
 import java.util.Random;
 
+import static controllers.backgroundController.BackgroundController.getBackgroundController;
+import static controllers.cardController.CardController.getCardController;
+import static engine.assets.AssetsBean.getAssets;
+import static engine.display.DisplayBean.getDisplay;
+import static engine.scene.SceneBean.getScene;
+import static gameLogic.game.Game.getGame;
 import static gameLogic.game.GameConstants.MAX_CARDS_PER_PLAYER;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
@@ -27,14 +30,13 @@ public class Controller {
     private CardDrawables cardDrawables;
     private BackgroundController backgroundController;
     private CardController cardController;
-
     private Game game;
 
     private Controller() {
-        assets = AssetsBean.getAssets();
-        display = DisplayBean.getDisplay();
-        scene = SceneBean.getScene();
-        game = new Game();
+        assets = getAssets();
+        display = getDisplay();
+        scene = getScene();
+        game = getGame();
     }
 
     public static Controller getController() {
@@ -51,6 +53,7 @@ public class Controller {
         initializeAssets();
         initializeGame();
         initializeControllers();
+        cardController.initializeHandCards();
         scene.update();
     }
 
@@ -87,8 +90,8 @@ public class Controller {
     }
 
     private void initializeControllers() {
-        backgroundController = new BackgroundController();
-        cardController = new CardController(game, backgroundController.getHandCardSpace());
+        backgroundController = getBackgroundController();
+        cardController = getCardController();
     }
 
     public static void main(String[] args) {

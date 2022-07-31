@@ -64,8 +64,8 @@ public class Controller {
         assets.addColor("red", 0xFFAA0707);
         assets.addColor("lightBlue", 0xFF99CCCC);
         assets.addColor("yellow", 0xFFFFCE00);
-        assets.addColor("gray", 0xFFCBCBCB);
-        assets.addColor("darkGray", 0xFF989898);
+        assets.addColor("gray", 0xFF989898);
+        assets.addColor("darkGray", 0xFF343434);
         assets.addColor("transparentGray", 0x44444444);
     }
 

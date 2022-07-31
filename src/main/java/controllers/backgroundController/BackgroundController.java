@@ -9,6 +9,7 @@ public class BackgroundController {
 
     private static BackgroundController backgroundController;
     private final Background background;
+    private final ProgramTitle programTitle;
     private final Table table;
     private final TableCenter tableCenter;
     @Getter
@@ -19,6 +20,7 @@ public class BackgroundController {
 
     private BackgroundController() {
         background = new Background(drawableFactory);
+        programTitle = new ProgramTitle(drawableFactory, background.getBackground());
         table = new Table(drawableFactory, background.getBackground());
         tableCenter = new TableCenter(drawableFactory, table.getTable());
         handCardSpace = new HandCardSpace(drawableFactory, table.getTable());

@@ -13,7 +13,7 @@ public class Points {
     Points(DrawableFactory drawableFactory, Drawable background) {
         points = drawableFactory.makeText(
                 "Points: N/S: 0 | E/W: 0",
-                background.getX() + 440,
+                background.getX() + 200,
                 background.getY() + 4,
                 "HBE32",
                 "black");

@@ -1,6 +1,5 @@
 package controllers.backgroundController;
 
-import controllers.textController.ProgramTitle;
 import engine.display.DisplayBean;
 import engine.display.DrawableFactory;
 import gameLogic.player.Player;

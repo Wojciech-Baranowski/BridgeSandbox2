@@ -1,5 +1,6 @@
 package controllers.backgroundController;
 
+import controllers.textController.ProgramTitle;
 import engine.display.DisplayBean;
 import engine.display.DrawableFactory;
 import gameLogic.player.Player;
@@ -9,8 +10,8 @@ public class BackgroundController {
     private static final DrawableFactory drawableFactory = DisplayBean.getDisplay().getDrawableFactory();
 
     private static BackgroundController backgroundController;
+    @Getter
     private final Background background;
-    private final ProgramTitle programTitle;
     private final Table table;
     private final TableCenter tableCenter;
     @Getter
@@ -21,7 +22,6 @@ public class BackgroundController {
 
     private BackgroundController() {
         background = new Background(drawableFactory);
-        programTitle = new ProgramTitle(drawableFactory, background.getBackground());
         table = new Table(drawableFactory, background.getBackground());
         tableCenter = new TableCenter(drawableFactory, table.getTable());
         handCardSpace = new HandCardSpace(drawableFactory, table.getTable());

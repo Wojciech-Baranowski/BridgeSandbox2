@@ -3,6 +3,7 @@ package controllers.main;
 import controllers.backgroundController.BackgroundController;
 import controllers.cardController.CardController;
 import controllers.main.assets.CardDrawables;
+import controllers.textController.TextController;
 import engine.assets.Assets;
 import engine.assets.font.Font;
 import engine.display.Display;
@@ -14,6 +15,7 @@ import java.util.Random;
 
 import static controllers.backgroundController.BackgroundController.getBackgroundController;
 import static controllers.cardController.CardController.getCardController;
+import static controllers.textController.TextController.getTextController;
 import static engine.assets.AssetsBean.getAssets;
 import static engine.display.DisplayBean.getDisplay;
 import static engine.scene.SceneBean.getScene;
@@ -29,6 +31,7 @@ public class Controller {
     private final Scene scene;
     private CardDrawables cardDrawables;
     private BackgroundController backgroundController;
+    private TextController textController;
     private CardController cardController;
     private Game game;
 
@@ -94,6 +97,7 @@ public class Controller {
     private void initializeControllers() {
         backgroundController = getBackgroundController();
         backgroundController.updateOverlays(game.getCurrentPlayer());
+        textController = getTextController();
         cardController = getCardController();
         cardController.initializeHandCards();
         cardController.updateOverlays();

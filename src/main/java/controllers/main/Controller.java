@@ -21,6 +21,7 @@ import static controllers.textController.TextController.getTextController;
 import static engine.assets.AssetsBean.getAssets;
 import static engine.display.DisplayBean.getDisplay;
 import static engine.scene.SceneBean.getScene;
+import static gameLogic.card.Color.CLUB;
 import static gameLogic.game.Game.getGame;
 import static gameLogic.game.GameConstants.MAX_CARDS_PER_PLAYER;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
@@ -66,7 +67,6 @@ public class Controller {
         assets.addColor("black", 0xFF000000);
         assets.addColor("white", 0xFFFFFFFF);
         assets.addColor("green", 0xFF007D00);
-        assets.addColor("blue", 0xFF0000FF);
         assets.addColor("darkGreen", 0xFF0E4C05);
         assets.addColor("red", 0xFFAA0707);
         assets.addColor("lightBlue", 0xFF99CCCC);
@@ -76,6 +76,8 @@ public class Controller {
         assets.addColor("darkGray", 0xFF555555);
         assets.addColor("transparentGray", 0x44444444);
         assets.addColor("transparent", 0xFFFF00FF);
+        assets.addColor("blue", 0xFF3E79FF);
+        assets.addColor("violet", 0xFF8042FF);
     }
 
     private void initializeFonts() {
@@ -94,8 +96,7 @@ public class Controller {
     }
 
     private void initializeGame() {
-        Color atu = Color.values()[new Random().nextInt(PLAYER_NUMBER)];
-        game.initializeGame(atu, MAX_CARDS_PER_PLAYER);
+        game.initializeGame(CLUB, MAX_CARDS_PER_PLAYER);
     }
 
     private void initializeControllers() {

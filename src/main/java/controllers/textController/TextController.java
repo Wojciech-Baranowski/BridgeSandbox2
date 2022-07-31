@@ -11,14 +11,17 @@ import static gameLogic.game.Game.getGame;
 public class TextController {
 
     private static final DrawableFactory drawableFactory = DisplayBean.getDisplay().getDrawableFactory();
-    private static final BackgroundController getBackground = getBackgroundController();
+    private static final BackgroundController backgroundController = getBackgroundController();
     private static TextController textController;
     private final Points points;
     private final Atu atu;
+    private final PlayerSymbols playerSymbols;
 
     private TextController() {
-        points = new Points(drawableFactory, getBackground.getBackground().getBackground());
-        atu = new Atu(drawableFactory, getBackground.getBackground().getBackground(), getGame().getAtu());
+        points = new Points(drawableFactory, backgroundController.getBackground().getBackground());
+        atu = new Atu(drawableFactory, backgroundController.getBackground().getBackground(), getGame().getAtu());
+        playerSymbols =
+                new PlayerSymbols(drawableFactory, backgroundController.getPlayerSymbolSpace().getPlayerSymbolSlots());
     }
 
     public static TextController getTextController() {
@@ -33,7 +36,7 @@ public class TextController {
     }
 
     public void updateAtu(Color atu) {
-        this.atu.updateAtu(getBackground.getBackground().getBackground(), atu);
+        this.atu.updateAtu(backgroundController.getBackground().getBackground(), atu);
     }
 
 }

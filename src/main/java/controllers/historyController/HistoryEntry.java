@@ -35,7 +35,7 @@ public class HistoryEntry {
                 60,
                 33,
                 2,
-                "lightGray",
+                (getGame().getWinningPlayer().ordinal() % 2 == 0) ? "blue" : "violet",
                 "lightBlue");
         for (int i = 0; i < PLAYER_NUMBER; i++) {
             Drawable drawable = drawableFactory.makeFramedRectangle(

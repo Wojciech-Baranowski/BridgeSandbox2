@@ -16,6 +16,8 @@ public class BackgroundController {
     @Getter
     private final PlayedCardSpace playedCardSpace;
     @Getter
+    private final PlayerSymbolSpace playerSymbolSpace;
+    @Getter
     private HandCardSpace handCardSpace;
 
 
@@ -25,6 +27,7 @@ public class BackgroundController {
         tableCenter = new TableCenter(drawableFactory, table.getTable());
         handCardSpace = new HandCardSpace(drawableFactory, table.getTable());
         playedCardSpace = new PlayedCardSpace(drawableFactory, tableCenter.getTableCenter());
+        playerSymbolSpace = new PlayerSymbolSpace(drawableFactory, handCardSpace.getHandCardSlots());
     }
 
     public static BackgroundController getBackgroundController() {

@@ -85,6 +85,10 @@ public class Game {
         return roundJudge.chooseWinningCard(playedCards, startingPlayer, atu);
     }
 
+    public Player getWinningPlayer() {
+        return roundJudge.chooseWinningPlayer(playedCards, startingPlayer, atu);
+    }
+
     private void makeMove(List<Card> playerCards, Card card) {
         playedCards.add(card);
         playerCards.remove(card);

@@ -1,7 +1,8 @@
-package controllers.backgroundController;
+package controllers.textController;
 
 import engine.display.Drawable;
 import engine.display.DrawableFactory;
+import engine.display.text.Text;
 import lombok.Getter;
 
 import static engine.scene.SceneBean.getScene;
@@ -9,7 +10,7 @@ import static engine.scene.SceneBean.getScene;
 public class ProgramTitle {
 
     @Getter
-    private final Drawable title;
+    private final Text title;
 
     ProgramTitle(DrawableFactory drawableFactory, Drawable background) {
         title = drawableFactory.makeText(

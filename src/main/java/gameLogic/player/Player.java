@@ -25,4 +25,8 @@ public enum Player {
         };
     }
 
+    public String getSymbolString() {
+        return String.valueOf(symbol);
+    }
+
 }

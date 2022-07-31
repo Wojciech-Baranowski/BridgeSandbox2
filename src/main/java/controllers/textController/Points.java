@@ -16,7 +16,7 @@ public class Points {
                 background.getX() + 440,
                 background.getY() + 4,
                 "HBE32",
-                "darkGray");
+                "black");
         getScene().addObjectHigherThan(points, background);
     }
 

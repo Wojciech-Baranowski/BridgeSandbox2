@@ -14,11 +14,11 @@ public class ProgramTitle {
 
     ProgramTitle(DrawableFactory drawableFactory, Drawable background) {
         title = drawableFactory.makeText(
-                "BridgeSandbox2 v1.02",
+                "BridgeSandbox2 v1.1",
                 background.getX() + 4,
                 background.getY() + 4,
                 "HBE32",
-                "darkGray");
+                "black");
         getScene().addObjectHigherThan(title, background);
     }
 

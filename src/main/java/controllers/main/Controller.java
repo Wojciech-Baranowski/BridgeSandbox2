@@ -2,6 +2,7 @@ package controllers.main;
 
 import controllers.backgroundController.BackgroundController;
 import controllers.cardController.CardController;
+import controllers.historyController.HistoryController;
 import controllers.main.assets.CardDrawables;
 import controllers.textController.TextController;
 import engine.assets.Assets;
@@ -15,6 +16,7 @@ import java.util.Random;
 
 import static controllers.backgroundController.BackgroundController.getBackgroundController;
 import static controllers.cardController.CardController.getCardController;
+import static controllers.historyController.HistoryController.getHistoryController;
 import static controllers.textController.TextController.getTextController;
 import static engine.assets.AssetsBean.getAssets;
 import static engine.display.DisplayBean.getDisplay;
@@ -33,6 +35,7 @@ public class Controller {
     private BackgroundController backgroundController;
     private TextController textController;
     private CardController cardController;
+    private HistoryController historyController;
     private Game game;
 
     private Controller() {
@@ -68,8 +71,9 @@ public class Controller {
         assets.addColor("red", 0xFFAA0707);
         assets.addColor("lightBlue", 0xFF99CCCC);
         assets.addColor("yellow", 0xFFFFCE00);
-        assets.addColor("gray", 0xFF989898);
-        assets.addColor("darkGray", 0xFF343434);
+        assets.addColor("lightGray", 0xFFA8A8A8);
+        assets.addColor("gray", 0xFF888888);
+        assets.addColor("darkGray", 0xFF555555);
         assets.addColor("transparentGray", 0x44444444);
         assets.addColor("transparent", 0xFFFF00FF);
     }
@@ -101,6 +105,7 @@ public class Controller {
         cardController = getCardController();
         cardController.initializeHandCards();
         cardController.updateOverlays();
+        historyController = getHistoryController();
     }
 
     public static void main(String[] args) {

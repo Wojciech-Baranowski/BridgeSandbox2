@@ -2,6 +2,7 @@ package controllers.backgroundController;
 
 import engine.display.DisplayBean;
 import engine.display.DrawableFactory;
+import gameLogic.player.Player;
 import lombok.Getter;
 
 public class BackgroundController {
@@ -32,6 +33,10 @@ public class BackgroundController {
             backgroundController = new BackgroundController();
         }
         return backgroundController;
+    }
+
+    public void updateOverlays(Player player) {
+        handCardSpace.updateOverlay(player);
     }
 
 }

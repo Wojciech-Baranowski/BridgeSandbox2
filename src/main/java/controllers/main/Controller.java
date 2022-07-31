@@ -60,6 +60,7 @@ public class Controller {
         assets.addColor("black", 0xFF000000);
         assets.addColor("white", 0xFFFFFFFF);
         assets.addColor("green", 0xFF007D00);
+        assets.addColor("blue", 0xFF0000FF);
         assets.addColor("darkGreen", 0xFF0E4C05);
         assets.addColor("red", 0xFFAA0707);
         assets.addColor("lightBlue", 0xFF99CCCC);
@@ -67,6 +68,7 @@ public class Controller {
         assets.addColor("gray", 0xFF989898);
         assets.addColor("darkGray", 0xFF343434);
         assets.addColor("transparentGray", 0x44444444);
+        assets.addColor("transparent", 0xFFFF00FF);
     }
 
     private void initializeFonts() {
@@ -91,6 +93,7 @@ public class Controller {
 
     private void initializeControllers() {
         backgroundController = getBackgroundController();
+        backgroundController.updateOverlays(game.getCurrentPlayer());
         cardController = getCardController();
         cardController.initializeHandCards();
         cardController.updateOverlays();

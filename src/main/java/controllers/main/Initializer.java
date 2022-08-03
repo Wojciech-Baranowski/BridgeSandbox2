@@ -9,10 +9,7 @@ import engine.assets.Assets;
 import engine.assets.font.Font;
 import engine.display.Display;
 import engine.scene.Scene;
-import gameLogic.card.Color;
 import gameLogic.game.Game;
-
-import java.util.Random;
 
 import static controllers.backgroundController.BackgroundController.getBackgroundController;
 import static controllers.cardController.CardController.getCardController;
@@ -24,11 +21,10 @@ import static engine.scene.SceneBean.getScene;
 import static gameLogic.card.Color.CLUB;
 import static gameLogic.game.Game.getGame;
 import static gameLogic.game.GameConstants.MAX_CARDS_PER_PLAYER;
-import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
-public class Controller {
+public class Initializer {
 
-    private static Controller controller;
+    private static Initializer initializer;
     private final Assets assets;
     private final Display display;
     private final Scene scene;
@@ -39,18 +35,18 @@ public class Controller {
     private HistoryController historyController;
     private Game game;
 
-    private Controller() {
+    private Initializer() {
         assets = getAssets();
         display = getDisplay();
         scene = getScene();
         game = getGame();
     }
 
-    public static Controller getController() {
-        if (controller == null) {
-            controller = new Controller();
+    public static Initializer getInitializer() {
+        if (initializer == null) {
+            initializer = new Initializer();
         }
-        return controller;
+        return initializer;
     }
 
     public void initializeController() {
@@ -110,7 +106,7 @@ public class Controller {
     }
 
     public static void main(String[] args) {
-        new Controller().initializeController();
+        new Initializer().initializeController();
     }
 
 }

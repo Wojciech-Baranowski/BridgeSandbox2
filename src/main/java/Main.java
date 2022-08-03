@@ -1,11 +1,11 @@
 import engine.main.Engine;
-import controllers.main.Controller;
+import controllers.main.Initializer;
 
 public class Main {
 
     public static void main(String[] args) {
         Engine.getEngine().initializeEngine();
-        Controller.getController().initializeController();
+        Initializer.getInitializer().initializeController();
         Engine.getEngine().initializeListeners();
     }
 

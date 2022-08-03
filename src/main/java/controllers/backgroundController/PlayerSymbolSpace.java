@@ -1,6 +1,5 @@
 package controllers.backgroundController;
 
-import engine.common.Visual;
 import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import lombok.Getter;
@@ -15,45 +14,18 @@ public class PlayerSymbolSpace {
 
     PlayerSymbolSpace(DrawableFactory drawableFactory, Drawable[] handCardSlots) {
         playerSymbolSlots = new Drawable[PLAYER_NUMBER];
-
-        playerSymbolSlots[0] = drawableFactory.makeFramedRectangle(
-                handCardSlots[0].getX() - 30,
-                handCardSlots[0].getY() + 63,
-                32,
-                32,
-                2,
-                "blue",
-                "lightBlue");
-
-        playerSymbolSlots[1] = drawableFactory.makeFramedRectangle(
-                handCardSlots[1].getX(),
-                handCardSlots[1].getY() + 93,
-                32,
-                32,
-                2,
-                "violet",
-                "lightBlue");
-
-        playerSymbolSlots[2] = drawableFactory.makeFramedRectangle(
-                handCardSlots[2].getX() - 30,
-                handCardSlots[2].getY() + 63,
-                32,
-                32,
-                2,
-                "blue",
-                "lightBlue");
-
-        playerSymbolSlots[3] = drawableFactory.makeFramedRectangle(
-                handCardSlots[3].getX(),
-                handCardSlots[3].getY() + 93,
-                32,
-                32,
-                2,
-                "violet",
-                "lightBlue");
-
+        int[] x = {-30, 0, -30, 0};
+        int[] y = {63, 93, 63, 93};
 
         for (int i = 0; i < PLAYER_NUMBER; i++) {
+            playerSymbolSlots[i] = drawableFactory.makeFramedRectangle(
+                    x[i] + handCardSlots[i].getX(),
+                    y[i] + handCardSlots[i].getY(),
+                    32,
+                    32,
+                    2,
+                    (i % 2 == 0) ? "blue" : "violet",
+                    "lightBlue");
             getScene().addObjectLowerThan(playerSymbolSlots[i], handCardSlots[i]);
         }
     }

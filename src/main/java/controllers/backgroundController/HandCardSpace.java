@@ -1,6 +1,5 @@
 package controllers.backgroundController;
 
-import engine.common.Visual;
 import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import gameLogic.player.Player;
@@ -17,42 +16,20 @@ public class HandCardSpace {
 
     HandCardSpace(DrawableFactory drawableFactory, Drawable table) {
         handCardSlots = new Drawable[PLAYER_NUMBER];
+        int[] x = {281, 553, 281, 9};
+        int[] y = {9, 185, 361, 185};
 
-        handCardSlots[0] = drawableFactory.makeFramedRectangle(
-                281 + table.getX(),
-                9 + table.getY(),
-                273,
-                95,
-                2,
-                "darkGreen",
-                "lightBlue");
-
-        handCardSlots[1] = drawableFactory.makeFramedRectangle(
-                553 + table.getX(),
-                185 + table.getY(),
-                273,
-                95,
-                2,
-                "darkGreen",
-                "lightBlue");
-
-        handCardSlots[2] = drawableFactory.makeFramedRectangle(
-                281 + table.getX(),
-                361 + table.getY(),
-                273,
-                95,
-                2,
-                "darkGreen",
-                "lightBlue");
-
-        handCardSlots[3] = drawableFactory.makeFramedRectangle(
-                9 + table.getX(),
-                185 + table.getY(),
-                273,
-                95,
-                2,
-                "darkGreen",
-                "lightBlue");
+        for (int i = 0; i < PLAYER_NUMBER; i++) {
+            handCardSlots[i] = drawableFactory.makeFramedRectangle(
+                    x[i] + table.getX(),
+                    y[i] + table.getY(),
+                    273,
+                    95,
+                    2,
+                    "darkGreen",
+                    "lightBlue");
+            getScene().addObjectHigherThan(handCardSlots[i], table);
+        }
 
         activeHandOverlay = drawableFactory.makeFramedRectangle(
                 0,
@@ -62,10 +39,6 @@ public class HandCardSpace {
                 2,
                 "transparent",
                 "yellow");
-
-        for (Visual handCardPlace : handCardSlots) {
-            getScene().addObjectHigherThan(handCardPlace, table);
-        }
     }
 
     public void updateOverlay(Player player) {

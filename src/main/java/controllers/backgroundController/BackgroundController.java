@@ -12,6 +12,8 @@ public class BackgroundController {
     @Getter
     private final Background background;
     private final Table table;
+    @Getter
+    private final ButtonsSpace buttonsSpace;
     private final TableCenter tableCenter;
     @Getter
     private final PlayedCardSpace playedCardSpace;
@@ -24,6 +26,7 @@ public class BackgroundController {
     private BackgroundController() {
         background = new Background(drawableFactory);
         table = new Table(drawableFactory, background.getBackground());
+        buttonsSpace = new ButtonsSpace(drawableFactory, background.getBackground());
         tableCenter = new TableCenter(drawableFactory, table.getTable());
         handCardSpace = new HandCardSpace(drawableFactory, table.getTable());
         playedCardSpace = new PlayedCardSpace(drawableFactory, tableCenter.getTableCenter());

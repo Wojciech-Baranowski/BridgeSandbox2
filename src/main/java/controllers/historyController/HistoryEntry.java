@@ -30,8 +30,8 @@ public class HistoryEntry {
 
     private void initializeEntryBackground(DrawableFactory drawableFactory, Drawable background, int entryId) {
         entry = drawableFactory.makeFramedRectangle(
-                background.getX() + entryId * 64 + 7,
-                background.getY() + 509,
+                background.getX() + entryId * 63 + 9,
+                background.getY() + 508,
                 60,
                 33,
                 2,
@@ -39,8 +39,8 @@ public class HistoryEntry {
                 "lightBlue");
         for (int i = 0; i < PLAYER_NUMBER; i++) {
             Drawable drawable = drawableFactory.makeFramedRectangle(
-                    background.getX() + entryId * 64 + 7,
-                    background.getY() + 540 + 31 * i,
+                    background.getX() + entryId * 63 + 9,
+                    background.getY() + 539 + 31 * i,
                     28,
                     33,
                     2,
@@ -49,8 +49,8 @@ public class HistoryEntry {
             entry = new DrawableComposition(entry, drawable);
 
             drawable = drawableFactory.makeFramedRectangle(
-                    background.getX() + entryId * 64 + 33,
-                    background.getY() + 540 + 31 * i,
+                    background.getX() + entryId * 63 + 35,
+                    background.getY() + 539 + 31 * i,
                     34,
                     33,
                     2,
@@ -63,16 +63,16 @@ public class HistoryEntry {
     private void initializeText(DrawableFactory drawableFactory, Game game, Drawable background, int entryId) {
         Drawable drawable = drawableFactory.makeText(
                 String.valueOf(entryId + 1),
-                background.getX() + entryId * 64 + 28,
-                background.getY() + 515,
+                background.getX() + entryId * 63 + 30,
+                background.getY() + 514,
                 "HBE24",
                 "black");
         entry = new DrawableComposition(entry, drawable);
         for(int i = 0; i < PLAYER_NUMBER; i++) {
             drawable = drawableFactory.makeText(
                     Player.values()[(game.getStartingPlayer().ordinal() + i) % PLAYER_NUMBER].getSymbolString(),
-                    background.getX() + entryId * 64 + 11,
-                    background.getY() + 540 + 31 * i + 6,
+                    background.getX() + entryId * 63 + 13,
+                    background.getY() + 539 + 31 * i + 6,
                     "HBE24",
                     "black");
             entry = new DrawableComposition(entry, drawable);
@@ -80,8 +80,8 @@ public class HistoryEntry {
             Card playedCard = game.getPlayedCards().get(i);
             drawable = drawableFactory.makeText(
                     playedCard.getFigure().getSymbolString() + playedCard.getColor().getSymbolString(),
-                    background.getX() + entryId * 64 + 36,
-                    background.getY() + 540 + 31 * i + 6,
+                    background.getX() + entryId * 63 + 38,
+                    background.getY() + 539 + 31 * i + 6,
                     "HBE24",
                     (playedCard.getId() < 13 || playedCard.getId() >= 39) ? "black" : "red");
             entry = new DrawableComposition(entry, drawable);

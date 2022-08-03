@@ -14,7 +14,7 @@ public class Table {
     Table(DrawableFactory drawableFactory, Drawable background) {
         table = drawableFactory.makeFramedRectangle(
                 background.getX(),
-                background.getY() + 35,
+                35 + background.getY(),
                 835,
                 465,
                 2,

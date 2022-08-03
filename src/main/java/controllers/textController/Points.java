@@ -12,8 +12,8 @@ public class Points {
 
     Points(DrawableFactory drawableFactory, Drawable background) {
         points = drawableFactory.makeText(
-                "Points: N/S: 0 | E/W: 0",
-                background.getX() + 200,
+                "N/S: 0 | E/W: 0",
+                background.getX() + 300,
                 background.getY() + 4,
                 "HBE32",
                 "black");
@@ -22,7 +22,7 @@ public class Points {
 
     void updatePoints(int[] points) {
         String text =  new StringBuilder()
-                .append("Points: N/S: ")
+                .append("N/S: ")
                 .append(points[0])
                 .append(" | E/W: ")
                 .append(points[1])

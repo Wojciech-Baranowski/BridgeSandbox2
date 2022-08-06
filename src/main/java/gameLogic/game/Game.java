@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import static gameLogic.game.GameConstants.DECK_SIZE;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 import static gameLogic.player.Player.N;
 
@@ -31,11 +32,14 @@ public class Game {
     private Player startingPlayer;
     @Getter
     private List<Card> playedCards;
+    @Getter
+    private int startingNumberOfCardsPerPlayer;
 
     private Game() {
         deck = Deck.getDeck();
-        this.moveValidator = new MoveValidator();
-        this.roundJudge = new RoundJudge();
+        moveValidator = new MoveValidator();
+        roundJudge = new RoundJudge();
+        startingNumberOfCardsPerPlayer = DECK_SIZE / PLAYER_NUMBER;
     }
 
     public static Game getGame() {
@@ -47,6 +51,7 @@ public class Game {
 
     public void initializeGame(Color atu, int numberOfCardsPerPlayer) {
         List<Card>[] cards = deck.dealCards(numberOfCardsPerPlayer);
+        startingNumberOfCardsPerPlayer = numberOfCardsPerPlayer;
         initializeGame(atu, cards, N);
     }
 

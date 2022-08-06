@@ -15,23 +15,23 @@ public class Atu {
     private final Drawable prefix;
     private final Text symbol;
 
-    Atu(DrawableFactory drawableFactory, Drawable background, Color atu) {
+    Atu(DrawableFactory drawableFactory, Drawable buttonsSpace, Color atu) {
         prefix = drawableFactory.makeText(
                 "Atu: ",
-                background.getX() + 9,
-                background.getY() + 4,
+                buttonsSpace.getX() + 10,
+                buttonsSpace.getY() + 10,
                 "HBE32",
                "black");
 
         symbol = drawableFactory.makeText(
                 atu.getSymbolString(),
-                background.getX() + 76,
-                background.getY() + 2,
+                buttonsSpace.getX() + 82,
+                buttonsSpace.getY() + 10,
                 "HBE32",
                 (atu == DIAMOND || atu == HEART) ? "red" : "black");
 
         this.atu = new DrawableComposition(prefix, symbol);
-        getScene().addObjectHigherThan(this.atu, background);
+        getScene().addObjectHigherThan(this.atu, buttonsSpace);
 
     }
 

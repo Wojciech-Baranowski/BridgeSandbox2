@@ -1,6 +1,7 @@
 package controllers.main;
 
 import controllers.backgroundController.BackgroundController;
+import controllers.buttonController.ButtonController;
 import controllers.cardController.CardController;
 import controllers.historyController.HistoryController;
 import controllers.main.assets.CardDrawables;
@@ -12,6 +13,7 @@ import engine.scene.Scene;
 import gameLogic.game.Game;
 
 import static controllers.backgroundController.BackgroundController.getBackgroundController;
+import static controllers.buttonController.ButtonController.getButtonController;
 import static controllers.cardController.CardController.getCardController;
 import static controllers.historyController.HistoryController.getHistoryController;
 import static controllers.textController.TextController.getTextController;
@@ -33,6 +35,7 @@ public class Initializer {
     private TextController textController;
     private CardController cardController;
     private HistoryController historyController;
+    private ButtonController buttonController;
     private Game game;
 
     private Initializer() {
@@ -49,7 +52,7 @@ public class Initializer {
         return initializer;
     }
 
-    public void initializeController() {
+    public void initialize() {
         initializeColors();
         initializeFonts();
         initializeScenes();
@@ -100,13 +103,14 @@ public class Initializer {
         backgroundController.updateOverlays(game.getCurrentPlayer());
         textController = getTextController();
         cardController = getCardController();
-        cardController.initializeHandCards();
+        cardController.initialize();
         cardController.updateOverlays();
         historyController = getHistoryController();
+        buttonController = getButtonController();
     }
 
     public static void main(String[] args) {
-        new Initializer().initializeController();
+        new Initializer().initialize();
     }
 
 }

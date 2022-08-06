@@ -13,8 +13,8 @@ import static java.lang.Math.min;
 
 public class ComplexButton implements Visual, Interactive {
 
-    private final Drawable drawable;
-    private final Map<InputCombination, Command> actions;
+    protected final Drawable drawable;
+    protected final Map<InputCombination, Command> actions;
 
     public ComplexButton(Drawable drawable, InputCombination[] activationCombinations, Command[] actions) {
         this.drawable = drawable;

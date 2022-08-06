@@ -4,6 +4,7 @@ import controllers.backgroundController.HandCardSpace;
 import engine.display.Drawable;
 import gameLogic.card.Card;
 import gameLogic.player.Player;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Comparator;
@@ -20,8 +21,8 @@ public class HandCards {
 
     private final int[][] xPos;
     private final int[][] yPos;
+    @Getter
     private final List<HandCard>[] handCards;
-
     @Setter
     private Comparator<Card> cardOrder;
 
@@ -79,7 +80,8 @@ public class HandCards {
         HandCard handCard = new HandCard(playerCards.get(cardInHandId));
         handCard.move(xPos[handId][cardInHandId], yPos[handId][cardInHandId]);
         handCards[handId].add(handCard);
-        getScene().addObjectHigherThan(handCard.getButton(), (cardInHandId == 0)
+        getScene().addObjectHigherThan(handCard.getButton(),
+                (cardInHandId == 0)
                 ? handCardSpace.getHandCardSlots()[handId].getDrawable()
                 : handCards[handId].get(cardInHandId - 1).getButton());
     }

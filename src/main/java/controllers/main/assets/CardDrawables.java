@@ -6,6 +6,8 @@ import engine.display.DrawableFactory;
 import gameLogic.card.Color;
 import gameLogic.card.Figure;
 
+import java.util.List;
+
 import static engine.display.DisplayBean.getDisplay;
 import static gameLogic.game.GameConstants.DECK_SIZE;
 import static gameLogic.game.GameConstants.FIGURE_NUMBER;
@@ -28,6 +30,13 @@ public class CardDrawables {
             cardDrawables = new CardDrawables();
         }
         return cardDrawables;
+    }
+
+    public static List<Drawable> getAllCardDrawables() {
+        if (cardDrawables == null) {
+            cardDrawables = new CardDrawables();
+        }
+        return List.of(cardDrawables.cards);
     }
 
     public static Drawable getCardDrawable(int cardId) {

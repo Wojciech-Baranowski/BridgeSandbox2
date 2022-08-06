@@ -8,26 +8,39 @@ import static engine.scene.SceneBean.getScene;
 
 public class Points {
 
-    private final Text points;
+    private final Text pointsNS;
+    private final Text pointsEW;
 
-    Points(DrawableFactory drawableFactory, Drawable background) {
-        points = drawableFactory.makeText(
-                "N/S: 0 | E/W: 0",
-                background.getX() + 300,
-                background.getY() + 4,
+    Points(DrawableFactory drawableFactory, Drawable buttonsSpace) {
+        pointsNS = drawableFactory.makeText(
+                "N/S: 0",
+                10 + buttonsSpace.getX(),
+                50 + buttonsSpace.getY(),
                 "HBE32",
                 "black");
-        getScene().addObjectHigherThan(points, background);
+        getScene().addObjectHigherThan(pointsNS, buttonsSpace);
+
+        pointsEW = drawableFactory.makeText(
+                "E/W: 0",
+                10 + buttonsSpace.getX(),
+                90 + buttonsSpace.getY(),
+                "HBE32",
+                "black");
+        getScene().addObjectHigherThan(pointsEW, buttonsSpace);
     }
 
     void updatePoints(int[] points) {
-        String text =  new StringBuilder()
+        String text = new StringBuilder()
                 .append("N/S: ")
                 .append(points[0])
-                .append(" | E/W: ")
+                .toString();
+        this.pointsNS.setText(text);
+
+        text = new StringBuilder()
+                .append("E/W: ")
                 .append(points[1])
                 .toString();
-        this.points.setText(text);
+        this.pointsEW.setText(text);
     }
 
 }

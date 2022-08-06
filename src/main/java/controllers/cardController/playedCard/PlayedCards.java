@@ -4,6 +4,7 @@ import controllers.backgroundController.PlayedCardSpace;
 import engine.display.Drawable;
 import gameLogic.card.Card;
 import gameLogic.player.Player;
+import lombok.Getter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +17,7 @@ public class PlayedCards {
 
     private final int[] xPos;
     private final int[] yPos;
+    @Getter
     private final Set<PlayedCard> playedCards;
 
     public PlayedCards() {

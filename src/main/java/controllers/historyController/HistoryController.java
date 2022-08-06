@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static controllers.backgroundController.BackgroundController.getBackgroundController;
+import static engine.scene.SceneBean.getScene;
 
 public class HistoryController {
 
@@ -31,6 +32,14 @@ public class HistoryController {
         HistoryEntry historyEntry = new HistoryEntry(drawableFactory, game,
                 getBackgroundController().getBackground().getBackground(), historyEntries.size());
         historyEntries.add(historyEntry);
+    }
+
+    public void removeAllHistoryEntries() {
+        for(HistoryEntry historyEntry : historyEntries) {
+            getScene().removeObject(historyEntry.getEntry());
+            getScene().removeObject(historyEntry.getOverlay().getOverlay());
+        }
+        historyEntries.clear();
     }
 
 }

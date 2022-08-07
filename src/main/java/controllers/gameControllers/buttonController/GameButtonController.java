@@ -32,7 +32,7 @@ public class GameButtonController {
         showStatisticsSwitch = new ShowStatisticsSwitch(drawableFactory, gameButtonsSpace);
     }
 
-    public static GameButtonController getButtonController() {
+    public static GameButtonController getGameButtonController() {
         if (gameButtonController == null) {
             gameButtonController = new GameButtonController();
         }

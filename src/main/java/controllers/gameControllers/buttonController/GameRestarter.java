@@ -8,9 +8,9 @@ import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
 import gameLogic.game.Game;
 
-import static controllers.gameControllers.cardController.GameCardController.getCardController;
-import static controllers.gameControllers.historyController.GameHistoryController.getHistoryController;
-import static controllers.gameControllers.textController.GameTextController.getTextController;
+import static controllers.gameControllers.cardController.GameCardController.getGameCardController;
+import static controllers.gameControllers.historyController.GameHistoryController.getGameHistoryController;
+import static controllers.gameControllers.textController.GameTextController.getGameTextController;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
 import static gameLogic.game.Game.getGame;
@@ -23,9 +23,9 @@ public class GameRestarter {
         public void execute() {
             Game game = getGame();
             game.initializeGame(game.getAtu(), game.getStartingNumberOfCardsPerPlayer());
-            getHistoryController().removeAllHistoryEntries();
-            getCardController().reinitialize();
-            getTextController().updatePoints();
+            getGameHistoryController().removeAllHistoryEntries();
+            getGameCardController().reinitialize();
+            getGameTextController().updatePoints();
         }
 
     }

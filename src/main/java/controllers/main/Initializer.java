@@ -1,10 +1,5 @@
 package controllers.main;
 
-import controllers.gameControllers.backgroundController.GameBackgroundController;
-import controllers.gameControllers.buttonController.GameButtonController;
-import controllers.gameControllers.cardController.GameCardController;
-import controllers.gameControllers.historyController.GameHistoryController;
-import controllers.gameControllers.textController.GameTextController;
 import engine.assets.Assets;
 import engine.assets.font.Font;
 import engine.display.Display;
@@ -12,10 +7,10 @@ import engine.scene.Scene;
 import gameLogic.game.Game;
 
 import static controllers.gameControllers.backgroundController.GameBackgroundController.getGameBackgroundController;
-import static controllers.gameControllers.buttonController.GameButtonController.getButtonController;
-import static controllers.gameControllers.cardController.GameCardController.getCardController;
-import static controllers.gameControllers.historyController.GameHistoryController.getHistoryController;
-import static controllers.gameControllers.textController.GameTextController.getTextController;
+import static controllers.gameControllers.buttonController.GameButtonController.getGameButtonController;
+import static controllers.gameControllers.cardController.GameCardController.getGameCardController;
+import static controllers.gameControllers.historyController.GameHistoryController.getGameHistoryController;
+import static controllers.gameControllers.textController.GameTextController.getGameTextController;
 import static engine.assets.AssetsBean.getAssets;
 import static engine.display.DisplayBean.getDisplay;
 import static engine.scene.SceneBean.getScene;
@@ -29,12 +24,7 @@ public class Initializer {
     private final Assets assets;
     private final Display display;
     private final Scene scene;
-    private GameBackgroundController gameBackgroundController;
-    private GameTextController gameTextController;
-    private GameCardController gameCardController;
-    private GameHistoryController gameHistoryController;
-    private GameButtonController gameButtonController;
-    private Game game;
+    private final Game game;
 
     private Initializer() {
         assets = getAssets();
@@ -96,11 +86,11 @@ public class Initializer {
     }
 
     private void initializeGameControllers() {
-        gameBackgroundController = getGameBackgroundController();
-        gameTextController = getTextController();
-        gameCardController = getCardController();
-        gameHistoryController = getHistoryController();
-        gameButtonController = getButtonController();
+        getGameBackgroundController();
+        getGameTextController();
+        getGameCardController();
+        getGameHistoryController();
+        getGameButtonController();
     }
 
     public static void main(String[] args) {

@@ -22,7 +22,7 @@ public class PlayerChanger {
             Game game = getGame();
             if(!game.isGameOngoing()) {
                 game.switchToNextPlayer();
-                GameCardController.getCardController().updateOverlays(game.getCurrentPlayer());
+                GameCardController.getGameCardController().updateOverlays(game.getCurrentPlayer());
             }
         }
     }

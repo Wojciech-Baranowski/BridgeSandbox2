@@ -8,9 +8,9 @@ import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
 import gameLogic.game.Game;
 
-import static controllers.gameControllers.cardController.GameCardController.getCardController;
-import static controllers.gameControllers.historyController.GameHistoryController.getHistoryController;
-import static controllers.gameControllers.textController.GameTextController.getTextController;
+import static controllers.gameControllers.cardController.GameCardController.getGameCardController;
+import static controllers.gameControllers.historyController.GameHistoryController.getGameHistoryController;
+import static controllers.gameControllers.textController.GameTextController.getGameTextController;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
 import static gameLogic.game.Game.getGame;
@@ -27,9 +27,9 @@ public class CardsNumberChanger {
             Game game = getGame();
             if(game.getStartingNumberOfCardsPerPlayer() > 1 && !game.isGameOngoing()) {
                 game.initializeGame(game.getAtu(), max(1, game.getStartingNumberOfCardsPerPlayer() - 1));
-                getHistoryController().removeAllHistoryEntries();
-                getCardController().reinitialize();
-                getTextController().updatePoints();
+                getGameHistoryController().removeAllHistoryEntries();
+                getGameCardController().reinitialize();
+                getGameTextController().updatePoints();
             }
         }
     }
@@ -42,9 +42,9 @@ public class CardsNumberChanger {
             if(game.getStartingNumberOfCardsPerPlayer() < MAX_CARDS_PER_PLAYER && !game.isGameOngoing()) {
                 game.initializeGame(game.getAtu(),
                         min(MAX_CARDS_PER_PLAYER, game.getStartingNumberOfCardsPerPlayer() + 1));
-                getHistoryController().removeAllHistoryEntries();
-                getCardController().reinitialize();
-                getTextController().updatePoints();
+                getGameHistoryController().removeAllHistoryEntries();
+                getGameCardController().reinitialize();
+                getGameTextController().updatePoints();
             }
         }
 

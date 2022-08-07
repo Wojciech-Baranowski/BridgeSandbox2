@@ -10,7 +10,7 @@ import gameLogic.card.Card;
 
 import java.util.Comparator;
 
-import static controllers.gameControllers.cardController.GameCardController.getCardController;
+import static controllers.gameControllers.cardController.GameCardController.getGameCardController;
 import static controllers.main.assets.CardComparer.getCardComparer;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
@@ -21,10 +21,10 @@ public class CardsOrderChanger {
 
         @Override
         public void execute() {
-            Comparator<Card> currentComparator = getCardController().getCardOrder();
+            Comparator<Card> currentComparator = getGameCardController().getCardOrder();
             Comparator<Card> newComparator = getCardComparer().getNextComparator(currentComparator);
-            getCardController().setCardOrder(newComparator);
-            getCardController().reinitialize();
+            getGameCardController().setCardOrder(newComparator);
+            getGameCardController().reinitialize();
         }
     }
 

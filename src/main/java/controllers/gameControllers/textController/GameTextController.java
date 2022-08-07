@@ -31,7 +31,7 @@ public class GameTextController {
         cardNumber = new CardNumber(drawableFactory, buttonsSpace);
     }
 
-    public static GameTextController getTextController() {
+    public static GameTextController getGameTextController() {
         if (gameTextController == null) {
             gameTextController = new GameTextController();
         }

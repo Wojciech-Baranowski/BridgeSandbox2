@@ -7,7 +7,7 @@ import engine.common.Command;
 import gameLogic.card.Card;
 import gameLogic.game.Game;
 
-import static controllers.gameControllers.cardController.GameCardController.getCardController;
+import static controllers.gameControllers.cardController.GameCardController.getGameCardController;
 import static gameLogic.game.Game.getGame;
 
 public class HandCardPlayCommand implements Command {
@@ -21,9 +21,9 @@ public class HandCardPlayCommand implements Command {
     @Override
     public void execute() {
         Game game = getGame();
-        GameCardController gameCardController = getCardController();
-        GameTextController gameTextController = GameTextController.getTextController();
-        GameHistoryController gameHistoryController = GameHistoryController.getHistoryController();
+        GameCardController gameCardController = getGameCardController();
+        GameTextController gameTextController = GameTextController.getGameTextController();
+        GameHistoryController gameHistoryController = GameHistoryController.getGameHistoryController();
         Card card = handCard.getCard();
         if (game.isMoveValid(card)) {
             gameCardController.removeHandCard(handCard, game.getCurrentPlayer());

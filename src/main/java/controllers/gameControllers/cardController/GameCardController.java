@@ -25,7 +25,7 @@ public class GameCardController {
         playedCards = new PlayedCards();
     }
 
-    public static GameCardController getCardController() {
+    public static GameCardController getGameCardController() {
         if (gameCardController == null) {
             gameCardController = new GameCardController();
             gameCardController.initialize();

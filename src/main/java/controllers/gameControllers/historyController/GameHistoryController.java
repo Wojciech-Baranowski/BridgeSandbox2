@@ -20,7 +20,7 @@ public class GameHistoryController {
         historyEntries = new LinkedList<>();
     }
 
-    public static GameHistoryController getHistoryController() {
+    public static GameHistoryController getGameHistoryController() {
         if (gameHistoryController == null) {
             gameHistoryController = new GameHistoryController();
         }

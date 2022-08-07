@@ -6,6 +6,9 @@ import engine.display.Drawable;
 import engine.display.DrawableComposition;
 import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
+import gameLogic.card.Card;
+
+import java.util.Comparator;
 
 import static controllers.cardController.CardController.getCardController;
 import static controllers.main.assets.CardComparer.getCardComparer;
@@ -18,11 +21,9 @@ public class CardsOrderChanger {
 
         @Override
         public void execute() {
-            if(getCardController().getCardOrder() == getCardComparer().getAscendingComparator()) {
-                getCardController().setCardOrder(getCardComparer().getDescendingComparator());
-            } else {
-                getCardController().setCardOrder(getCardComparer().getAscendingComparator());
-            }
+            Comparator<Card> currentComparator = getCardController().getCardOrder();
+            Comparator<Card> newComparator = getCardComparer().getNextComparator(currentComparator);
+            getCardController().setCardOrder(newComparator);
             getCardController().reinitialize();
         }
     }

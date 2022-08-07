@@ -25,10 +25,12 @@ public class CardsNumberChanger {
         @Override
         public void execute() {
             Game game = getGame();
-            game.initializeGame(game.getAtu(), max(1, game.getStartingNumberOfCardsPerPlayer() - 1));
-            getHistoryController().removeAllHistoryEntries();
-            getCardController().reinitialize();
-            getTextController().updatePoints();
+            if(game.getStartingNumberOfCardsPerPlayer() > 1) {
+                game.initializeGame(game.getAtu(), max(1, game.getStartingNumberOfCardsPerPlayer() - 1));
+                getHistoryController().removeAllHistoryEntries();
+                getCardController().reinitialize();
+                getTextController().updatePoints();
+            }
         }
     }
 
@@ -37,10 +39,13 @@ public class CardsNumberChanger {
         @Override
         public void execute() {
             Game game = getGame();
-            game.initializeGame(game.getAtu(), min(MAX_CARDS_PER_PLAYER, game.getStartingNumberOfCardsPerPlayer() + 1));
-            getHistoryController().removeAllHistoryEntries();
-            getCardController().reinitialize();
-            getTextController().updatePoints();
+            if(game.getStartingNumberOfCardsPerPlayer() < MAX_CARDS_PER_PLAYER) {
+                game.initializeGame(game.getAtu(),
+                        min(MAX_CARDS_PER_PLAYER, game.getStartingNumberOfCardsPerPlayer() + 1));
+                getHistoryController().removeAllHistoryEntries();
+                getCardController().reinitialize();
+                getTextController().updatePoints();
+            }
         }
 
     }

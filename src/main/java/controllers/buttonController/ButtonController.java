@@ -2,6 +2,7 @@ package controllers.buttonController;
 
 import controllers.backgroundController.BackgroundController;
 import engine.display.DisplayBean;
+import engine.display.Drawable;
 import engine.display.DrawableFactory;
 
 import static controllers.backgroundController.BackgroundController.getBackgroundController;
@@ -15,14 +16,21 @@ public class ButtonController {
     private final PlayerChanger playerChanger;
     private final GameRestarter gameRestarter;
     private final CardsOrderChanger cardsOrderChanger;
+    private final GameEditSwitch gameEditSwitch;
+    private final SolverStarter solverStarter;
+    private final SolverSettingsSwitch solverSettingsSwitch;
+    private final ShowStatisticsSwitch showStatisticsSwitch;
 
     private ButtonController() {
-        cardsNumberChanger =
-                new CardsNumberChanger(drawableFactory, backgroundController.getButtonsSpace().getButtonsSpace());
-        playerChanger = new PlayerChanger(drawableFactory, backgroundController.getButtonsSpace().getButtonsSpace());
-        gameRestarter = new GameRestarter(drawableFactory, backgroundController.getButtonsSpace().getButtonsSpace());
-        cardsOrderChanger =
-                new CardsOrderChanger(drawableFactory, backgroundController.getButtonsSpace().getButtonsSpace());
+        Drawable gameButtonsSpace = backgroundController.getButtonsSpace().getButtonsSpace();
+        cardsNumberChanger = new CardsNumberChanger(drawableFactory, gameButtonsSpace);
+        playerChanger = new PlayerChanger(drawableFactory, gameButtonsSpace);
+        gameRestarter = new GameRestarter(drawableFactory, gameButtonsSpace);
+        cardsOrderChanger = new CardsOrderChanger(drawableFactory, gameButtonsSpace);
+        gameEditSwitch = new GameEditSwitch(drawableFactory, gameButtonsSpace);
+        solverStarter = new SolverStarter(drawableFactory, gameButtonsSpace);
+        solverSettingsSwitch = new SolverSettingsSwitch(drawableFactory, gameButtonsSpace);
+        showStatisticsSwitch = new ShowStatisticsSwitch(drawableFactory, gameButtonsSpace);
     }
 
     public static ButtonController getButtonController() {

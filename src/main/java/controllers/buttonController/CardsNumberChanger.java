@@ -25,7 +25,7 @@ public class CardsNumberChanger {
         @Override
         public void execute() {
             Game game = getGame();
-            if(game.getStartingNumberOfCardsPerPlayer() > 1) {
+            if(game.getStartingNumberOfCardsPerPlayer() > 1 && !game.isGameOngoing()) {
                 game.initializeGame(game.getAtu(), max(1, game.getStartingNumberOfCardsPerPlayer() - 1));
                 getHistoryController().removeAllHistoryEntries();
                 getCardController().reinitialize();
@@ -39,7 +39,7 @@ public class CardsNumberChanger {
         @Override
         public void execute() {
             Game game = getGame();
-            if(game.getStartingNumberOfCardsPerPlayer() < MAX_CARDS_PER_PLAYER) {
+            if(game.getStartingNumberOfCardsPerPlayer() < MAX_CARDS_PER_PLAYER && !game.isGameOngoing()) {
                 game.initializeGame(game.getAtu(),
                         min(MAX_CARDS_PER_PLAYER, game.getStartingNumberOfCardsPerPlayer() + 1));
                 getHistoryController().removeAllHistoryEntries();

@@ -7,8 +7,10 @@ import gameLogic.player.Player;
 import lombok.Getter;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static gameLogic.game.GameConstants.DECK_SIZE;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
@@ -96,6 +98,11 @@ public class Game {
 
     public void switchToNextPlayer() {
         currentPlayer = startingPlayer = startingPlayer.nextPlayer();
+    }
+
+    public boolean isGameOngoing() {
+        return (long) startingNumberOfCardsPerPlayer * PLAYER_NUMBER !=
+                Stream.of(cards).mapToLong(Collection::size).sum();
     }
 
     private void makeMove(List<Card> playerCards, Card card) {

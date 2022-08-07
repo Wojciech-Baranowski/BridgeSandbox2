@@ -30,7 +30,6 @@ public class Initializer {
     private final Assets assets;
     private final Display display;
     private final Scene scene;
-    private CardDrawables cardDrawables;
     private BackgroundController backgroundController;
     private TextController textController;
     private CardController cardController;
@@ -56,7 +55,6 @@ public class Initializer {
         initializeColors();
         initializeFonts();
         initializeScenes();
-        initializeAssets();
         initializeGame();
         initializeControllers();
         scene.update();
@@ -90,10 +88,6 @@ public class Initializer {
         scene.switchCollection("game");
     }
 
-    private void initializeAssets() {
-        cardDrawables = CardDrawables.getCardDrawables();
-    }
-
     private void initializeGame() {
         game.initializeGame(CLUB, MAX_CARDS_PER_PLAYER);
     }
@@ -102,8 +96,6 @@ public class Initializer {
         backgroundController = getBackgroundController();
         textController = getTextController();
         cardController = getCardController();
-        cardController.initialize();
-        cardController.updateOverlays(game.getCurrentPlayer());
         historyController = getHistoryController();
         buttonController = getButtonController();
     }

@@ -23,7 +23,7 @@ public class GameEditSwitch {
 
     private final SimpleButton gameEditSwitch;
 
-    public GameEditSwitch(DrawableFactory drawableFactory, Drawable buttonsSpace) {
+    GameEditSwitch(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         Drawable background = drawableFactory.makeFramedRectangle(
                 10 + buttonsSpace.getX(),
                 320 + buttonsSpace.getY(),

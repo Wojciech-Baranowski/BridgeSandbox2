@@ -32,7 +32,7 @@ public class GameRestarter {
 
     private final SimpleButton gameRestarter;
 
-    public GameRestarter(DrawableFactory drawableFactory, Drawable buttonsSpace) {
+    GameRestarter(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         Drawable background = drawableFactory.makeFramedRectangle(
                 10 + buttonsSpace.getX(),
                 220 + buttonsSpace.getY(),

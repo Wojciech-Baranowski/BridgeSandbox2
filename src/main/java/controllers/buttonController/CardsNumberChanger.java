@@ -53,7 +53,7 @@ public class CardsNumberChanger {
     private SimpleButton incCardsButton;
     private SimpleButton decCardsButton;
 
-    public CardsNumberChanger(DrawableFactory drawableFactory, Drawable buttonsSpace) {
+    CardsNumberChanger(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         Drawable background = drawableFactory.makeFramedRectangle(
                 110 + buttonsSpace.getX(),
                 124 + buttonsSpace.getY(),

@@ -2,11 +2,11 @@ package controllers.backgroundController;
 
 import engine.display.DisplayBean;
 import engine.display.DrawableFactory;
-import gameLogic.player.Player;
 import lombok.Getter;
 
+import static engine.display.DisplayBean.getDisplay;
+
 public class BackgroundController {
-    private static final DrawableFactory drawableFactory = DisplayBean.getDisplay().getDrawableFactory();
 
     private static BackgroundController backgroundController;
     @Getter
@@ -24,6 +24,7 @@ public class BackgroundController {
 
 
     private BackgroundController() {
+        DrawableFactory drawableFactory = getDisplay().getDrawableFactory();
         background = new Background(drawableFactory);
         table = new Table(drawableFactory, background.getBackground());
         buttonsSpace = new ButtonsSpace(drawableFactory, background.getBackground());

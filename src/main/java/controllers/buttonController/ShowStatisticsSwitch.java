@@ -23,7 +23,7 @@ public class ShowStatisticsSwitch {
 
     private final SimpleButton showStatisticsSwitch;
 
-    public ShowStatisticsSwitch(DrawableFactory drawableFactory, Drawable buttonsSpace) {
+    ShowStatisticsSwitch(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         Drawable background = drawableFactory.makeFramedRectangle(
                 10 + buttonsSpace.getX(),
                 470 + buttonsSpace.getY(),

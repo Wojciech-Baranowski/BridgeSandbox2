@@ -6,11 +6,10 @@ import engine.display.Drawable;
 import engine.display.DrawableFactory;
 
 import static controllers.backgroundController.BackgroundController.getBackgroundController;
+import static engine.display.DisplayBean.getDisplay;
 
 public class ButtonController {
 
-    private static final DrawableFactory drawableFactory = DisplayBean.getDisplay().getDrawableFactory();
-    private static final BackgroundController backgroundController = getBackgroundController();
     private static ButtonController buttonController;
     private final CardsNumberChanger cardsNumberChanger;
     private final PlayerChanger playerChanger;
@@ -22,7 +21,9 @@ public class ButtonController {
     private final ShowStatisticsSwitch showStatisticsSwitch;
 
     private ButtonController() {
-        Drawable gameButtonsSpace = backgroundController.getButtonsSpace().getButtonsSpace();
+        DrawableFactory drawableFactory = getDisplay().getDrawableFactory();
+        Drawable gameButtonsSpace = getBackgroundController().getButtonsSpace().getButtonsSpace();
+
         cardsNumberChanger = new CardsNumberChanger(drawableFactory, gameButtonsSpace);
         playerChanger = new PlayerChanger(drawableFactory, gameButtonsSpace);
         gameRestarter = new GameRestarter(drawableFactory, gameButtonsSpace);

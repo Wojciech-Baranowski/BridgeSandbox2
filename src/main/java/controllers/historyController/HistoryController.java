@@ -1,6 +1,7 @@
 package controllers.historyController;
 
 import engine.display.DisplayBean;
+import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import gameLogic.game.Game;
 
@@ -12,9 +13,7 @@ import static engine.scene.SceneBean.getScene;
 
 public class HistoryController {
 
-    private static final DrawableFactory drawableFactory = DisplayBean.getDisplay().getDrawableFactory();
     private static HistoryController historyController;
-
     private final List<HistoryEntry> historyEntries;
 
     private HistoryController() {
@@ -29,8 +28,10 @@ public class HistoryController {
     }
 
     public void addHistoryEntry(Game game) {
-        HistoryEntry historyEntry = new HistoryEntry(drawableFactory, game,
-                getBackgroundController().getBackground().getBackground(), historyEntries.size());
+        DrawableFactory drawableFactory = DisplayBean.getDisplay().getDrawableFactory();
+        Drawable background = getBackgroundController().getBackground().getBackground();
+
+        HistoryEntry historyEntry = new HistoryEntry(drawableFactory, game, background, historyEntries.size());
         historyEntries.add(historyEntry);
     }
 

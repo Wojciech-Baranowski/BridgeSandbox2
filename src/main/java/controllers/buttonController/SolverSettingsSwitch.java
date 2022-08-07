@@ -23,7 +23,7 @@ public class SolverSettingsSwitch {
 
     private final SimpleButton solverSettingsSwitch;
 
-    public SolverSettingsSwitch(DrawableFactory drawableFactory, Drawable buttonsSpace) {
+    SolverSettingsSwitch(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         Drawable background = drawableFactory.makeFramedRectangle(
                 10 + buttonsSpace.getX(),
                 420 + buttonsSpace.getY(),

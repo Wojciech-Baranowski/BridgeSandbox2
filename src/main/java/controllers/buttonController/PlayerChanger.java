@@ -29,7 +29,7 @@ public class PlayerChanger {
 
     private final SimpleButton nextPlayer;
 
-    public PlayerChanger(DrawableFactory drawableFactory, Drawable buttonsSpace) {
+    PlayerChanger(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         Drawable background = drawableFactory.makeFramedRectangle(
                 10 + buttonsSpace.getX(),
                 170 + buttonsSpace.getY(),

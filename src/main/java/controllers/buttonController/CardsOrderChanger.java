@@ -30,7 +30,7 @@ public class CardsOrderChanger {
 
     private final SimpleButton cardOrderChanger;
 
-    public CardsOrderChanger(DrawableFactory drawableFactory, Drawable buttonsSpace) {
+    CardsOrderChanger(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         Drawable background = drawableFactory.makeFramedRectangle(
                 10 + buttonsSpace.getX(),
                 270 + buttonsSpace.getY(),

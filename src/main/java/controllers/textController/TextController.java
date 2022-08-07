@@ -2,16 +2,16 @@ package controllers.textController;
 
 import controllers.backgroundController.BackgroundController;
 import engine.display.DisplayBean;
+import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import gameLogic.card.Color;
 
 import static controllers.backgroundController.BackgroundController.getBackgroundController;
+import static engine.display.DisplayBean.getDisplay;
 import static gameLogic.game.Game.getGame;
 
 public class TextController {
 
-    private static final DrawableFactory drawableFactory = DisplayBean.getDisplay().getDrawableFactory();
-    private static final BackgroundController backgroundController = getBackgroundController();
     private static TextController textController;
     private final PlayerSymbols playerSymbols;
     private final Title title;
@@ -20,12 +20,16 @@ public class TextController {
     private final CardNumber cardNumber;
 
     private TextController() {
-        playerSymbols =
-                new PlayerSymbols(drawableFactory, backgroundController.getPlayerSymbolSpace().getPlayerSymbolSlots());
-        title = new Title(drawableFactory, backgroundController.getBackground().getBackground());
-        points = new Points(drawableFactory, backgroundController.getButtonsSpace().getButtonsSpace());
-        atu = new Atu(drawableFactory, backgroundController.getButtonsSpace().getButtonsSpace(), getGame().getAtu());
-        cardNumber = new CardNumber(drawableFactory, backgroundController.getButtonsSpace().getButtonsSpace());
+        DrawableFactory drawableFactory = getDisplay().getDrawableFactory();
+        Drawable[] playerSymbolSlots = getBackgroundController().getPlayerSymbolSpace().getPlayerSymbolSlots();
+        Drawable background = getBackgroundController().getBackground().getBackground();
+        Drawable buttonsSpace = getBackgroundController().getButtonsSpace().getButtonsSpace();
+
+        playerSymbols = new PlayerSymbols(drawableFactory, playerSymbolSlots);
+        title = new Title(drawableFactory, background);
+        points = new Points(drawableFactory, buttonsSpace);
+        atu = new Atu(drawableFactory, buttonsSpace, getGame().getAtu());
+        cardNumber = new CardNumber(drawableFactory, buttonsSpace);
     }
 
     public static TextController getTextController() {
@@ -42,6 +46,7 @@ public class TextController {
 
     public void updateAtu() {
         Color atu = getGame().getAtu();
+        BackgroundController backgroundController = getBackgroundController();
         this.atu.updateAtu(backgroundController.getBackground().getBackground(), atu);
     }
 

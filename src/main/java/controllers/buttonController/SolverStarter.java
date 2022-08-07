@@ -23,7 +23,7 @@ public class SolverStarter {
 
     private final SimpleButton solverStarter;
 
-    public SolverStarter(DrawableFactory drawableFactory, Drawable buttonsSpace) {
+    SolverStarter(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         Drawable background = drawableFactory.makeFramedRectangle(
                 10 + buttonsSpace.getX(),
                 370 + buttonsSpace.getY(),

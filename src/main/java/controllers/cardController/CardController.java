@@ -4,7 +4,6 @@ import controllers.cardController.handCard.HandCard;
 import controllers.cardController.handCard.HandCards;
 import controllers.cardController.playedCard.PlayedCard;
 import controllers.cardController.playedCard.PlayedCards;
-import engine.display.DrawableFactory;
 import gameLogic.card.Card;
 import gameLogic.player.Player;
 
@@ -17,19 +16,19 @@ import static engine.scene.SceneBean.getScene;
 
 public class CardController {
 
-    private static final DrawableFactory drawableFactory = getDisplay().getDrawableFactory();
     private static CardController cardController;
     private final HandCards handCards;
     private final PlayedCards playedCards;
 
     private CardController() {
-        handCards = new HandCards(drawableFactory);
+        handCards = new HandCards(getDisplay().getDrawableFactory());
         playedCards = new PlayedCards();
     }
 
     public static CardController getCardController() {
         if (cardController == null) {
             cardController = new CardController();
+            cardController.initialize();
         }
         return cardController;
     }

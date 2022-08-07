@@ -18,7 +18,7 @@ public class ButtonsSpace {
                 367,
                 675,
                 2,
-                "darkGray",
+                "transparent",
                 "lightBlue");
         getScene().addObjectHigherThan(buttonsSpace, background);
     }

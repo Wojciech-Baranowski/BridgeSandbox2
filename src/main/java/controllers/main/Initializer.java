@@ -55,15 +55,16 @@ public class Initializer {
         assets.addColor("green", 0xFF007D00);
         assets.addColor("darkGreen", 0xFF0E4C05);
         assets.addColor("red", 0xFFAA0707);
-        assets.addColor("lightBlue", 0xFF99CCCC);
-        assets.addColor("yellow", 0xFFFFCE00);
+        assets.addColor("lightBlue", 0xFF01BAEF);
+        assets.addColor("yellow", 0xFFFFFF00);
         assets.addColor("lightGray", 0xFFA8A8A8);
-        assets.addColor("gray", 0xFF888888);
+        assets.addColor("gray", 0xFF4378FF);
         assets.addColor("darkGray", 0xFF555555);
         assets.addColor("transparentGray", 0x44444444);
         assets.addColor("transparent", 0xFFFF00FF);
-        assets.addColor("blue", 0xFF3E79FF);
+        assets.addColor("blue", 0xFF1F57FF);
         assets.addColor("violet", 0xFF8042FF);
+        assets.addColor("pink", 0xFFB477FF);
     }
 
     private void initializeFonts() {

@@ -18,7 +18,7 @@ public class Background {
                 1200,
                 675,
                 2,
-                "darkGray",
+                "blue",
                 "lightBlue");
         getScene().addOnLowest(background);
     }

@@ -24,7 +24,7 @@ public class PlayerSymbolSpace {
                     32,
                     32,
                     2,
-                    (i % 2 == 0) ? "blue" : "violet",
+                    (i % 2 == 0) ? "pink" : "violet",
                     "lightBlue");
             getScene().addObjectLowerThan(playerSymbolSlots[i], handCardSlots[i]);
         }

@@ -1,15 +1,31 @@
-package controllers.buttonController.cardOrderChangeButton;
+package controllers.buttonController;
 
 import engine.button.SimpleButton;
+import engine.common.Command;
 import engine.display.Drawable;
 import engine.display.DrawableComposition;
 import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
 
+import static controllers.cardController.CardController.getCardController;
+import static controllers.main.assets.CardComparer.getCardComparer;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
 
 public class CardsOrderChanger {
+
+    private static class CardOrderChangeCommand implements Command {
+
+        @Override
+        public void execute() {
+            if(getCardController().getCardOrder() == getCardComparer().getAscendingComparator()) {
+                getCardController().setCardOrder(getCardComparer().getDescendingComparator());
+            } else {
+                getCardController().setCardOrder(getCardComparer().getAscendingComparator());
+            }
+            getCardController().reinitialize();
+        }
+    }
 
     private final SimpleButton cardOrderChanger;
 

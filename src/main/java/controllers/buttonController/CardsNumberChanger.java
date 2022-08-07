@@ -1,15 +1,49 @@
-package controllers.buttonController.cardNumberButton;
+package controllers.buttonController;
 
 import engine.button.SimpleButton;
+import engine.common.Command;
 import engine.display.Drawable;
 import engine.display.DrawableComposition;
 import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
+import gameLogic.game.Game;
 
+import static controllers.cardController.CardController.getCardController;
+import static controllers.historyController.HistoryController.getHistoryController;
+import static controllers.textController.TextController.getTextController;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
+import static gameLogic.game.Game.getGame;
+import static gameLogic.game.GameConstants.MAX_CARDS_PER_PLAYER;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class CardsNumberChanger {
+
+    private static class DecrementCardNumberCommand implements Command {
+
+        @Override
+        public void execute() {
+            Game game = getGame();
+            game.initializeGame(game.getAtu(), max(1, game.getStartingNumberOfCardsPerPlayer() - 1));
+            getHistoryController().removeAllHistoryEntries();
+            getCardController().reinitialize();
+            getTextController().updatePoints();
+        }
+    }
+
+    private static class IncrementCardNumberCommand implements Command {
+
+        @Override
+        public void execute() {
+            Game game = getGame();
+            game.initializeGame(game.getAtu(), min(MAX_CARDS_PER_PLAYER, game.getStartingNumberOfCardsPerPlayer() + 1));
+            getHistoryController().removeAllHistoryEntries();
+            getCardController().reinitialize();
+            getTextController().updatePoints();
+        }
+
+    }
 
     private SimpleButton incCardsButton;
     private SimpleButton decCardsButton;

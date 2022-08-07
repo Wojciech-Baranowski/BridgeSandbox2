@@ -1,15 +1,29 @@
-package controllers.buttonController.nextPlayerButton;
+package controllers.buttonController;
 
 import engine.button.SimpleButton;
+import engine.common.Command;
 import engine.display.Drawable;
 import engine.display.DrawableComposition;
 import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
+import gameLogic.game.Game;
 
+import static controllers.cardController.CardController.getCardController;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
+import static gameLogic.game.Game.getGame;
 
 public class PlayerChanger {
+
+    private static class SwitchToNextPlayerCommand implements Command {
+
+        @Override
+        public void execute() {
+            Game game = getGame();
+            game.switchToNextPlayer();
+            getCardController().updateOverlays(game.getCurrentPlayer());
+        }
+    }
 
     private final SimpleButton nextPlayer;
 

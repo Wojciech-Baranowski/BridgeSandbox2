@@ -1,15 +1,34 @@
-package controllers.buttonController.restartGameButton;
+package controllers.buttonController;
 
 import engine.button.SimpleButton;
+import engine.common.Command;
 import engine.display.Drawable;
 import engine.display.DrawableComposition;
 import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
+import gameLogic.game.Game;
 
+import static controllers.cardController.CardController.getCardController;
+import static controllers.historyController.HistoryController.getHistoryController;
+import static controllers.textController.TextController.getTextController;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
+import static gameLogic.game.Game.getGame;
 
 public class GameRestarter {
+
+    private static class RestartGameCommand implements Command {
+
+        @Override
+        public void execute() {
+            Game game = getGame();
+            game.initializeGame(game.getAtu(), game.getStartingNumberOfCardsPerPlayer());
+            getHistoryController().removeAllHistoryEntries();
+            getCardController().reinitialize();
+            getTextController().updatePoints();
+        }
+
+    }
 
     private final SimpleButton gameRestarter;
 

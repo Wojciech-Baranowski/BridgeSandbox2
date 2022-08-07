@@ -8,7 +8,7 @@ import engine.input.inputCombination.InputCombination;
 import gameLogic.card.Card;
 import lombok.Getter;
 
-import static controllers.main.assets.CardDrawables.getCardDrawable;
+import static controllers.main.assets.CardDrawables.getGameCardDrawable;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
 
@@ -22,7 +22,7 @@ public class HandCard {
 
     HandCard(Card card) {
         this.card = card;
-        Drawable drawable = getCardDrawable(card.getId());
+        Drawable drawable = getGameCardDrawable(card.getId());
         InputCombination activationCombination = getInput().getInputCombinationFactory().makeLmbCombination();
         Command command = new HandCardPlayCommand(this);
         button = new SimpleButton(drawable, activationCombination, command);

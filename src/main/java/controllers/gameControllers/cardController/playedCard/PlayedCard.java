@@ -4,7 +4,7 @@ import engine.display.Drawable;
 import gameLogic.card.Card;
 import lombok.Getter;
 
-import static controllers.main.assets.CardDrawables.getCardDrawable;
+import static controllers.main.assets.CardDrawables.getGameCardDrawable;
 
 public class PlayedCard {
 
@@ -12,7 +12,7 @@ public class PlayedCard {
     private final Drawable drawable;
 
     PlayedCard(Card card, int x, int y) {
-        drawable = getCardDrawable(card.getId());
+        drawable = getGameCardDrawable(card.getId());
         drawable.setX(x);
         drawable.setY(y);
     }

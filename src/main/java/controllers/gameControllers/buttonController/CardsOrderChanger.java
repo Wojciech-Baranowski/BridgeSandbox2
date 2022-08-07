@@ -1,17 +1,14 @@
 package controllers.gameControllers.buttonController;
 
+import controllers.main.assets.CardComparator;
 import engine.button.SimpleButton;
 import engine.common.Command;
 import engine.display.Drawable;
 import engine.display.DrawableComposition;
 import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
-import gameLogic.card.Card;
-
-import java.util.Comparator;
 
 import static controllers.gameControllers.cardController.GameCardController.getGameCardController;
-import static controllers.main.assets.CardComparer.getCardComparer;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
 
@@ -21,8 +18,8 @@ public class CardsOrderChanger {
 
         @Override
         public void execute() {
-            Comparator<Card> currentComparator = getGameCardController().getCardOrder();
-            Comparator<Card> newComparator = getCardComparer().getNextComparator(currentComparator);
+            CardComparator currentComparator = getGameCardController().getCardOrderComparator();
+            CardComparator newComparator = currentComparator.getNextComparator();
             getGameCardController().setCardOrder(newComparator);
             getGameCardController().reinitialize();
         }

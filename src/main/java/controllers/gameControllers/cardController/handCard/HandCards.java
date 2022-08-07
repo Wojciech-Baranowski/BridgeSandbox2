@@ -1,6 +1,7 @@
 package controllers.gameControllers.cardController.handCard;
 
 import controllers.gameControllers.backgroundController.HandCardSpace;
+import controllers.main.assets.CardComparator;
 import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import gameLogic.card.Card;
@@ -8,12 +9,10 @@ import gameLogic.player.Player;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
 import static controllers.gameControllers.backgroundController.GameBackgroundController.getGameBackgroundController;
-import static controllers.main.assets.CardComparer.getCardComparer;
 import static engine.scene.SceneBean.getScene;
 import static gameLogic.game.Game.getGame;
 import static gameLogic.game.GameConstants.FIGURE_NUMBER;
@@ -28,12 +27,12 @@ public class HandCards {
     private final Drawable activeHandOverlay;
     @Getter
     @Setter
-    private Comparator<Card> cardOrder;
+    private CardComparator cardOrderComparator;
 
     public HandCards(DrawableFactory drawableFactory) {
         xPos = new int[PLAYER_NUMBER][FIGURE_NUMBER];
         yPos = new int[PLAYER_NUMBER][FIGURE_NUMBER];
-        cardOrder = getCardComparer().getAscendingComparator();
+        cardOrderComparator = CardComparator.ASCENDING;
         initializePositions();
         handCards = new List[PLAYER_NUMBER];
         activeHandOverlay = drawableFactory.makeFramedRectangle(
@@ -68,9 +67,9 @@ public class HandCards {
     }
 
     public void updateOverlays(Player player) {
-        for(int i = 0; i < PLAYER_NUMBER; i++) {
-            for(HandCard handCard : handCards[i]) {
-                if(getGame().isMoveValid(handCard.getCard())) {
+        for (int i = 0; i < PLAYER_NUMBER; i++) {
+            for (HandCard handCard : handCards[i]) {
+                if (getGame().isMoveValid(handCard.getCard())) {
                     handCard.deactivateOverlay();
                 } else {
                     handCard.activateOverlay();
@@ -92,7 +91,7 @@ public class HandCards {
 
     private void initializeHandCards(int handId) {
         List<Card> playerCards = getGame().getCards()[handId];
-        playerCards.sort(cardOrder);
+        playerCards.sort(cardOrderComparator.getComparator());
         HandCardSpace handCardSpace = getGameBackgroundController().getHandCardSpace();
         for (int j = 0; j < playerCards.size(); j++) {
             initializeHandCard(playerCards, handCardSpace, handId, j);
@@ -105,8 +104,8 @@ public class HandCards {
         handCards[handId].add(handCard);
         getScene().addObjectHigherThan(handCard.getButton(),
                 (cardInHandId == 0)
-                ? handCardSpace.getHandCardSlots()[handId].getDrawable()
-                : handCards[handId].get(cardInHandId - 1).getButton());
+                        ? handCardSpace.getHandCardSlots()[handId].getDrawable()
+                        : handCards[handId].get(cardInHandId - 1).getButton());
     }
 
     private void initializePositions() {

@@ -4,11 +4,11 @@ import controllers.gameControllers.cardController.handCard.HandCard;
 import controllers.gameControllers.cardController.handCard.HandCards;
 import controllers.gameControllers.cardController.playedCard.PlayedCard;
 import controllers.gameControllers.cardController.playedCard.PlayedCards;
+import controllers.main.assets.CardComparator;
 import gameLogic.card.Card;
 import gameLogic.player.Player;
 
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.stream.Stream;
 
 import static engine.display.DisplayBean.getDisplay;
@@ -63,12 +63,12 @@ public class GameCardController {
         playedCards.removePlayedCards();
     }
 
-    public Comparator<Card> getCardOrder() {
-        return handCards.getCardOrder();
+    public CardComparator getCardOrderComparator() {
+        return handCards.getCardOrderComparator();
     }
 
-    public void setCardOrder(Comparator<Card> cardOrder) {
-        handCards.setCardOrder(cardOrder);
+    public void setCardOrder(CardComparator cardOrderComparator) {
+        handCards.setCardOrderComparator(cardOrderComparator);
     }
 
     private void removeAllCards() {

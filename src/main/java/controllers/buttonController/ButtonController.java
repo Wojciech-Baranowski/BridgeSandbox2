@@ -2,6 +2,7 @@ package controllers.buttonController;
 
 import controllers.backgroundController.BackgroundController;
 import controllers.buttonController.cardNumberButton.CardsNumberChanger;
+import controllers.buttonController.cardOrderChangeButton.CardsOrderChanger;
 import controllers.buttonController.nextPlayerButton.PlayerChanger;
 import controllers.buttonController.restartGameButton.GameRestarter;
 import engine.display.DisplayBean;
@@ -17,12 +18,15 @@ public class ButtonController {
     private final CardsNumberChanger cardsNumberChanger;
     private final PlayerChanger playerChanger;
     private final GameRestarter gameRestarter;
+    private final CardsOrderChanger cardsOrderChanger;
 
     private ButtonController() {
         cardsNumberChanger =
                 new CardsNumberChanger(drawableFactory, backgroundController.getButtonsSpace().getButtonsSpace());
         playerChanger = new PlayerChanger(drawableFactory, backgroundController.getButtonsSpace().getButtonsSpace());
         gameRestarter = new GameRestarter(drawableFactory, backgroundController.getButtonsSpace().getButtonsSpace());
+        cardsOrderChanger =
+                new CardsOrderChanger(drawableFactory, backgroundController.getButtonsSpace().getButtonsSpace());
     }
 
     public static ButtonController getButtonController() {

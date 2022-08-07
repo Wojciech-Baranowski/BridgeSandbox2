@@ -9,6 +9,7 @@ import gameLogic.card.Card;
 import gameLogic.player.Player;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.stream.Stream;
 
 import static engine.display.DisplayBean.getDisplay;
@@ -61,6 +62,14 @@ public class CardController {
 
     public void removePlayedCards() {
         playedCards.removePlayedCards();
+    }
+
+    public Comparator<Card> getCardOrder() {
+        return handCards.getCardOrder();
+    }
+
+    public void setCardOrder(Comparator<Card> cardOrder) {
+        handCards.setCardOrder(cardOrder);
     }
 
     private void removeAllCards() {

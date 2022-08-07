@@ -48,7 +48,7 @@ public class Window {
     }
 
     private void createWindow() {
-        JFrame jFrame = new JFrame("BridgeSandbox2 v1.12");
+        JFrame jFrame = new JFrame("BridgeSandbox2");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLayout(new BorderLayout());
         jFrame.add(canvas, BorderLayout.CENTER);

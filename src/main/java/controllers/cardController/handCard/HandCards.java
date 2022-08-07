@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static controllers.backgroundController.BackgroundController.getBackgroundController;
+import static controllers.main.assets.CardComparer.getCardComparer;
 import static engine.scene.SceneBean.getScene;
 import static gameLogic.game.Game.getGame;
 import static gameLogic.game.GameConstants.FIGURE_NUMBER;
@@ -25,13 +26,14 @@ public class HandCards {
     @Getter
     private final List<HandCard>[] handCards;
     private final Drawable activeHandOverlay;
+    @Getter
     @Setter
     private Comparator<Card> cardOrder;
 
     public HandCards(DrawableFactory drawableFactory) {
         xPos = new int[PLAYER_NUMBER][FIGURE_NUMBER];
         yPos = new int[PLAYER_NUMBER][FIGURE_NUMBER];
-        cardOrder = Comparator.comparingInt(Card::getId);
+        cardOrder = getCardComparer().getAscendingComparator();
         initializePositions();
         handCards = new List[PLAYER_NUMBER];
         activeHandOverlay = drawableFactory.makeFramedRectangle(

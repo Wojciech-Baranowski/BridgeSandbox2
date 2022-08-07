@@ -2,6 +2,7 @@ package controllers.cardController.handCard;
 
 import controllers.backgroundController.HandCardSpace;
 import engine.display.Drawable;
+import engine.display.DrawableFactory;
 import gameLogic.card.Card;
 import gameLogic.player.Player;
 import lombok.Getter;
@@ -23,15 +24,24 @@ public class HandCards {
     private final int[][] yPos;
     @Getter
     private final List<HandCard>[] handCards;
+    private final Drawable activeHandOverlay;
     @Setter
     private Comparator<Card> cardOrder;
 
-    public HandCards() {
+    public HandCards(DrawableFactory drawableFactory) {
         xPos = new int[PLAYER_NUMBER][FIGURE_NUMBER];
         yPos = new int[PLAYER_NUMBER][FIGURE_NUMBER];
         cardOrder = Comparator.comparingInt(Card::getId);
         initializePositions();
         handCards = new List[PLAYER_NUMBER];
+        activeHandOverlay = drawableFactory.makeFramedRectangle(
+                0,
+                0,
+                273,
+                95,
+                2,
+                "transparent",
+                "yellow");
     }
 
     public void initializeHandsCards() {
@@ -55,7 +65,7 @@ public class HandCards {
         }
     }
 
-    public void updateOverlays() {
+    public void updateOverlays(Player player) {
         for(int i = 0; i < PLAYER_NUMBER; i++) {
             for(HandCard handCard : handCards[i]) {
                 if(getGame().isMoveValid(handCard.getCard())) {
@@ -65,6 +75,17 @@ public class HandCards {
                 }
             }
         }
+        updateCurrentHandOverlay(player);
+    }
+
+    public void updateCurrentHandOverlay(Player player) {
+        int x = getBackgroundController().getHandCardSpace().getHandCardSlots()[player.ordinal()].getX();
+        int y = getBackgroundController().getHandCardSpace().getHandCardSlots()[player.ordinal()].getY();
+        activeHandOverlay.setX(x);
+        activeHandOverlay.setY(y);
+        getScene().removeObject(activeHandOverlay);
+        getScene().addObjectHigherThan(activeHandOverlay,
+                getBackgroundController().getHandCardSpace().getHandCardSlots()[player.ordinal()]);
     }
 
     private void initializeHandCards(int handId) {

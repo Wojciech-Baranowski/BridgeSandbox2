@@ -43,7 +43,7 @@ public class Game {
     }
 
     public static Game getGame() {
-        if(game == null) {
+        if (game == null) {
             game = new Game();
         }
         return game;
@@ -92,6 +92,10 @@ public class Game {
 
     public Player getWinningPlayer() {
         return roundJudge.chooseWinningPlayer(playedCards, startingPlayer, atu);
+    }
+
+    public void switchToNextPlayer() {
+        currentPlayer = startingPlayer = startingPlayer.nextPlayer();
     }
 
     private void makeMove(List<Card> playerCards, Card card) {

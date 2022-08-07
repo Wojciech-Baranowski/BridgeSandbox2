@@ -1,6 +1,5 @@
 package controllers.cardController.handCard;
 
-import controllers.backgroundController.BackgroundController;
 import controllers.cardController.CardController;
 import controllers.historyController.HistoryController;
 import controllers.textController.TextController;
@@ -8,7 +7,6 @@ import engine.common.Command;
 import gameLogic.card.Card;
 import gameLogic.game.Game;
 
-import static controllers.backgroundController.BackgroundController.getBackgroundController;
 import static controllers.cardController.CardController.getCardController;
 import static controllers.historyController.HistoryController.getHistoryController;
 import static controllers.textController.TextController.getTextController;
@@ -26,7 +24,6 @@ public class HandCardPlayCommand implements Command {
     public void execute() {
         Game game = getGame();
         CardController cardController = getCardController();
-        BackgroundController backgroundController = getBackgroundController();
         TextController textController = getTextController();
         HistoryController historyController = getHistoryController();
         Card card = handCard.getCard();
@@ -39,10 +36,9 @@ public class HandCardPlayCommand implements Command {
                 historyController.addHistoryEntry(game);
                 cardController.removePlayedCards();
                 game.summarizeRound();
-                textController.updatePoints(game.getPoints());
+                textController.updatePoints();
             }
-            cardController.updateOverlays();
-            backgroundController.updateOverlays(game.getCurrentPlayer());
+            cardController.updateOverlays(game.getCurrentPlayer());
         }
     }
 

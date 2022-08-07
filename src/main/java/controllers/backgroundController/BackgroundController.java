@@ -40,8 +40,4 @@ public class BackgroundController {
         return backgroundController;
     }
 
-    public void updateOverlays(Player player) {
-        handCardSpace.updateOverlay(player);
-    }
-
 }

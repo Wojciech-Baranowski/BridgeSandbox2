@@ -100,11 +100,10 @@ public class Initializer {
 
     private void initializeControllers() {
         backgroundController = getBackgroundController();
-        backgroundController.updateOverlays(game.getCurrentPlayer());
         textController = getTextController();
         cardController = getCardController();
         cardController.initialize();
-        cardController.updateOverlays();
+        cardController.updateOverlays(game.getCurrentPlayer());
         historyController = getHistoryController();
         buttonController = getButtonController();
     }

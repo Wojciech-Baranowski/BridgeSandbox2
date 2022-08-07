@@ -12,7 +12,6 @@ import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 public class HandCardSpace {
 
     private final Drawable[] handCardSlots;
-    private final Drawable activeHandOverlay;
 
     HandCardSpace(DrawableFactory drawableFactory, Drawable table) {
         handCardSlots = new Drawable[PLAYER_NUMBER];
@@ -30,24 +29,6 @@ public class HandCardSpace {
                     "lightBlue");
             getScene().addObjectHigherThan(handCardSlots[i], table);
         }
-
-        activeHandOverlay = drawableFactory.makeFramedRectangle(
-                0,
-                0,
-                273,
-                95,
-                2,
-                "transparent",
-                "yellow");
-    }
-
-    public void updateOverlay(Player player) {
-        int x = handCardSlots[player.ordinal()].getX();
-        int y = handCardSlots[player.ordinal()].getY();
-        activeHandOverlay.setX(x);
-        activeHandOverlay.setY(y);
-        getScene().removeObject(activeHandOverlay);
-        getScene().addObjectHigherThan(activeHandOverlay, handCardSlots[player.ordinal()]);
     }
 
 }

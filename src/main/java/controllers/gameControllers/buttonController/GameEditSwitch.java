@@ -16,7 +16,7 @@ public class GameEditSwitch {
 
         @Override
         public void execute() {
-
+            getScene().switchCollection("editGame");
         }
 
     }

@@ -6,6 +6,10 @@ import engine.display.Display;
 import engine.scene.Scene;
 import gameLogic.game.Game;
 
+import static controllers.editGameControllers.backgroundController.EditGameBackgroundController.getEditGameBackgroundController;
+import static controllers.editGameControllers.buttonController.EditGameButtonController.getEditGameButtonController;
+import static controllers.editGameControllers.cardController.EditGameCardController.getEditGameCardController;
+import static controllers.editGameControllers.textController.EditGameTextController.getEditGameTextController;
 import static controllers.gameControllers.backgroundController.GameBackgroundController.getGameBackgroundController;
 import static controllers.gameControllers.buttonController.GameButtonController.getGameButtonController;
 import static controllers.gameControllers.cardController.GameCardController.getGameCardController;
@@ -46,6 +50,7 @@ public class Initializer {
         initializeScenes();
         initializeGame();
         initializeControllers();
+        scene.switchCollection("game");
         scene.update();
     }
 
@@ -75,7 +80,7 @@ public class Initializer {
 
     private void initializeScenes() {
         scene.addCollection("game");
-        scene.switchCollection("game");
+        scene.addCollection("editGame");
     }
 
     private void initializeGame() {
@@ -84,14 +89,24 @@ public class Initializer {
 
     private void initializeControllers() {
         initializeGameControllers();
+        initializeEditGameControllers();
     }
 
     private void initializeGameControllers() {
+        scene.switchCollection("game");
         getGameBackgroundController();
         getGameTextController();
         getGameCardController();
         getGameHistoryController();
         getGameButtonController();
+    }
+
+    private void initializeEditGameControllers() {
+        scene.switchCollection("editGame");
+        getEditGameBackgroundController();
+        getEditGameTextController();
+        getEditGameCardController();
+        getEditGameButtonController();
     }
 
     public static void main(String[] args) {

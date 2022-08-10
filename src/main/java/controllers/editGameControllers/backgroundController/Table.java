@@ -2,10 +2,9 @@ package controllers.editGameControllers.backgroundController;
 
 import engine.display.Drawable;
 import engine.display.DrawableFactory;
+import lombok.Getter;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
 
 import static engine.scene.SceneBean.getScene;
 import static gameLogic.game.GameConstants.COLOR_NUMBER;
@@ -13,6 +12,7 @@ import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
 public class Table {
 
+    @Getter
     private final Drawable[][] cells;
 
     Table(DrawableFactory drawableFactory, Drawable background) {

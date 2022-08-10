@@ -26,7 +26,7 @@ public class CardsNumberChanger {
         public void execute() {
             Game game = getGame();
             if(game.getStartingNumberOfCardsPerPlayer() > 1 && !game.isGameOngoing()) {
-                game.initializeGame(game.getAtu(), max(1, game.getStartingNumberOfCardsPerPlayer() - 1));
+                game.initializeGame(game.getAtu(), game.getStartingNumberOfCardsPerPlayer() - 1);
                 getGameHistoryController().removeAllHistoryEntries();
                 getGameCardController().reinitialize();
                 getGameTextController().updatePoints();
@@ -40,8 +40,7 @@ public class CardsNumberChanger {
         public void execute() {
             Game game = getGame();
             if(game.getStartingNumberOfCardsPerPlayer() < MAX_CARDS_PER_PLAYER && !game.isGameOngoing()) {
-                game.initializeGame(game.getAtu(),
-                        min(MAX_CARDS_PER_PLAYER, game.getStartingNumberOfCardsPerPlayer() + 1));
+                game.initializeGame(game.getAtu(), game.getStartingNumberOfCardsPerPlayer() + 1);
                 getGameHistoryController().removeAllHistoryEntries();
                 getGameCardController().reinitialize();
                 getGameTextController().updatePoints();
@@ -50,8 +49,8 @@ public class CardsNumberChanger {
 
     }
 
-    private SimpleButton incCardsButton;
-    private SimpleButton decCardsButton;
+    private final SimpleButton incCardsButton;
+    private final SimpleButton decCardsButton;
 
     CardsNumberChanger(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         Drawable background = drawableFactory.makeFramedRectangle(
@@ -73,8 +72,8 @@ public class CardsNumberChanger {
         Drawable decDrawable = new DrawableComposition(background, symbol);
 
         background = drawableFactory.makeFramedRectangle(
-                150 + buttonsSpace.getX(),
-                124 + buttonsSpace.getY(),
+                40 + decDrawable.getX(),
+                decDrawable.getY(),
                 32,
                 32,
                 2,

@@ -13,6 +13,7 @@ public class EditGameButtonController {
     private final AtuChanger atuChanger;
     private final CardsNumberChanger cardsNumberChanger;
     private final AcceptChanges acceptChanges;
+    private final ClearChanges clearChanges;
 
     private EditGameButtonController() {
         DrawableFactory drawableFactory = getDisplay().getDrawableFactory();
@@ -22,6 +23,7 @@ public class EditGameButtonController {
         atuChanger = new AtuChanger(drawableFactory, background);
         cardsNumberChanger = new CardsNumberChanger(drawableFactory, background);
         acceptChanges = new AcceptChanges(drawableFactory, background);
+        clearChanges = new ClearChanges(drawableFactory, background);
     }
 
     public static EditGameButtonController getEditGameButtonController() {

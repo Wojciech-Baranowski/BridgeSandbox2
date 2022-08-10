@@ -46,7 +46,7 @@ public class CardsNumberChanger {
     CardsNumberChanger(DrawableFactory drawableFactory, Drawable background) {
         cardNumber = 13;
         Drawable buttonBackground = drawableFactory.makeFramedRectangle(
-                920 + background.getX(),
+                910 + background.getX(),
                 490 + background.getY(),
                 32,
                 32,

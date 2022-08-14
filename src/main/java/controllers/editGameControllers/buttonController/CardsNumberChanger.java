@@ -20,8 +20,7 @@ public class CardsNumberChanger {
         @Override
         public void execute() {
             if (cardNumber > 1) {
-                cardNumber--;
-                getEditGameTextController().getCardNumber().updateCardNumber(cardNumber);
+                updateCardNumber(cardNumber - 1);
             }
         }
     }
@@ -31,8 +30,7 @@ public class CardsNumberChanger {
         @Override
         public void execute() {
             if (cardNumber < MAX_CARDS_PER_PLAYER) {
-                cardNumber++;
-                getEditGameTextController().getCardNumber().updateCardNumber(cardNumber);
+                updateCardNumber(cardNumber + 1);
             }
         }
 
@@ -86,6 +84,11 @@ public class CardsNumberChanger {
         decCardsButton = new SimpleButton(decDrawable, activationCombination, new DecrementCardNumberCommand());
         getScene().addObjectHigherThan(incCardsButton, background);
         getScene().addObjectHigherThan(decCardsButton, background);
+    }
+
+    public void updateCardNumber(int cardNumber) {
+        this.cardNumber = cardNumber;
+        getEditGameTextController().getCardNumber().updateCardNumber(cardNumber);
     }
 
 }

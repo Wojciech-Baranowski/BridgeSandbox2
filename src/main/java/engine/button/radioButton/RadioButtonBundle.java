@@ -27,6 +27,13 @@ public class RadioButtonBundle {
         selectedRadioButton = currentlySelected;
     }
 
+    public void unset() {
+        if(selectedRadioButton != null) {
+            selectedRadioButton.setSelected(false);
+            selectedRadioButton = null;
+        }
+    }
+
     public List<Boolean> getBundleState() {
         return radioButtons.stream()
                 .map(RadioButton::isSelected)

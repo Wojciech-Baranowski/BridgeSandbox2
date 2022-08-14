@@ -30,7 +30,7 @@ public class ChooseCard {
                 inactiveDrawable.getH(),
                 2,
                 "transparentBlue",
-                "lightBlue");
+                "violet");
         Drawable activeDrawable = new DrawableComposition(inactiveDrawable, activeOverlayDrawable);
         InputCombination activationCombination = getInput().getInputCombinationFactory().makeLmbCombination();
         button = new RadioButton(inactiveDrawable, activeDrawable, activationCombination);

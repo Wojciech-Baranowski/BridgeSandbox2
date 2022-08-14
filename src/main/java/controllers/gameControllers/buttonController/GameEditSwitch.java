@@ -1,14 +1,20 @@
 package controllers.gameControllers.buttonController;
 
+import controllers.editGameControllers.buttonController.EditGameButtonController;
+import controllers.editGameControllers.cardController.EditGameCardController;
 import engine.button.SimpleButton;
 import engine.common.Command;
 import engine.display.Drawable;
 import engine.display.DrawableComposition;
 import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
+import gameLogic.game.Game;
 
+import static controllers.editGameControllers.buttonController.EditGameButtonController.getEditGameButtonController;
+import static controllers.editGameControllers.cardController.EditGameCardController.getEditGameCardController;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
+import static gameLogic.game.Game.getGame;
 
 public class GameEditSwitch {
 
@@ -16,6 +22,15 @@ public class GameEditSwitch {
 
         @Override
         public void execute() {
+            Game game = getGame();
+            EditGameButtonController buttonController = getEditGameButtonController();
+            EditGameCardController cardController = getEditGameCardController();
+
+            buttonController.getAtuChanger().updateChooseAtuButtonsBundle(game.getAtu());
+            buttonController.getStartingPlayerChanger().updateChooseStartingPlayerButtons(game.getCurrentPlayer());
+            buttonController.getCardsNumberChanger().updateCardNumber(game.getStartingNumberOfCardsPerPlayer());
+            cardController.getChooseCards().updateChosenCards(game.getCards());
+
             getScene().switchCollection("editGame");
         }
 

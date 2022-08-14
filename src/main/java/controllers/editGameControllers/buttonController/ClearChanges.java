@@ -1,5 +1,6 @@
 package controllers.editGameControllers.buttonController;
 
+import controllers.editGameControllers.cardController.EditGameCardController;
 import engine.button.SimpleButton;
 import engine.common.Command;
 import engine.display.Drawable;
@@ -7,16 +8,24 @@ import engine.display.DrawableComposition;
 import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
 
+import static controllers.editGameControllers.buttonController.EditGameButtonController.getEditGameButtonController;
+import static controllers.editGameControllers.cardController.EditGameCardController.getEditGameCardController;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
+import static gameLogic.game.GameConstants.MAX_CARDS_PER_PLAYER;
 
 public class ClearChanges {
 
-    private class ClearCommand implements Command {
+    private static class ClearCommand implements Command {
 
         @Override
         public void execute() {
+            EditGameButtonController buttonController = getEditGameButtonController();
+            EditGameCardController cardController = getEditGameCardController();
 
+            buttonController.getAtuChanger().getChooseAtuButtonsBundle().unset();
+            buttonController.getStartingPlayerChanger().getChooseStartingPlayerButtonsBundle().unset();
+            cardController.getChooseCards().updateChosenCards(null);
         }
 
     }

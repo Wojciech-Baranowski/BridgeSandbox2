@@ -2,6 +2,7 @@ package controllers.editGameControllers.cardController;
 
 import engine.display.Drawable;
 import engine.display.DrawableFactory;
+import lombok.Getter;
 
 import static controllers.editGameControllers.backgroundController.EditGameBackgroundController.getEditGameBackgroundController;
 import static engine.display.DisplayBean.getDisplay;
@@ -9,6 +10,7 @@ import static engine.display.DisplayBean.getDisplay;
 public class EditGameCardController {
 
     private static EditGameCardController editGameCardController;
+    @Getter
     private final ChooseCards chooseCards;
 
     private EditGameCardController() {

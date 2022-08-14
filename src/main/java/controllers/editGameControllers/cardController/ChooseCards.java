@@ -4,6 +4,7 @@ import engine.button.radioButton.RadioButton;
 import engine.button.radioButton.RadioButtonBundle;
 import engine.display.Drawable;
 import engine.display.DrawableFactory;
+import gameLogic.card.Card;
 import gameLogic.player.Player;
 
 import java.util.Arrays;
@@ -44,6 +45,17 @@ public class ChooseCards {
             chooseCardsBundles[i] = new RadioButtonBundle(radioButtonsList);
         }
 
+    }
+
+    public void updateChosenCards(List<Card>[] cards) {
+        for(RadioButtonBundle cardBundle : chooseCardsBundles) {
+            cardBundle.unset();
+        }
+        for(int i = 0; i < PLAYER_NUMBER; i++) {
+            for(Card card : cards[i]) {
+                chooseCardsBundles[card.getId()].update(chooseCards[card.getId()][i].getButton());
+            }
+        }
     }
 
 }

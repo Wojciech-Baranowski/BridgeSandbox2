@@ -61,7 +61,7 @@ public class StartingPlayerChanger {
         chooseStartingPlayerButtonsBundle = new RadioButtonBundle(Arrays.stream(chooseStartingPlayerButtons).toList());
     }
 
-    public void updateChooseStartingPlayerButtonsBundle(Player player) {
+    public void updateChooseStartingPlayerButtons(Player player) {
         chooseStartingPlayerButtonsBundle.update(chooseStartingPlayerButtons[player.ordinal()]);
     }
 

@@ -6,6 +6,7 @@ import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import gameLogic.card.Card;
 import gameLogic.player.Player;
+import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +18,7 @@ import static gameLogic.game.GameConstants.*;
 public class ChooseCards {
 
     private final ChooseCard[][] chooseCards;
+    @Getter
     private final RadioButtonBundle[] chooseCardsBundles;
 
     ChooseCards(DrawableFactory drawableFactory, Drawable[][] cells) {
@@ -51,9 +53,11 @@ public class ChooseCards {
         for(RadioButtonBundle cardBundle : chooseCardsBundles) {
             cardBundle.unset();
         }
-        for(int i = 0; i < PLAYER_NUMBER; i++) {
-            for(Card card : cards[i]) {
-                chooseCardsBundles[card.getId()].update(chooseCards[card.getId()][i].getButton());
+        if(cards != null) {
+            for(int i = 0; i < PLAYER_NUMBER; i++) {
+                for(Card card : cards[i]) {
+                    chooseCardsBundles[card.getId()].update(chooseCards[card.getId()][i].getButton());
+                }
             }
         }
     }

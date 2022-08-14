@@ -62,6 +62,7 @@ public class StartingPlayerChanger {
     }
 
     public void updateChooseStartingPlayerButtons(Player player) {
+        chooseStartingPlayerButtonsBundle.unset();
         chooseStartingPlayerButtonsBundle.update(chooseStartingPlayerButtons[player.ordinal()]);
     }
 

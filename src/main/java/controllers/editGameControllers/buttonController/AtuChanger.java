@@ -63,6 +63,7 @@ public class AtuChanger {
     }
 
     public void updateChooseAtuButtonsBundle(Color color) {
+        chooseAtuButtonsBundle.unset();
         chooseAtuButtonsBundle.update(chooseAtuButtons[color.ordinal()]);
     }
 

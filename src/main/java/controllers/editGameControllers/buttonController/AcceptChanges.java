@@ -1,15 +1,25 @@
 package controllers.editGameControllers.buttonController;
 
+import controllers.editGameControllers.cardController.EditGameCardController;
 import engine.button.SimpleButton;
+import engine.button.radioButton.RadioButtonBundle;
 import engine.common.Command;
 import engine.display.Drawable;
 import engine.display.DrawableComposition;
 import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static controllers.editGameControllers.buttonController.EditGameButtonController.getEditGameButtonController;
+import static controllers.editGameControllers.cardController.EditGameCardController.getEditGameCardController;
 import static controllers.editGameControllers.textController.EditGameTextController.getEditGameTextController;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
+import static gameLogic.game.GameConstants.MAX_CARDS_PER_PLAYER;
+import static gameLogic.game.GameConstants.PLAYER_NUMBER;
+import static java.lang.Math.max;
 
 public class AcceptChanges {
 
@@ -17,7 +27,7 @@ public class AcceptChanges {
 
         @Override
         public void execute() {
-            if(isGameValid()) {
+            if (isGameValid()) {
                 getScene().switchCollection("game");
             } else {
                 getEditGameTextController().getInvalidGameData().showText();
@@ -52,7 +62,31 @@ public class AcceptChanges {
     }
 
     private boolean isGameValid() {
-        return false;
+        return areCardsProperlyChosen() && areChangersNotNull();
+    }
+
+    private boolean areChangersNotNull() {
+        EditGameButtonController buttonController = getEditGameButtonController();
+        return buttonController.getAtuChanger()
+                .getChooseAtuButtonsBundle()
+                .getSelectedRadioButtonIndex() >= 0
+                && buttonController.getStartingPlayerChanger()
+                .getChooseStartingPlayerButtonsBundle()
+                .getSelectedRadioButtonIndex() >= 0;
+    }
+
+    private boolean areCardsProperlyChosen() {
+        EditGameCardController cardController = getEditGameCardController();
+        EditGameButtonController buttonController = getEditGameButtonController();
+
+        return Arrays.stream(cardController.getChooseCards().getChooseCardsBundles())
+                .filter(rbb -> rbb.getSelectedRadioButtonIndex() >= 0)
+                .collect(Collectors.groupingBy(RadioButtonBundle::getSelectedRadioButtonIndex))
+                .values()
+                .stream()
+                .map(Collection::size)
+                .max(Comparator.naturalOrder())
+                .orElse(0) <= buttonController.getCardsNumberChanger().getCardNumber();
     }
 
 }

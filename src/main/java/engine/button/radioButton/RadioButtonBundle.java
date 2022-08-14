@@ -46,7 +46,7 @@ public class RadioButtonBundle {
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 
     public void addRadioButton(RadioButton radioButton) {

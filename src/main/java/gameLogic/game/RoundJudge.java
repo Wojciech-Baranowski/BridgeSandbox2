@@ -39,7 +39,7 @@ public class RoundJudge {
     }
 
     private Card chooseWinningCardIfAtuNotPresent(List<Card> playedCards, Player startingPlayer, Color atu) {
-        Color startingCardColor = playedCards.get(startingPlayer.ordinal()).getColor();
+        Color startingCardColor = playedCards.get(0).getColor();
         return playedCards.stream()
                 .filter(c -> c.getColor().equals(startingCardColor))
                 .max(Comparator.comparingInt(c -> c.getFigure().ordinal()))

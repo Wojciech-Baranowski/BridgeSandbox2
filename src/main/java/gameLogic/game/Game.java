@@ -58,6 +58,7 @@ public class Game {
     }
 
     public void initializeGame(Color atu, List<Card>[] cards, Player startingPlayer) {
+        this.startingNumberOfCardsPerPlayer = cards[0].size();
         this.cards = cards;
         this.points = new int[PLAYER_NUMBER / 2];
         this.atu = atu;

@@ -1,6 +1,5 @@
 package controllers.editGameControllers.backgroundController;
 
-import controllers.gameControllers.backgroundController.PlayerSymbolSpace;
 import engine.display.DrawableFactory;
 import lombok.Getter;
 

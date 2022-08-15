@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 
 import static engine.display.DisplayBean.getDisplay;
 import static engine.scene.SceneBean.getScene;
+import static gameLogic.game.Game.getGame;
 
 public class GameCardController {
 
@@ -35,7 +36,7 @@ public class GameCardController {
 
     public void initialize() {
         handCards.initializeHandsCards();
-        handCards.updateOverlays(Player.N);
+        handCards.updateOverlays(getGame().getStartingPlayer());
     }
 
     public void reinitialize() {

@@ -23,15 +23,17 @@ public class GameEditSwitch {
         @Override
         public void execute() {
             Game game = getGame();
-            EditGameButtonController buttonController = getEditGameButtonController();
-            EditGameCardController cardController = getEditGameCardController();
+            if (!game.isGameOngoing()) {
+                EditGameButtonController buttonController = getEditGameButtonController();
+                EditGameCardController cardController = getEditGameCardController();
 
-            buttonController.getAtuChanger().updateChooseAtuButtonsBundle(game.getAtu());
-            buttonController.getStartingPlayerChanger().updateChooseStartingPlayerButtons(game.getCurrentPlayer());
-            buttonController.getCardsNumberChanger().updateCardNumber(game.getStartingNumberOfCardsPerPlayer());
-            cardController.getChooseCards().updateChosenCards(game.getCards());
+                buttonController.getAtuChanger().updateChooseAtuButtonsBundle(game.getAtu());
+                buttonController.getStartingPlayerChanger().updateChooseStartingPlayerButtons(game.getCurrentPlayer());
+                buttonController.getCardsNumberChanger().updateCardNumber(game.getStartingNumberOfCardsPerPlayer());
+                cardController.getChooseCards().updateChosenCards(game.getCards());
 
-            getScene().switchCollection("editGame");
+                getScene().switchCollection("editGame");
+            }
         }
 
     }

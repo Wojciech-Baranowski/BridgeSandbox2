@@ -10,9 +10,9 @@ public class InvalidGameData {
     private final Drawable invalidGameData;
 
     InvalidGameData(DrawableFactory drawableFactory, Drawable background) {
-        invalidGameData = drawableFactory.makeText("Invalid data!",
-                1020 + background.getX(),
-                494 + background.getY(),
+        invalidGameData = drawableFactory.makeText("Invalid game data!",
+                10 + background.getX(),
+                6 + background.getY(),
                 "HBE24",
                 "red");
     }

@@ -12,7 +12,7 @@ public class CardNumber {
 
     CardNumber(DrawableFactory drawableFactory, Drawable background) {
         cardNumber = drawableFactory.makeText("Number of Cards: 13",
-                570 + background.getX(),
+                736 + background.getX(),
                 492 + background.getY(),
                 "HBE32",
                 "black");

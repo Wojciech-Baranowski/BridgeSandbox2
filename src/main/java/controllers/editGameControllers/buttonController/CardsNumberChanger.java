@@ -19,9 +19,7 @@ public class CardsNumberChanger {
 
         @Override
         public void execute() {
-            if (cardNumber > 1) {
-                updateCardNumber(cardNumber - 1);
-            }
+            updateCardNumber((cardNumber + MAX_CARDS_PER_PLAYER - 2) % MAX_CARDS_PER_PLAYER + 1);
         }
     }
 
@@ -29,9 +27,7 @@ public class CardsNumberChanger {
 
         @Override
         public void execute() {
-            if (cardNumber < MAX_CARDS_PER_PLAYER) {
-                updateCardNumber(cardNumber + 1);
-            }
+            updateCardNumber(cardNumber % MAX_CARDS_PER_PLAYER + 1);
         }
 
     }

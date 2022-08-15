@@ -15,8 +15,6 @@ import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
 import static gameLogic.game.Game.getGame;
 import static gameLogic.game.GameConstants.MAX_CARDS_PER_PLAYER;
-import static java.lang.Math.max;
-import static java.lang.Math.min;
 
 public class CardsNumberChanger {
 

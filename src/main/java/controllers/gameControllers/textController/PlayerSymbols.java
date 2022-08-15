@@ -40,7 +40,7 @@ public class PlayerSymbols {
                 playersSymbolSlots[3].getY() + 2,
                 "HBE32",
                 "black");
-        for(int i = 0; i < PLAYER_NUMBER; i++) {
+        for (int i = 0; i < PLAYER_NUMBER; i++) {
             getScene().addObjectHigherThan(symbols[i], playersSymbolSlots[i]);
         }
     }

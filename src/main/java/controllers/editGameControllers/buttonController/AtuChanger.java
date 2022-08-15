@@ -7,7 +7,6 @@ import engine.display.DrawableComposition;
 import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
 import gameLogic.card.Color;
-import gameLogic.player.Player;
 import lombok.Getter;
 
 import java.util.Arrays;

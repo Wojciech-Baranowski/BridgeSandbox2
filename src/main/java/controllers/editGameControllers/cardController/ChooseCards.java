@@ -50,12 +50,12 @@ public class ChooseCards {
     }
 
     public void updateChosenCards(List<Card>[] cards) {
-        for(RadioButtonBundle cardBundle : chooseCardsBundles) {
+        for (RadioButtonBundle cardBundle : chooseCardsBundles) {
             cardBundle.unset();
         }
-        if(cards != null) {
-            for(int i = 0; i < PLAYER_NUMBER; i++) {
-                for(Card card : cards[i]) {
+        if (cards != null) {
+            for (int i = 0; i < PLAYER_NUMBER; i++) {
+                for (Card card : cards[i]) {
                     chooseCardsBundles[card.getId()].update(chooseCards[card.getId()][i].getButton());
                 }
             }

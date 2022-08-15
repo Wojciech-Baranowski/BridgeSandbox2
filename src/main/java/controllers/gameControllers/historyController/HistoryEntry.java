@@ -67,7 +67,7 @@ public class HistoryEntry {
                 "HBE24",
                 "black");
         entry = new DrawableComposition(entry, drawable);
-        for(int i = 0; i < PLAYER_NUMBER; i++) {
+        for (int i = 0; i < PLAYER_NUMBER; i++) {
             drawable = drawableFactory.makeText(
                     Player.values()[(game.getStartingPlayer().ordinal() + i) % PLAYER_NUMBER].getSymbolString(),
                     background.getX() + entryId * 63 + 13,

@@ -18,7 +18,7 @@ public class Table {
     Table(DrawableFactory drawableFactory, Drawable background) {
         cells = new Drawable[COLOR_NUMBER + 1][PLAYER_NUMBER];
 
-        for(int i = 0; i < PLAYER_NUMBER; i++) {
+        for (int i = 0; i < PLAYER_NUMBER; i++) {
             cells[0][i] = drawableFactory.makeFramedRectangle(
                     7 + background.getX(),
                     i * 101 + 35 + background.getY(),
@@ -28,7 +28,7 @@ public class Table {
                     "gray",
                     "lightBlue");
 
-            for(int j = 0; j < COLOR_NUMBER; j++) {
+            for (int j = 0; j < COLOR_NUMBER; j++) {
                 cells[j + 1][i] = drawableFactory.makeFramedRectangle(
                         j * 281 + 67 + background.getX(),
                         i * 101 + 35 + background.getY(),
@@ -41,7 +41,7 @@ public class Table {
         }
 
 
-        for(Drawable cell : Arrays.stream(cells).flatMap(Arrays::stream).toList()) {
+        for (Drawable cell : Arrays.stream(cells).flatMap(Arrays::stream).toList()) {
             getScene().addObjectHigherThan(cell, background);
         }
     }

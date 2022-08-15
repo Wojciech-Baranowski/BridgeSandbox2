@@ -20,7 +20,7 @@ public class PlayerChanger {
         @Override
         public void execute() {
             Game game = getGame();
-            if(!game.isGameOngoing()) {
+            if (!game.isGameOngoing()) {
                 game.switchToNextPlayer();
                 GameCardController.getGameCardController().updateOverlays(game.getCurrentPlayer());
             }

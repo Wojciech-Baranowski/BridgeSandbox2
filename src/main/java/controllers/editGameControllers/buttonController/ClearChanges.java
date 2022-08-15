@@ -12,7 +12,6 @@ import static controllers.editGameControllers.buttonController.EditGameButtonCon
 import static controllers.editGameControllers.cardController.EditGameCardController.getEditGameCardController;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
-import static gameLogic.game.GameConstants.MAX_CARDS_PER_PLAYER;
 
 public class ClearChanges {
 

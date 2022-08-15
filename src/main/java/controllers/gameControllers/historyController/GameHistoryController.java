@@ -36,7 +36,7 @@ public class GameHistoryController {
     }
 
     public void removeAllHistoryEntries() {
-        for(HistoryEntry historyEntry : historyEntries) {
+        for (HistoryEntry historyEntry : historyEntries) {
             getScene().removeObject(historyEntry.getEntry());
             getScene().removeObject(historyEntry.getOverlay().getOverlay());
         }

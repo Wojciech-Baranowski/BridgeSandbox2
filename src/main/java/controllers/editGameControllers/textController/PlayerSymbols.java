@@ -14,7 +14,7 @@ public class PlayerSymbols {
     PlayerSymbols(DrawableFactory drawableFactory, Drawable[][] cells) {
         playerSymbols = new Drawable[PLAYER_NUMBER];
         int[] x = {16, 17, 15, 9};
-        for(int i = 0; i < PLAYER_NUMBER; i++) {
+        for (int i = 0; i < PLAYER_NUMBER; i++) {
             playerSymbols[i] = drawableFactory.makeText(
                     Player.values()[i].getSymbolString(),
                     x[i] + cells[0][i].getX(),

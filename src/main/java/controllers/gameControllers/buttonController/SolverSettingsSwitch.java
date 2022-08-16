@@ -16,7 +16,7 @@ public class SolverSettingsSwitch {
 
         @Override
         public void execute() {
-
+            getScene().switchCollection("solverSettings");
         }
 
     }

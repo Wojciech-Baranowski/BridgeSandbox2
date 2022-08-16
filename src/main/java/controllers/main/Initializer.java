@@ -15,6 +15,9 @@ import static controllers.gameControllers.buttonController.GameButtonController.
 import static controllers.gameControllers.cardController.GameCardController.getGameCardController;
 import static controllers.gameControllers.historyController.GameHistoryController.getGameHistoryController;
 import static controllers.gameControllers.textController.GameTextController.getGameTextController;
+import static controllers.solverSettingsControllers.backgroundController.SolverSettingsBackgroundController.getSolverSettingsBackgroundController;
+import static controllers.solverSettingsControllers.buttonController.SolverSettingsButtonController.getSolverSettingsButtonController;
+import static controllers.solverSettingsControllers.textController.SolverSettingsTextController.getSolverSettingsTextController;
 import static engine.assets.AssetsBean.getAssets;
 import static engine.display.DisplayBean.getDisplay;
 import static engine.scene.SceneBean.getScene;
@@ -82,6 +85,7 @@ public class Initializer {
     private void initializeScenes() {
         scene.addCollection("game");
         scene.addCollection("editGame");
+        scene.addCollection("solverSettings");
     }
 
     private void initializeGame() {
@@ -91,6 +95,7 @@ public class Initializer {
     private void initializeControllers() {
         initializeGameControllers();
         initializeEditGameControllers();
+        initializeSolverSettingsControllers();
     }
 
     private void initializeGameControllers() {
@@ -108,6 +113,13 @@ public class Initializer {
         getEditGameTextController();
         getEditGameCardController();
         getEditGameButtonController();
+    }
+
+    private void initializeSolverSettingsControllers() {
+        scene.switchCollection("solverSettings");
+        getSolverSettingsBackgroundController();
+        getSolverSettingsTextController();
+        getSolverSettingsButtonController();
     }
 
     public static void main(String[] args) {

@@ -23,7 +23,7 @@ public class GameEditSwitch {
         @Override
         public void execute() {
             Game game = getGame();
-            if (!game.isGameOngoing()) {
+            if (game.getStartingPlayer() == game.getCurrentPlayer()) {
                 EditGameButtonController buttonController = getEditGameButtonController();
                 EditGameCardController cardController = getEditGameCardController();
 

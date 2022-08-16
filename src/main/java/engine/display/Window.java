@@ -62,6 +62,7 @@ public class Window {
         Canvas canvas = new Canvas();
         Dimension s = new Dimension(w, h);
         canvas.setPreferredSize(s);
+
         canvas.setMaximumSize(s);
         canvas.setMinimumSize(s);
         canvas.createBufferStrategy(1);

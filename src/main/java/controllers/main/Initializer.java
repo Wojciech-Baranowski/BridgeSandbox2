@@ -15,6 +15,7 @@ import static controllers.gameControllers.buttonController.GameButtonController.
 import static controllers.gameControllers.cardController.GameCardController.getGameCardController;
 import static controllers.gameControllers.historyController.GameHistoryController.getGameHistoryController;
 import static controllers.gameControllers.textController.GameTextController.getGameTextController;
+import static controllers.solverSettingsControllers.algorithmsController.SolverSettingsAlgorithmsController.getSolverSettingsAlgorithmsController;
 import static controllers.solverSettingsControllers.backgroundController.SolverSettingsBackgroundController.getSolverSettingsBackgroundController;
 import static controllers.solverSettingsControllers.buttonController.SolverSettingsButtonController.getSolverSettingsButtonController;
 import static controllers.solverSettingsControllers.textController.SolverSettingsTextController.getSolverSettingsTextController;
@@ -74,6 +75,7 @@ public class Initializer {
         assets.addColor("blue", 0xFF1F57FF);
         assets.addColor("violet", 0xFF8042FF);
         assets.addColor("pink", 0xFFB477FF);
+        assets.addColor("orange", 0xFFFFA82C);
     }
 
     private void initializeFonts() {
@@ -120,6 +122,7 @@ public class Initializer {
         getSolverSettingsBackgroundController();
         getSolverSettingsTextController();
         getSolverSettingsButtonController();
+        getSolverSettingsAlgorithmsController();
     }
 
     public static void main(String[] args) {

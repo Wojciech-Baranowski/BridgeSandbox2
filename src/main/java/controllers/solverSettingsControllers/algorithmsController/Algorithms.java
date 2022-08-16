@@ -26,7 +26,7 @@ public class Algorithms {
         algorithmMethods.add(3);
 
         algorithms = new ArrayList<>();
-        for(int i = 0; i < algorithmMethods.size(); i++) {
+        for (int i = 0; i < algorithmMethods.size(); i++) {
             Algorithm algorithm =
                     new Algorithm(drawableFactory, background, algorithmNames.get(i), algorithmMethods.get(i), i);
             algorithms.add(algorithm);

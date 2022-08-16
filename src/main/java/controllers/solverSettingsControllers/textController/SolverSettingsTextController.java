@@ -28,7 +28,7 @@ public class SolverSettingsTextController {
     }
 
     public static SolverSettingsTextController getSolverSettingsTextController() {
-        if(solverSettingsTextController == null) {
+        if (solverSettingsTextController == null) {
             solverSettingsTextController = new SolverSettingsTextController();
         }
         return solverSettingsTextController;

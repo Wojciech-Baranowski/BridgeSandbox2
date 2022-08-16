@@ -3,7 +3,6 @@ package controllers.solverSettingsControllers.buttonController;
 import engine.display.Drawable;
 import engine.display.DrawableFactory;
 
-import static controllers.gameControllers.backgroundController.GameBackgroundController.getGameBackgroundController;
 import static controllers.solverSettingsControllers.backgroundController.SolverSettingsBackgroundController.getSolverSettingsBackgroundController;
 import static engine.display.DisplayBean.getDisplay;
 

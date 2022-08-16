@@ -19,7 +19,7 @@ public class SolverSettingsAlgorithmsController {
     }
 
     public static SolverSettingsAlgorithmsController getSolverSettingsAlgorithmsController() {
-        if(solverSettingsAlgorithmsController == null) {
+        if (solverSettingsAlgorithmsController == null) {
             solverSettingsAlgorithmsController = new SolverSettingsAlgorithmsController();
         }
         return solverSettingsAlgorithmsController;

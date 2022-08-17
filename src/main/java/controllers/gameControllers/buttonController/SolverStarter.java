@@ -1,14 +1,22 @@
 package controllers.gameControllers.buttonController;
 
+import controllers.solverSettingsControllers.algorithmsController.AlgorithmsChanger;
 import engine.button.SimpleButton;
 import engine.common.Command;
 import engine.display.Drawable;
 import engine.display.DrawableComposition;
 import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
+import solver.Result;
+import solver.ResultRound;
 
+import static controllers.gameControllers.cardController.GameCardController.getGameCardController;
+import static controllers.gameControllers.historyController.GameHistoryController.getGameHistoryController;
+import static controllers.gameControllers.textController.GameTextController.getGameTextController;
+import static controllers.solverSettingsControllers.algorithmsController.SolverSettingsAlgorithmsController.getSolverSettingsAlgorithmsController;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
+import static gameLogic.game.Game.getGame;
 
 public class SolverStarter {
 
@@ -16,7 +24,14 @@ public class SolverStarter {
 
         @Override
         public void execute() {
-
+            AlgorithmsChanger algorithmsChanger = getSolverSettingsAlgorithmsController().getAlgorithmsChanger();
+            int chosenSolverIndex = algorithmsChanger.getAlgorithmsBundle().getSelectedRadioButtonIndex();
+            Result result = algorithmsChanger.getSolvers().get(chosenSolverIndex).getAlgorithm().solve(getGame());
+            for (ResultRound round : result.getResultRounds()) {
+                getGameHistoryController().addHistoryEntry(round);
+            }
+            getGameCardController().removeAllCards();
+            getGameTextController().updatePoints(result.getPoints());
         }
 
     }

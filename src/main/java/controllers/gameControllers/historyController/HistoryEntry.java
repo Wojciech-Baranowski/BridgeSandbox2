@@ -7,9 +7,11 @@ import gameLogic.card.Card;
 import gameLogic.game.Game;
 import gameLogic.player.Player;
 import lombok.Getter;
+import solver.ResultRound;
+
+import java.util.List;
 
 import static engine.scene.SceneBean.getScene;
-import static gameLogic.game.Game.getGame;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
 public class HistoryEntry {
@@ -19,22 +21,44 @@ public class HistoryEntry {
     @Getter
     private HistoryEntryOverlay overlay;
 
-    HistoryEntry(DrawableFactory drawableFactory, Game game, Drawable background, int entryId) {
-        initializeEntryBackground(drawableFactory, background, entryId);
-        initializeText(drawableFactory, game, background, entryId);
+    public HistoryEntry(DrawableFactory drawableFactory, Drawable background, Game game, int entryId) {
+        initializeEntryBackground(drawableFactory, background, game.getWinningPlayer(), entryId);
+        initializeText(drawableFactory,
+                background,
+                game.getPlayedCards(),
+                game.getStartingPlayer(),
+                entryId,
+                false);
         getScene().addObjectHigherThan(entry, background);
-        overlay = new HistoryEntryOverlay(drawableFactory,
-                this, game.getPlayedCards().indexOf(game.getWinningCard()));
+        overlay = new HistoryEntryOverlay(drawableFactory, this, game.getWinningPlayer().ordinal());
     }
 
-    private void initializeEntryBackground(DrawableFactory drawableFactory, Drawable background, int entryId) {
+    public HistoryEntry(DrawableFactory drawableFactory, Drawable background, ResultRound resultRound, int entryId) {
+        initializeEntryBackground(
+                drawableFactory,
+                background,
+                resultRound.getWinningPlayer(),
+                entryId);
+
+        initializeText(drawableFactory,
+                background,
+                resultRound.getCards(),
+                resultRound.getStartingPlayer(),
+                entryId,
+                true);
+        getScene().addObjectHigherThan(entry, background);
+        overlay = new HistoryEntryOverlay(drawableFactory, this, resultRound.getWinningPlayer().ordinal());
+    }
+
+    private void initializeEntryBackground(
+            DrawableFactory drawableFactory, Drawable background, Player winningPlayer, int entryId) {
         entry = drawableFactory.makeFramedRectangle(
                 background.getX() + entryId * 63 + 9,
                 background.getY() + 508,
                 60,
                 33,
                 2,
-                (getGame().getWinningPlayer().ordinal() % 2 == 0) ? "pink" : "violet",
+                (winningPlayer.ordinal() % 2 == 0) ? "pink" : "violet",
                 "lightBlue");
         for (int i = 0; i < PLAYER_NUMBER; i++) {
             Drawable drawable = drawableFactory.makeFramedRectangle(
@@ -59,27 +83,32 @@ public class HistoryEntry {
         }
     }
 
-    private void initializeText(DrawableFactory drawableFactory, Game game, Drawable background, int entryId) {
+    private void initializeText(DrawableFactory drawableFactory,
+                                Drawable background,
+                                List<Card> cards,
+                                Player startingPlayer,
+                                int id,
+                                boolean predicted) {
         Drawable drawable = drawableFactory.makeText(
-                String.valueOf(entryId + 1),
-                background.getX() + entryId * 63 + 30,
+                String.valueOf(id + 1),
+                background.getX() + id * 63 + 30,
                 background.getY() + 514,
                 "HBE24",
-                "black");
+                predicted ? "yellow" : "black");
         entry = new DrawableComposition(entry, drawable);
         for (int i = 0; i < PLAYER_NUMBER; i++) {
             drawable = drawableFactory.makeText(
-                    Player.values()[(game.getStartingPlayer().ordinal() + i) % PLAYER_NUMBER].getSymbolString(),
-                    background.getX() + entryId * 63 + 13,
+                    Player.values()[(startingPlayer.ordinal() + i) % PLAYER_NUMBER].getSymbolString(),
+                    background.getX() + id * 63 + 13,
                     background.getY() + 539 + 31 * i + 6,
                     "HBE24",
                     "black");
             entry = new DrawableComposition(entry, drawable);
 
-            Card playedCard = game.getPlayedCards().get(i);
+            Card playedCard = cards.get(i);
             drawable = drawableFactory.makeText(
                     playedCard.getFigure().getSymbolString() + playedCard.getColor().getSymbolString(),
-                    background.getX() + entryId * 63 + 38,
+                    background.getX() + id * 63 + 38,
                     background.getY() + 539 + 31 * i + 6,
                     "HBE24",
                     (playedCard.getId() < 13 || playedCard.getId() >= 39) ? "black" : "red");

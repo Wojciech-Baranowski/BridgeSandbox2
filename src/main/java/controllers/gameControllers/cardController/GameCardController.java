@@ -72,7 +72,7 @@ public class GameCardController {
         handCards.setCardOrderComparator(cardOrderComparator);
     }
 
-    private void removeAllCards() {
+    public void removeAllCards() {
         for (HandCard handCard : Stream.of(handCards.getHandCards()).flatMap(Collection::stream).toList()) {
             getScene().removeObject(handCard.getButton());
             getScene().removeObject(handCard.getInactiveOverlay().getDrawable());

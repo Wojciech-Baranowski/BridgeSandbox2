@@ -43,6 +43,10 @@ public class GameTextController {
         this.points.updatePoints(points);
     }
 
+    public void updatePoints(int[] points) {
+        this.points.updatePoints(points);
+    }
+
     public void updateAtu() {
         Color atu = getGame().getAtu();
         GameBackgroundController backgroundController = getGameBackgroundController();

@@ -11,15 +11,12 @@ import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
 public class RoundJudge {
 
-    RoundJudge() {
-    }
-
-    Player chooseWinningPlayer(List<Card> playedCards, Player startingPlayer, Color atu) {
+    public Player chooseWinningPlayer(List<Card> playedCards, Player startingPlayer, Color atu) {
         Card winningCard = chooseWinningCard(playedCards, startingPlayer, atu);
         return findOwnerOfWinningCard(playedCards, startingPlayer, winningCard);
     }
 
-    Card chooseWinningCard(List<Card> playedCards, Player startingPlayer, Color atu) {
+    public Card chooseWinningCard(List<Card> playedCards, Player startingPlayer, Color atu) {
         return (isAnyCardAtu(playedCards, atu))
                 ? chooseWinningCardIfAtuPresent(playedCards, atu)
                 : chooseWinningCardIfAtuNotPresent(playedCards, startingPlayer, atu);

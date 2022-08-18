@@ -4,7 +4,7 @@ import engine.button.radioButton.RadioButtonBundle;
 import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import lombok.Getter;
-import solver.Solver;
+import solver.Algorithm;
 import solver.algorithms.Naive;
 
 import java.util.ArrayList;
@@ -14,18 +14,22 @@ public class AlgorithmsChanger {
 
     private final List<AlgorithmChangerOption> algorithmChangerOptions;
     @Getter
-    private final List<Solver> solvers;
+    private final List<Algorithm> algorithms;
+    @Getter
+    private final List<String> algorithmNames;
     @Getter
     private final RadioButtonBundle algorithmsBundle;
 
     AlgorithmsChanger(DrawableFactory drawableFactory, Drawable background) {
-        solvers = new ArrayList<>();
-        solvers.add(new Solver(new Naive(), "Naive algorithm"));
-
+        algorithms = new ArrayList<>();
+        algorithmNames = new ArrayList<>();
         algorithmChangerOptions = new ArrayList<>();
-        for (int i = 0; i < solvers.size(); i++) {
+        algorithms.add(new Naive());
+        algorithmNames.add("Naive algorithm");
+
+        for (int i = 0; i < algorithms.size(); i++) {
             AlgorithmChangerOption algorithmChangerOption =
-                    new AlgorithmChangerOption(drawableFactory, background, solvers.get(i), i);
+                    new AlgorithmChangerOption(drawableFactory, background, algorithmNames.get(i), algorithms.get(i), i);
             algorithmChangerOptions.add(algorithmChangerOption);
         }
 

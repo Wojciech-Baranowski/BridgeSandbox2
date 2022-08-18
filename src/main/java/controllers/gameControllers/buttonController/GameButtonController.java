@@ -2,6 +2,7 @@ package controllers.gameControllers.buttonController;
 
 import engine.display.Drawable;
 import engine.display.DrawableFactory;
+import lombok.Getter;
 
 import static controllers.gameControllers.backgroundController.GameBackgroundController.getGameBackgroundController;
 import static engine.display.DisplayBean.getDisplay;
@@ -14,7 +15,8 @@ public class GameButtonController {
     private final GameRestarter gameRestarter;
     private final CardsOrderChanger cardsOrderChanger;
     private final GameEditSwitch gameEditSwitch;
-    private final SolverStarter solverStarter;
+    @Getter
+    private final SolverTrigger solverTrigger;
     private final SolverSettingsSwitch solverSettingsSwitch;
     private final ShowStatisticsSwitch showStatisticsSwitch;
 
@@ -27,7 +29,7 @@ public class GameButtonController {
         gameRestarter = new GameRestarter(drawableFactory, gameButtonsSpace);
         cardsOrderChanger = new CardsOrderChanger(drawableFactory, gameButtonsSpace);
         gameEditSwitch = new GameEditSwitch(drawableFactory, gameButtonsSpace);
-        solverStarter = new SolverStarter(drawableFactory, gameButtonsSpace);
+        solverTrigger = new SolverTrigger(drawableFactory, gameButtonsSpace);
         solverSettingsSwitch = new SolverSettingsSwitch(drawableFactory, gameButtonsSpace);
         showStatisticsSwitch = new ShowStatisticsSwitch(drawableFactory, gameButtonsSpace);
     }

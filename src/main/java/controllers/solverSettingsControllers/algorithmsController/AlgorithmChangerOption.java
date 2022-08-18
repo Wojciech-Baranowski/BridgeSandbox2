@@ -7,7 +7,6 @@ import engine.display.text.Text;
 import engine.input.inputCombination.InputCombination;
 import lombok.Getter;
 import solver.Algorithm;
-import solver.Solver;
 
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
@@ -21,8 +20,8 @@ public class AlgorithmChangerOption {
     private Algorithm algorithm;
 
     AlgorithmChangerOption(
-            DrawableFactory drawableFactory, Drawable background, Solver solver, int index) {
-        this.algorithm = solver.getAlgorithm();
+            DrawableFactory drawableFactory, Drawable background, String name, Algorithm algorithm, int index) {
+        this.algorithm = algorithm;
         Drawable inactiveButtonDrawable = drawableFactory.makeFramedRectangle(
                 ((index > 5) ? 620 : 20) + background.getX(),
                 ((index > 5) ? 20 : 330) + 50 * (index > 5 ? index - 6 : index) + background.getY(),
@@ -45,7 +44,7 @@ public class AlgorithmChangerOption {
         radioButton = new RadioButton(inactiveButtonDrawable, activeButtonDrawable, activationCombination);
 
         this.name = drawableFactory.makeText(
-                solver.getName(),
+                name,
                 42 + inactiveButtonDrawable.getX(),
                 2 + inactiveButtonDrawable.getY(),
                 "HBE32",

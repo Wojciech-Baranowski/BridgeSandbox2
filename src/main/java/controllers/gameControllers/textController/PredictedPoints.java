@@ -6,40 +6,44 @@ import engine.display.text.Text;
 
 import static engine.scene.SceneBean.getScene;
 
-public class Points {
+public class PredictedPoints {
 
     private final Text pointsNS;
     private final Text pointsEW;
 
-    Points(DrawableFactory drawableFactory, Drawable buttonsSpace) {
+    PredictedPoints(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         pointsNS = drawableFactory.makeText(
-                "N/S: 0",
-                10 + buttonsSpace.getX(),
-                47 + buttonsSpace.getY(),
+                "",
+                140 + buttonsSpace.getX(),
+                46 + buttonsSpace.getY(),
                 "HBE32",
                 "black");
         getScene().addObjectHigherThan(pointsNS, buttonsSpace);
 
         pointsEW = drawableFactory.makeText(
-                "E/W: 0",
-                10 + buttonsSpace.getX(),
-                87 + buttonsSpace.getY(),
+                "",
+                140 + buttonsSpace.getX(),
+                86 + buttonsSpace.getY(),
                 "HBE32",
                 "black");
         getScene().addObjectHigherThan(pointsEW, buttonsSpace);
     }
 
     void updatePoints(int[] points) {
-        String text = new StringBuilder()
-                .append("N/S: ")
+        String text = (points != null) ? new StringBuilder()
+                .append("(")
                 .append(points[0])
-                .toString();
+                .append(")")
+                .toString()
+                : "";
         this.pointsNS.setText(text);
 
-        text = new StringBuilder()
-                .append("E/W: ")
+        text = (points != null) ? new StringBuilder()
+                .append("(")
                 .append(points[1])
-                .toString();
+                .append(")")
+                .toString()
+                : "";
         this.pointsEW.setText(text);
     }
 

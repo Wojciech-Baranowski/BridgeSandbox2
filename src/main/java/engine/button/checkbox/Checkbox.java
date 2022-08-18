@@ -8,11 +8,11 @@ import lombok.Getter;
 
 public class Checkbox implements Visual, Interactive {
 
-    private final Drawable offDrawable;
-    private final Drawable onDrawable;
-    private final InputCombination activationCombination;
+    protected final Drawable offDrawable;
+    protected final Drawable onDrawable;
+    protected final InputCombination activationCombination;
     @Getter
-    private boolean selected;
+    protected boolean selected;
 
     public Checkbox(Drawable offDrawable, Drawable onDrawable, InputCombination activationCombination) {
         this.offDrawable = offDrawable;

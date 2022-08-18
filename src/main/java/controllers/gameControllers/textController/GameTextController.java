@@ -15,6 +15,7 @@ public class GameTextController {
     private final PlayerSymbols playerSymbols;
     private final Title title;
     private final Points points;
+    private final PredictedPoints predictedPoints;
     private final Atu atu;
     private final CardNumber cardNumber;
 
@@ -27,6 +28,7 @@ public class GameTextController {
         playerSymbols = new PlayerSymbols(drawableFactory, playerSymbolSlots);
         title = new Title(drawableFactory, background);
         points = new Points(drawableFactory, buttonsSpace);
+        predictedPoints = new PredictedPoints(drawableFactory, buttonsSpace);
         atu = new Atu(drawableFactory, buttonsSpace, getGame().getAtu());
         cardNumber = new CardNumber(drawableFactory, buttonsSpace);
     }
@@ -43,8 +45,14 @@ public class GameTextController {
         this.points.updatePoints(points);
     }
 
-    public void updatePoints(int[] points) {
-        this.points.updatePoints(points);
+    public void updatePredictedPoints(int[] predictedPoints) {
+        if (predictedPoints == null) {
+            this.predictedPoints.updatePoints(null);
+        } else {
+            int[] gamePoints = getGame().getPoints();
+            int[] pointsSum = {gamePoints[0] + predictedPoints[0], gamePoints[1] + predictedPoints[1]};
+            this.predictedPoints.updatePoints(pointsSum);
+        }
     }
 
     public void updateAtu() {

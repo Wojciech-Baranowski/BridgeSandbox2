@@ -7,45 +7,32 @@ import gameLogic.card.Card;
 import gameLogic.game.Game;
 import gameLogic.player.Player;
 import lombok.Getter;
-import solver.ResultRound;
+import solver.result.ResultRound;
 
 import java.util.List;
 
 import static engine.scene.SceneBean.getScene;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
+@Getter
 public class HistoryEntry {
 
-    @Getter
     private Drawable entry;
-    @Getter
     private HistoryEntryOverlay overlay;
+    private boolean predicted;
 
     public HistoryEntry(DrawableFactory drawableFactory, Drawable background, Game game, int entryId) {
+        predicted = false;
         initializeEntryBackground(drawableFactory, background, game.getWinningPlayer(), entryId);
-        initializeText(drawableFactory,
-                background,
-                game.getPlayedCards(),
-                game.getStartingPlayer(),
-                entryId,
-                false);
+        initializeText(drawableFactory, background, game.getPlayedCards(), game.getStartingPlayer(), entryId);
         getScene().addObjectHigherThan(entry, background);
         overlay = new HistoryEntryOverlay(drawableFactory, this, game.getWinningPlayer().ordinal());
     }
 
     public HistoryEntry(DrawableFactory drawableFactory, Drawable background, ResultRound resultRound, int entryId) {
-        initializeEntryBackground(
-                drawableFactory,
-                background,
-                resultRound.getWinningPlayer(),
-                entryId);
-
-        initializeText(drawableFactory,
-                background,
-                resultRound.getCards(),
-                resultRound.getStartingPlayer(),
-                entryId,
-                true);
+        predicted = true;
+        initializeEntryBackground(drawableFactory, background, resultRound.getWinningPlayer(), entryId);
+        initializeText(drawableFactory, background, resultRound.getCards(), resultRound.getStartingPlayer(), entryId);
         getScene().addObjectHigherThan(entry, background);
         overlay = new HistoryEntryOverlay(drawableFactory, this, resultRound.getWinningPlayer().ordinal());
     }
@@ -83,12 +70,8 @@ public class HistoryEntry {
         }
     }
 
-    private void initializeText(DrawableFactory drawableFactory,
-                                Drawable background,
-                                List<Card> cards,
-                                Player startingPlayer,
-                                int id,
-                                boolean predicted) {
+    private void initializeText(
+            DrawableFactory drawableFactory, Drawable background, List<Card> cards, Player startingPlayer, int id) {
         Drawable drawable = drawableFactory.makeText(
                 String.valueOf(id + 1),
                 background.getX() + id * 63 + 30,

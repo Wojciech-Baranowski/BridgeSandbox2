@@ -3,7 +3,7 @@ package solver.algorithms;
 import gameLogic.card.Card;
 import gameLogic.game.Game;
 import solver.Algorithm;
-import solver.Result;
+import solver.result.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ public class Naive implements Algorithm {
 
     @Override
     public Result solve(Game game) {
-        return new Result(getAllCardsInNaiveOrder(game), game.getStartingPlayer(), game.getAtu());
+        return new Result(getAllCardsInNaiveOrder(new Game(game)), game.getStartingPlayer(), game.getAtu());
     }
 
     private List<Card> getAllCardsInNaiveOrder(Game game) {

@@ -4,7 +4,7 @@ import engine.display.DisplayBean;
 import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import gameLogic.game.Game;
-import solver.ResultRound;
+import solver.result.ResultRound;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class GameHistoryController {
     public void addHistoryEntry(Game game) {
         DrawableFactory drawableFactory = DisplayBean.getDisplay().getDrawableFactory();
         Drawable background = getGameBackgroundController().getBackground().getBackground();
-
+        removeAllPredictedHistoryEntries();
         HistoryEntry historyEntry = new HistoryEntry(drawableFactory, background, game, historyEntries.size());
         historyEntries.add(historyEntry);
     }
@@ -44,10 +44,13 @@ public class GameHistoryController {
         historyEntries.add(historyEntry);
     }
 
-    public void removeHistoryEntry(int entryId) {
-        getScene().removeObject(historyEntries.get(entryId).getEntry());
-        getScene().removeObject(historyEntries.get(entryId).getOverlay().getOverlay());
-        historyEntries.remove(entryId);
+    public void removeAllPredictedHistoryEntries() {
+        while(!historyEntries.isEmpty() && historyEntries.get(historyEntries.size() - 1).isPredicted()) {
+            HistoryEntry historyEntryToRemove = historyEntries.get(historyEntries.size() - 1);
+            getScene().removeObject(historyEntryToRemove.getEntry());
+            getScene().removeObject(historyEntryToRemove.getOverlay().getOverlay());
+            historyEntries.remove(historyEntryToRemove);
+        }
     }
 
     public void removeAllHistoryEntries() {

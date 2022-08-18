@@ -1,18 +1,14 @@
 package controllers.solverSettingsControllers.buttonController;
 
-import controllers.solverSettingsControllers.algorithmsController.AlgorithmsChanger;
 import engine.button.SimpleButton;
 import engine.common.Command;
 import engine.display.Drawable;
 import engine.display.DrawableComposition;
 import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
-import solver.Result;
 
-import static controllers.solverSettingsControllers.algorithmsController.SolverSettingsAlgorithmsController.getSolverSettingsAlgorithmsController;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
-import static gameLogic.game.Game.getGame;
 
 public class MultipleGamesSolverStarter {
 

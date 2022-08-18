@@ -1,4 +1,4 @@
-package solver;
+package solver.result;
 
 import gameLogic.card.Card;
 import gameLogic.card.Color;

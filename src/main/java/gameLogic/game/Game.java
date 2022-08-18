@@ -6,12 +6,10 @@ import gameLogic.card.Deck;
 import gameLogic.player.Player;
 import lombok.Getter;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
+import static gameLogic.card.Deck.getDeck;
 import static gameLogic.game.GameConstants.DECK_SIZE;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 import static gameLogic.player.Player.N;
@@ -38,10 +36,28 @@ public class Game {
     private int startingNumberOfCardsPerPlayer;
 
     private Game() {
-        deck = Deck.getDeck();
+        deck = getDeck();
         moveValidator = new MoveValidator();
         roundJudge = new RoundJudge();
         startingNumberOfCardsPerPlayer = DECK_SIZE / PLAYER_NUMBER;
+    }
+
+    public Game(Game game) {
+        deck = getDeck();
+        moveValidator = new MoveValidator();
+        roundJudge = new RoundJudge();
+        cards = new List[PLAYER_NUMBER];
+        for(int i = 0; i < PLAYER_NUMBER; i++) {
+            cards[i] = new ArrayList<>(game.getCards()[i]);
+        }
+        points = new int[PLAYER_NUMBER / 2];
+        points[0] = game.getPoints()[0];
+        points[1] = game.getPoints()[1];
+        atu = game.getAtu();
+        currentPlayer = game.getCurrentPlayer();
+        startingPlayer = game.getStartingPlayer();
+        playedCards = new ArrayList<>(game.getPlayedCards());
+        startingNumberOfCardsPerPlayer = game.getStartingNumberOfCardsPerPlayer();
     }
 
     public static Game getGame() {
@@ -87,10 +103,6 @@ public class Game {
         currentPlayer = startingPlayer = roundJudge.chooseWinningPlayer(playedCards, startingPlayer, atu);
         points[currentPlayer.ordinal() % (PLAYER_NUMBER / 2)]++;
         playedCards.clear();
-    }
-
-    public Card getWinningCard() {
-        return roundJudge.chooseWinningCard(playedCards, startingPlayer, atu);
     }
 
     public Player getWinningPlayer() {

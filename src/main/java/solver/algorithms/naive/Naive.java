@@ -1,4 +1,4 @@
-package solver.algorithms;
+package solver.algorithms.naive;
 
 import gameLogic.card.Card;
 import gameLogic.game.Game;

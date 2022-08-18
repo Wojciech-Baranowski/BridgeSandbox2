@@ -5,7 +5,7 @@ import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import lombok.Getter;
 import solver.Algorithm;
-import solver.algorithms.Naive;
+import solver.algorithms.naive.Naive;
 
 import java.util.ArrayList;
 import java.util.List;

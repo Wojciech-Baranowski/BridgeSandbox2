@@ -68,7 +68,7 @@ public class Initializer {
         assets.addColor("yellow", 0xFFFFFF00);
         assets.addColor("lightGray", 0xFFA8A8A8);
         assets.addColor("gray", 0xFF4378FF);
-        assets.addColor("darkGray", 0xFF555555);
+        assets.addColor("darkGray", 0xFF898989);
         assets.addColor("transparentGray", 0x44444444);
         assets.addColor("transparentBlue", 0x554378FF);
         assets.addColor("transparent", 0xFFFF00FF);

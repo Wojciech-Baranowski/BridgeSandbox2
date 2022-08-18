@@ -54,7 +54,7 @@ public class HistoryEntry {
                     28,
                     33,
                     2,
-                    (i % 2 == 0) ? "gray" : "lightGray",
+                    (i % 2 == 0) ? "darkGray" : "lightGray",
                     "lightBlue");
             entry = new DrawableComposition(entry, drawable);
 
@@ -64,7 +64,7 @@ public class HistoryEntry {
                     34,
                     33,
                     2,
-                    (i % 2 == 0) ? "gray" : "lightGray",
+                    (i % 2 == 0) ? "darkGray" : "lightGray",
                     "lightBlue");
             entry = new DrawableComposition(entry, drawable);
         }
@@ -77,7 +77,7 @@ public class HistoryEntry {
                 background.getX() + id * 63 + 30,
                 background.getY() + 514,
                 "HBE24",
-                predicted ? "yellow" : "black");
+                predicted ? "black" : "yellow");
         entry = new DrawableComposition(entry, drawable);
         for (int i = 0; i < PLAYER_NUMBER; i++) {
             drawable = drawableFactory.makeText(

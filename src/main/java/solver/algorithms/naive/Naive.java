@@ -17,8 +17,8 @@ public class Naive implements Algorithm {
 
     private List<Card> getAllCardsInNaiveOrder(Game game) {
         List<Card> cards = new ArrayList<>(game.getPlayedCards());
-        while(!game.getCards()[game.getCurrentPlayer().ordinal()].isEmpty()) {
-            for(int i = 0; i < game.getCards()[game.getCurrentPlayer().ordinal()].size(); i++) {
+        while (!game.getCards()[game.getCurrentPlayer().ordinal()].isEmpty()) {
+            for (int i = 0; i < game.getCards()[game.getCurrentPlayer().ordinal()].size(); i++) {
                 Card card = game.getCards()[game.getCurrentPlayer().ordinal()].get(i);
                 if (game.isMoveValid(card)) {
                     cards.add(card);

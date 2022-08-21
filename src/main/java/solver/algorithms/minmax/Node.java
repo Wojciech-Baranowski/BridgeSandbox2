@@ -5,7 +5,8 @@ import gameLogic.game.Game;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static gameLogic.game.GameConstants.*;
+import static gameLogic.game.GameConstants.FIGURE_NUMBER;
+import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
 public class Node {
 
@@ -23,9 +24,9 @@ public class Node {
 
     Node(Game game) {
         allCardsNumber = Response.allCardsNumber = (byte) (Arrays.stream(game.getCards())
-                                .map(Collection::size)
-                                .reduce(0, Integer::sum)
-                                .byteValue() + game.getPlayedCards().size());
+                .map(Collection::size)
+                .reduce(0, Integer::sum)
+                .byteValue() + game.getPlayedCards().size());
         depth = (byte) game.getPlayedCards().size();
         maximizing = game.getCurrentPlayer().ordinal() % 2 == 0;
         setCards(game);
@@ -47,13 +48,13 @@ public class Node {
 
     public byte winningPlayerIndex() {
         byte winnerIndex = startingPlayer;
-        for(byte i = 0; i < PLAYER_NUMBER; i++) {
-            if(i != startingPlayer) {
-                if(playedCards[i] / FIGURE_NUMBER == playedCards[winnerIndex] / FIGURE_NUMBER) {
-                    if(playedCards[i] > playedCards[winnerIndex]) {
+        for (byte i = 0; i < PLAYER_NUMBER; i++) {
+            if (i != startingPlayer) {
+                if (playedCards[i] / FIGURE_NUMBER == playedCards[winnerIndex] / FIGURE_NUMBER) {
+                    if (playedCards[i] > playedCards[winnerIndex]) {
                         winnerIndex = i;
                     }
-                } else if(playedCards[i] / FIGURE_NUMBER == atu) {
+                } else if (playedCards[i] / FIGURE_NUMBER == atu) {
                     winnerIndex = i;
                 }
             }
@@ -90,7 +91,7 @@ public class Node {
         playedCardsSize = PLAYER_NUMBER;
         nsPoints -= ((startingPlayer & 1) == 0) ? 1 : 0;
         currentPlayer = startingPlayer = lastStartingPlayer;
-        for(byte i = 0; i < PLAYER_NUMBER; i++) {
+        for (byte i = 0; i < PLAYER_NUMBER; i++) {
             this.playedCards[i] = playedCards[i];
         }
     }
@@ -103,8 +104,8 @@ public class Node {
 
     private void insertCardBack(byte card) {
         byte index = (byte) (cardsSize[currentPlayer] - 1);
-        while(index >= 0) {
-            if(cards[currentPlayer][index] < card) {
+        while (index >= 0) {
+            if (cards[currentPlayer][index] < card) {
                 cards[currentPlayer][index + 1] = card;
                 return;
             }

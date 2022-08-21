@@ -32,7 +32,7 @@ public class Result {
             }
         }
 
-        for(ResultRound round : resultRounds) {
+        for (ResultRound round : resultRounds) {
             int index = round.isPointNS() ? 0 : 1;
             points[index]++;
         }

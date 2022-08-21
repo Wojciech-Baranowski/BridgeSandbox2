@@ -6,7 +6,7 @@ public class Response {
     public byte[] cards;
     public byte nsPoints;
 
-    Response (byte points){
+    Response(byte points) {
         cards = new byte[allCardsNumber];
         this.nsPoints = points;
     }

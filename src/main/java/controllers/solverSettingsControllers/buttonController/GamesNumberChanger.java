@@ -37,7 +37,7 @@ public class GamesNumberChanger {
     private int gamesNumber;
 
     GamesNumberChanger(DrawableFactory drawableFactory, Drawable background) {
-        gamesNumber = 1000000;
+        gamesNumber = 1;
         Drawable buttonBackground = drawableFactory.makeFramedRectangle(
                 484 + background.getX(),
                 83 + background.getY(),

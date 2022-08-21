@@ -1,14 +1,11 @@
 package solver.algorithms.minmax;
 
-public class Response {
+import solver.algorithms.BaseResponse;
 
-    public static byte allCardsNumber;
-    public byte[] cards;
-    public byte nsPoints;
+public class Response extends BaseResponse {
 
     Response(byte points) {
-        cards = new byte[allCardsNumber];
-        this.nsPoints = points;
+        super(points);
     }
 
     public void addData(byte card, byte depth) {

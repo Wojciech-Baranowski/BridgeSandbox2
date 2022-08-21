@@ -37,16 +37,16 @@ public class GameSwitch {
 
     GameSwitch(DrawableFactory drawableFactory, Drawable background) {
         Drawable buttonBackground = drawableFactory.makeFramedRectangle(
-                763 + background.getX(),
+                828 + background.getX(),
                 594 + background.getY(),
-                165,
+                354,
                 64,
                 2,
                 "gray",
                 "lightBlue");
 
         Drawable buttonText = drawableFactory.makeText(
-                "Game",
+                "Back to game",
                 18 + buttonBackground.getX(),
                 10 + buttonBackground.getY(),
                 "HBE48",

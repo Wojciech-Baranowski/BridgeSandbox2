@@ -23,8 +23,8 @@ public class AlgorithmChangerOption {
             DrawableFactory drawableFactory, Drawable background, String name, Algorithm algorithm, int index) {
         this.algorithm = algorithm;
         Drawable inactiveButtonDrawable = drawableFactory.makeFramedRectangle(
-                ((index > 5) ? 620 : 20) + background.getX(),
-                ((index > 5) ? 20 : 330) + 50 * (index > 5 ? index - 6 : index) + background.getY(),
+                620 + background.getX(),
+                80 + 50 * index + background.getY(),
                 32,
                 32,
                 2,

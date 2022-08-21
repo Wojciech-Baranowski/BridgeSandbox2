@@ -7,4 +7,6 @@ public interface Algorithm {
 
     Result solve(Game game);
 
+    long getNumberOfVisitedNodes();
+
 }

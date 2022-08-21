@@ -13,17 +13,26 @@ import static gameLogic.card.Deck.getDeck;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
 public class Minmax implements Algorithm {
+
+    private long numberOfVisitedNodes;
     @Override
     public Result solve(Game game) {
+        numberOfVisitedNodes = 0;
         Node node = new Node(game);
         Response bestOutcome = minMax(node);
         return mapResponseToResult(game, bestOutcome);
+    }
+
+    @Override
+    public long getNumberOfVisitedNodes() {
+        return numberOfVisitedNodes;
     }
 
     private Response minMax(Node node) {
         if (node.depth == Node.allCardsNumber) {
             return new Response(node.nsPoints);
         }
+        numberOfVisitedNodes++;
         Response bestResponse = new Response((byte) (node.maximizing ? -100 : 100));
         for (byte i = 0; i < node.cardsSize[node.currentPlayer]; i++) {
             if (node.isCardValid(i)) {

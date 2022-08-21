@@ -11,8 +11,8 @@ public class Algorithms {
 
     Algorithms(DrawableFactory drawableFactory, Drawable background) {
         algorithms = drawableFactory.makeText("Algorithms:",
-                22 + background.getX(),
-                260 + background.getY(),
+                615 + background.getX(),
+                15 + background.getY(),
                 "HBE48",
                 "black");
         getScene().addObjectHigherThan(algorithms, background);

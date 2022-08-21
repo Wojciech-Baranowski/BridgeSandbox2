@@ -1,11 +1,14 @@
 package engine.button.radioButton;
 
+import lombok.Getter;
+
 import java.util.LinkedList;
 import java.util.List;
 
 public class RadioButtonBundle {
 
     private final List<RadioButton> radioButtons;
+    @Getter
     private RadioButton selectedRadioButton;
 
     public RadioButtonBundle() {

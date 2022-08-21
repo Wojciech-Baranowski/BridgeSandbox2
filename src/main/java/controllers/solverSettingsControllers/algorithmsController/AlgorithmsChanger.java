@@ -37,16 +37,13 @@ public class AlgorithmsChanger {
         algorithmsBundle.update(algorithmChangerOptions.get(0).getRadioButton());
     }
 
-    private void addAlgorithms() {
+    public void addAlgorithms() {
 
         algorithms.add(new Minmax());
         algorithmNames.add("Minmax");
 
         algorithms.add(new Naive());
-        algorithmNames.add("Naive algorithm");
-
-        algorithms.add(new Minmax());
-        algorithmNames.add("Minmax");
+        algorithmNames.add("Naive");
     }
 
 }

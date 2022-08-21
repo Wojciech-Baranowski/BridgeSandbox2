@@ -16,6 +16,10 @@ public class SolverSettingsTextController {
     @Getter
     private final GamesNumber gamesNumber;
     private final Algorithms algorithms;
+    @Getter
+    private final TimeStatistics timeStatistics;
+    @Getter
+    private final VisitedNodesStatistics visitedNodesStatistics;
 
     private SolverSettingsTextController() {
         DrawableFactory drawableFactory = getDisplay().getDrawableFactory();
@@ -25,6 +29,8 @@ public class SolverSettingsTextController {
         cardNumber = new CardNumber(drawableFactory, buttonsSpace);
         gamesNumber = new GamesNumber(drawableFactory, buttonsSpace);
         algorithms = new Algorithms(drawableFactory, background);
+        timeStatistics = new TimeStatistics(drawableFactory, background);
+        visitedNodesStatistics = new VisitedNodesStatistics(drawableFactory, background);
     }
 
     public static SolverSettingsTextController getSolverSettingsTextController() {

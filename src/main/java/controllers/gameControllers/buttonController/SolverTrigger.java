@@ -56,25 +56,25 @@ public class SolverTrigger {
         Drawable inactiveBackground = drawableFactory.makeFramedRectangle(
                 10 + buttonsSpace.getX(),
                 370 + buttonsSpace.getY(),
-                100,
+                224,
                 40,
                 2,
                 "gray",
                 "lightBlue");
 
         Drawable activeBackground = drawableFactory.makeFramedRectangle(
-                10 + buttonsSpace.getX(),
-                370 + buttonsSpace.getY(),
-                100,
-                40,
+                inactiveBackground.getX(),
+                inactiveBackground.getY(),
+                inactiveBackground.getW(),
+                inactiveBackground.getH(),
                 2,
                 "lightBlue",
                 "yellow");
 
         Drawable text = drawableFactory.makeText(
-                "Solve",
+                "Toggle solver",
                 8 + inactiveBackground.getX(),
-                6 + inactiveBackground.getY(),
+                5 + inactiveBackground.getY(),
                 "HBE32",
                 "black");
 

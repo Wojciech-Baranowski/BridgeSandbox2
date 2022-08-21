@@ -26,7 +26,9 @@ public class HistoryEntry {
         initializeEntryBackground(drawableFactory, background, game.getWinningPlayer(), entryId);
         initializeText(drawableFactory, background, game.getPlayedCards(), game.getStartingPlayer(), entryId);
         getScene().addObjectHigherThan(entry, background);
-        overlay = new HistoryEntryOverlay(drawableFactory, this, game.getWinningPlayer().ordinal());
+        int overlayFieldId = (game.getWinningPlayer().ordinal()
+                - game.getStartingPlayer().ordinal() + PLAYER_NUMBER) % PLAYER_NUMBER;
+        overlay = new HistoryEntryOverlay(drawableFactory, this, overlayFieldId);
     }
 
     public HistoryEntry(DrawableFactory drawableFactory, Drawable background, ResultRound resultRound, int entryId) {
@@ -34,7 +36,9 @@ public class HistoryEntry {
         initializeEntryBackground(drawableFactory, background, resultRound.getWinningPlayer(), entryId);
         initializeText(drawableFactory, background, resultRound.getCards(), resultRound.getStartingPlayer(), entryId);
         getScene().addObjectHigherThan(entry, background);
-        overlay = new HistoryEntryOverlay(drawableFactory, this, resultRound.getWinningPlayer().ordinal());
+        int overlayFieldId = (resultRound.getWinningPlayer().ordinal()
+                - resultRound.getStartingPlayer().ordinal() + PLAYER_NUMBER) % PLAYER_NUMBER;
+        overlay = new HistoryEntryOverlay(drawableFactory, this, overlayFieldId);
     }
 
     private void initializeEntryBackground(

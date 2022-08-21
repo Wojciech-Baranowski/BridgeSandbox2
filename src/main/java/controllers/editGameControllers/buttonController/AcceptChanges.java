@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 import static controllers.editGameControllers.buttonController.EditGameButtonController.getEditGameButtonController;
 import static controllers.editGameControllers.cardController.EditGameCardController.getEditGameCardController;
 import static controllers.editGameControllers.textController.EditGameTextController.getEditGameTextController;
+import static controllers.gameControllers.buttonController.GameButtonController.getGameButtonController;
 import static controllers.gameControllers.cardController.GameCardController.getGameCardController;
 import static controllers.gameControllers.historyController.GameHistoryController.getGameHistoryController;
 import static controllers.gameControllers.textController.GameTextController.getGameTextController;
@@ -37,6 +38,7 @@ public class AcceptChanges {
                 getEditGameTextController().getInvalidGameData().hideText();
                 getScene().switchCollection("game");
                 initializeGame();
+                getGameButtonController().getSolverTrigger().getSolverTrigger().setSelected(false);
             } else {
                 getEditGameTextController().getInvalidGameData().showText();
             }

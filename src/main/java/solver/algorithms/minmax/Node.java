@@ -5,7 +5,7 @@ import gameLogic.game.Game;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static gameLogic.game.GameConstants.PLAYER_NUMBER;
+import static gameLogic.game.GameConstants.*;
 
 public class Node {
 
@@ -22,23 +22,43 @@ public class Node {
     public boolean maximizing;
 
     Node(Game game) {
-        allCardsNumber = Response.allCardsNumber = Arrays.stream(game.getCards())
-                .map(Collection::size)
-                .reduce(0, Integer::sum)
-                .byteValue();
-        depth = 0;
-        maximizing = (game.getCurrentPlayer().ordinal() % 2 == 0);
+        allCardsNumber = Response.allCardsNumber = (byte) (Arrays.stream(game.getCards())
+                                .map(Collection::size)
+                                .reduce(0, Integer::sum)
+                                .byteValue() + game.getPlayedCards().size());
+        depth = (byte) game.getPlayedCards().size();
+        maximizing = game.getCurrentPlayer().ordinal() % 2 == 0;
         setCards(game);
         setPlayedCards(game);
         setPlayerData(game);
     }
 
     public boolean isCardValid(byte index) {
-        return false;
+        if (cards[currentPlayer][index] / FIGURE_NUMBER != playedCards[startingPlayer] / FIGURE_NUMBER
+                && playedCardsSize > 0) {
+            for (byte i = 0; i < cardsSize[currentPlayer]; i++) {
+                if (cards[currentPlayer][i] / FIGURE_NUMBER == playedCards[startingPlayer] / FIGURE_NUMBER) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public byte winningPlayerIndex() {
-        return 0;
+        byte winnerIndex = startingPlayer;
+        for(byte i = 0; i < PLAYER_NUMBER; i++) {
+            if(i != startingPlayer) {
+                if(playedCards[i] / FIGURE_NUMBER == playedCards[winnerIndex] / FIGURE_NUMBER) {
+                    if(playedCards[i] > playedCards[winnerIndex]) {
+                        winnerIndex = i;
+                    }
+                } else if(playedCards[i] / FIGURE_NUMBER == atu) {
+                    winnerIndex = i;
+                }
+            }
+        }
+        return winnerIndex;
     }
 
     public void playCard(byte index) {
@@ -47,6 +67,8 @@ public class Node {
         cardsSize[currentPlayer]--;
         playedCardsSize++;
         currentPlayer = (byte) ((currentPlayer + 1) & 3);
+        maximizing = !maximizing;
+        depth++;
     }
 
     public void summarize() {
@@ -56,6 +78,8 @@ public class Node {
     }
 
     public void revertPlayCard() {
+        depth--;
+        maximizing = !maximizing;
         currentPlayer = (byte) ((currentPlayer - 1 + PLAYER_NUMBER) & 3);
         playedCardsSize--;
         insertCardBack(playedCards[currentPlayer]);
@@ -72,14 +96,14 @@ public class Node {
     }
 
     private void shiftCards(byte index) {
-        for (byte i = index; i < cards[currentPlayer].length - 2; i++) {
+        for (byte i = index; i < cards[currentPlayer].length - 1; i++) {
             cards[currentPlayer][i] = cards[currentPlayer][i + 1];
         }
     }
 
     private void insertCardBack(byte card) {
-        byte index = cardsSize[currentPlayer];
-        while(index > 0) {
+        byte index = (byte) (cardsSize[currentPlayer] - 1);
+        while(index >= 0) {
             if(cards[currentPlayer][index] < card) {
                 cards[currentPlayer][index + 1] = card;
                 return;
@@ -91,9 +115,10 @@ public class Node {
     }
 
     private void setCards(Game game) {
-        cards = new byte[PLAYER_NUMBER][allCardsNumber];
+        cards = new byte[PLAYER_NUMBER][];
         cardsSize = new byte[PLAYER_NUMBER];
         for (int i = 0; i < PLAYER_NUMBER; i++) {
+            cards[i] = new byte[game.getCards()[i].size()];
             for (int j = 0; j < game.getCards()[i].size(); j++) {
                 cards[i][j] = (byte) game.getCards()[i].get(j).getId();
             }
@@ -108,7 +133,7 @@ public class Node {
             int cardsOwnerOrdinal = (i + game.getStartingPlayer().ordinal()) % PLAYER_NUMBER;
             playedCards[cardsOwnerOrdinal] = (byte) game.getPlayedCards().get(i).getId();
         }
-        playedCardsSize = (byte) playedCards.length;
+        playedCardsSize = (byte) game.getPlayedCards().size();
     }
 
     private void setPlayerData(Game game) {

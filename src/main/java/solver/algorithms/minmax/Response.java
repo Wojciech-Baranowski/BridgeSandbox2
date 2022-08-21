@@ -6,15 +6,13 @@ public class Response {
     public byte[] cards;
     public byte nsPoints;
 
-    Response (byte card, byte points){
+    Response (byte points){
         cards = new byte[allCardsNumber];
-        cards[0] = card;
         this.nsPoints = points;
     }
 
-    public void addData(byte card, byte point) {
-        cards[cards.length - 1] = card;
-        nsPoints += point;
+    public void addData(byte card, byte depth) {
+        cards[depth] = card;
     }
 
 }

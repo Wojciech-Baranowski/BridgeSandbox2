@@ -8,6 +8,7 @@ import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
 import gameLogic.game.Game;
 
+import static controllers.gameControllers.buttonController.GameButtonController.getGameButtonController;
 import static controllers.gameControllers.cardController.GameCardController.getGameCardController;
 import static controllers.gameControllers.historyController.GameHistoryController.getGameHistoryController;
 import static controllers.gameControllers.textController.GameTextController.getGameTextController;
@@ -27,6 +28,7 @@ public class GameSwitch {
             getGameHistoryController().removeAllHistoryEntries();
             getGameCardController().reinitialize();
             getGameTextController().updatePoints();
+            getGameButtonController().getSolverTrigger().getSolverTrigger().setSelected(false);
         }
 
     }

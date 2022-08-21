@@ -5,6 +5,7 @@ import engine.common.Visual;
 import engine.display.Drawable;
 import engine.input.inputCombination.InputCombination;
 import lombok.Getter;
+import lombok.Setter;
 
 public class Checkbox implements Visual, Interactive {
 
@@ -12,6 +13,7 @@ public class Checkbox implements Visual, Interactive {
     protected final Drawable onDrawable;
     protected final InputCombination activationCombination;
     @Getter
+    @Setter
     protected boolean selected;
 
     public Checkbox(Drawable offDrawable, Drawable onDrawable, InputCombination activationCombination) {

@@ -29,8 +29,8 @@ public class VisitedNodesStatistics {
         getScene().addObjectHigherThan(title, background);
 
         total = drawableFactory.makeText(
-                "S:",
-                10 + title.getX(),
+                "sum:",
+                12 + title.getX(),
                 40 + title.getY(),
                 "HBE24",
                 "black");
@@ -46,7 +46,7 @@ public class VisitedNodesStatistics {
 
         average = drawableFactory.makeText(
                 "avg:",
-                10 + title.getX(),
+                18 + title.getX(),
                 104 + title.getY(),
                 "HBE24",
                 "black");
@@ -54,15 +54,15 @@ public class VisitedNodesStatistics {
 
         median = drawableFactory.makeText(
                 "med:",
-                10 + title.getX(),
+                12 + title.getX(),
                 136 + title.getY(),
                 "HBE24",
                 "black");
         getScene().addObjectHigherThan(median, background);
 
         standardDeviation = drawableFactory.makeText(
-                "d:",
-                10 + title.getX(),
+                "dev:",
+                18 + title.getX(),
                 168 + title.getY(),
                 "HBE24",
                 "black");
@@ -70,7 +70,7 @@ public class VisitedNodesStatistics {
 
         quantile90 = drawableFactory.makeText(
                 "p90:",
-                10 + title.getX(),
+                17 + title.getX(),
                 200 + title.getY(),
                 "HBE24",
                 "black");
@@ -78,7 +78,7 @@ public class VisitedNodesStatistics {
 
         quantile95 = drawableFactory.makeText(
                 "p95:",
-                10 + title.getX(),
+                17 + title.getX(),
                 232 + title.getY(),
                 "HBE24",
                 "black");
@@ -86,7 +86,7 @@ public class VisitedNodesStatistics {
 
         quantile99 = drawableFactory.makeText(
                 "p99:",
-                10 + title.getX(),
+                17 + title.getX(),
                 264 + title.getY(),
                 "HBE24",
                 "black");
@@ -94,14 +94,14 @@ public class VisitedNodesStatistics {
     }
 
     public void update(long tot, long max, long avg, long med, long dev, long p90, long p95, long p99) {
-        total.setText("S: " + tot);
-        maximum.setText("max: " + max);
-        average.setText("avg: " + avg);
-        median.setText("med: " + med);
-        standardDeviation.setText("d: " + dev);
-        quantile90.setText("p90: " + p90);
-        quantile95.setText("p95: " + p95);
-        quantile99.setText("p99: " + p99);
+        total.setText("sum: " + String.format("%,d", tot));
+        maximum.setText("max: " + String.format("%,d", max));
+        average.setText("avg: " + String.format("%,d", avg));
+        median.setText("med: " + String.format("%,d", med));
+        standardDeviation.setText("dev: " + String.format("%,d", dev));
+        quantile90.setText("p90: " + String.format("%,d", p90));
+        quantile95.setText("p95: " + String.format("%,d", p95));
+        quantile99.setText("p99: " + String.format("%,d", p99));
     }
 
 }

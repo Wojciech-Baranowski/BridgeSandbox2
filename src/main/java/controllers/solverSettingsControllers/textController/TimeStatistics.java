@@ -28,8 +28,8 @@ public class TimeStatistics {
         getScene().addObjectHigherThan(title, background);
 
         total = drawableFactory.makeText(
-                "S:",
-                10 + title.getX(),
+                "sum:",
+                12 + title.getX(),
                 40 + title.getY(),
                 "HBE24",
                 "black");
@@ -45,7 +45,7 @@ public class TimeStatistics {
 
         average = drawableFactory.makeText(
                 "avg:",
-                10 + title.getX(),
+                18 + title.getX(),
                 104 + title.getY(),
                 "HBE24",
                 "black");
@@ -53,15 +53,15 @@ public class TimeStatistics {
 
         median = drawableFactory.makeText(
                 "med:",
-                10 + title.getX(),
+                12 + title.getX(),
                 136 + title.getY(),
                 "HBE24",
                 "black");
         getScene().addObjectHigherThan(median, background);
 
         standardDeviation = drawableFactory.makeText(
-                "d:",
-                10 + title.getX(),
+                "dev:",
+                18 + title.getX(),
                 168 + title.getY(),
                 "HBE24",
                 "black");
@@ -69,7 +69,7 @@ public class TimeStatistics {
 
         quantile90 = drawableFactory.makeText(
                 "p90:",
-                10 + title.getX(),
+                17 + title.getX(),
                 200 + title.getY(),
                 "HBE24",
                 "black");
@@ -77,7 +77,7 @@ public class TimeStatistics {
 
         quantile95 = drawableFactory.makeText(
                 "p95:",
-                10 + title.getX(),
+                17 + title.getX(),
                 232 + title.getY(),
                 "HBE24",
                 "black");
@@ -85,7 +85,7 @@ public class TimeStatistics {
 
         quantile99 = drawableFactory.makeText(
                 "p99:",
-                10 + title.getX(),
+                17 + title.getX(),
                 264 + title.getY(),
                 "HBE24",
                 "black");
@@ -93,11 +93,11 @@ public class TimeStatistics {
     }
 
     public void update(double tot, double max, double avg, double med, double dev, double p90, double p95, double p99) {
-        total.setText("S: " + tot);
+        total.setText("sum: " + tot);
         maximum.setText("max: " + max);
         average.setText("avg: " + avg);
         median.setText("med: " + med);
-        standardDeviation.setText("d: " + dev);
+        standardDeviation.setText("dev: " + dev);
         quantile90.setText("p90: " + p90);
         quantile95.setText("p95: " + p95);
         quantile99.setText("p99: " + p99);

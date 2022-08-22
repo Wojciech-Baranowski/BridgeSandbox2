@@ -9,7 +9,7 @@ public class CommandCheckbox extends Checkbox {
 
     @Getter
     private final Command onCommand;
-    @Getter
+    @Getter 
     private final Command offCommand;
 
     public CommandCheckbox(Drawable offDrawable,
@@ -25,12 +25,16 @@ public class CommandCheckbox extends Checkbox {
     @Override
     public void update() {
         if (activationCombination == null || activationCombination.isActive()) {
-            if(!selected) {
+            if (!selected) {
                 selected = true;
-                onCommand.execute();
+                if (onCommand != null) {
+                    onCommand.execute();
+                }
             } else {
                 selected = false;
-                offCommand.execute();
+                if (offCommand != null) {
+                    offCommand.execute();
+                }
             }
         }
     }

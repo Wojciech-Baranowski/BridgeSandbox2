@@ -67,6 +67,10 @@ public class Game {
         return game;
     }
 
+    public static Game getGameMultipliedInstance() {
+        return new Game();
+    }
+
     public void initializeGame(Color atu, int numberOfCardsPerPlayer) {
         List<Card>[] cards = deck.dealCards(numberOfCardsPerPlayer);
         startingNumberOfCardsPerPlayer = numberOfCardsPerPlayer;

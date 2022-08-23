@@ -32,7 +32,7 @@ public class MultipleGamesSolverStarter {
             int cardNumber = buttonController.getCardsNumberChanger().getCardNumber();
             int gameNumber = buttonController.getGamesNumberChanger().getGamesNumber();
             MultipleGamesSolver solver = new MultipleGamesSolver(algorithm, gameNumber, cardNumber);
-            solver.solve();
+            solver.solveMultipleGames();
             textController.getTimeStatisticsText().update(solver.getTimeStatistics());
             textController.getVisitedNodesStatisticsText().update(solver.getVisitedNodesStatistics());
         }

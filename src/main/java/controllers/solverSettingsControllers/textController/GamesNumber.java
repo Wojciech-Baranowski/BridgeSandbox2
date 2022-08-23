@@ -11,7 +11,7 @@ public class GamesNumber {
     private final Text gamesNumber;
 
     GamesNumber(DrawableFactory drawableFactory, Drawable background) {
-        gamesNumber = drawableFactory.makeText("Number of Games: 1",
+        gamesNumber = drawableFactory.makeText("Number of games: 1",
                 20 + background.getX(),
                 85 + background.getY(),
                 "HBE32",
@@ -20,7 +20,7 @@ public class GamesNumber {
     }
 
     public void updateGamesNumber(int gamesNumber) {
-        this.gamesNumber.setText("Number of Games: " + gamesNumber);
+        this.gamesNumber.setText("Number of games: " + gamesNumber);
     }
 
 }

@@ -21,7 +21,7 @@ public class VisitedNodesStatisticsText {
 
     VisitedNodesStatisticsText(DrawableFactory drawableFactory, Drawable background) {
         title = drawableFactory.makeText(
-                "VisitedNodes:",
+                "Visited nodes:",
                 350 + background.getX(),
                 250 + background.getY(),
                 "HBE32",

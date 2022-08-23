@@ -10,20 +10,25 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.TimeUnit;
 
 import static controllers.main.assets.NumberRounder.round;
-import static gameLogic.game.Game.getGame;
 import static java.lang.Math.sqrt;
 import static java.util.Collections.sort;
 
 @Getter
 public class MultipleGamesSolver {
 
+    private final static int THREAD_NUMBER = 6;
     private final TimeStatistics timeStatistics;
     private final VisitedNodesStatistics visitedNodesStatistics;
     private final Algorithm algorithm;
     private final int gameNumber;
     private final int cardNumber;
+    private final List<Long> numberOfVisitedNodesList;
+    private final List<Double> computationTimeList;
+    private int numberOfProcessedGames;
 
 
     public MultipleGamesSolver(Algorithm algorithm, int gameNumber, int cardNumber) {
@@ -32,27 +37,43 @@ public class MultipleGamesSolver {
         this.algorithm = algorithm;
         this.gameNumber = gameNumber;
         this.cardNumber = cardNumber;
+        numberOfVisitedNodesList = new ArrayList<>();
+        computationTimeList = new ArrayList<>();
     }
 
-    public void solve() {
-        List<Long> numberOfVisitedNodesList = new ArrayList<>();
-        List<Double> computationTimeList = new ArrayList<>();
-        Game game = getGame();
-
+    public void solveMultipleGames() {
+        numberOfProcessedGames = 0;
+        ForkJoinPool threadPool = new ForkJoinPool(THREAD_NUMBER);
         for (int i = 0; i < gameNumber; i++) {
-            game.initializeGame(Color.CLUB, cardNumber);
-            long time = System.currentTimeMillis();
-            algorithm.solve(game);
-            time = System.currentTimeMillis() - time;
-            numberOfVisitedNodesList.add(algorithm.getNumberOfVisitedNodes());
-            computationTimeList.add(round(time / 1000.0, 4));
-            Logger.log((i + 1) + " / " + gameNumber);
+            threadPool.execute(this::solveGame);
         }
-
+        threadPool.shutdown();
+        try {
+            threadPool.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         updateTimeStatistics(computationTimeList);
         updateVisitedNodesStatistics(numberOfVisitedNodesList);
         moveStatisticsToClipboard();
     }
+
+    private void solveGame() {
+        Game game = Game.getGameMultipliedInstance();
+        game.initializeGame(Color.CLUB, cardNumber);
+        long time = System.currentTimeMillis();
+        algorithm.solve(game);
+        time = System.currentTimeMillis() - time;
+        long numberOfVisitedNodes = algorithm.getNumberOfVisitedNodes();
+        double computationTime = round(time / 1000.0, 4);
+        synchronized (this) {
+            numberOfVisitedNodesList.add(numberOfVisitedNodes);
+            computationTimeList.add(computationTime);
+            numberOfProcessedGames++;
+            Logger.log(numberOfProcessedGames + " / " + gameNumber);
+        }
+    }
+
 
     private void updateTimeStatistics(List<Double> timeList) {
         sort(timeList);

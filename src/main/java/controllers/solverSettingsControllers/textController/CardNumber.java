@@ -11,7 +11,7 @@ public class CardNumber {
     private final Text cardNumber;
 
     CardNumber(DrawableFactory drawableFactory, Drawable background) {
-        cardNumber = drawableFactory.makeText("Number of Cards: 13",
+        cardNumber = drawableFactory.makeText("Number of cards: 13",
                 20 + background.getX(),
                 35 + background.getY(),
                 "HBE32",
@@ -20,7 +20,7 @@ public class CardNumber {
     }
 
     public void updateCardNumber(int cardNumber) {
-        this.cardNumber.setText("Number of Cards: " + cardNumber);
+        this.cardNumber.setText("Number of cards: " + cardNumber);
     }
 
 }

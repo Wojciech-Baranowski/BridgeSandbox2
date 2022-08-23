@@ -13,6 +13,8 @@ import gameLogic.card.Color;
 import gameLogic.game.Game;
 import solver.Algorithm;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class MultipleGamesSolverStarter {
         public void execute() {
             Game game = getGame();
             SolverSettingsButtonController buttonController = getSolverSettingsButtonController();
+            SolverSettingsTextController textController = getSolverSettingsTextController();
             AlgorithmsChanger algorithmsChanger = getSolverSettingsAlgorithmsController().getAlgorithmsChanger();
 
             int algorithmIndex = algorithmsChanger.getAlgorithmsBundle().getSelectedRadioButtonIndex();
@@ -54,6 +57,7 @@ public class MultipleGamesSolverStarter {
             }
             updateTimeStatistics(computationTimeList);
             updateVisitedNodesStatistics(numberOfVisitedNodesList);
+            moveStatisticsToClipboard();
         }
 
         private void updateTimeStatistics(List<Double> timeList) {
@@ -94,7 +98,16 @@ public class MultipleGamesSolverStarter {
             textController.getVisitedNodesStatistics().update(tot, max, avg, med, dev, p90, p95, p99);
         }
 
+        private void moveStatisticsToClipboard() {
+            SolverSettingsTextController textController = getSolverSettingsTextController();
+            String timeStatistics = textController.getTimeStatistics().getCSVData();
+            String visitedNodesStatistics = textController.getVisitedNodesStatistics().getCSVData();
+            StringSelection clipboardContent = new StringSelection(timeStatistics + ";" + visitedNodesStatistics);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(clipboardContent, null);
+        }
+
     }
+
     private final SimpleButton multipleGamesSolverStarter;
 
     MultipleGamesSolverStarter(DrawableFactory drawableFactory, Drawable buttonsSpace) {

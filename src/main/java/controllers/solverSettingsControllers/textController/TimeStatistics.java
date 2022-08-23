@@ -17,6 +17,14 @@ public class TimeStatistics {
     private final Text quantile90;
     private final Text quantile95;
     private final Text quantile99;
+    private double totalValue;
+    private double maximumValue;
+    private double averageValue;
+    private double medianValue;
+    private double standardDeviationValue;
+    private double quantile90Value;
+    private double quantile95Value;
+    private double quantile99Value;
 
     TimeStatistics(DrawableFactory drawableFactory, Drawable background) {
         title = drawableFactory.makeText(
@@ -90,6 +98,15 @@ public class TimeStatistics {
                 "HBE24",
                 "black");
         getScene().addObjectHigherThan(quantile99, background);
+
+        totalValue = 0;
+        maximumValue = 0;
+        averageValue = 0;
+        medianValue = 0;
+        standardDeviationValue = 0;
+        quantile90Value = 0;
+        quantile95Value = 0;
+        quantile99Value = 0;
     }
 
     public void update(double tot, double max, double avg, double med, double dev, double p90, double p95, double p99) {
@@ -101,6 +118,34 @@ public class TimeStatistics {
         quantile90.setText("p90: " + p90);
         quantile95.setText("p95: " + p95);
         quantile99.setText("p99: " + p99);
+        totalValue = tot;
+        maximumValue = max;
+        averageValue = avg;
+        medianValue = med;
+        standardDeviationValue = dev;
+        quantile90Value = p90;
+        quantile95Value = p95;
+        quantile99Value = p99;
+    }
+
+    public String getCSVData() {
+        return new StringBuilder()
+                .append(totalValue)
+                .append(";")
+                .append(maximumValue)
+                .append(";")
+                .append(averageValue)
+                .append(";")
+                .append(medianValue)
+                .append(";")
+                .append(standardDeviationValue)
+                .append(";")
+                .append(quantile90Value)
+                .append(";")
+                .append(quantile95Value)
+                .append(";")
+                .append(quantile99Value)
+                .toString();
     }
 
 }

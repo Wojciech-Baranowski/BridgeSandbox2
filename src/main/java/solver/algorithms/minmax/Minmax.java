@@ -20,6 +20,7 @@ public class Minmax implements Algorithm {
         numberOfVisitedNodes = 0;
         Node node = new Node(game);
         Response bestOutcome = minMax(node);
+        System.out.println(numberOfVisitedNodes);
         return mapResponseToResult(game, bestOutcome);
     }
 
@@ -30,9 +31,9 @@ public class Minmax implements Algorithm {
 
     private Response minMax(Node node) {
         if (node.depth == Node.allCardsNumber) {
+            numberOfVisitedNodes++;
             return new Response(node.nsPoints);
         }
-        numberOfVisitedNodes++;
         Response bestResponse = new Response((byte) (node.maximizing ? -100 : 100));
         for (byte i = 0; i < node.cardsSize[node.currentPlayer]; i++) {
             if (node.isCardValid(i)) {

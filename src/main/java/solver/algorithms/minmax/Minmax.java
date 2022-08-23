@@ -20,7 +20,6 @@ public class Minmax implements Algorithm {
         numberOfVisitedNodes = 0;
         Node node = new Node(game);
         Response bestOutcome = minMax(node);
-        System.out.println(numberOfVisitedNodes);
         return mapResponseToResult(game, bestOutcome);
     }
 

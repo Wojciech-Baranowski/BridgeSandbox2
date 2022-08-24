@@ -14,7 +14,7 @@ import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
 public class Minmax implements Algorithm {
 
-    private long numberOfVisitedNodes;
+    protected long numberOfVisitedNodes;
     @Override
     public Result solve(Game game) {
         numberOfVisitedNodes = 0;
@@ -28,7 +28,7 @@ public class Minmax implements Algorithm {
         return numberOfVisitedNodes;
     }
 
-    private Response minMax(Node node) {
+    protected Response minMax(Node node) {
         if (node.depth == Node.allCardsNumber) {
             numberOfVisitedNodes++;
             return new Response(node.nsPoints);
@@ -42,7 +42,7 @@ public class Minmax implements Algorithm {
         return bestResponse;
     }
 
-    private Response chooseBestResponse(Node node, Response currentBestResponse, byte currentCardIndex) {
+    protected Response chooseBestResponse(Node node, Response currentBestResponse, byte currentCardIndex) {
         Response newResponse = getResponseAfterPlayingCard(node, currentCardIndex);
         if ((node.maximizing && newResponse.nsPoints > currentBestResponse.nsPoints)
                 || (!node.maximizing && newResponse.nsPoints < currentBestResponse.nsPoints)) {
@@ -52,7 +52,7 @@ public class Minmax implements Algorithm {
         return currentBestResponse;
     }
 
-    private Response getResponseAfterPlayingCard(Node node, byte currentCardIndex) {
+    protected Response getResponseAfterPlayingCard(Node node, byte currentCardIndex) {
         Response response;
         node.playCard(currentCardIndex);
         if (node.playedCardsSize != PLAYER_NUMBER) {
@@ -68,7 +68,7 @@ public class Minmax implements Algorithm {
         return response;
     }
 
-    private Result mapResponseToResult(Game game, Response response) {
+    protected Result mapResponseToResult(Game game, Response response) {
         Deck deck = getDeck();
         List<Card> cards = new ArrayList<>();
         for (int i = 0; i < game.getPlayedCards().size(); i++) {

@@ -22,13 +22,7 @@ public class GameSwitch {
 
         @Override
         public void execute() {
-            Game game = getGame();
-            game.initializeGame(game.getAtu(), game.getStartingNumberOfCardsPerPlayer());
             getScene().switchCollection("game");
-            getGameHistoryController().removeAllHistoryEntries();
-            getGameCardController().reinitialize();
-            getGameTextController().updatePoints();
-            getGameButtonController().getSolverTrigger().getSolverTrigger().setSelected(false);
         }
 
     }

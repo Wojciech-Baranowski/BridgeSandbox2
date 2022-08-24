@@ -6,6 +6,7 @@ import engine.display.DrawableFactory;
 import lombok.Getter;
 import solver.Algorithm;
 import solver.algorithms.minmax.Minmax;
+import solver.algorithms.minmax.MinmaxWithCutoff;
 import solver.algorithms.naive.Naive;
 
 import java.util.ArrayList;
@@ -38,6 +39,9 @@ public class AlgorithmsChanger {
     }
 
     public void addAlgorithms() {
+
+        algorithms.add(new MinmaxWithCutoff());
+        algorithmNames.add("Minmax with cutoff");
 
         algorithms.add(new Minmax());
         algorithmNames.add("Minmax");

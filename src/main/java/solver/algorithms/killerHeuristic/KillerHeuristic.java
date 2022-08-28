@@ -1,4 +1,4 @@
-package solver.algorithms.minmax;
+package solver.algorithms.killerHeuristic;
 
 import gameLogic.card.Card;
 import gameLogic.card.Deck;
@@ -11,15 +11,18 @@ import java.util.List;
 
 import static gameLogic.card.Deck.getDeck;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
-public class Minmax implements Algorithm {
+public class KillerHeuristic implements Algorithm {
 
     protected long numberOfVisitedNodes;
+
     @Override
     public Result solve(Game game) {
         numberOfVisitedNodes = 0;
         Node node = new Node(game);
-        Response bestOutcome = minMax(node);
+        Response bestOutcome = alphaBeta(node);
         return mapResponseToResult(game, bestOutcome);
     }
 
@@ -28,8 +31,8 @@ public class Minmax implements Algorithm {
         return numberOfVisitedNodes;
     }
 
-    protected Response minMax(Node node) {
-        if (node.depth == Node.allCardsNumber) {
+    protected Response alphaBeta(Node node) {
+        if (node.depth == solver.algorithms.alphaBeta.Node.allCardsNumber) {
             numberOfVisitedNodes++;
             return new Response(node.nsPoints);
         }
@@ -37,6 +40,14 @@ public class Minmax implements Algorithm {
         for (byte i = 0; i < node.cardsSize[node.currentPlayer]; i++) {
             if (node.isCardValid(i)) {
                 bestResponse = chooseBestResponse(node, bestResponse, i);
+                if(node.maximizing) {
+                    node.alpha = (byte) max(node.alpha, bestResponse.nsPoints);
+                } else {
+                    node.beta = (byte) min(node.beta, bestResponse.nsPoints);
+                }
+                if(node.alpha >= node.beta) {
+                    break;
+                }
             }
         }
         return bestResponse;
@@ -54,17 +65,21 @@ public class Minmax implements Algorithm {
 
     protected Response getResponseAfterPlayingCard(Node node, byte currentCardIndex) {
         Response response;
+        byte prevAlpha = node.alpha;
+        byte prevBeta = node.beta;
         node.playCard(currentCardIndex);
         if (node.playedCardsSize != PLAYER_NUMBER) {
-            response = minMax(node);
+            response = alphaBeta(node);
         } else {
             byte[] playedCards = {node.playedCards[0], node.playedCards[1], node.playedCards[2], node.playedCards[3]};
             byte lastStartingPlayer = node.startingPlayer;
             node.summarize();
-            response = minMax(node);
+            response = alphaBeta(node);
             node.revertSummarize(playedCards, lastStartingPlayer);
         }
         node.revertPlayCard(currentCardIndex);
+        node.alpha = prevAlpha;
+        node.beta = prevBeta;
         return response;
     }
 

@@ -5,6 +5,9 @@ import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import lombok.Getter;
 import solver.Algorithm;
+import solver.algorithms.alphaBeta.AlphaBeta;
+import solver.algorithms.killerHeuristic.KillerHeuristicAtuFirst;
+import solver.algorithms.killerHeuristic.KillerHeuristicHighestFirst;
 import solver.algorithms.minmax.Minmax;
 import solver.algorithms.minmax.MinmaxWithCutoff;
 import solver.algorithms.naive.Naive;
@@ -39,6 +42,18 @@ public class AlgorithmsChanger {
     }
 
     public void addAlgorithms() {
+
+        algorithms.add(new KillerHeuristicHighestFirst() );
+        algorithmNames.add("A-b (killer heuristic combined)");
+
+        algorithms.add(new KillerHeuristicHighestFirst() );
+        algorithmNames.add("A-b (killer heuristic highest first)");
+
+        algorithms.add(new KillerHeuristicAtuFirst());
+        algorithmNames.add("A-b (killer heuristic atu first)");
+
+        algorithms.add(new AlphaBeta());
+        algorithmNames.add("Alpha-beta");
 
         algorithms.add(new MinmaxWithCutoff());
         algorithmNames.add("Minmax with cutoff");

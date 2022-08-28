@@ -73,10 +73,10 @@ public class BaseNode {
         playedCardsSize = 0;
     }
 
-    public void revertPlayCard() {
+    public void revertPlayCard(byte cardPlace) {
         currentPlayer = (byte) ((currentPlayer - 1 + PLAYER_NUMBER) & 3);
         playedCardsSize--;
-        insertCardBack(playedCards[currentPlayer]);
+        insertCardBack(playedCards[currentPlayer], cardPlace);
         cardsSize[currentPlayer]++;
     }
 
@@ -95,17 +95,11 @@ public class BaseNode {
         }
     }
 
-    private void insertCardBack(byte card) {
-        byte index = (byte) (cardsSize[currentPlayer] - 1);
-        while (index >= 0) {
-            if (cards[currentPlayer][index] < card) {
-                cards[currentPlayer][index + 1] = card;
-                return;
-            }
-            cards[currentPlayer][index + 1] = cards[currentPlayer][index];
-            index--;
+    private void insertCardBack(byte card, byte cardPlace) {
+        for(byte i = cardsSize[currentPlayer]; i > cardPlace; i--) {
+            cards[currentPlayer][i] = cards[currentPlayer][i - 1];
         }
-        cards[currentPlayer][0] = card;
+        cards[currentPlayer][cardPlace] = card;
     }
 
     private void setCards(Game game) {

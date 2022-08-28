@@ -11,6 +11,7 @@ import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.TimeUnit;
 
@@ -21,6 +22,7 @@ import static java.util.Collections.sort;
 @Getter
 public class MultipleGamesSolver {
 
+    private final static Random random = new Random();
     private final static int THREAD_NUMBER = 6;
     private final TimeStatistics timeStatistics;
     private final VisitedNodesStatistics visitedNodesStatistics;
@@ -61,7 +63,11 @@ public class MultipleGamesSolver {
 
     private void solveGame() {
         Game game = Game.getGameMultipliedInstance();
-        game.initializeGame(Color.CLUB, cardNumber);
+        int randomNumber = random.nextInt();
+        if(randomNumber < 0) {
+            randomNumber *= -1;
+        }
+        game.initializeGame(Color.values()[randomNumber % 5], cardNumber);
         long time = System.currentTimeMillis();
         algorithm.solve(game);
         time = System.currentTimeMillis() - time;
@@ -87,14 +93,14 @@ public class MultipleGamesSolver {
         double p90 = timeList.get(size * 90 / 100);
         double p95 = timeList.get(size * 95 / 100);
         double p99 = timeList.get(size * 99 / 100);
-        tot = round(tot, 3);
-        max = round(max, 3);
-        avg = round(avg, 3);
-        med = round(med, 3);
-        dev = round(dev, 3);
-        p90 = round(p90, 3);
-        p95 = round(p95, 3);
-        p99 = round(p99, 3);
+        tot = round(tot, 4);
+        max = round(max, 4);
+        avg = round(avg, 4);
+        med = round(med, 4);
+        dev = round(dev, 4);
+        p90 = round(p90, 4);
+        p95 = round(p95, 4);
+        p99 = round(p99, 4);
         timeStatistics.update(tot, max, avg, med, dev, p90, p95, p99);
     }
 
@@ -105,7 +111,7 @@ public class MultipleGamesSolver {
         long max = nodesList.get(size - 1);
         long avg = tot / size;
         long med = nodesList.get(size / 2);
-        long dev = (long) sqrt(nodesList.stream().map(t -> t * t).reduce(0L, Long::sum) - avg * avg);
+        long dev = (long) sqrt(nodesList.stream().map(t -> t * t).reduce(0L, Long::sum) / size - avg * avg);
         long p90 = nodesList.get(size * 90 / 100);
         long p95 = nodesList.get(size * 95 / 100);
         long p99 = nodesList.get(size * 99 / 100);

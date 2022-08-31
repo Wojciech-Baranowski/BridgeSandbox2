@@ -5,7 +5,6 @@ import gameLogic.game.Game;
 import solver.Algorithm;
 import solver.algorithms.alphaBeta.AlphaBeta;
 import solver.algorithms.killerHeuristic.KillerHeuristicAtuAndHighestFirst;
-import solver.algorithms.killerHeuristic.KillerHeuristicAtuFirst;
 import solver.result.Result;
 
 public class Tester {

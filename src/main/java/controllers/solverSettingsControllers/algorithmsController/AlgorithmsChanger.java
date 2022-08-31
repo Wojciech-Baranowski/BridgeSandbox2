@@ -10,7 +10,6 @@ import solver.algorithms.killerHeuristic.KillerHeuristicAtuFirst;
 import solver.algorithms.killerHeuristic.KillerHeuristicHighestFirst;
 import solver.algorithms.minmax.Minmax;
 import solver.algorithms.minmax.MinmaxWithCutoff;
-import solver.algorithms.naive.Naive;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +42,10 @@ public class AlgorithmsChanger {
 
     public void addAlgorithms() {
 
-        algorithms.add(new KillerHeuristicHighestFirst() );
+        algorithms.add(new KillerHeuristicHighestFirst());
         algorithmNames.add("A-b (killer heuristic combined)");
 
-        algorithms.add(new KillerHeuristicHighestFirst() );
+        algorithms.add(new KillerHeuristicHighestFirst());
         algorithmNames.add("A-b (killer heuristic highest first)");
 
         algorithms.add(new KillerHeuristicAtuFirst());
@@ -60,9 +59,6 @@ public class AlgorithmsChanger {
 
         algorithms.add(new Minmax());
         algorithmNames.add("Minmax");
-
-        algorithms.add(new Naive());
-        algorithmNames.add("Naive");
     }
 
 }

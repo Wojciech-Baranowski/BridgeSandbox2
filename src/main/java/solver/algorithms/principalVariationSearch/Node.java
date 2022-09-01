@@ -1,4 +1,4 @@
-package solver.algorithms.killerHeuristic;
+package solver.algorithms.principalVariationSearch;
 
 import gameLogic.game.Game;
 import solver.algorithms.BaseNode;
@@ -16,12 +16,11 @@ public class Node extends BaseNode {
         beta = 100;
     }
 
-    public void playCard(byte index) {
+    public void playCard(byte index, byte alpha, byte beta) {
         super.playCard(index);
         color *= -1;
-        byte tempAlpha = alpha;
-        alpha = (byte) -beta;
-        beta = (byte) -tempAlpha;
+        this.alpha = alpha;
+        this.beta = beta;
     }
 
     public void revertPlayCard(byte cardPlace) {

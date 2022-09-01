@@ -10,6 +10,7 @@ import solver.algorithms.killerHeuristic.KillerHeuristicAtuFirst;
 import solver.algorithms.killerHeuristic.KillerHeuristicHighestFirst;
 import solver.algorithms.minmax.Minmax;
 import solver.algorithms.minmax.MinmaxWithCutoff;
+import solver.algorithms.principalVariationSearch.PrincipalVariationSearch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,9 @@ public class AlgorithmsChanger {
     }
 
     public void addAlgorithms() {
+
+        algorithms.add(new PrincipalVariationSearch());
+        algorithmNames.add("Principal Variation Search");
 
         algorithms.add(new KillerHeuristicHighestFirst());
         algorithmNames.add("A-b (killer heuristic combined)");

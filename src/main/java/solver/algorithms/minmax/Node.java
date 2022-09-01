@@ -5,7 +5,6 @@ import solver.algorithms.BaseNode;
 
 public class Node extends BaseNode {
 
-    public byte depth;
     public boolean maximizing;
 
     Node(Game game) {
@@ -17,12 +16,10 @@ public class Node extends BaseNode {
     public void playCard(byte index) {
         super.playCard(index);
         maximizing = !maximizing;
-        depth++;
     }
 
     public void revertPlayCard(byte cardPlace) {
         super.revertPlayCard(cardPlace);
-        depth--;
         maximizing = !maximizing;
     }
 

@@ -13,8 +13,8 @@ public class KillerHeuristicHighestFirst extends KillerHeuristic {
         numberOfVisitedNodes = 0;
         Node node = new Node(game);
         orderByFiguresDescending(node);
-        Response bestOutcome = alphaBeta(node);
-        return mapResponseToResult(game, bestOutcome);
+        byte bestOutcome = alphaBeta(node);
+        return Result.mapResponseToResult(game, node.allOutcomeCards, bestOutcome);
     }
 
     private void orderByFiguresDescending(Node node) {
@@ -23,7 +23,7 @@ public class KillerHeuristicHighestFirst extends KillerHeuristic {
         }
     }
 
-    public void quickSort(byte[] cards, byte beg, byte end) {
+    private void quickSort(byte[] cards, byte beg, byte end) {
         if (beg < end) {
             byte pivot = cards[end];
             byte i = (byte) (beg - 1);

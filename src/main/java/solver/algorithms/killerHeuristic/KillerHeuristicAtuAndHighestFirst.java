@@ -8,7 +8,7 @@ import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
 public class KillerHeuristicAtuAndHighestFirst extends KillerHeuristic {
 
-    private byte atu;
+    protected byte atu;
 
     @Override
     public Result solve(Game game) {
@@ -16,8 +16,8 @@ public class KillerHeuristicAtuAndHighestFirst extends KillerHeuristic {
         Node node = new Node(game);
         atu = node.atu;
         moveHighestAndAtuToFirstPosition(node);
-        Response bestOutcome = alphaBeta(node);
-        return mapResponseToResult(game, bestOutcome);
+        byte bestOutcome = alphaBeta(node);
+        return Result.mapResponseToResult(game, node.allOutcomeCards, bestOutcome);
     }
 
     private void moveHighestAndAtuToFirstPosition(Node node) {
@@ -26,7 +26,7 @@ public class KillerHeuristicAtuAndHighestFirst extends KillerHeuristic {
         }
     }
 
-    public void quickSort(byte[] cards, byte beg, byte end) {
+    private void quickSort(byte[] cards, byte beg, byte end) {
         if (beg < end) {
             byte pivot = cards[end];
             byte i = (byte) (beg - 1);

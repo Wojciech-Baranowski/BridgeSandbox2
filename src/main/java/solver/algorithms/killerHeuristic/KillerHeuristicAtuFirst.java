@@ -13,8 +13,8 @@ public class KillerHeuristicAtuFirst extends KillerHeuristic {
         numberOfVisitedNodes = 0;
         Node node = new Node(game);
         moveAtuToFirstPosition(node);
-        Response bestOutcome = alphaBeta(node);
-        return mapResponseToResult(game, bestOutcome);
+        byte bestOutcome = alphaBeta(node);
+        return Result.mapResponseToResult(game, node.allOutcomeCards, bestOutcome);
     }
 
     private void moveAtuToFirstPosition(Node node) {

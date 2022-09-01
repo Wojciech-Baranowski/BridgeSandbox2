@@ -1,7 +1,6 @@
 package solver.algorithms;
 
 import gameLogic.game.Game;
-import solver.algorithms.minmax.Response;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -13,16 +12,19 @@ public class BaseNode {
 
     public static byte allCardsNumber;
     public byte[][] cards;
+    public byte[][] allOutcomeCards;
     public byte[] cardsSize;
     public byte[] playedCards;
+    public byte[] allPlayedCards;
     public byte playedCardsSize;
     public byte startingPlayer;
     public byte currentPlayer;
     public byte atu;
     public byte nsPoints;
+    public byte depth;
 
     public BaseNode(Game game) {
-        allCardsNumber = Response.allCardsNumber = (byte) (Arrays.stream(game.getCards())
+        allCardsNumber = (byte) (Arrays.stream(game.getCards())
                 .map(Collection::size)
                 .reduce(0, Integer::sum)
                 .byteValue() + game.getPlayedCards().size());
@@ -60,7 +62,8 @@ public class BaseNode {
     }
 
     public void playCard(byte index) {
-        playedCards[currentPlayer] = cards[currentPlayer][index];
+        allPlayedCards[depth] = playedCards[currentPlayer] = cards[currentPlayer][index];;
+        depth++;
         shiftCards(index);
         cardsSize[currentPlayer]--;
         playedCardsSize++;
@@ -76,6 +79,7 @@ public class BaseNode {
     public void revertPlayCard(byte cardPlace) {
         currentPlayer = (byte) ((currentPlayer - 1 + PLAYER_NUMBER) & 3);
         playedCardsSize--;
+        depth--;
         insertCardBack(playedCards[currentPlayer], cardPlace);
         cardsSize[currentPlayer]++;
     }
@@ -117,6 +121,11 @@ public class BaseNode {
 
     private void setPlayedCards(Game game) {
         playedCards = new byte[PLAYER_NUMBER];
+        allPlayedCards = new byte[allCardsNumber];
+        allOutcomeCards = new byte[game.getStartingNumberOfCardsPerPlayer() + 1][allCardsNumber];
+        for(int i = 0; i < game.getStartingNumberOfCardsPerPlayer() + 1; i++) {
+            allOutcomeCards[i][0] = -1;
+        }
         for (int i = 0; i < game.getPlayedCards().size(); i++) {
             int cardsOwnerOrdinal = (i + game.getStartingPlayer().ordinal()) % PLAYER_NUMBER;
             playedCards[cardsOwnerOrdinal] = (byte) game.getPlayedCards().get(i).getId();

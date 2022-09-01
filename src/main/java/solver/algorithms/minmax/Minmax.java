@@ -11,6 +11,8 @@ import java.util.List;
 
 import static gameLogic.card.Deck.getDeck;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class Minmax implements Algorithm {
 
@@ -19,8 +21,8 @@ public class Minmax implements Algorithm {
     public Result solve(Game game) {
         numberOfVisitedNodes = 0;
         Node node = new Node(game);
-        Response bestOutcome = minMax(node);
-        return mapResponseToResult(game, bestOutcome);
+        byte bestScore = minMax(node);
+        return Result.mapResponseToResult(game, node.allOutcomeCards, bestScore);
     }
 
     @Override
@@ -28,32 +30,31 @@ public class Minmax implements Algorithm {
         return numberOfVisitedNodes;
     }
 
-    protected Response minMax(Node node) {
+    protected byte minMax(Node node) {
         if (node.depth == Node.allCardsNumber) {
             numberOfVisitedNodes++;
-            return new Response(node.nsPoints);
+            if(node.allOutcomeCards[node.nsPoints][0] == -1) {
+                for(int i = 0; i < Node.allCardsNumber; i++) {
+                    node.allOutcomeCards[node.nsPoints][i] = node.allPlayedCards[i];
+                }
+            }
+            return node.nsPoints;
         }
-        Response bestResponse = new Response((byte) (node.maximizing ? -100 : 100));
+        byte bestScore = (byte) (node.maximizing ? -100 : 100);
         for (byte i = 0; i < node.cardsSize[node.currentPlayer]; i++) {
             if (node.isCardValid(i)) {
-                bestResponse = chooseBestResponse(node, bestResponse, i);
+                if(node.maximizing) {
+                    bestScore = (byte) max(bestScore, playCard(node, i));
+                } else {
+                    bestScore = (byte) min(bestScore, playCard(node, i));
+                }
             }
         }
-        return bestResponse;
+        return bestScore;
     }
 
-    protected Response chooseBestResponse(Node node, Response currentBestResponse, byte currentCardIndex) {
-        Response newResponse = getResponseAfterPlayingCard(node, currentCardIndex);
-        if ((node.maximizing && newResponse.nsPoints > currentBestResponse.nsPoints)
-                || (!node.maximizing && newResponse.nsPoints < currentBestResponse.nsPoints)) {
-            newResponse.addData(node.cards[node.currentPlayer][currentCardIndex], node.depth);
-            return newResponse;
-        }
-        return currentBestResponse;
-    }
-
-    protected Response getResponseAfterPlayingCard(Node node, byte currentCardIndex) {
-        Response response;
+    protected byte playCard(Node node, byte currentCardIndex) {
+        byte response;
         node.playCard(currentCardIndex);
         if (node.playedCardsSize != PLAYER_NUMBER) {
             response = minMax(node);
@@ -66,18 +67,6 @@ public class Minmax implements Algorithm {
         }
         node.revertPlayCard(currentCardIndex);
         return response;
-    }
-
-    protected Result mapResponseToResult(Game game, Response response) {
-        Deck deck = getDeck();
-        List<Card> cards = new ArrayList<>();
-        for (int i = 0; i < game.getPlayedCards().size(); i++) {
-            response.cards[i] = (byte) game.getPlayedCards().get(i).getId();
-        }
-        for (byte cardId : response.cards) {
-            cards.add(deck.getCard(cardId));
-        }
-        return new Result(cards, game.getStartingPlayer(), game.getAtu());
     }
 
 }

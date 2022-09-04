@@ -13,6 +13,7 @@ import solver.algorithms.minmax.Minmax;
 import solver.algorithms.minmax.MinmaxWithCutoff;
 import solver.algorithms.mtd.Mtd;
 import solver.algorithms.principalVariationSearch.PrincipalVariationSearch;
+import solver.algorithms.principalVariationSearchWithCutoff.PrincipalVariationSearchWithCutoff;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,14 +46,14 @@ public class AlgorithmsChanger {
 
     public void addAlgorithms() {
 
-        algorithms.add(new AlphaBetaWithMemory());
-        algorithmNames.add("Alpha-beta with memory");
-
-        algorithms.add(new Mtd());
-        algorithmNames.add("MTD(f)");
+        algorithms.add(new PrincipalVariationSearchWithCutoff());
+        algorithmNames.add("Principal Variation Search with cutoff");
 
         algorithms.add(new PrincipalVariationSearch());
         algorithmNames.add("Principal Variation Search");
+
+        algorithms.add(new Mtd());
+        algorithmNames.add("MTD(f)");
 
         algorithms.add(new KillerHeuristicHighestFirst());
         algorithmNames.add("A-b (killer heuristic atu then highest first)");
@@ -62,6 +63,9 @@ public class AlgorithmsChanger {
 
         algorithms.add(new KillerHeuristicAtuFirst());
         algorithmNames.add("A-b (killer heuristic atu first)");
+
+        algorithms.add(new AlphaBetaWithMemory());
+        algorithmNames.add("Alpha-beta with memory");
 
         algorithms.add(new AlphaBeta());
         algorithmNames.add("Alpha-beta");

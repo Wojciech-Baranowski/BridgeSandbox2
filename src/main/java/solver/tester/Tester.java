@@ -12,6 +12,7 @@ import solver.algorithms.minmax.Minmax;
 import solver.algorithms.minmax.MinmaxWithCutoff;
 import solver.algorithms.mtd.Mtd;
 import solver.algorithms.principalVariationSearch.PrincipalVariationSearch;
+import solver.algorithms.principalVariationSearchWithCutoff.PrincipalVariationSearchWithCutoff;
 import solver.result.Result;
 
 public class Tester {
@@ -24,7 +25,7 @@ public class Tester {
     public Tester() {
         numberOfCards = 4;
         numberOfTests = 10000;
-        tested = new AlphaBetaWithMemory();
+        tested = new PrincipalVariationSearchWithCutoff();
         correct = new AlphaBeta();
         test();
     }

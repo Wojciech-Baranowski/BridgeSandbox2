@@ -1,5 +1,4 @@
-package solver.algorithms.principalVariationSearch;
-
+package solver.algorithms.principalVariationSearchWithCutoff;
 
 import gameLogic.game.Game;
 import solver.Algorithm;
@@ -9,7 +8,7 @@ import static gameLogic.game.GameConstants.FIGURE_NUMBER;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 import static java.lang.Math.max;
 
-public class PrincipalVariationSearch implements Algorithm {
+public class PrincipalVariationSearchWithCutoff implements Algorithm {
 
     public long numberOfVisitedNodes;
     public byte atu;
@@ -42,16 +41,18 @@ public class PrincipalVariationSearch implements Algorithm {
         byte score = -100;
         for (byte i = 0; i < node.cardsSize[node.currentPlayer]; i++) {
             if (node.isCardValid(i)) {
-                if(score == -100) {
+                if (score == -100) {
                     score = (byte) -playCard(node, i, (byte) -node.beta, (byte) -node.alpha);
                 } else {
                     score = (byte) -playCard(node, i, (byte) (-node.alpha - 1), (byte) -node.alpha);
-                    if(node.alpha < score && score < node.beta) {
+                    if (node.alpha < score && score < node.beta) {
                         score = (byte) -playCard(node, i, (byte) -node.beta, (byte) -score);
                     }
                 }
                 node.alpha = (byte) max(node.alpha, score);
-                if (node.alpha >= node.beta) {
+                if ((node.alpha >= node.beta)
+                        || ((node.color == 1) && (Node.allCardsNumber - node.depth + 3) / 4 <= score - node.nsPoints)
+                        || (node.color == -1) && (0 >= -score - node.nsPoints)) {
                     break;
                 }
             }

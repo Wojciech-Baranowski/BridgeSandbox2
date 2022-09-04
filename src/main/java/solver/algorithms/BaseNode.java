@@ -62,7 +62,7 @@ public class BaseNode {
     }
 
     public void playCard(byte index) {
-        allPlayedCards[depth] = playedCards[currentPlayer] = cards[currentPlayer][index];;
+        allPlayedCards[depth] = playedCards[currentPlayer] = cards[currentPlayer][index];
         depth++;
         shiftCards(index);
         cardsSize[currentPlayer]--;
@@ -100,7 +100,7 @@ public class BaseNode {
     }
 
     private void insertCardBack(byte card, byte cardPlace) {
-        for(byte i = cardsSize[currentPlayer]; i > cardPlace; i--) {
+        for (byte i = cardsSize[currentPlayer]; i > cardPlace; i--) {
             cards[currentPlayer][i] = cards[currentPlayer][i - 1];
         }
         cards[currentPlayer][cardPlace] = card;
@@ -123,7 +123,7 @@ public class BaseNode {
         playedCards = new byte[PLAYER_NUMBER];
         allPlayedCards = new byte[allCardsNumber];
         allOutcomeCards = new byte[game.getStartingNumberOfCardsPerPlayer() + 1][allCardsNumber];
-        for(int i = 0; i < game.getStartingNumberOfCardsPerPlayer() + 1; i++) {
+        for (int i = 0; i < game.getStartingNumberOfCardsPerPlayer() + 1; i++) {
             allOutcomeCards[i][0] = -1;
         }
         for (int i = 0; i < game.getPlayedCards().size(); i++) {

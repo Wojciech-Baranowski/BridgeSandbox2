@@ -6,10 +6,12 @@ import engine.display.DrawableFactory;
 import lombok.Getter;
 import solver.Algorithm;
 import solver.algorithms.alphaBeta.AlphaBeta;
+import solver.algorithms.alphaBetaWithMemory.AlphaBetaWithMemory;
 import solver.algorithms.killerHeuristic.KillerHeuristicAtuFirst;
 import solver.algorithms.killerHeuristic.KillerHeuristicHighestFirst;
 import solver.algorithms.minmax.Minmax;
 import solver.algorithms.minmax.MinmaxWithCutoff;
+import solver.algorithms.mtd.Mtd;
 import solver.algorithms.principalVariationSearch.PrincipalVariationSearch;
 
 import java.util.ArrayList;
@@ -43,11 +45,17 @@ public class AlgorithmsChanger {
 
     public void addAlgorithms() {
 
+        algorithms.add(new AlphaBetaWithMemory());
+        algorithmNames.add("Alpha-beta with memory");
+
+        algorithms.add(new Mtd());
+        algorithmNames.add("MTD(f)");
+
         algorithms.add(new PrincipalVariationSearch());
         algorithmNames.add("Principal Variation Search");
 
         algorithms.add(new KillerHeuristicHighestFirst());
-        algorithmNames.add("A-b (killer heuristic combined)");
+        algorithmNames.add("A-b (killer heuristic atu then highest first)");
 
         algorithms.add(new KillerHeuristicHighestFirst());
         algorithmNames.add("A-b (killer heuristic highest first)");

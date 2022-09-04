@@ -24,9 +24,9 @@ public class AlgorithmChangerOption {
         this.algorithm = algorithm;
         Drawable inactiveButtonDrawable = drawableFactory.makeFramedRectangle(
                 620 + background.getX(),
-                80 + 50 * index + background.getY(),
-                32,
-                32,
+                80 + 32 * index + background.getY(),
+                24,
+                24,
                 2,
                 "gray",
                 "lightBlue");
@@ -47,7 +47,7 @@ public class AlgorithmChangerOption {
                 name,
                 42 + inactiveButtonDrawable.getX(),
                 2 + inactiveButtonDrawable.getY(),
-                "HBE32",
+                "HBE24",
                 "black");
 
         getScene().addObjectHigherThan(radioButton, background);

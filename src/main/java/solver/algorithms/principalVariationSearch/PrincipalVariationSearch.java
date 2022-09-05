@@ -42,11 +42,11 @@ public class PrincipalVariationSearch implements Algorithm {
         byte score = -100;
         for (byte i = 0; i < node.cardsSize[node.currentPlayer]; i++) {
             if (node.isCardValid(i)) {
-                if(score == -100) {
+                if (score == -100) {
                     score = (byte) -playCard(node, i, (byte) -node.beta, (byte) -node.alpha);
                 } else {
                     score = (byte) -playCard(node, i, (byte) (-node.alpha - 1), (byte) -node.alpha);
-                    if(node.alpha < score && score < node.beta) {
+                    if (node.alpha < score && score < node.beta) {
                         score = (byte) -playCard(node, i, (byte) -node.beta, (byte) -score);
                     }
                 }

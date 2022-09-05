@@ -1,7 +1,6 @@
 package controllers.gameControllers.buttonController;
 
 import controllers.solverSettingsControllers.algorithmsController.AlgorithmsChanger;
-import engine.button.SimpleButton;
 import engine.button.checkbox.CommandCheckbox;
 import engine.common.Command;
 import engine.display.Drawable;
@@ -12,6 +11,9 @@ import gameLogic.game.Game;
 import lombok.Getter;
 import solver.result.Result;
 import solver.result.ResultRound;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 import static controllers.gameControllers.historyController.GameHistoryController.getGameHistoryController;
 import static controllers.gameControllers.textController.GameTextController.getGameTextController;
@@ -29,12 +31,18 @@ public class SolverTrigger {
             Game game = getGame();
             AlgorithmsChanger algorithmsChanger = getSolverSettingsAlgorithmsController().getAlgorithmsChanger();
             int chosenAlgorithmIndex = algorithmsChanger.getAlgorithmsBundle().getSelectedRadioButtonIndex();
-            Result result = algorithmsChanger.getAlgorithms().get(chosenAlgorithmIndex).solve(game);
-            getGameHistoryController().removeAllPredictedHistoryEntries();
-            for (ResultRound round : result.getResultRounds()) {
-                getGameHistoryController().addHistoryEntry(round);
+            if ((Arrays.stream(game.getCards())
+                    .map(Collection::size)
+                    .reduce(0, Integer::sum)
+                    .byteValue() + game.getPlayedCards().size()) > 0) {
+                Result result = algorithmsChanger.getAlgorithms().get(chosenAlgorithmIndex).solve(game);
+                getGameHistoryController().removeAllPredictedHistoryEntries();
+                for (ResultRound round : result.getResultRounds()) {
+                    getGameHistoryController().addHistoryEntry(round);
+                }
+                getGameTextController().updatePredictedPoints(result.getPoints());
             }
-            getGameTextController().updatePredictedPoints(result.getPoints());
+
         }
 
     }

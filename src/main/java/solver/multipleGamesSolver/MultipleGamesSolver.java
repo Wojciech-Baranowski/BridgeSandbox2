@@ -9,7 +9,6 @@ import solver.Algorithm;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
@@ -64,7 +63,7 @@ public class MultipleGamesSolver {
     private void solveGame() {
         Game game = Game.getGameMultipliedInstance();
         int randomNumber = random.nextInt();
-        if(randomNumber < 0) {
+        if (randomNumber < 0) {
             randomNumber *= -1;
         }
         game.initializeGame(Color.values()[randomNumber % 5], cardNumber);

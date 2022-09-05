@@ -28,9 +28,12 @@ public class BaseNode {
                 .map(Collection::size)
                 .reduce(0, Integer::sum)
                 .byteValue() + game.getPlayedCards().size());
-        setCards(game);
-        setPlayedCards(game);
-        setPlayerData(game);
+        if (allCardsNumber > 0) {
+            depth = (byte) game.getPlayedCards().size();
+            setCards(game);
+            setPlayedCards(game);
+            setPlayerData(game);
+        }
     }
 
     public boolean isCardValid(byte index) {

@@ -12,8 +12,8 @@ public class Node extends BaseNode {
     Node(Game game) {
         super(game);
         color = (byte) (game.getCurrentPlayer().ordinal() % 2 == 0 ? 1 : -1);
-        alpha = -100;
-        beta = 100;
+        alpha = (byte) -100;
+        beta = (byte) 100;
     }
 
     public void playCard(byte index) {

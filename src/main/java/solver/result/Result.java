@@ -47,6 +47,7 @@ public class Result {
     public static Result mapResponseToResult(Game game, byte[][] allOutcomeCards, byte bestScore) {
         Deck deck = getDeck();
         List<Card> cards = new ArrayList<>();
+        bestScore = bestScore < 0 ? (byte) (bestScore * -1) : bestScore;
         for (int i = 0; i < game.getPlayedCards().size(); i++) {
             allOutcomeCards[bestScore][i] = (byte) game.getPlayedCards().get(i).getId();
         }

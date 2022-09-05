@@ -9,7 +9,6 @@ public class Node extends BaseNode {
 
     Node(Game game) {
         super(game);
-        depth = (byte) game.getPlayedCards().size();
         maximizing = game.getCurrentPlayer().ordinal() % 2 == 0;
     }
 

@@ -33,12 +33,12 @@ public class Mtd implements Algorithm {
         byte upperBound = 100;
         byte lowerBound = -100;
         byte beta;
-        while(lowerBound < upperBound) {
+        while (lowerBound < upperBound) {
             beta = (byte) max(g, lowerBound + 1);
             node.alpha = (byte) (beta - 1);
             node.beta = beta;
             g = alphaBeta(node);
-            if(g < beta) {
+            if (g < beta) {
                 upperBound = g;
             } else {
                 lowerBound = g;

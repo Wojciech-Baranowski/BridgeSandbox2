@@ -9,7 +9,7 @@ public class Node extends BaseNode {
     public byte alpha;
     public byte beta;
 
-    Node(Game game) {
+    public Node(Game game) {
         super(game);
         color = (byte) (game.getCurrentPlayer().ordinal() % 2 == 0 ? 1 : -1);
         alpha = -100;

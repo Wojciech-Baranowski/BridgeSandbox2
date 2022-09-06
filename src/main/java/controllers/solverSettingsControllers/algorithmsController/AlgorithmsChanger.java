@@ -5,15 +5,15 @@ import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import lombok.Getter;
 import solver.Algorithm;
+import solver.algorithms.PVSKillerHeuristic.PVSKillerHeuristicAtuAndHighestFirst;
+import solver.algorithms.PVSKillerHeuristic.PVSKillerHeuristicAtuFirst;
+import solver.algorithms.PVSKillerHeuristic.PVSKillerHeuristicHighestFirst;
+import solver.algorithms.PVSWithCutoff.PVSWithCutoff;
 import solver.algorithms.alphaBeta.AlphaBeta;
 import solver.algorithms.alphaBetaWithMemory.AlphaBetaWithMemory;
-import solver.algorithms.killerHeuristic.KillerHeuristicAtuFirst;
-import solver.algorithms.killerHeuristic.KillerHeuristicHighestFirst;
 import solver.algorithms.minmax.Minmax;
-import solver.algorithms.minmax.MinmaxWithCutoff;
 import solver.algorithms.mtd.Mtd;
 import solver.algorithms.principalVariationSearch.PrincipalVariationSearch;
-import solver.algorithms.principalVariationSearchWithCutoff.PrincipalVariationSearchWithCutoff;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +46,17 @@ public class AlgorithmsChanger {
 
     public void addAlgorithms() {
 
-        algorithms.add(new PrincipalVariationSearchWithCutoff());
-        algorithmNames.add("Principal Variation Search with cutoff");
+        algorithms.add(new PVSWithCutoff());
+        algorithmNames.add("PVS with cutoff");
+
+        algorithms.add(new PVSKillerHeuristicAtuAndHighestFirst());
+        algorithmNames.add("PVS killer heuristic atu then highest first");
+
+        algorithms.add(new PVSKillerHeuristicHighestFirst());
+        algorithmNames.add("PVS killer heuristic highest first");
+
+        algorithms.add(new PVSKillerHeuristicAtuFirst());
+        algorithmNames.add("PVS killer heuristic atu first");
 
         algorithms.add(new PrincipalVariationSearch());
         algorithmNames.add("Principal Variation Search");
@@ -55,23 +64,11 @@ public class AlgorithmsChanger {
         algorithms.add(new Mtd());
         algorithmNames.add("MTD(f)");
 
-        algorithms.add(new KillerHeuristicHighestFirst());
-        algorithmNames.add("A-b (killer heuristic atu then highest first)");
-
-        algorithms.add(new KillerHeuristicHighestFirst());
-        algorithmNames.add("A-b (killer heuristic highest first)");
-
-        algorithms.add(new KillerHeuristicAtuFirst());
-        algorithmNames.add("A-b (killer heuristic atu first)");
-
         algorithms.add(new AlphaBetaWithMemory());
         algorithmNames.add("Alpha-beta with memory");
 
         algorithms.add(new AlphaBeta());
         algorithmNames.add("Alpha-beta");
-
-        algorithms.add(new MinmaxWithCutoff());
-        algorithmNames.add("Minmax with cutoff");
 
         algorithms.add(new Minmax());
         algorithmNames.add("Minmax");

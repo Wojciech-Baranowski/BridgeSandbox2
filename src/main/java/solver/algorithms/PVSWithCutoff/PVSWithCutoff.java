@@ -1,28 +1,22 @@
-package solver.algorithms.principalVariationSearch;
-
+package solver.algorithms.PVSWithCutoff;
 
 import gameLogic.game.Game;
-import solver.Algorithm;
+import solver.algorithms.PVSKillerHeuristic.PVSKillerHeuristicAtuAndHighestFirst;
+import solver.algorithms.principalVariationSearch.Node;
 import solver.result.Result;
 
-import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 import static java.lang.Math.max;
 
-public class PrincipalVariationSearch implements Algorithm {
-
-    public long numberOfVisitedNodes;
+public class PVSWithCutoff extends PVSKillerHeuristicAtuAndHighestFirst {
 
     @Override
     public Result solve(Game game) {
         numberOfVisitedNodes = 0;
         Node node = new Node(game);
+        atu = node.atu;
+        moveHighestAndAtuToFirstPosition(node);
         byte bestOutcome = principalVariationSearch(node);
         return Result.mapResponseToResult(game, node.allOutcomeCards, bestOutcome);
-    }
-
-    @Override
-    public long getNumberOfVisitedNodes() {
-        return numberOfVisitedNodes;
     }
 
     protected byte principalVariationSearch(Node node) {
@@ -47,32 +41,14 @@ public class PrincipalVariationSearch implements Algorithm {
                     }
                 }
                 node.alpha = (byte) max(node.alpha, score);
-                if (node.alpha >= node.beta) {
+                if ((node.alpha >= node.beta)
+                        || ((node.color == 1) && (Node.allCardsNumber - node.depth + 3) / 4 <= score - node.nsPoints)
+                        || (node.color == -1) && (0 >= -score - node.nsPoints)) {
                     break;
                 }
             }
         }
         return node.alpha;
-    }
-
-    protected byte playCard(Node node, byte currentCardIndex, byte alpha, byte beta) {
-        byte response;
-        byte prevAlpha = node.alpha;
-        byte prevBeta = node.beta;
-        node.playCard(currentCardIndex, alpha, beta);
-        if (node.playedCardsSize != PLAYER_NUMBER) {
-            response = principalVariationSearch(node);
-        } else {
-            byte[] playedCards = {node.playedCards[0], node.playedCards[1], node.playedCards[2], node.playedCards[3]};
-            byte lastStartingPlayer = node.startingPlayer;
-            node.summarize();
-            response = principalVariationSearch(node);
-            node.revertSummarize(playedCards, lastStartingPlayer);
-        }
-        node.revertPlayCard(currentCardIndex);
-        node.alpha = prevAlpha;
-        node.beta = prevBeta;
-        return response;
     }
 
 }

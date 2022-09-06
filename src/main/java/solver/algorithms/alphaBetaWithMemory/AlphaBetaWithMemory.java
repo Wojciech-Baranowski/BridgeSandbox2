@@ -33,7 +33,9 @@ public class AlphaBetaWithMemory implements Algorithm {
     private byte alphaBetaWithMemory(Node node) {
         byte alphaOrig = node.alpha;
         Bound memorizedBound;
-        memorizedBound = memory.get(new NodeInfo(node));
+        synchronized (this) {
+            memorizedBound = memory.get(new NodeInfo(node));
+        }
         if (memorizedBound != null) {
             if (memorizedBound.flag == 0) {
                 return memorizedBound.bound;
@@ -73,7 +75,9 @@ public class AlphaBetaWithMemory implements Algorithm {
         } else {
             bound.flag = 0;
         }
-        memory.put(new NodeInfo(node), bound);
+        synchronized (this) {
+            memory.put(new NodeInfo(node), bound);
+        }
         return bestScore;
     }
 

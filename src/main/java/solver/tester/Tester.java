@@ -4,15 +4,7 @@ import gameLogic.card.Color;
 import gameLogic.game.Game;
 import solver.Algorithm;
 import solver.algorithms.alphaBeta.AlphaBeta;
-import solver.algorithms.alphaBetaWithMemory.AlphaBetaWithMemory;
-import solver.algorithms.killerHeuristic.KillerHeuristicAtuAndHighestFirst;
-import solver.algorithms.killerHeuristic.KillerHeuristicAtuFirst;
-import solver.algorithms.killerHeuristic.KillerHeuristicHighestFirst;
-import solver.algorithms.minmax.Minmax;
-import solver.algorithms.minmax.MinmaxWithCutoff;
-import solver.algorithms.mtd.Mtd;
-import solver.algorithms.principalVariationSearch.PrincipalVariationSearch;
-import solver.algorithms.principalVariationSearchWithCutoff.PrincipalVariationSearchWithCutoff;
+import solver.algorithms.PVSWithCutoff.PVSWithCutoff;
 import solver.result.Result;
 
 public class Tester {
@@ -25,7 +17,7 @@ public class Tester {
     public Tester() {
         numberOfCards = 4;
         numberOfTests = 10000;
-        tested = new PrincipalVariationSearchWithCutoff();
+        tested = new PVSWithCutoff();
         correct = new AlphaBeta();
         test();
     }

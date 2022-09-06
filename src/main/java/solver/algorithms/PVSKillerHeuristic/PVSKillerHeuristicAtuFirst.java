@@ -1,23 +1,25 @@
-package solver.algorithms.killerHeuristic;
+package solver.algorithms.PVSKillerHeuristic;
 
 import gameLogic.game.Game;
+import solver.algorithms.principalVariationSearch.Node;
+import solver.algorithms.principalVariationSearch.PrincipalVariationSearch;
 import solver.result.Result;
 
 import static gameLogic.game.GameConstants.FIGURE_NUMBER;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
-public class KillerHeuristicAtuFirst extends KillerHeuristic {
+public class PVSKillerHeuristicAtuFirst extends PrincipalVariationSearch {
 
     @Override
     public Result solve(Game game) {
         numberOfVisitedNodes = 0;
         Node node = new Node(game);
         moveAtuToFirstPosition(node);
-        byte bestOutcome = alphaBeta(node);
+        byte bestOutcome = principalVariationSearch(node);
         return Result.mapResponseToResult(game, node.allOutcomeCards, bestOutcome);
     }
 
-    private void moveAtuToFirstPosition(Node node) {
+    protected void moveAtuToFirstPosition(Node node) {
         for(int i = 0; i < PLAYER_NUMBER; i++) {
             byte[] temporaryCards = new byte[node.cardsSize[i]];
             byte temporaryCardsSize = 0;

@@ -96,13 +96,13 @@ public class BaseNode {
         }
     }
 
-    private void shiftCards(byte index) {
+    protected void shiftCards(byte index) {
         for (byte i = index; i < cards[currentPlayer].length - 1; i++) {
             cards[currentPlayer][i] = cards[currentPlayer][i + 1];
         }
     }
 
-    private void insertCardBack(byte card, byte cardPlace) {
+    protected void insertCardBack(byte card, byte cardPlace) {
         for (byte i = cardsSize[currentPlayer]; i > cardPlace; i--) {
             cards[currentPlayer][i] = cards[currentPlayer][i - 1];
         }

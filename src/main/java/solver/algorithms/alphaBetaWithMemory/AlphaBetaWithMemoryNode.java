@@ -1,19 +1,19 @@
-package solver.algorithms.alphaBeta;
+package solver.algorithms.alphaBetaWithMemory;
 
 import gameLogic.game.Game;
 import solver.algorithms.BaseNode;
 
-public class Node extends BaseNode {
+public class AlphaBetaWithMemoryNode extends BaseNode {
 
     public byte color;
     public byte alpha;
     public byte beta;
 
-    Node(Game game) {
+    AlphaBetaWithMemoryNode(Game game) {
         super(game);
         color = (byte) (game.getCurrentPlayer().ordinal() % 2 == 0 ? 1 : -1);
-        alpha = (byte) -100;
-        beta = (byte) 100;
+        alpha = -100;
+        beta = 100;
     }
 
     public void playCard(byte index) {

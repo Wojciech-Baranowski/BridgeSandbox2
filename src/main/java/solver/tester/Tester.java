@@ -4,7 +4,8 @@ import gameLogic.card.Color;
 import gameLogic.game.Game;
 import solver.Algorithm;
 import solver.algorithms.alphaBeta.AlphaBeta;
-import solver.algorithms.PVSWithCutoff.PVSWithCutoff;
+import solver.algorithms.principalVariationSearch.PVSWithCutoff;
+import solver.algorithms.principalVariationSearch.PVSWithLookup;
 import solver.result.Result;
 
 public class Tester {
@@ -17,12 +18,14 @@ public class Tester {
     public Tester() {
         numberOfCards = 4;
         numberOfTests = 10000;
-        tested = new PVSWithCutoff();
+        tested = new PVSWithLookup();
         correct = new AlphaBeta();
         test();
     }
 
     private void test() {
+        tested.preprocessing();
+        correct.preprocessing();
         Game game = Game.getGameMultipliedInstance();
         for (int i = 0; i < numberOfTests; i++) {
             game.initializeGame(Color.CLUB, numberOfCards);

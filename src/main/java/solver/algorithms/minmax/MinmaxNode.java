@@ -3,11 +3,11 @@ package solver.algorithms.minmax;
 import gameLogic.game.Game;
 import solver.algorithms.BaseNode;
 
-public class Node extends BaseNode {
+public class MinmaxNode extends BaseNode {
 
     public boolean maximizing;
 
-    Node(Game game) {
+    MinmaxNode(Game game) {
         super(game);
         maximizing = game.getCurrentPlayer().ordinal() % 2 == 0;
     }

@@ -15,9 +15,9 @@ public class Minmax implements Algorithm {
     @Override
     public Result solve(Game game) {
         numberOfVisitedNodes = 0;
-        Node node = new Node(game);
-        byte bestScore = minMax(node);
-        return Result.mapResponseToResult(game, node.allOutcomeCards, bestScore);
+        MinmaxNode minmaxNode = new MinmaxNode(game);
+        byte bestScore = minMax(minmaxNode);
+        return Result.mapResponseToResult(game, minmaxNode.allOutcomeCards, bestScore);
     }
 
     @Override
@@ -25,42 +25,46 @@ public class Minmax implements Algorithm {
         return numberOfVisitedNodes;
     }
 
-    protected byte minMax(Node node) {
-        if (node.depth == Node.allCardsNumber) {
+    protected byte minMax(MinmaxNode minmaxNode) {
+        if (minmaxNode.depth == MinmaxNode.allCardsNumber) {
             numberOfVisitedNodes++;
-            if (node.allOutcomeCards[node.nsPoints][0] == -1) {
-                for (int i = 0; i < Node.allCardsNumber; i++) {
-                    node.allOutcomeCards[node.nsPoints][i] = node.allPlayedCards[i];
+            if (minmaxNode.allOutcomeCards[minmaxNode.nsPoints][0] == -1) {
+                for (int i = 0; i < MinmaxNode.allCardsNumber; i++) {
+                    minmaxNode.allOutcomeCards[minmaxNode.nsPoints][i] = minmaxNode.allPlayedCards[i];
                 }
             }
-            return node.nsPoints;
+            return minmaxNode.nsPoints;
         }
-        byte bestScore = (byte) (node.maximizing ? -100 : 100);
-        for (byte i = 0; i < node.cardsSize[node.currentPlayer]; i++) {
-            if (node.isCardValid(i)) {
-                if (node.maximizing) {
-                    bestScore = (byte) max(bestScore, playCard(node, i));
+        byte bestScore = (byte) (minmaxNode.maximizing ? -100 : 100);
+        for (byte i = 0; i < minmaxNode.cardsSize[minmaxNode.currentPlayer]; i++) {
+            if (minmaxNode.isCardValid(i)) {
+                if (minmaxNode.maximizing) {
+                    bestScore = (byte) max(bestScore, playCard(minmaxNode, i));
                 } else {
-                    bestScore = (byte) min(bestScore, playCard(node, i));
+                    bestScore = (byte) min(bestScore, playCard(minmaxNode, i));
                 }
             }
         }
         return bestScore;
     }
 
-    protected byte playCard(Node node, byte currentCardIndex) {
+    protected byte playCard(MinmaxNode minmaxNode, byte currentCardIndex) {
         byte response;
-        node.playCard(currentCardIndex);
-        if (node.playedCardsSize != PLAYER_NUMBER) {
-            response = minMax(node);
+        minmaxNode.playCard(currentCardIndex);
+        if (minmaxNode.playedCardsSize != PLAYER_NUMBER) {
+            response = minMax(minmaxNode);
         } else {
-            byte[] playedCards = {node.playedCards[0], node.playedCards[1], node.playedCards[2], node.playedCards[3]};
-            byte lastStartingPlayer = node.startingPlayer;
-            node.summarize();
-            response = minMax(node);
-            node.revertSummarize(playedCards, lastStartingPlayer);
+            byte[] playedCards = {
+                    minmaxNode.playedCards[0],
+                    minmaxNode.playedCards[1],
+                    minmaxNode.playedCards[2],
+                    minmaxNode.playedCards[3]};
+            byte lastStartingPlayer = minmaxNode.startingPlayer;
+            minmaxNode.summarize();
+            response = minMax(minmaxNode);
+            minmaxNode.revertSummarize(playedCards, lastStartingPlayer);
         }
-        node.revertPlayCard(currentCardIndex);
+        minmaxNode.revertPlayCard(currentCardIndex);
         return response;
     }
 

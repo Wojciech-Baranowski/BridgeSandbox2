@@ -9,4 +9,6 @@ public interface Algorithm {
 
     long getNumberOfVisitedNodes();
 
+    default void preprocessing(){}
+
 }

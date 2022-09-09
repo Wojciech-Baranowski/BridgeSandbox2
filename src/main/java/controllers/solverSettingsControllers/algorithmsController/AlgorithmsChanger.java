@@ -5,15 +5,11 @@ import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import lombok.Getter;
 import solver.Algorithm;
-import solver.algorithms.PVSKillerHeuristic.PVSKillerHeuristicAtuAndHighestFirst;
-import solver.algorithms.PVSKillerHeuristic.PVSKillerHeuristicAtuFirst;
-import solver.algorithms.PVSKillerHeuristic.PVSKillerHeuristicHighestFirst;
-import solver.algorithms.PVSWithCutoff.PVSWithCutoff;
+import solver.algorithms.principalVariationSearch.*;
 import solver.algorithms.alphaBeta.AlphaBeta;
 import solver.algorithms.alphaBetaWithMemory.AlphaBetaWithMemory;
 import solver.algorithms.minmax.Minmax;
 import solver.algorithms.mtd.Mtd;
-import solver.algorithms.principalVariationSearch.PrincipalVariationSearch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +41,9 @@ public class AlgorithmsChanger {
     }
 
     public void addAlgorithms() {
+
+        algorithms.add(new PVSWithLookup());
+        algorithmNames.add("PVS with lookup");
 
         algorithms.add(new PVSWithCutoff());
         algorithmNames.add("PVS with cutoff");

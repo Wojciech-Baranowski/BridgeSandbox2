@@ -14,9 +14,9 @@ public class AlphaBeta implements Algorithm {
     @Override
     public Result solve(Game game) {
         numberOfVisitedNodes = 0;
-        Node node = new Node(game);
-        byte bestOutcome = alphaBeta(node);
-        return Result.mapResponseToResult(game, node.allOutcomeCards, bestOutcome);
+        AlphaBetaNode alphaBetaNode = new AlphaBetaNode(game);
+        byte bestOutcome = alphaBeta(alphaBetaNode);
+        return Result.mapResponseToResult(game, alphaBetaNode.allOutcomeCards, bestOutcome);
     }
 
     @Override
@@ -24,22 +24,22 @@ public class AlphaBeta implements Algorithm {
         return numberOfVisitedNodes;
     }
 
-    private byte alphaBeta(Node node) {
-        if (node.depth == Node.allCardsNumber) {
+    private byte alphaBeta(AlphaBetaNode alphaBetaNode) {
+        if (alphaBetaNode.depth == AlphaBetaNode.allCardsNumber) {
             numberOfVisitedNodes++;
-            if (node.allOutcomeCards[node.nsPoints][0] == -1) {
-                for (int i = 0; i < Node.allCardsNumber; i++) {
-                    node.allOutcomeCards[node.nsPoints][i] = node.allPlayedCards[i];
+            if (alphaBetaNode.allOutcomeCards[alphaBetaNode.nsPoints][0] == -1) {
+                for (int i = 0; i < AlphaBetaNode.allCardsNumber; i++) {
+                    alphaBetaNode.allOutcomeCards[alphaBetaNode.nsPoints][i] = alphaBetaNode.allPlayedCards[i];
                 }
             }
-            return (byte) (node.nsPoints * node.color);
+            return (byte) (alphaBetaNode.nsPoints * alphaBetaNode.color);
         }
         byte bestScore = (byte) (-100);
-        for (byte i = 0; i < node.cardsSize[node.currentPlayer]; i++) {
-            if (node.isCardValid(i)) {
-                bestScore = (byte) max(bestScore, -playCard(node, i));
-                node.alpha = (byte) max(node.alpha, bestScore);
-                if (node.alpha >= node.beta) {
+        for (byte i = 0; i < alphaBetaNode.cardsSize[alphaBetaNode.currentPlayer]; i++) {
+            if (alphaBetaNode.isCardValid(i)) {
+                bestScore = (byte) max(bestScore, -playCard(alphaBetaNode, i));
+                alphaBetaNode.alpha = (byte) max(alphaBetaNode.alpha, bestScore);
+                if (alphaBetaNode.alpha >= alphaBetaNode.beta) {
                     break;
                 }
             }
@@ -47,23 +47,27 @@ public class AlphaBeta implements Algorithm {
         return bestScore;
     }
 
-    private byte playCard(Node node, byte currentCardIndex) {
+    private byte playCard(AlphaBetaNode alphaBetaNode, byte currentCardIndex) {
         byte response;
-        byte prevAlpha = node.alpha;
-        byte prevBeta = node.beta;
-        node.playCard(currentCardIndex);
-        if (node.playedCardsSize != PLAYER_NUMBER) {
-            response = alphaBeta(node);
+        byte prevAlpha = alphaBetaNode.alpha;
+        byte prevBeta = alphaBetaNode.beta;
+        alphaBetaNode.playCard(currentCardIndex);
+        if (alphaBetaNode.playedCardsSize != PLAYER_NUMBER) {
+            response = alphaBeta(alphaBetaNode);
         } else {
-            byte[] playedCards = {node.playedCards[0], node.playedCards[1], node.playedCards[2], node.playedCards[3]};
-            byte lastStartingPlayer = node.startingPlayer;
-            node.summarize();
-            response = alphaBeta(node);
-            node.revertSummarize(playedCards, lastStartingPlayer);
+            byte[] playedCards = {
+                    alphaBetaNode.playedCards[0],
+                    alphaBetaNode.playedCards[1],
+                    alphaBetaNode.playedCards[2],
+                    alphaBetaNode.playedCards[3]};
+            byte lastStartingPlayer = alphaBetaNode.startingPlayer;
+            alphaBetaNode.summarize();
+            response = alphaBeta(alphaBetaNode);
+            alphaBetaNode.revertSummarize(playedCards, lastStartingPlayer);
         }
-        node.revertPlayCard(currentCardIndex);
-        node.alpha = prevAlpha;
-        node.beta = prevBeta;
+        alphaBetaNode.revertPlayCard(currentCardIndex);
+        alphaBetaNode.alpha = prevAlpha;
+        alphaBetaNode.beta = prevBeta;
         return response;
     }
 

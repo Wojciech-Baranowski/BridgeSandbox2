@@ -3,13 +3,13 @@ package solver.algorithms.principalVariationSearch;
 import gameLogic.game.Game;
 import solver.algorithms.BaseNode;
 
-public class Node extends BaseNode {
+public class PVSNode extends BaseNode {
 
     public byte color;
     public byte alpha;
     public byte beta;
 
-    public Node(Game game) {
+    public PVSNode(Game game) {
         super(game);
         color = (byte) (game.getCurrentPlayer().ordinal() % 2 == 0 ? 1 : -1);
         alpha = -100;

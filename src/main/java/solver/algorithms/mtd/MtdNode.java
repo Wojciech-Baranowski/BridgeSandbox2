@@ -1,15 +1,15 @@
-package solver.algorithms.alphaBetaWithMemory;
+package solver.algorithms.mtd;
 
 import gameLogic.game.Game;
 import solver.algorithms.BaseNode;
 
-public class Node extends BaseNode {
+public class MtdNode extends BaseNode {
 
     public byte color;
     public byte alpha;
     public byte beta;
 
-    Node(Game game) {
+    MtdNode(Game game) {
         super(game);
         color = (byte) (game.getCurrentPlayer().ordinal() % 2 == 0 ? 1 : -1);
         alpha = -100;

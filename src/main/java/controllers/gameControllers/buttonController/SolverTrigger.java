@@ -35,6 +35,7 @@ public class SolverTrigger {
                     .map(Collection::size)
                     .reduce(0, Integer::sum)
                     .byteValue() + game.getPlayedCards().size()) > 0) {
+                algorithmsChanger.getAlgorithms().get(chosenAlgorithmIndex).preprocessing();
                 Result result = algorithmsChanger.getAlgorithms().get(chosenAlgorithmIndex).solve(game);
                 getGameHistoryController().removeAllPredictedHistoryEntries();
                 for (ResultRound round : result.getResultRounds()) {

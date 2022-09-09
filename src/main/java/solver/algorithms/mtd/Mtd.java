@@ -14,9 +14,9 @@ public class Mtd implements Algorithm {
     @Override
     public Result solve(Game game) {
         numberOfVisitedNodes = 0;
-        Node node = new Node(game);
-        byte bestOutcome = mtd(node, (byte) ((byte) game.getStartingNumberOfCardsPerPlayer() / 2));
-        return Result.mapResponseToResult(game, node.allOutcomeCards, bestOutcome);
+        MtdNode mtdNode = new MtdNode(game);
+        byte bestOutcome = mtd(mtdNode, (byte) ((byte) game.getStartingNumberOfCardsPerPlayer() / 2));
+        return Result.mapResponseToResult(game, mtdNode.allOutcomeCards, bestOutcome);
     }
 
     @Override
@@ -24,16 +24,16 @@ public class Mtd implements Algorithm {
         return numberOfVisitedNodes;
     }
 
-    private byte mtd(Node node, byte f) {
+    private byte mtd(MtdNode mtdNode, byte f) {
         byte g = f;
         byte upperBound = 100;
         byte lowerBound = -100;
         byte beta;
         while (lowerBound < upperBound) {
             beta = (byte) max(g, lowerBound + 1);
-            node.alpha = (byte) (beta - 1);
-            node.beta = beta;
-            g = alphaBeta(node);
+            mtdNode.alpha = (byte) (beta - 1);
+            mtdNode.beta = beta;
+            g = alphaBeta(mtdNode);
             if (g < beta) {
                 upperBound = g;
             } else {
@@ -43,22 +43,22 @@ public class Mtd implements Algorithm {
         return g;
     }
 
-    private byte alphaBeta(Node node) {
-        if (node.depth == Node.allCardsNumber) {
+    private byte alphaBeta(MtdNode mtdNode) {
+        if (mtdNode.depth == MtdNode.allCardsNumber) {
             numberOfVisitedNodes++;
-            if (node.allOutcomeCards[node.nsPoints][0] == -1) {
-                for (int i = 0; i < Node.allCardsNumber; i++) {
-                    node.allOutcomeCards[node.nsPoints][i] = node.allPlayedCards[i];
+            if (mtdNode.allOutcomeCards[mtdNode.nsPoints][0] == -1) {
+                for (int i = 0; i < MtdNode.allCardsNumber; i++) {
+                    mtdNode.allOutcomeCards[mtdNode.nsPoints][i] = mtdNode.allPlayedCards[i];
                 }
             }
-            return (byte) (node.nsPoints * node.color);
+            return (byte) (mtdNode.nsPoints * mtdNode.color);
         }
         byte bestScore = (byte) (-100);
-        for (byte i = 0; i < node.cardsSize[node.currentPlayer]; i++) {
-            if (node.isCardValid(i)) {
-                bestScore = (byte) max(bestScore, -playCard(node, i));
-                node.alpha = (byte) max(node.alpha, bestScore);
-                if (node.alpha >= node.beta) {
+        for (byte i = 0; i < mtdNode.cardsSize[mtdNode.currentPlayer]; i++) {
+            if (mtdNode.isCardValid(i)) {
+                bestScore = (byte) max(bestScore, -playCard(mtdNode, i));
+                mtdNode.alpha = (byte) max(mtdNode.alpha, bestScore);
+                if (mtdNode.alpha >= mtdNode.beta) {
                     break;
                 }
             }
@@ -66,23 +66,27 @@ public class Mtd implements Algorithm {
         return bestScore;
     }
 
-    private byte playCard(Node node, byte currentCardIndex) {
+    private byte playCard(MtdNode mtdNode, byte currentCardIndex) {
         byte response;
-        byte prevAlpha = node.alpha;
-        byte prevBeta = node.beta;
-        node.playCard(currentCardIndex);
-        if (node.playedCardsSize != PLAYER_NUMBER) {
-            response = alphaBeta(node);
+        byte prevAlpha = mtdNode.alpha;
+        byte prevBeta = mtdNode.beta;
+        mtdNode.playCard(currentCardIndex);
+        if (mtdNode.playedCardsSize != PLAYER_NUMBER) {
+            response = alphaBeta(mtdNode);
         } else {
-            byte[] playedCards = {node.playedCards[0], node.playedCards[1], node.playedCards[2], node.playedCards[3]};
-            byte lastStartingPlayer = node.startingPlayer;
-            node.summarize();
-            response = alphaBeta(node);
-            node.revertSummarize(playedCards, lastStartingPlayer);
+            byte[] playedCards = {
+                    mtdNode.playedCards[0],
+                    mtdNode.playedCards[1],
+                    mtdNode.playedCards[2],
+                    mtdNode.playedCards[3]};
+            byte lastStartingPlayer = mtdNode.startingPlayer;
+            mtdNode.summarize();
+            response = alphaBeta(mtdNode);
+            mtdNode.revertSummarize(playedCards, lastStartingPlayer);
         }
-        node.revertPlayCard(currentCardIndex);
-        node.alpha = prevAlpha;
-        node.beta = prevBeta;
+        mtdNode.revertPlayCard(currentCardIndex);
+        mtdNode.alpha = prevAlpha;
+        mtdNode.beta = prevBeta;
         return response;
     }
 

@@ -3,6 +3,8 @@ package solver.algorithms.principalVariationSearch;
 
 import gameLogic.game.Game;
 import solver.Algorithm;
+import solver.algorithms.BaseNode;
+import solver.algorithms.alphaBeta.AlphaBetaNode;
 import solver.result.Result;
 
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
@@ -15,9 +17,9 @@ public class PrincipalVariationSearch implements Algorithm {
     @Override
     public Result solve(Game game) {
         numberOfVisitedNodes = 0;
-        Node node = new Node(game);
-        byte bestOutcome = principalVariationSearch(node);
-        return Result.mapResponseToResult(game, node.allOutcomeCards, bestOutcome);
+        PVSNode PVSNode = new PVSNode(game);
+        byte bestOutcome = principalVariationSearch(PVSNode);
+        return Result.mapResponseToResult(game, PVSNode.allOutcomeCards, bestOutcome);
     }
 
     @Override
@@ -25,53 +27,57 @@ public class PrincipalVariationSearch implements Algorithm {
         return numberOfVisitedNodes;
     }
 
-    protected byte principalVariationSearch(Node node) {
-        if (node.depth == Node.allCardsNumber) {
+    protected byte principalVariationSearch(PVSNode PVSNode) {
+        if (PVSNode.depth == BaseNode.allCardsNumber) {
             numberOfVisitedNodes++;
-            if (node.allOutcomeCards[node.nsPoints][0] == -1) {
-                for (int i = 0; i < solver.algorithms.alphaBeta.Node.allCardsNumber; i++) {
-                    node.allOutcomeCards[node.nsPoints][i] = node.allPlayedCards[i];
+            if (PVSNode.allOutcomeCards[PVSNode.nsPoints][0] == -1) {
+                for (int i = 0; i < AlphaBetaNode.allCardsNumber; i++) {
+                    PVSNode.allOutcomeCards[PVSNode.nsPoints][i] = PVSNode.allPlayedCards[i];
                 }
             }
-            return (byte) (node.nsPoints * node.color);
+            return (byte) (PVSNode.nsPoints * PVSNode.color);
         }
         byte score = -100;
-        for (byte i = 0; i < node.cardsSize[node.currentPlayer]; i++) {
-            if (node.isCardValid(i)) {
+        for (byte i = 0; i < PVSNode.cardsSize[PVSNode.currentPlayer]; i++) {
+            if (PVSNode.isCardValid(i)) {
                 if (score == -100) {
-                    score = (byte) -playCard(node, i, (byte) -node.beta, (byte) -node.alpha);
+                    score = (byte) -playCard(PVSNode, i, (byte) -PVSNode.beta, (byte) -PVSNode.alpha);
                 } else {
-                    score = (byte) -playCard(node, i, (byte) (-node.alpha - 1), (byte) -node.alpha);
-                    if (node.alpha < score && score < node.beta) {
-                        score = (byte) -playCard(node, i, (byte) -node.beta, (byte) -score);
+                    score = (byte) -playCard(PVSNode, i, (byte) (-PVSNode.alpha - 1), (byte) -PVSNode.alpha);
+                    if (PVSNode.alpha < score && score < PVSNode.beta) {
+                        score = (byte) -playCard(PVSNode, i, (byte) -PVSNode.beta, (byte) -score);
                     }
                 }
-                node.alpha = (byte) max(node.alpha, score);
-                if (node.alpha >= node.beta) {
+                PVSNode.alpha = (byte) max(PVSNode.alpha, score);
+                if (PVSNode.alpha >= PVSNode.beta) {
                     break;
                 }
             }
         }
-        return node.alpha;
+        return PVSNode.alpha;
     }
 
-    protected byte playCard(Node node, byte currentCardIndex, byte alpha, byte beta) {
+    protected byte playCard(PVSNode PVSNode, byte currentCardIndex, byte alpha, byte beta) {
         byte response;
-        byte prevAlpha = node.alpha;
-        byte prevBeta = node.beta;
-        node.playCard(currentCardIndex, alpha, beta);
-        if (node.playedCardsSize != PLAYER_NUMBER) {
-            response = principalVariationSearch(node);
+        byte prevAlpha = PVSNode.alpha;
+        byte prevBeta = PVSNode.beta;
+        PVSNode.playCard(currentCardIndex, alpha, beta);
+        if (PVSNode.playedCardsSize != PLAYER_NUMBER) {
+            response = principalVariationSearch(PVSNode);
         } else {
-            byte[] playedCards = {node.playedCards[0], node.playedCards[1], node.playedCards[2], node.playedCards[3]};
-            byte lastStartingPlayer = node.startingPlayer;
-            node.summarize();
-            response = principalVariationSearch(node);
-            node.revertSummarize(playedCards, lastStartingPlayer);
+            byte[] playedCards = {
+                    PVSNode.playedCards[0],
+                    PVSNode.playedCards[1],
+                    PVSNode.playedCards[2],
+                    PVSNode.playedCards[3]};
+            byte lastStartingPlayer = PVSNode.startingPlayer;
+            PVSNode.summarize();
+            response = principalVariationSearch(PVSNode);
+            PVSNode.revertSummarize(playedCards, lastStartingPlayer);
         }
-        node.revertPlayCard(currentCardIndex);
-        node.alpha = prevAlpha;
-        node.beta = prevBeta;
+        PVSNode.revertPlayCard(currentCardIndex);
+        PVSNode.alpha = prevAlpha;
+        PVSNode.beta = prevBeta;
         return response;
     }
 

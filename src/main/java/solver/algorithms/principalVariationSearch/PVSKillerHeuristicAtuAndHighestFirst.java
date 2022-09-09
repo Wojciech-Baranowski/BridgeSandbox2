@@ -1,8 +1,6 @@
-package solver.algorithms.PVSKillerHeuristic;
+package solver.algorithms.principalVariationSearch;
 
 import gameLogic.game.Game;
-import solver.algorithms.principalVariationSearch.Node;
-import solver.algorithms.principalVariationSearch.PrincipalVariationSearch;
 import solver.result.Result;
 
 import static gameLogic.game.GameConstants.FIGURE_NUMBER;
@@ -15,16 +13,16 @@ public class PVSKillerHeuristicAtuAndHighestFirst extends PrincipalVariationSear
     @Override
     public Result solve(Game game) {
         numberOfVisitedNodes = 0;
-        Node node = new Node(game);
-        atu = node.atu;
-        moveHighestAndAtuToFirstPosition(node);
-        byte bestOutcome = principalVariationSearch(node);
-        return Result.mapResponseToResult(game, node.allOutcomeCards, bestOutcome);
+        PVSNode PVSNode = new PVSNode(game);
+        atu = PVSNode.atu;
+        moveHighestAndAtuToFirstPosition(PVSNode);
+        byte bestOutcome = principalVariationSearch(PVSNode);
+        return Result.mapResponseToResult(game, PVSNode.allOutcomeCards, bestOutcome);
     }
 
-    protected void moveHighestAndAtuToFirstPosition(Node node) {
+    protected void moveHighestAndAtuToFirstPosition(PVSNode PVSNode) {
         for (int i = 0; i < PLAYER_NUMBER; i++) {
-            quickSort(node.cards[i], (byte) 0, (byte) (node.cardsSize[i] - 1));
+            quickSort(PVSNode.cards[i], (byte) 0, (byte) (PVSNode.cardsSize[i] - 1));
         }
     }
 

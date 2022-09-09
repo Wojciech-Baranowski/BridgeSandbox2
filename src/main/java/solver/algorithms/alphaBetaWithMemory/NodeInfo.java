@@ -10,12 +10,12 @@ public class NodeInfo implements Comparable {
     public byte playedCardsSize;
     public byte[] allPlayedCards;
 
-    public NodeInfo(Node node) {
-        startingPlayer = node.startingPlayer;
-        depth = node.depth;
-        nsPoints = node.nsPoints;
-        playedCardsSize = node.playedCardsSize;
-        allPlayedCards = Arrays.copyOf(node.allPlayedCards, node.allPlayedCards.length);
+    public NodeInfo(AlphaBetaWithMemoryNode alphaBetaWithMemoryNode) {
+        startingPlayer = alphaBetaWithMemoryNode.startingPlayer;
+        depth = alphaBetaWithMemoryNode.depth;
+        nsPoints = alphaBetaWithMemoryNode.nsPoints;
+        playedCardsSize = alphaBetaWithMemoryNode.playedCardsSize;
+        allPlayedCards = Arrays.copyOf(alphaBetaWithMemoryNode.allPlayedCards, alphaBetaWithMemoryNode.allPlayedCards.length);
     }
 
     @Override

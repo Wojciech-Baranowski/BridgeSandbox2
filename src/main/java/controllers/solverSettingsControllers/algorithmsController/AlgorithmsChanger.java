@@ -37,7 +37,7 @@ public class AlgorithmsChanger {
         }
 
         algorithmsBundle = new RadioButtonBundle(algorithmChangerOptions.stream().map(AlgorithmChangerOption::getRadioButton).toList());
-        algorithmsBundle.update(algorithmChangerOptions.get(0).getRadioButton());
+        algorithmsBundle.update(algorithmChangerOptions.get(1).getRadioButton());
     }
 
     public void addAlgorithms() {

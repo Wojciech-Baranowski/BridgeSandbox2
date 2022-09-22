@@ -31,12 +31,15 @@ public class AlgorithmsChanger {
         addAlgorithms();
 
         for (int i = 0; i < algorithms.size(); i++) {
-            AlgorithmChangerOption algorithmChangerOption =
-                    new AlgorithmChangerOption(drawableFactory, background, algorithmNames.get(i), algorithms.get(i), i);
+            AlgorithmChangerOption algorithmChangerOption = new AlgorithmChangerOption(
+                    drawableFactory, background, algorithmNames.get(i), algorithms.get(i), i);
             algorithmChangerOptions.add(algorithmChangerOption);
         }
 
-        algorithmsBundle = new RadioButtonBundle(algorithmChangerOptions.stream().map(AlgorithmChangerOption::getRadioButton).toList());
+        algorithmsBundle = new RadioButtonBundle(algorithmChangerOptions
+                .stream()
+                .map(AlgorithmChangerOption::getRadioButton)
+                .toList());
         algorithmsBundle.update(algorithmChangerOptions.get(1).getRadioButton());
     }
 

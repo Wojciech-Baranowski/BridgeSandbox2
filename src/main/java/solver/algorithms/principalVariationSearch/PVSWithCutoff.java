@@ -7,14 +7,13 @@ import solver.result.Result;
 
 import static java.lang.Math.max;
 
-public class PVSWithCutoff extends PVSKillerHeuristicAtuAndHighestFirst {
+public class PVSWithCutoff extends PVSKillerHeuristicHighestFirst {
 
     @Override
     public Result solve(Game game) {
         numberOfVisitedNodes = 0;
         PVSNode pvsNode = new PVSNode(game);
-        atu = pvsNode.atu;
-        moveHighestAndAtuToFirstPosition(pvsNode);
+        orderByFiguresDescending(pvsNode);
         byte bestOutcome = principalVariationSearch(pvsNode);
         return Result.mapResponseToResult(game, pvsNode.allOutcomeCards, bestOutcome);
     }

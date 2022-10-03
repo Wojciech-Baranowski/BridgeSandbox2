@@ -11,8 +11,7 @@ public class PVSWithLookup extends PVSWithCutoff {
     public Result solve(Game game) {
         numberOfVisitedNodes = 0;
         PVSLookupNode pvsNode = new PVSLookupNode(game);
-        atu = pvsNode.atu;
-        moveHighestAndAtuToFirstPosition(pvsNode);
+        orderByFiguresDescending(pvsNode);
         byte bestOutcome = principalVariationSearch(pvsNode);
         return Result.mapResponseToResult(game, pvsNode.allOutcomeCards, bestOutcome);
     }

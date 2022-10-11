@@ -56,7 +56,7 @@ public class BaseNode {
     }
 
     public byte winningPlayerIndex() {
-        if(getGame().getStartingNumberOfCardsPerPlayer() == 8) {
+        if(allCardsNumber == 28) {
             Player player = Player.values()[startingPlayer];
             Color color = Color.values()[atu];
             List<Card> cards = new ArrayList<>();
@@ -65,21 +65,20 @@ public class BaseNode {
             cards.add(new Card(playedCards[2]));
             cards.add(new Card(playedCards[3]));
             return (byte) new RoundJudge().chooseWinningPlayer(cards, player, color).ordinal();
-        } else {
-            byte winnerIndex = startingPlayer;
-            for (byte i = 0; i < PLAYER_NUMBER; i++) {
-                if (i != startingPlayer) {
-                    if (playedCards[i] / FIGURE_NUMBER == playedCards[winnerIndex] / FIGURE_NUMBER) {
-                        if (playedCards[i] > playedCards[winnerIndex]) {
-                            winnerIndex = i;
-                        }
-                    } else if (playedCards[i] / FIGURE_NUMBER == atu) {
+        }
+        byte winnerIndex = startingPlayer;
+        for (byte i = 0; i < PLAYER_NUMBER; i++) {
+            if (i != startingPlayer) {
+                if (playedCards[i] / FIGURE_NUMBER == playedCards[winnerIndex] / FIGURE_NUMBER) {
+                    if (playedCards[i] > playedCards[winnerIndex]) {
                         winnerIndex = i;
                     }
+                } else if (playedCards[i] / FIGURE_NUMBER == atu) {
+                    winnerIndex = i;
                 }
             }
-            return winnerIndex;
         }
+        return winnerIndex;
     }
 
     public void playCard(byte index) {

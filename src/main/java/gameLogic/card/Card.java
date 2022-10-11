@@ -10,7 +10,7 @@ public class Card {
     private final Figure figure;
     private final Color color;
 
-    Card(int id) {
+    public Card(int id) {
         this.figure = Figure.values()[id % FIGURE_NUMBER];
         this.color = Color.values()[id / FIGURE_NUMBER];
     }

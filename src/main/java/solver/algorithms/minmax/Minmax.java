@@ -61,7 +61,14 @@ public class Minmax implements Algorithm {
                     minmaxNode.playedCards[3]};
             byte lastStartingPlayer = minmaxNode.startingPlayer;
             minmaxNode.summarize();
-            response = minMax(minmaxNode);
+            boolean parity = minmaxNode.isSummarizeParity(lastStartingPlayer);
+            if (parity) {
+                minmaxNode.playDummyCard();
+                response = minMax(minmaxNode);
+                minmaxNode.revertPlayDummyCard();
+            } else {
+                response = minMax(minmaxNode);
+            }
             minmaxNode.revertSummarize(playedCards, lastStartingPlayer);
         }
         minmaxNode.revertPlayCard(currentCardIndex);

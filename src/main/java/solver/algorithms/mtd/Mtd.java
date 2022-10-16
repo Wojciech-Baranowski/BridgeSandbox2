@@ -70,6 +70,7 @@ public class Mtd implements Algorithm {
         byte response;
         byte prevAlpha = mtdNode.alpha;
         byte prevBeta = mtdNode.beta;
+        byte prevColor = mtdNode.color;
         mtdNode.playCard(currentCardIndex);
         if (mtdNode.playedCardsSize != PLAYER_NUMBER) {
             response = alphaBeta(mtdNode);
@@ -81,12 +82,19 @@ public class Mtd implements Algorithm {
                     mtdNode.playedCards[3]};
             byte lastStartingPlayer = mtdNode.startingPlayer;
             mtdNode.summarize();
-            response = alphaBeta(mtdNode);
+            if( mtdNode.isSummarizeParity(lastStartingPlayer)) {
+                mtdNode.playDummyCard();
+                response = (byte) -alphaBeta( mtdNode);
+                mtdNode.revertPlayDummyCard();
+            } else {
+                response = alphaBeta( mtdNode);
+            }
             mtdNode.revertSummarize(playedCards, lastStartingPlayer);
         }
         mtdNode.revertPlayCard(currentCardIndex);
         mtdNode.alpha = prevAlpha;
         mtdNode.beta = prevBeta;
+        mtdNode.color = prevColor;
         return response;
     }
 

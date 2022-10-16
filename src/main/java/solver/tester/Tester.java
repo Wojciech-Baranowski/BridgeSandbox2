@@ -4,8 +4,10 @@ import gameLogic.card.Color;
 import gameLogic.game.Game;
 import solver.Algorithm;
 import solver.algorithms.alphaBeta.AlphaBeta;
-import solver.algorithms.principalVariationSearch.PVSWithCutoff;
-import solver.algorithms.principalVariationSearch.PVSWithLookup;
+import solver.algorithms.alphaBetaWithMemory.AlphaBetaWithMemory;
+import solver.algorithms.minmax.Minmax;
+import solver.algorithms.mtd.Mtd;
+import solver.algorithms.principalVariationSearch.*;
 import solver.result.Result;
 
 public class Tester {
@@ -19,7 +21,7 @@ public class Tester {
         numberOfCards = 4;
         numberOfTests = 10000;
         tested = new PVSWithLookup();
-        correct = new AlphaBeta();
+        correct = new Minmax();
         test();
     }
 

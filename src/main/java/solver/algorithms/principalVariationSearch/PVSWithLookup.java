@@ -38,7 +38,13 @@ public class PVSWithLookup extends PVSWithCutoff {
                     pvsNode.playedCards[3]};
             byte lastStartingPlayer = pvsNode.startingPlayer;
             pvsNode.summarize();
-            response = principalVariationSearch(pvsNode);
+            if (pvsNode.isSummarizeParity(lastStartingPlayer)) {
+                pvsNode.playDummyCard();
+                response = (byte) -principalVariationSearch(pvsNode);
+                pvsNode.revertPlayDummyCard();
+            } else {
+                response = principalVariationSearch(pvsNode);
+            }
             pvsNode.revertSummarize(playedCards, lastStartingPlayer);
         }
         pvsNode.revertPlayCard(currentCardIndex);

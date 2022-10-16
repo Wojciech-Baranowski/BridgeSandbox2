@@ -17,9 +17,21 @@ public class MinmaxNode extends BaseNode {
         maximizing = !maximizing;
     }
 
+    public void playDummyCard() {
+        maximizing = !maximizing;
+    }
+
     public void revertPlayCard(byte cardPlace) {
         super.revertPlayCard(cardPlace);
         maximizing = !maximizing;
+    }
+
+    public void revertPlayDummyCard() {
+        maximizing = !maximizing;
+    }
+
+    public boolean isSummarizeParity(byte lastStartingPlayer) {
+        return (lastStartingPlayer & 1) != (startingPlayer & 1);
     }
 
 }

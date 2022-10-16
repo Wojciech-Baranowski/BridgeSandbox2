@@ -1,17 +1,10 @@
 package solver.algorithms;
 
-import gameLogic.card.Card;
-import gameLogic.card.Color;
 import gameLogic.game.Game;
-import gameLogic.game.RoundJudge;
-import gameLogic.player.Player;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
-import static gameLogic.game.Game.getGame;
 import static gameLogic.game.GameConstants.FIGURE_NUMBER;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
@@ -56,16 +49,6 @@ public class BaseNode {
     }
 
     public byte winningPlayerIndex() {
-        if(allCardsNumber == 28) {
-            Player player = Player.values()[startingPlayer];
-            Color color = Color.values()[atu];
-            List<Card> cards = new ArrayList<>();
-            cards.add(new Card(playedCards[0]));
-            cards.add(new Card(playedCards[1]));
-            cards.add(new Card(playedCards[2]));
-            cards.add(new Card(playedCards[3]));
-            return (byte) new RoundJudge().chooseWinningPlayer(cards, player, color).ordinal();
-        }
         byte winnerIndex = startingPlayer;
         for (byte i = 0; i < PLAYER_NUMBER; i++) {
             if (i != startingPlayer) {

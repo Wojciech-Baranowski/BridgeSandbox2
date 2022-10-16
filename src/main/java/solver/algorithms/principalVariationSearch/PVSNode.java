@@ -23,9 +23,22 @@ public class PVSNode extends BaseNode {
         this.beta = beta;
     }
 
-    public void revertPlayCard(byte cardPlace) {
-        super.revertPlayCard(cardPlace);
+    public void playDummyCard() {
         color *= -1;
+        byte tempAlpha = alpha;
+        alpha = (byte) -beta;
+        beta = (byte) -tempAlpha;
+    }
+
+    public void revertPlayDummyCard() {
+        color *= -1;
+        byte tempAlpha = alpha;
+        alpha = (byte) -beta;
+        beta = (byte) -tempAlpha;
+    }
+
+    public boolean isSummarizeParity(byte lastStartingPlayer) {
+        return (lastStartingPlayer & 1) != (startingPlayer & 1);
     }
 
 }

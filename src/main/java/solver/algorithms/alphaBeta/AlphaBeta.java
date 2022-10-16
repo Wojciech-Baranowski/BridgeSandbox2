@@ -51,6 +51,7 @@ public class AlphaBeta implements Algorithm {
         byte response;
         byte prevAlpha = alphaBetaNode.alpha;
         byte prevBeta = alphaBetaNode.beta;
+        byte prevColor = alphaBetaNode.color;
         alphaBetaNode.playCard(currentCardIndex);
         if (alphaBetaNode.playedCardsSize != PLAYER_NUMBER) {
             response = alphaBeta(alphaBetaNode);
@@ -62,13 +63,19 @@ public class AlphaBeta implements Algorithm {
                     alphaBetaNode.playedCards[3]};
             byte lastStartingPlayer = alphaBetaNode.startingPlayer;
             alphaBetaNode.summarize();
-            response = alphaBeta(alphaBetaNode);
+            if (alphaBetaNode.isSummarizeParity(lastStartingPlayer)) {
+                alphaBetaNode.playDummyCard();
+                response = (byte) -alphaBeta(alphaBetaNode);
+                alphaBetaNode.revertPlayDummyCard();
+            } else {
+                response = alphaBeta(alphaBetaNode);
+            }
             alphaBetaNode.revertSummarize(playedCards, lastStartingPlayer);
         }
         alphaBetaNode.revertPlayCard(currentCardIndex);
         alphaBetaNode.alpha = prevAlpha;
         alphaBetaNode.beta = prevBeta;
+        alphaBetaNode.color = prevColor;
         return response;
     }
-
 }

@@ -57,27 +57,35 @@ public class PrincipalVariationSearch implements Algorithm {
         return PVSNode.alpha;
     }
 
-    protected byte playCard(PVSNode PVSNode, byte currentCardIndex, byte alpha, byte beta) {
+    protected byte playCard(PVSNode pvsNode, byte currentCardIndex, byte alpha, byte beta) {
         byte response;
-        byte prevAlpha = PVSNode.alpha;
-        byte prevBeta = PVSNode.beta;
-        PVSNode.playCard(currentCardIndex, alpha, beta);
-        if (PVSNode.playedCardsSize != PLAYER_NUMBER) {
-            response = principalVariationSearch(PVSNode);
+        byte prevAlpha = pvsNode.alpha;
+        byte prevBeta = pvsNode.beta;
+        byte prevColor = pvsNode.color;
+        pvsNode.playCard(currentCardIndex, alpha, beta);
+        if (pvsNode.playedCardsSize != PLAYER_NUMBER) {
+            response = principalVariationSearch(pvsNode);
         } else {
             byte[] playedCards = {
-                    PVSNode.playedCards[0],
-                    PVSNode.playedCards[1],
-                    PVSNode.playedCards[2],
-                    PVSNode.playedCards[3]};
-            byte lastStartingPlayer = PVSNode.startingPlayer;
-            PVSNode.summarize();
-            response = principalVariationSearch(PVSNode);
-            PVSNode.revertSummarize(playedCards, lastStartingPlayer);
+                    pvsNode.playedCards[0],
+                    pvsNode.playedCards[1],
+                    pvsNode.playedCards[2],
+                    pvsNode.playedCards[3]};
+            byte lastStartingPlayer = pvsNode.startingPlayer;
+            pvsNode.summarize();
+            if (pvsNode.isSummarizeParity(lastStartingPlayer)) {
+                pvsNode.playDummyCard();
+                response = (byte) -principalVariationSearch(pvsNode);
+                pvsNode.revertPlayDummyCard();
+            } else {
+                response = principalVariationSearch(pvsNode);
+            }
+            pvsNode.revertSummarize(playedCards, lastStartingPlayer);
         }
-        PVSNode.revertPlayCard(currentCardIndex);
-        PVSNode.alpha = prevAlpha;
-        PVSNode.beta = prevBeta;
+        pvsNode.revertPlayCard(currentCardIndex);
+        pvsNode.alpha = prevAlpha;
+        pvsNode.beta = prevBeta;
+        pvsNode.color = prevColor;
         return response;
     }
 

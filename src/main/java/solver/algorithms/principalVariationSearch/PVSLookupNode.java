@@ -64,10 +64,11 @@ public class PVSLookupNode extends PVSNode {
         }
         return winnerIndex;
     }
+
     public boolean isCardValid(byte index) {
         return (cards[currentPlayer][index] / FIGURE_NUMBER == playedCards[startingPlayer] / FIGURE_NUMBER
-                    || playedCardsSize == 0
-                    || cardsInColor[currentPlayer][playedCards[startingPlayer] / FIGURE_NUMBER] == 0);
+                || playedCardsSize == 0
+                || cardsInColor[currentPlayer][playedCards[startingPlayer] / FIGURE_NUMBER] == 0);
     }
 
     public void playCard(byte index, byte alpha, byte beta) {
@@ -91,6 +92,24 @@ public class PVSLookupNode extends PVSNode {
         insertCardBack(playedCards[currentPlayer], cardPlace);
         cardsSize[currentPlayer]++;
         color *= -1;
+    }
+
+    public void playDummyCard() {
+        color *= -1;
+        byte tempAlpha = alpha;
+        alpha = (byte) -beta;
+        beta = (byte) -tempAlpha;
+    }
+
+    public void revertPlayDummyCard() {
+        color *= -1;
+        byte tempAlpha = alpha;
+        alpha = (byte) -beta;
+        beta = (byte) -tempAlpha;
+    }
+
+    public boolean isSummarizeParity(byte lastStartingPlayer) {
+        return (lastStartingPlayer & 1) != (startingPlayer & 1);
     }
 
 }

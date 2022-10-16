@@ -86,6 +86,7 @@ public class AlphaBetaWithMemory implements Algorithm {
         byte response;
         byte prevAlpha = alphaBetaWithMemoryNode.alpha;
         byte prevBeta = alphaBetaWithMemoryNode.beta;
+        byte prevColor = alphaBetaWithMemoryNode.color;
         alphaBetaWithMemoryNode.playCard(currentCardIndex);
         if (alphaBetaWithMemoryNode.playedCardsSize != PLAYER_NUMBER) {
             response = alphaBetaWithMemory(alphaBetaWithMemoryNode);
@@ -97,12 +98,19 @@ public class AlphaBetaWithMemory implements Algorithm {
                     alphaBetaWithMemoryNode.playedCards[3]};
             byte lastStartingPlayer = alphaBetaWithMemoryNode.startingPlayer;
             alphaBetaWithMemoryNode.summarize();
-            response = alphaBetaWithMemory(alphaBetaWithMemoryNode);
+            if (alphaBetaWithMemoryNode.isSummarizeParity(lastStartingPlayer)) {
+                alphaBetaWithMemoryNode.playDummyCard();
+                response = (byte) -alphaBetaWithMemory(alphaBetaWithMemoryNode);
+                alphaBetaWithMemoryNode.revertPlayDummyCard();
+            } else {
+                response = alphaBetaWithMemory(alphaBetaWithMemoryNode);
+            }
             alphaBetaWithMemoryNode.revertSummarize(playedCards, lastStartingPlayer);
         }
         alphaBetaWithMemoryNode.revertPlayCard(currentCardIndex);
         alphaBetaWithMemoryNode.alpha = prevAlpha;
         alphaBetaWithMemoryNode.beta = prevBeta;
+        alphaBetaWithMemoryNode.color = prevColor;
         return response;
     }
 

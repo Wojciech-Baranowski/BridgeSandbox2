@@ -30,7 +30,7 @@ import static gameLogic.game.GameConstants.*;
 
 public class AcceptChanges {
 
-    private class AcceptCommand implements Command {
+    private static class AcceptCommand implements Command {
 
         @Override
         public void execute() {
@@ -42,6 +42,93 @@ public class AcceptChanges {
             } else {
                 getEditGameTextController().getInvalidGameData().showText();
             }
+        }
+
+        private boolean isGameValid() {
+            return areChangersNotNull() && areCardsProperlyChosen();
+        }
+
+        private boolean areChangersNotNull() {
+            EditGameButtonController buttonController = getEditGameButtonController();
+            return buttonController.getAtuChanger()
+                    .getChooseAtuButtonsBundle()
+                    .getSelectedRadioButtonIndex() >= 0
+                    && buttonController.getStartingPlayerChanger()
+                    .getChooseStartingPlayerButtonsBundle()
+                    .getSelectedRadioButtonIndex() >= 0;
+        }
+
+        private boolean areCardsProperlyChosen() {
+            EditGameCardController cardController = getEditGameCardController();
+            EditGameButtonController buttonController = getEditGameButtonController();
+
+            List<Integer> numbersOfPlayerCards = Arrays.stream(cardController.getChooseCards().getChooseCardsBundles())
+                    .filter(rbb -> rbb.getSelectedRadioButtonIndex() >= 0)
+                    .collect(Collectors.groupingBy(RadioButtonBundle::getSelectedRadioButtonIndex))
+                    .values()
+                    .stream()
+                    .map(Collection::size)
+                    .toList();
+
+            int playersWithAnyCards = numbersOfPlayerCards.size();
+            int cardNumber = buttonController.getCardsNumberChanger().getCardNumber();
+
+            int minNumberOfCards = numbersOfPlayerCards
+                    .stream()
+                    .min(Comparator.naturalOrder())
+                    .orElse(MAX_CARDS_PER_PLAYER);
+
+            int maxNumberOfCards = numbersOfPlayerCards
+                    .stream()
+                    .max(Comparator.naturalOrder())
+                    .orElse(0);
+
+            return minNumberOfCards == maxNumberOfCards
+                    && maxNumberOfCards == cardNumber
+                    && playersWithAnyCards == PLAYER_NUMBER;
+        }
+
+        private void initializeGame() {
+            getGame().initializeGame(getChosenAtuColor(), getChosenCards(), getChosenPlayer());
+            getGameHistoryController().removeAllHistoryEntries();
+            getGameCardController().reinitialize();
+            getGameTextController().updatePoints();
+            getGameTextController().updateAtu();
+        }
+
+        private Color getChosenAtuColor() {
+            EditGameButtonController buttonController = getEditGameButtonController();
+            int colorOrdinal = buttonController
+                    .getAtuChanger()
+                    .getChooseAtuButtonsBundle()
+                    .getSelectedRadioButtonIndex();
+            return Color.values()[colorOrdinal];
+        }
+
+        private Player getChosenPlayer() {
+            EditGameButtonController buttonController = getEditGameButtonController();
+            int playerOrdinal = buttonController
+                    .getStartingPlayerChanger()
+                    .getChooseStartingPlayerButtonsBundle()
+                    .getSelectedRadioButtonIndex();
+            return Player.values()[playerOrdinal];
+        }
+
+        private List<Card>[] getChosenCards() {
+            List<Card>[] chosenCards = new List[PLAYER_NUMBER];
+            for (int i = 0; i < PLAYER_NUMBER; i++) {
+                chosenCards[i] = new ArrayList<>();
+            }
+            for (int i = 0; i < DECK_SIZE; i++) {
+                int cardOwnersOrdinal = getEditGameCardController()
+                        .getChooseCards()
+                        .getChooseCardsBundles()[i]
+                        .getSelectedRadioButtonIndex();
+                if (cardOwnersOrdinal >= 0) {
+                    chosenCards[cardOwnersOrdinal].add(getDeck().getCard(i));
+                }
+            }
+            return chosenCards;
         }
 
     }
@@ -69,93 +156,6 @@ public class AcceptChanges {
         InputCombination activationCombination = getInput().getInputCombinationFactory().makeLmbCombination();
         acceptChanges = new SimpleButton(buttonDrawable, activationCombination, new AcceptCommand());
         getScene().addObjectHigherThan(acceptChanges, background);
-    }
-
-    private boolean isGameValid() {
-        return areChangersNotNull() && areCardsProperlyChosen();
-    }
-
-    private boolean areChangersNotNull() {
-        EditGameButtonController buttonController = getEditGameButtonController();
-        return buttonController.getAtuChanger()
-                .getChooseAtuButtonsBundle()
-                .getSelectedRadioButtonIndex() >= 0
-                && buttonController.getStartingPlayerChanger()
-                .getChooseStartingPlayerButtonsBundle()
-                .getSelectedRadioButtonIndex() >= 0;
-    }
-
-    private boolean areCardsProperlyChosen() {
-        EditGameCardController cardController = getEditGameCardController();
-        EditGameButtonController buttonController = getEditGameButtonController();
-
-        List<Integer> numbersOfPlayerCards = Arrays.stream(cardController.getChooseCards().getChooseCardsBundles())
-                .filter(rbb -> rbb.getSelectedRadioButtonIndex() >= 0)
-                .collect(Collectors.groupingBy(RadioButtonBundle::getSelectedRadioButtonIndex))
-                .values()
-                .stream()
-                .map(Collection::size)
-                .toList();
-
-        int playersWithAnyCards = numbersOfPlayerCards.size();
-        int cardNumber = buttonController.getCardsNumberChanger().getCardNumber();
-
-        int minNumberOfCards = numbersOfPlayerCards
-                .stream()
-                .min(Comparator.naturalOrder())
-                .orElse(MAX_CARDS_PER_PLAYER);
-
-        int maxNumberOfCards = numbersOfPlayerCards
-                .stream()
-                .max(Comparator.naturalOrder())
-                .orElse(0);
-
-        return minNumberOfCards == maxNumberOfCards
-                && maxNumberOfCards == cardNumber
-                && playersWithAnyCards == PLAYER_NUMBER;
-    }
-
-    private void initializeGame() {
-        getGame().initializeGame(getChosenAtuColor(), getChosenCards(), getChosenPlayer());
-        getGameHistoryController().removeAllHistoryEntries();
-        getGameCardController().reinitialize();
-        getGameTextController().updatePoints();
-        getGameTextController().updateAtu();
-    }
-
-    private Color getChosenAtuColor() {
-        EditGameButtonController buttonController = getEditGameButtonController();
-        int colorOrdinal = buttonController
-                .getAtuChanger()
-                .getChooseAtuButtonsBundle()
-                .getSelectedRadioButtonIndex();
-        return Color.values()[colorOrdinal];
-    }
-
-    private Player getChosenPlayer() {
-        EditGameButtonController buttonController = getEditGameButtonController();
-        int playerOrdinal = buttonController
-                .getStartingPlayerChanger()
-                .getChooseStartingPlayerButtonsBundle()
-                .getSelectedRadioButtonIndex();
-        return Player.values()[playerOrdinal];
-    }
-
-    private List<Card>[] getChosenCards() {
-        List<Card>[] chosenCards = new List[PLAYER_NUMBER];
-        for (int i = 0; i < PLAYER_NUMBER; i++) {
-            chosenCards[i] = new ArrayList<>();
-        }
-        for (int i = 0; i < DECK_SIZE; i++) {
-            int cardOwnersOrdinal = getEditGameCardController()
-                    .getChooseCards()
-                    .getChooseCardsBundles()[i]
-                    .getSelectedRadioButtonIndex();
-            if (cardOwnersOrdinal >= 0) {
-                chosenCards[cardOwnersOrdinal].add(getDeck().getCard(i));
-            }
-        }
-        return chosenCards;
     }
 
 }

@@ -7,7 +7,12 @@ import engine.display.Drawable;
 import engine.display.DrawableComposition;
 import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
+import gameLogic.card.Card;
+import gameLogic.card.Color;
+import gameLogic.card.Figure;
+import gameLogic.player.Player;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,19 +21,144 @@ import static controllers.probabilityModeControllers.cardController.ProbabilityM
 import static controllers.probabilityModeControllers.textController.ProbabilityModeTextController.getProbabilityModeTextController;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
+import static gameLogic.card.Deck.getDeck;
+import static gameLogic.game.GameConstants.FIGURE_NUMBER;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
 public class ProbabilitySolverStarter {
 
-    private class StartProbabilitySolverCommand implements Command {
+    private static class StartProbabilitySolverCommand implements Command {
 
         @Override
         public void execute() {
             if (isGameValid()) {
                 getProbabilityModeTextController().getInvalidGameData().hideText();
+                List<Card>[] cards = getChosenCards();
+                Card[] playedCards = getPlayedCards();
+                List<Card> remainingCards = getRemainingCards(cards);
+                Player startingPlayer = getStartingPlayer(playedCards);
             } else {
                 getProbabilityModeTextController().getInvalidGameData().showText();
             }
+        }
+
+        private boolean isGameValid() {
+            return isStartingPlayerChosen()
+                    && hasStartingPlayerAnyCard()
+                    && arePlayedCardsChosen()
+                    && doesTurnBelongToNS();
+        }
+
+        private boolean isStartingPlayerChosen() {
+            return getProbabilityModeButtonController()
+                    .getStartingPlayerChanger()
+                    .getChooseStartingPlayerButtonsBundle()
+                    .getSelectedRadioButtonIndex() >= 0;
+        }
+
+        private boolean hasStartingPlayerAnyCard() {
+            int startingPlayerId = getProbabilityModeButtonController()
+                    .getStartingPlayerChanger()
+                    .getChooseStartingPlayerButtonsBundle()
+                    .getSelectedRadioButtonIndex() * 2;
+            return Arrays.stream(getProbabilityModeCardController()
+                            .getChooseCards()
+                            .getChooseCardsBundles())
+                    .map(RadioButtonBundle::getSelectedRadioButtonIndex)
+                    .anyMatch(index -> index == startingPlayerId);
+        }
+
+        private boolean arePlayedCardsChosen() {
+            for (int i = 0; i < PLAYER_NUMBER; i++) {
+                int playedCardId = getProbabilityModeButtonController()
+                        .getPlayedCardsChanger()
+                        .getChoosePlayedCardsButtonsBundles()[i]
+                        .getSelectedRadioButtonIndex();
+                if (playedCardId >= 0 && getProbabilityModeCardController()
+                        .getChooseCards()
+                        .getChooseCardsBundles()[playedCardId]
+                        .getSelectedRadioButtonIndex() != i) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private boolean doesTurnBelongToNS() {
+            List<Boolean> playersWhichPlayedCards = Arrays.stream(getProbabilityModeButtonController()
+                            .getPlayedCardsChanger()
+                            .getChoosePlayedCardsButtonsBundles())
+                    .map(RadioButtonBundle::getSelectedRadioButtonIndex)
+                    .map(index -> index >= 0)
+                    .toList();
+            return playersWhichPlayedCards.stream().filter(p -> p).count() < 4
+                    && (playersWhichPlayedCards.stream().filter(p -> p).count() != 2
+                    || !playersWhichPlayedCards.get(1)
+                    || !playersWhichPlayedCards.get(3))
+                    && (playersWhichPlayedCards.stream().filter(p -> p).count() != 2
+                    || !playersWhichPlayedCards.get(0)
+                    || !playersWhichPlayedCards.get(2))
+                    && (!playersWhichPlayedCards.get(0) || playersWhichPlayedCards.get(1))
+                    && (!playersWhichPlayedCards.get(2) || playersWhichPlayedCards.get(3));
+        }
+
+        private List<Card>[] getChosenCards() {
+            List<Card>[] cards = new List[PLAYER_NUMBER + 1];
+            for (int i = 0; i < PLAYER_NUMBER + 1; i++) {
+                cards[i] = new ArrayList<>();
+            }
+            for (int i = 0; i < FIGURE_NUMBER; i++) {
+                int ownerId = getProbabilityModeCardController()
+                        .getChooseCards()
+                        .getChooseCardsBundles()[i]
+                        .getSelectedRadioButtonIndex();
+                if (ownerId >= 0) {
+                    cards[ownerId].add(getDeck().getCard(Figure.values()[i], Color.HEART));
+                }
+            }
+            return cards;
+        }
+
+        private Card[] getPlayedCards() {
+            Card[] cards = new Card[PLAYER_NUMBER];
+            for (int i = 0; i < PLAYER_NUMBER; i++) {
+                int index = getProbabilityModeButtonController()
+                        .getPlayedCardsChanger()
+                        .getChoosePlayedCardsButtonsBundles()[i]
+                        .getSelectedRadioButtonIndex();
+                if (index >= 0) {
+                    cards[i] = getDeck().getCard(Figure.values()[i], Color.HEART);
+                }
+            }
+            return cards;
+        }
+
+        private List<Card> getRemainingCards(List<Card>[] cards) {
+            List<Card> allCards = new ArrayList<>();
+            List<Card> playedCards = new ArrayList<>();
+            for (int i = 0; i < FIGURE_NUMBER; i++) {
+                allCards.add(getDeck().getCard(Figure.values()[i], Color.HEART));
+                if (getProbabilityModeCardController()
+                        .getChooseCards()
+                        .getChooseCardsBundles()[i]
+                        .getSelectedRadioButtonIndex() == PLAYER_NUMBER) {
+                    playedCards.add(getDeck().getCard(Figure.values()[i], Color.HEART));
+                }
+            }
+            for(int i = 0; i < PLAYER_NUMBER; i++) {
+                allCards.removeAll(cards[i]);
+            }
+            allCards.removeAll(playedCards);
+            return allCards;
+        }
+
+        private Player getStartingPlayer(Card[] playedCards) {
+            for (int i = 0; i < PLAYER_NUMBER; i++) {
+                if (playedCards[i] != null && playedCards[(i + 3) % PLAYER_NUMBER] == null) {
+                    return Player.values()[i];
+                }
+            }
+            return Player.N;
         }
 
     }
@@ -59,63 +189,4 @@ public class ProbabilitySolverStarter {
         getScene().addObjectHigherThan(probabilitySolverStarter, background);
     }
 
-    private boolean isGameValid() {
-        return isStartingPlayerChosen()
-                && hasStartingPlayerAnyCard()
-                && arePlayedCardsChosen()
-                && doesTurnBelongToNS();
-    }
-
-    private boolean isStartingPlayerChosen() {
-        return getProbabilityModeButtonController()
-                .getStartingPlayerChanger()
-                .getChooseStartingPlayerButtonsBundle()
-                .getSelectedRadioButtonIndex() >= 0;
-    }
-
-    private boolean hasStartingPlayerAnyCard() {
-        int startingPlayerId = getProbabilityModeButtonController()
-                .getStartingPlayerChanger()
-                .getChooseStartingPlayerButtonsBundle()
-                .getSelectedRadioButtonIndex() * 2;
-        return Arrays.stream(getProbabilityModeCardController()
-                        .getChooseCards()
-                        .getChooseCardsBundles())
-                .map(RadioButtonBundle::getSelectedRadioButtonIndex)
-                .anyMatch(index -> index == startingPlayerId);
-    }
-
-    private boolean arePlayedCardsChosen() {
-        for (int i = 0; i < PLAYER_NUMBER; i++) {
-            int playedCardId = getProbabilityModeButtonController()
-                    .getPlayedCardsChanger()
-                    .getChoosePlayedCardsButtonsBundles()[i]
-                    .getSelectedRadioButtonIndex();
-            if (playedCardId >= 0 && getProbabilityModeCardController()
-                    .getChooseCards()
-                    .getChooseCardsBundles()[playedCardId]
-                    .getSelectedRadioButtonIndex() != i) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean doesTurnBelongToNS() {
-        List<Boolean> playersWhichPlayedCards = Arrays.stream(getProbabilityModeButtonController()
-                        .getPlayedCardsChanger()
-                        .getChoosePlayedCardsButtonsBundles())
-                .map(RadioButtonBundle::getSelectedRadioButtonIndex)
-                .map(index -> index >= 0)
-                .toList();
-        return playersWhichPlayedCards.stream().filter(p -> p).count() < 4
-                && (playersWhichPlayedCards.stream().filter(p -> p).count() != 2
-                || !playersWhichPlayedCards.get(1)
-                || !playersWhichPlayedCards.get(3))
-                && (playersWhichPlayedCards.stream().filter(p -> p).count() != 2
-                || !playersWhichPlayedCards.get(0)
-                || !playersWhichPlayedCards.get(2))
-                && (!playersWhichPlayedCards.get(0) || playersWhichPlayedCards.get(1))
-                && (!playersWhichPlayedCards.get(2) || playersWhichPlayedCards.get(3));
-    }
 }

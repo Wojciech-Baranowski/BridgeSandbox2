@@ -16,14 +16,19 @@ public class CardDrawables {
     private static CardDrawables cardDrawables;
     private final Drawable[] gameCards;
     private final Drawable[][] gameEditCards;
+    private final Drawable[][] probabilityModeCards;
 
     private CardDrawables() {
         gameCards = new Drawable[DECK_SIZE];
         gameEditCards = new Drawable[PLAYER_NUMBER][DECK_SIZE];
+        probabilityModeCards = new Drawable[PLAYER_NUMBER + 1][DECK_SIZE];
         for (int i = 0; i < DECK_SIZE; i++) {
             gameCards[i] = initializeDrawable(i);
             for (int j = 0; j < PLAYER_NUMBER; j++) {
                 gameEditCards[j][i] = initializeDrawable(i);
+            }
+            for(int j = 0; j < PLAYER_NUMBER + 1; j++) {
+                probabilityModeCards[j][i] = initializeDrawable(i);
             }
         }
     }
@@ -40,6 +45,13 @@ public class CardDrawables {
             cardDrawables = new CardDrawables();
         }
         return cardDrawables.gameEditCards[player.ordinal()][cardId];
+    }
+
+    public static Drawable getProbabilityModeCardDrawable(int slotId, int cardId) {
+        if(cardDrawables == null) {
+            cardDrawables = new CardDrawables();
+        }
+        return cardDrawables.probabilityModeCards[slotId][cardId];
     }
 
     private Drawable initializeDrawable(int cardId) {

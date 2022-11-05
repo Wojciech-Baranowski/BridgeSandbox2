@@ -18,6 +18,7 @@ public class GameButtonController {
     @Getter
     private final SolverTrigger solverTrigger;
     private final SolverSettingsSwitch solverSettingsSwitch;
+    private final ProbabilityModeSwitch probabilityModeSwitch;
 
     private GameButtonController() {
         DrawableFactory drawableFactory = getDisplay().getDrawableFactory();
@@ -30,6 +31,7 @@ public class GameButtonController {
         gameEditSwitch = new GameEditSwitch(drawableFactory, gameButtonsSpace);
         solverTrigger = new SolverTrigger(drawableFactory, gameButtonsSpace);
         solverSettingsSwitch = new SolverSettingsSwitch(drawableFactory, gameButtonsSpace);
+        probabilityModeSwitch = new ProbabilityModeSwitch(drawableFactory, gameButtonsSpace);
     }
 
     public static GameButtonController getGameButtonController() {

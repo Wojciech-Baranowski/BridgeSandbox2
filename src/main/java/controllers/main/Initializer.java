@@ -15,6 +15,10 @@ import static controllers.gameControllers.buttonController.GameButtonController.
 import static controllers.gameControllers.cardController.GameCardController.getGameCardController;
 import static controllers.gameControllers.historyController.GameHistoryController.getGameHistoryController;
 import static controllers.gameControllers.textController.GameTextController.getGameTextController;
+import static controllers.probabilityModeControllers.backgroundController.ProbabilityModeBackgroundController.getProbabilityModeBackgroundController;
+import static controllers.probabilityModeControllers.buttonController.ProbabilityModeButtonController.getProbabilityModeButtonController;
+import static controllers.probabilityModeControllers.cardController.ProbabilityModeCardController.getProbabilityModeCardController;
+import static controllers.probabilityModeControllers.textController.ProbabilityModeTextController.getProbabilityModeTextController;
 import static controllers.solverSettingsControllers.algorithmsController.SolverSettingsAlgorithmsController.getSolverSettingsAlgorithmsController;
 import static controllers.solverSettingsControllers.backgroundController.SolverSettingsBackgroundController.getSolverSettingsBackgroundController;
 import static controllers.solverSettingsControllers.buttonController.SolverSettingsButtonController.getSolverSettingsButtonController;
@@ -88,6 +92,7 @@ public class Initializer {
         scene.addCollection("game");
         scene.addCollection("editGame");
         scene.addCollection("solverSettings");
+        scene.addCollection("probabilityMode");
     }
 
     private void initializeGame() {
@@ -98,6 +103,7 @@ public class Initializer {
         initializeGameControllers();
         initializeEditGameControllers();
         initializeSolverSettingsControllers();
+        initializeProbabilityModeControllers();
     }
 
     private void initializeGameControllers() {
@@ -123,6 +129,14 @@ public class Initializer {
         getSolverSettingsTextController();
         getSolverSettingsButtonController();
         getSolverSettingsAlgorithmsController();
+    }
+
+    private void initializeProbabilityModeControllers() {
+        scene.switchCollection("probabilityMode");
+        getProbabilityModeBackgroundController();
+        getProbabilityModeTextController();
+        getProbabilityModeButtonController();
+        getProbabilityModeCardController();
     }
 
     public static void main(String[] args) {

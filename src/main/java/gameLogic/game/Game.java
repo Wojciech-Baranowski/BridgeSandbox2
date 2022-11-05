@@ -47,7 +47,7 @@ public class Game {
         moveValidator = new MoveValidator();
         roundJudge = new RoundJudge();
         cards = new List[PLAYER_NUMBER];
-        for(int i = 0; i < PLAYER_NUMBER; i++) {
+        for (int i = 0; i < PLAYER_NUMBER; i++) {
             cards[i] = new ArrayList<>(game.getCards()[i]);
         }
         points = new int[PLAYER_NUMBER / 2];
@@ -86,6 +86,11 @@ public class Game {
         this.startingPlayer = startingPlayer;
         this.playedCards = new LinkedList<>();
         Arrays.fill(points, 0);
+    }
+
+    public void initializeGame(Color atu, List<Card>[] cards, List<Card> playedCards, Player startingPlayer) {
+        initializeGame(atu, cards, startingPlayer);
+        this.playedCards = playedCards;
     }
 
     public boolean isMoveValid(Card card) {

@@ -36,10 +36,10 @@ public class AtuChanger {
                     "lightBlue");
 
             Drawable activeButtonBackground = drawableFactory.makeFramedRectangle(
-                    200 + 70 * i + background.getX(),
-                    565,
-                    60,
-                    60,
+                    inactiveButtonBackground.getX(),
+                    inactiveButtonBackground.getY(),
+                    inactiveButtonBackground.getW(),
+                    inactiveButtonBackground.getH(),
                     2,
                     "gray",
                     "yellow");

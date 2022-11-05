@@ -1,4 +1,4 @@
-package controllers.editGameControllers.buttonController;
+package controllers.probabilityModeControllers.buttonController;
 
 import engine.button.radioButton.RadioButton;
 import engine.button.radioButton.RadioButtonBundle;
@@ -22,12 +22,11 @@ public class StartingPlayerChanger {
     private final RadioButtonBundle chooseStartingPlayerButtonsBundle;
 
     StartingPlayerChanger(DrawableFactory drawableFactory, Drawable background) {
-        chooseStartingPlayerButtons = new RadioButton[PLAYER_NUMBER];
-        int[] textX = {14, 16, 14, 8};
-        for (int i = 0; i < PLAYER_NUMBER; i++) {
+        chooseStartingPlayerButtons = new RadioButton[PLAYER_NUMBER / 2];
+        for (int i = 0; i < PLAYER_NUMBER / 2; i++) {
             Drawable inactiveButtonBackground = drawableFactory.makeFramedRectangle(
-                    270 + 70 * i + background.getX(),
-                    477,
+                    270 + 90 * i + background.getX(),
+                    600 + background.getY(),
                     60,
                     60,
                     2,
@@ -38,14 +37,14 @@ public class StartingPlayerChanger {
                     inactiveButtonBackground.getX(),
                     inactiveButtonBackground.getY(),
                     inactiveButtonBackground.getW(),
-                    inactiveButtonBackground.getH(),
+                    inactiveButtonBackground.getH(), 
                     2,
                     "gray",
                     "yellow");
 
             Drawable buttonText  = drawableFactory.makeText(
-                    Player.values()[i].getSymbolString(),
-                    textX[i] + activeButtonBackground.getX(),
+                    Player.values()[i * 2].getSymbolString(),
+                    14 + activeButtonBackground.getX(),
                     10 + activeButtonBackground.getY(),
                     "HBE48",
                     "black");
@@ -59,11 +58,7 @@ public class StartingPlayerChanger {
             getScene().addObjectHigherThan(chooseStartingPlayerButtons[i], background);
         }
         chooseStartingPlayerButtonsBundle = new RadioButtonBundle(Arrays.stream(chooseStartingPlayerButtons).toList());
-    }
-
-    public void updateChooseStartingPlayerButtons(Player player) {
-        chooseStartingPlayerButtonsBundle.unset();
-        chooseStartingPlayerButtonsBundle.update(chooseStartingPlayerButtons[player.ordinal()]);
+        chooseStartingPlayerButtonsBundle.update(chooseStartingPlayerButtons[0]);
     }
 
 }

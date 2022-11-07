@@ -17,6 +17,7 @@ public class ProbabilityModeButtonController {
     private final ProbabilitySolverStarter probabilitySolverStarter;
     @Getter
     private PlayedCardsChanger playedCardsChanger;
+    private ClearChanges clearChanges;
 
     private ProbabilityModeButtonController() {
         DrawableFactory drawableFactory = getDisplay().getDrawableFactory();
@@ -28,6 +29,7 @@ public class ProbabilityModeButtonController {
         probabilitySolverStarter = new ProbabilitySolverStarter(drawableFactory, background);
         playedCardsChanger = new PlayedCardsChanger(drawableFactory,
                 probabilityModeBackgroundController.getCardSlots().getCardSlots());
+        clearChanges = new ClearChanges(drawableFactory, background);
     }
 
     public static ProbabilityModeButtonController getProbabilityModeButtonController() {

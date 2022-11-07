@@ -88,8 +88,10 @@ public class Game {
         Arrays.fill(points, 0);
     }
 
-    public void initializeGame(Color atu, List<Card>[] cards, List<Card> playedCards, Player startingPlayer) {
-        initializeGame(atu, cards, startingPlayer);
+    public void initializeGame(Color atu, List<Card>[] cards, List<Card> playedCards,
+                               Player startingPlayer, Player currentPlayer) {
+        initializeGame(atu, cards, currentPlayer);
+        this.startingPlayer = startingPlayer;
         this.playedCards = playedCards;
     }
 

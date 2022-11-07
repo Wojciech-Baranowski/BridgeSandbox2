@@ -3,7 +3,7 @@ package controllers.probabilityModeControllers.textController;
 import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import engine.display.text.Text;
-import gameLogic.card.Card;
+import solver.probabilitySolver.CardProbability;
 
 import java.util.List;
 
@@ -27,11 +27,13 @@ public class Probabilities {
         }
     }
 
-    public void updateProbabilities(List<Card> cards, List<Double> probabilities) {
-        for(int i = 0; i < cards.size(); i++) {
-            String figure = cards.get(i).getFigure().getSymbolString();
-            String color = cards.get(i).getColor().getSymbolString();
-            this.probabilities[i].setText(figure + color + " - " + probabilities.get(i) + "%");
+    public void updateProbabilities(List<CardProbability> cardProbabilities) {
+        for (int i = 0; i < cardProbabilities.size(); i++) {
+            String figure = cardProbabilities.get(i).getCard().getFigure().getSymbolString();
+            this.probabilities[i].setText(figure + " - " + cardProbabilities.get(i).getProbability() + "%");
+        }
+        for (int i = cardProbabilities.size(); i < probabilities.length; i++) {
+            this.probabilities[i].setText("");
         }
     }
 }

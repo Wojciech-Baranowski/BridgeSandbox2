@@ -20,12 +20,6 @@ public class AlphaBeta implements Algorithm {
         return Result.mapResponseToResult(game, alphaBetaNode.allOutcomeCards, bestOutcome);
     }
 
-    public boolean canNSTakeAll(Game game, int numberOfCardsToTake) {
-        numberOfVisitedNodes = 0;
-        AlphaBetaNode alphaBetaNode = new AlphaBetaNode(game, numberOfCardsToTake);
-        return abs(alphaBeta(alphaBetaNode)) >= numberOfCardsToTake;
-    }
-
     @Override
     public long getNumberOfVisitedNodes() {
         return numberOfVisitedNodes;

@@ -7,6 +7,7 @@ import gameLogic.game.Game;
 import gameLogic.player.Player;
 import solver.Algorithm;
 import solver.algorithms.alphaBeta.AlphaBeta;
+import solver.algorithms.principalVariationSearch.PVSWithZeroWindowCutoff;
 import solver.result.Result;
 
 import java.util.*;
@@ -38,7 +39,7 @@ public class ProbabilitySolver {
                     if(game.hasRoundEnded()) {
                         game.summarizeRound();
                     }
-                    if(new AlphaBeta().canNSTakeAll(game, numberOfCardsToTake)) {
+                    if(new PVSWithZeroWindowCutoff().solve(game, numberOfCardsToTake)) {
                         numberOfSuccessfulGames++;
                     }
                 }

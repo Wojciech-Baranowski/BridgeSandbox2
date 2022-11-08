@@ -6,25 +6,22 @@ import gameLogic.card.Color;
 import gameLogic.game.Game;
 import gameLogic.player.Player;
 import solver.Algorithm;
+import solver.algorithms.alphaBeta.AlphaBeta;
 import solver.result.Result;
 
 import java.util.*;
 
 import static gameLogic.game.Game.getGame;
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
+import static java.lang.Math.max;
 
 public class ProbabilitySolver {
-
-    private Algorithm algorithm;
-
-    public ProbabilitySolver(Algorithm algorithm) {
-        this.algorithm = algorithm;
-    }
 
     public List<CardProbability> solve(List<Card>[] cards, Card[] playedCards,
                                        List<Card> remainingCards, Player startingPlayer) {
         List<Card> playedCardsList = getPlayedCardList(playedCards, startingPlayer);
         Player currentPlayer = Player.values()[(startingPlayer.ordinal() + playedCardsList.size()) % PLAYER_NUMBER];
+        int numberOfCardsToTake = max(cards[0].size(), cards[2].size());
         List<CardProbability> probabilities = new ArrayList<>();
         Card prevCard = null;
         for(int i = 0; i < cards[currentPlayer.ordinal()].size(); i++) {
@@ -37,14 +34,11 @@ public class ProbabilitySolver {
                 for(int j = 0; j < Math.pow(2, remainingCards.size()); j++) {
                     Game game = prepareGame(getCopyOfCards(cards), playedCards, new ArrayList<>(playedCardsList),
                             remainingCards, startingPlayer, currentPlayer, j);
-                    int maxNumberOfCards = getMaxNumberOfCards(game.getCards());
                     game.playCard(card);
                     if(game.hasRoundEnded()) {
                         game.summarizeRound();
                     }
-                    algorithm.preprocessing();
-                    Result result = algorithm.solve(game);
-                    if(result.getPoints()[0] >= maxNumberOfCards) {
+                    if(new AlphaBeta().canNSTakeAll(game, numberOfCardsToTake)) {
                         numberOfSuccessfulGames++;
                     }
                 }

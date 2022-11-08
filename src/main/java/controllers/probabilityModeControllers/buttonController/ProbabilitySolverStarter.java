@@ -42,10 +42,7 @@ public class ProbabilitySolverStarter {
                 Card[] playedCards = getPlayedCards();
                 List<Card> remainingCards = getRemainingCards(cards);
                 Player startingPlayer = getStartingPlayer();
-                AlgorithmsChanger algorithmsChanger = getSolverSettingsAlgorithmsController().getAlgorithmsChanger();
-                int chosenAlgorithmIndex = algorithmsChanger.getAlgorithmsBundle().getSelectedRadioButtonIndex();
-                Algorithm algorithm = algorithmsChanger.getAlgorithms().get(chosenAlgorithmIndex);
-                ProbabilitySolver probabilitySolver = new ProbabilitySolver(algorithm);
+                ProbabilitySolver probabilitySolver = new ProbabilitySolver();
                 List<CardProbability> probabilities =
                         probabilitySolver.solve(cards, playedCards, remainingCards, startingPlayer);
                 getProbabilityModeTextController().getProbabilities().updateProbabilities(probabilities);

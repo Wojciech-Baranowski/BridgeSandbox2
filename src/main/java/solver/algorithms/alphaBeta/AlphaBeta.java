@@ -5,6 +5,7 @@ import solver.Algorithm;
 import solver.result.Result;
 
 import static gameLogic.game.GameConstants.PLAYER_NUMBER;
+import static java.lang.Math.abs;
 import static java.lang.Math.max;
 
 public class AlphaBeta implements Algorithm {
@@ -17,6 +18,12 @@ public class AlphaBeta implements Algorithm {
         AlphaBetaNode alphaBetaNode = new AlphaBetaNode(game);
         byte bestOutcome = alphaBeta(alphaBetaNode);
         return Result.mapResponseToResult(game, alphaBetaNode.allOutcomeCards, bestOutcome);
+    }
+
+    public boolean canNSTakeAll(Game game, int numberOfCardsToTake) {
+        numberOfVisitedNodes = 0;
+        AlphaBetaNode alphaBetaNode = new AlphaBetaNode(game, numberOfCardsToTake);
+        return abs(alphaBeta(alphaBetaNode)) >= numberOfCardsToTake;
     }
 
     @Override

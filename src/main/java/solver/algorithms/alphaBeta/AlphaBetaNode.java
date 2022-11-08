@@ -19,7 +19,7 @@ public class AlphaBetaNode extends BaseNode {
     protected AlphaBetaNode(Game game, int numberOfPoints) {
         super(game);
         color = (byte) (game.getCurrentPlayer().ordinal() % 2 == 0 ? 1 : -1);
-        alpha = (byte) numberOfPoints;
+        alpha = (byte) (numberOfPoints - 1);
         beta = (byte) numberOfPoints;
     }
 

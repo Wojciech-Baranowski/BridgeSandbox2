@@ -125,7 +125,7 @@ public class BaseNode {
     private void setPlayedCards(Game game) {
         playedCards = new byte[PLAYER_NUMBER];
         allPlayedCards = new byte[allCardsNumber];
-        allOutcomeCards = new byte[game.getStartingNumberOfCardsPerPlayer() + 1][allCardsNumber];
+        allOutcomeCards = new byte[game.getStartingNumberOfCardsPerPlayer() + 2][allCardsNumber];
         for (int i = 0; i < game.getStartingNumberOfCardsPerPlayer() + 1; i++) {
             allOutcomeCards[i][0] = -1;
         }

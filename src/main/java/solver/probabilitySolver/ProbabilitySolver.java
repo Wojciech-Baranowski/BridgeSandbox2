@@ -31,19 +31,19 @@ public class ProbabilitySolver {
     }
 
     public List<CardProbability>[] solve(List<Card>[] cards, Card[] playedCards,
-                                       List<Card> remainingCards, Player startingPlayer) {
+                                         List<Card> remainingCards, Player startingPlayer) {
         List<Card> playedCardsList = getPlayedCardList(playedCards, startingPlayer);
         Player currentPlayer = Player.values()[(startingPlayer.ordinal() + playedCardsList.size()) % PLAYER_NUMBER];
         int numberOfCardsToTake = max(cards[0].size(), cards[2].size());
         List<CardProbability>[] probabilities = new List[MIN_CARDS_PER_PLAYER + 1];
-        for(int i = 0; i < MIN_CARDS_PER_PLAYER + 1; i++) {
+        for (int i = 0; i < MIN_CARDS_PER_PLAYER + 1; i++) {
             probabilities[i] = new ArrayList<>();
         }
         Card prevCard = null;
         for (int i = 0; i < cards[currentPlayer.ordinal()].size(); i++) {
             Card card = cards[currentPlayer.ordinal()].get(i);
             if (prevCard != null && prevCard.getId() + 1 == card.getId()) {
-                for(int j = 0; j < MIN_CARDS_PER_PLAYER + 1; j++) {
+                for (int j = 0; j < MIN_CARDS_PER_PLAYER + 1; j++) {
                     probabilities[j].add(new CardProbability(card,
                             probabilities[j].get(probabilities[j].size() - 1).getProbability()));
                 }
@@ -63,7 +63,7 @@ public class ProbabilitySolver {
                         numberOfSuccessfulGames[numberOfCardsToTake - taken]++;
                     }
                 }
-                for(int j = 0; j < MIN_CARDS_PER_PLAYER + 1; j++) {
+                for (int j = 0; j < MIN_CARDS_PER_PLAYER + 1; j++) {
                     double probability = (numberOfSuccessfulGames[j] / Math.pow(2, remainingCards.size()));
                     double probabilityPercents = NumberRounder.round(100 * probability, 2);
                     probabilities[j].add(new CardProbability(card, probabilityPercents));

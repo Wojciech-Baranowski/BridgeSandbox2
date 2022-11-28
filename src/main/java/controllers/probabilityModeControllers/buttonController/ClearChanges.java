@@ -23,10 +23,10 @@ public class ClearChanges {
             ProbabilityModeButtonController buttonController = getProbabilityModeButtonController();
             ProbabilityModeCardController cardController = getProbabilityModeCardController();
 
-            for(RadioButtonBundle bundle : cardController.getChooseCards().getChooseCardsBundles()) {
+            for (RadioButtonBundle bundle : cardController.getChooseCards().getChooseCardsBundles()) {
                 bundle.unset();
             }
-            for(RadioButtonBundle bundle : buttonController.getPlayedCardsChanger()
+            for (RadioButtonBundle bundle : buttonController.getPlayedCardsChanger()
                     .getChoosePlayedCardsButtonsBundles()) {
                 bundle.unset();
             }

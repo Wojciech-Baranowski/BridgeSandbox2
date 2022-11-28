@@ -9,7 +9,6 @@ import java.util.List;
 
 import static engine.scene.SceneBean.getScene;
 import static gameLogic.game.GameConstants.FIGURE_NUMBER;
-import static gameLogic.game.GameConstants.MIN_CARDS_PER_PLAYER;
 
 public class Probabilities {
 
@@ -18,13 +17,13 @@ public class Probabilities {
     Probabilities(DrawableFactory drawableFactory, Drawable background) {
         probabilities = new Text[FIGURE_NUMBER];
         for (int i = 0; i < FIGURE_NUMBER; i++) {
-                probabilities[i] = drawableFactory.makeText(
-                        "",
-                        860 + background.getX(),
-                        80 + 40 * i + background.getY(),
-                        "HBE32",
-                        "black");
-                getScene().addObjectHigherThan(probabilities[i], background);
+            probabilities[i] = drawableFactory.makeText(
+                    "",
+                    860 + background.getX(),
+                    80 + 40 * i + background.getY(),
+                    "HBE32",
+                    "black");
+            getScene().addObjectHigherThan(probabilities[i], background);
         }
     }
 

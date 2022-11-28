@@ -11,7 +11,7 @@ public class Title {
 
     Title(DrawableFactory drawableFactory, Drawable background) {
         title = drawableFactory.makeText(
-                "Bridge Sandbox2 v1.6",
+                "Bridge Sandbox2 v1.7",
                 6 + background.getX(),
                 4 + background.getY(),
                 "HBE32",

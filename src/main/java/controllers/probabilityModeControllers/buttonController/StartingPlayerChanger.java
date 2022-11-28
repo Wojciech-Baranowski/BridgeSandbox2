@@ -37,12 +37,12 @@ public class StartingPlayerChanger {
                     inactiveButtonBackground.getX(),
                     inactiveButtonBackground.getY(),
                     inactiveButtonBackground.getW(),
-                    inactiveButtonBackground.getH(), 
+                    inactiveButtonBackground.getH(),
                     2,
                     "gray",
                     "yellow");
 
-            Drawable buttonText  = drawableFactory.makeText(
+            Drawable buttonText = drawableFactory.makeText(
                     Player.values()[i * 2].getSymbolString(),
                     14 + activeButtonBackground.getX(),
                     10 + activeButtonBackground.getY(),

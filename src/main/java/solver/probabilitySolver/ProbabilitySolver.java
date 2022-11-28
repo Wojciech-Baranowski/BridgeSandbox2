@@ -5,57 +5,80 @@ import gameLogic.card.Card;
 import gameLogic.card.Color;
 import gameLogic.game.Game;
 import gameLogic.player.Player;
+import lombok.Getter;
+import lombok.Setter;
 import solver.Algorithm;
-import solver.algorithms.alphaBeta.AlphaBeta;
-import solver.algorithms.principalVariationSearch.PVSWithZeroWindowCutoff;
-import solver.result.Result;
+import solver.algorithms.principalVariationSearch.PVSWithCutoff;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 import static gameLogic.game.Game.getGame;
-import static gameLogic.game.GameConstants.PLAYER_NUMBER;
+import static gameLogic.game.GameConstants.*;
 import static java.lang.Math.max;
 
+@Getter
 public class ProbabilitySolver {
 
-    public List<CardProbability> solve(List<Card>[] cards, Card[] playedCards,
+    private List<CardProbability>[] lastProbabilities;
+    @Setter
+    private int lostTricksNumber;
+
+    public ProbabilitySolver() {
+        lostTricksNumber = 0;
+    }
+
+    public List<CardProbability>[] solve(List<Card>[] cards, Card[] playedCards,
                                        List<Card> remainingCards, Player startingPlayer) {
         List<Card> playedCardsList = getPlayedCardList(playedCards, startingPlayer);
         Player currentPlayer = Player.values()[(startingPlayer.ordinal() + playedCardsList.size()) % PLAYER_NUMBER];
         int numberOfCardsToTake = max(cards[0].size(), cards[2].size());
-        List<CardProbability> probabilities = new ArrayList<>();
+        List<CardProbability>[] probabilities = new List[MIN_CARDS_PER_PLAYER + 1];
+        for(int i = 0; i < MIN_CARDS_PER_PLAYER + 1; i++) {
+            probabilities[i] = new ArrayList<>();
+        }
         Card prevCard = null;
-        for(int i = 0; i < cards[currentPlayer.ordinal()].size(); i++) {
+        for (int i = 0; i < cards[currentPlayer.ordinal()].size(); i++) {
             Card card = cards[currentPlayer.ordinal()].get(i);
-            if(prevCard != null && prevCard.getId() + 1 == card.getId()) {
-                probabilities.add(
-                        new CardProbability(card, probabilities.get(probabilities.size() - 1).getProbability()));
+            if (prevCard != null && prevCard.getId() + 1 == card.getId()) {
+                for(int j = 0; j < MIN_CARDS_PER_PLAYER + 1; j++) {
+                    probabilities[j].add(new CardProbability(card,
+                            probabilities[j].get(probabilities[j].size() - 1).getProbability()));
+                }
             } else {
-                int numberOfSuccessfulGames = 0;
-                for(int j = 0; j < Math.pow(2, remainingCards.size()); j++) {
+                int[] numberOfSuccessfulGames = new int[MIN_CARDS_PER_PLAYER + 1];
+                Arrays.fill(numberOfSuccessfulGames, 0);
+                for (int j = 0; j < Math.pow(2, remainingCards.size()); j++) {
                     Game game = prepareGame(getCopyOfCards(cards), playedCards, new ArrayList<>(playedCardsList),
                             remainingCards, startingPlayer, currentPlayer, j);
                     game.playCard(card);
-                    if(game.hasRoundEnded()) {
+                    if (game.hasRoundEnded()) {
                         game.summarizeRound();
                     }
-                    if(new PVSWithZeroWindowCutoff().solve(game, numberOfCardsToTake)) {
-                        numberOfSuccessfulGames++;
+                    Algorithm algorithm = new PVSWithCutoff();
+                    int taken = algorithm.solve(game).getPoints()[0];
+                    if (numberOfCardsToTake - taken <= MAX_CARDS_PER_PLAYER) {
+                        numberOfSuccessfulGames[numberOfCardsToTake - taken]++;
                     }
                 }
-                double probability = NumberRounder.round(
-                        100 * (numberOfSuccessfulGames / Math.pow(2, remainingCards.size())), 3);
-                probabilities.add(new CardProbability(card, probability));
+                for(int j = 0; j < MIN_CARDS_PER_PLAYER + 1; j++) {
+                    double probability = (numberOfSuccessfulGames[j] / Math.pow(2, remainingCards.size()));
+                    double probabilityPercents = NumberRounder.round(100 * probability, 2);
+                    probabilities[j].add(new CardProbability(card, probabilityPercents));
+                }
             }
             prevCard = card;
         }
+        lastProbabilities = probabilities;
         return probabilities;
     }
 
     private List<Card> getPlayedCardList(Card[] playedCards, Player startingPlayer) {
         List<Card> playedCardsList = new ArrayList<>();
-        for(int i = 0; i < PLAYER_NUMBER; i++) {
-            if(playedCards[(i + startingPlayer.ordinal()) % PLAYER_NUMBER] != null) {
+        for (int i = 0; i < PLAYER_NUMBER; i++) {
+            if (playedCards[(i + startingPlayer.ordinal()) % PLAYER_NUMBER] != null) {
                 playedCardsList.add(playedCards[(i + startingPlayer.ordinal()) % PLAYER_NUMBER]);
             } else {
                 break;
@@ -71,11 +94,11 @@ public class ProbabilitySolver {
             cardDivisor /= 2;
         }
         int maxNumberOfCards = getMaxNumberOfCards(cards);
-        for(int i = 0; i < PLAYER_NUMBER; i++) {
+        for (int i = 0; i < PLAYER_NUMBER; i++) {
             while (cards[i].size() < maxNumberOfCards) {
                 cards[i].add(new Card(i % 2));
             }
-            if(playedCards[i] != null) {
+            if (playedCards[i] != null) {
                 int finalI = i;
                 cards[i] = cards[i].stream()
                         .filter(card -> card.getId() != playedCards[finalI].getId())
@@ -96,9 +119,9 @@ public class ProbabilitySolver {
 
     private List<Card>[] getCopyOfCards(List<Card>[] cards) {
         List<Card>[] copyOfCards = new List[PLAYER_NUMBER];
-        for(int j = 0; j < PLAYER_NUMBER; j++) {
+        for (int j = 0; j < PLAYER_NUMBER; j++) {
             copyOfCards[j] = new ArrayList<>();
-            for(Card copiedCard : cards[j]) {
+            for (Card copiedCard : cards[j]) {
                 copyOfCards[j].add(copiedCard);
             }
         }

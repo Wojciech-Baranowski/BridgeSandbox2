@@ -1,6 +1,5 @@
 package controllers.probabilityModeControllers.buttonController;
 
-import controllers.solverSettingsControllers.algorithmsController.AlgorithmsChanger;
 import engine.button.SimpleButton;
 import engine.button.radioButton.RadioButtonBundle;
 import engine.common.Command;
@@ -12,7 +11,7 @@ import gameLogic.card.Card;
 import gameLogic.card.Color;
 import gameLogic.card.Figure;
 import gameLogic.player.Player;
-import solver.Algorithm;
+import lombok.Getter;
 import solver.probabilitySolver.CardProbability;
 import solver.probabilitySolver.ProbabilitySolver;
 
@@ -23,7 +22,6 @@ import java.util.List;
 import static controllers.probabilityModeControllers.buttonController.ProbabilityModeButtonController.getProbabilityModeButtonController;
 import static controllers.probabilityModeControllers.cardController.ProbabilityModeCardController.getProbabilityModeCardController;
 import static controllers.probabilityModeControllers.textController.ProbabilityModeTextController.getProbabilityModeTextController;
-import static controllers.solverSettingsControllers.algorithmsController.SolverSettingsAlgorithmsController.getSolverSettingsAlgorithmsController;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
 import static gameLogic.card.Deck.getDeck;
@@ -32,7 +30,7 @@ import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
 public class ProbabilitySolverStarter {
 
-    private static class StartProbabilitySolverCommand implements Command {
+    private class StartProbabilitySolverCommand implements Command {
 
         @Override
         public void execute() {
@@ -42,10 +40,10 @@ public class ProbabilitySolverStarter {
                 Card[] playedCards = getPlayedCards();
                 List<Card> remainingCards = getRemainingCards(cards);
                 Player startingPlayer = getStartingPlayer();
-                ProbabilitySolver probabilitySolver = new ProbabilitySolver();
-                List<CardProbability> probabilities =
+                List<CardProbability>[] probabilities =
                         probabilitySolver.solve(cards, playedCards, remainingCards, startingPlayer);
-                getProbabilityModeTextController().getProbabilities().updateProbabilities(probabilities);
+                int lostTricks = probabilitySolver.getLostTricksNumber();
+                getProbabilityModeTextController().getProbabilities().updateProbabilities(probabilities[lostTricks]);
             } else {
                 getProbabilityModeTextController().getInvalidGameData().showText();
             }
@@ -170,9 +168,12 @@ public class ProbabilitySolverStarter {
 
     }
 
+    @Getter
+    private final ProbabilitySolver probabilitySolver;
     private final SimpleButton probabilitySolverStarter;
 
     ProbabilitySolverStarter(DrawableFactory drawableFactory, Drawable background) {
+        probabilitySolver = new ProbabilitySolver();
         Drawable buttonBackground = drawableFactory.makeFramedRectangle(
                 560 + background.getX(),
                 594 + background.getY(),

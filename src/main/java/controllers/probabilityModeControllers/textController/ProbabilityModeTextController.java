@@ -18,6 +18,8 @@ public class ProbabilityModeTextController {
     private final InvalidGameData invalidGameData;
     @Getter
     private final Probabilities probabilities;
+    @Getter
+    private final LostTricks lostTricks;
 
     private ProbabilityModeTextController() {
         DrawableFactory drawableFactory = getDisplay().getDrawableFactory();
@@ -30,6 +32,7 @@ public class ProbabilityModeTextController {
         startingPlayer = new StartingPlayer(drawableFactory, background);
         invalidGameData = new InvalidGameData(drawableFactory, background);
         probabilities = new Probabilities(drawableFactory, background);
+        lostTricks = new LostTricks(drawableFactory, background);
     }
 
     public static ProbabilityModeTextController getProbabilityModeTextController() {

@@ -29,8 +29,9 @@ public class LostTricksChanger {
                 solver.setLostTricksNumber(currentLostTricksNumber - 1);
                 textController.getLostTricks().updateLostTricks(currentLostTricksNumber - 1);
                 if (solver.getLastProbabilities() != null) {
-                    textController.getProbabilities()
-                            .updateProbabilities(solver.getLastProbabilities()[solver.getLostTricksNumber()]);
+                    textController.getProbabilities().updateProbabilities(
+                            solver.getLastProbabilities()[solver.getLostTricksNumber()],
+                            solver.getLastProbabilitiesSums()[solver.getLostTricksNumber()]);
                 }
             }
         }
@@ -48,8 +49,9 @@ public class LostTricksChanger {
                 solver.setLostTricksNumber(currentLostTricksNumber + 1);
                 textController.getLostTricks().updateLostTricks(currentLostTricksNumber + 1);
                 if (solver.getLastProbabilities() != null) {
-                    textController.getProbabilities()
-                            .updateProbabilities(solver.getLastProbabilities()[solver.getLostTricksNumber()]);
+                    textController.getProbabilities().updateProbabilities(
+                            solver.getLastProbabilities()[solver.getLostTricksNumber()],
+                            solver.getLastProbabilitiesSums()[solver.getLostTricksNumber()]);
                 }
             }
         }

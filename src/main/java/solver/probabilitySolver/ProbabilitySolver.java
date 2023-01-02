@@ -23,6 +23,7 @@ import static java.lang.Math.max;
 public class ProbabilitySolver {
 
     private List<CardProbability>[] lastProbabilities;
+    private List<CardProbability>[] lastProbabilitiesSums;
     @Setter
     private int lostTricksNumber;
 
@@ -72,6 +73,18 @@ public class ProbabilitySolver {
             prevCard = card;
         }
         lastProbabilities = probabilities;
+        lastProbabilitiesSums = new List[MIN_CARDS_PER_PLAYER + 1];
+        for (int i = 0; i < MIN_CARDS_PER_PLAYER + 1; i++) {
+            lastProbabilitiesSums[i] = new ArrayList<>();
+        }
+        for(int i = 0; i < lastProbabilities.length; i++) {
+            for(int j = 0; j < lastProbabilities[i].size(); j++) {
+                double prevProbability = i > 0 ? lastProbabilitiesSums[i - 1].get(j).getProbability() : 0;
+                double probability = prevProbability + lastProbabilities[i].get(j).getProbability();
+                double roundedProbability = Math.min(100.00, probability);
+                lastProbabilitiesSums[i].add(new CardProbability(lastProbabilities[i].get(j).getCard(), roundedProbability));
+            }
+        }
         return probabilities;
     }
 

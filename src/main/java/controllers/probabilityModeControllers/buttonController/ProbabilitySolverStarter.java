@@ -40,10 +40,12 @@ public class ProbabilitySolverStarter {
                 Card[] playedCards = getPlayedCards();
                 List<Card> remainingCards = getRemainingCards(cards);
                 Player startingPlayer = getStartingPlayer();
-                List<CardProbability>[] probabilities =
-                        probabilitySolver.solve(cards, playedCards, remainingCards, startingPlayer);
+                probabilitySolver.solve(cards, playedCards, remainingCards, startingPlayer);
+                List<CardProbability>[] probabilities = probabilitySolver.getLastProbabilities();
+                List<CardProbability>[] probabilitiesSums = probabilitySolver.getLastProbabilitiesSums();
                 int lostTricks = probabilitySolver.getLostTricksNumber();
-                getProbabilityModeTextController().getProbabilities().updateProbabilities(probabilities[lostTricks]);
+                getProbabilityModeTextController().getProbabilities()
+                        .updateProbabilities(probabilities[lostTricks], probabilitiesSums[lostTricks]);
             } else {
                 getProbabilityModeTextController().getInvalidGameData().showText();
             }

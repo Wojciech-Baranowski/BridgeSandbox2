@@ -27,10 +27,17 @@ public class Probabilities {
         }
     }
 
-    public void updateProbabilities(List<CardProbability> cardProbabilities) {
+    public void updateProbabilities(List<CardProbability> cardProbabilities, List<CardProbability> cardProbabilitiesSums) {
         for (int i = 0; i < cardProbabilities.size(); i++) {
             String figure = cardProbabilities.get(i).getCard().getFigure().getSymbolString();
-            this.probabilities[i].setText(figure + " - " + cardProbabilities.get(i).getProbability() + "%");
+            StringBuilder text = new StringBuilder()
+                    .append(figure)
+                    .append(" - ")
+                    .append(cardProbabilities.get(i).getProbability())
+                    .append("% (")
+                    .append(cardProbabilitiesSums.get(i).getProbability())
+                    .append("%)");
+            this.probabilities[i].setText(text.toString());
         }
         for (int i = cardProbabilities.size(); i < probabilities.length; i++) {
             this.probabilities[i].setText("");

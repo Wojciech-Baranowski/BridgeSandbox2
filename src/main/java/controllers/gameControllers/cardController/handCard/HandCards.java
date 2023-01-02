@@ -32,7 +32,7 @@ public class HandCards {
     public HandCards(DrawableFactory drawableFactory) {
         xPos = new int[PLAYER_NUMBER][FIGURE_NUMBER];
         yPos = new int[PLAYER_NUMBER][FIGURE_NUMBER];
-        cardOrderComparator = CardComparator.ASCENDING;
+        cardOrderComparator = CardComparator.DESCENDING_INTERTWINED;
         initializePositions();
         handCards = new List[PLAYER_NUMBER];
         activeHandOverlay = drawableFactory.makeFramedRectangle(

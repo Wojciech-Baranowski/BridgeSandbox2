@@ -52,8 +52,8 @@ public class Probabilities {
             StringBuilder text = new StringBuilder()
                     .append(figure)
                     .append(" - ")
-                    .append(probabilityToConstLengthString(cardProbabilities.get(i).getProbability(), false))
-                    .append(probabilityToConstLengthString(cardProbabilitiesSums.get(i).getProbability(), true));
+                    .append(probabilityToConstLengthString(cardProbabilities.get(i).getProbability()))
+                    .append(probabilityToConstLengthString(cardProbabilitiesSums.get(i).getProbability()));
             this.probabilities[i].setText(text.toString());
         }
         for (int i = cardProbabilities.size(); i < probabilities.length; i++) {
@@ -61,18 +61,12 @@ public class Probabilities {
         }
     }
 
-    private String probabilityToConstLengthString(Double probability, boolean bracket) {
+    private String probabilityToConstLengthString(Double probability) {
         StringBuilder probabilityText = new StringBuilder();
-        if(bracket) {
-            probabilityText.append(" (");
-        }
         probabilityText.append(probability.toString());
         probabilityText.append("%");
-        while(!bracket && probabilityText.length() < 7) {
+        while(probabilityText.length() < 8) {
             probabilityText.append(" ");
-        }
-        if(bracket) {
-            probabilityText.append(")");
         }
         return probabilityText.toString();
     }

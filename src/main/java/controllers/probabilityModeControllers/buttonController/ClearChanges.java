@@ -48,7 +48,7 @@ public class ClearChanges {
                 "lightBlue");
 
         Drawable buttonText = drawableFactory.makeText(
-                "CLEAR",
+                "Clear",
                 48 + buttonBackground.getX(),
                 10 + buttonBackground.getY(),
                 "HBE48",

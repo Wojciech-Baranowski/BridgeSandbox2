@@ -13,6 +13,8 @@ import static gameLogic.game.GameConstants.FIGURE_NUMBER;
 public class Probabilities {
 
     private final Text[] probabilities;
+    private final Text equal;
+    private final Text greaterOrEqual;
 
     Probabilities(DrawableFactory drawableFactory, Drawable background) {
         probabilities = new Text[FIGURE_NUMBER];
@@ -20,11 +22,28 @@ public class Probabilities {
             probabilities[i] = drawableFactory.makeText(
                     "",
                     860 + background.getX(),
-                    80 + 40 * i + background.getY(),
+                    140 + 40 * i + background.getY(),
                     "HBE32",
                     "black");
             getScene().addObjectHigherThan(probabilities[i], background);
         }
+        equal = drawableFactory.makeText(
+                "=",
+                940 + background.getX(),
+                80 + background.getY(),
+                "HBE48",
+                "black"
+        );
+        getScene().addObjectHigherThan(equal, background);
+
+        greaterOrEqual = drawableFactory.makeText(
+                ">=",
+                1070 + background.getX(),
+                80 + background.getY(),
+                "HBE48",
+                "black"
+        );
+        getScene().addObjectHigherThan(greaterOrEqual, background);
     }
 
     public void updateProbabilities(List<CardProbability> cardProbabilities, List<CardProbability> cardProbabilitiesSums) {
@@ -33,14 +52,28 @@ public class Probabilities {
             StringBuilder text = new StringBuilder()
                     .append(figure)
                     .append(" - ")
-                    .append(cardProbabilities.get(i).getProbability())
-                    .append("% (")
-                    .append(cardProbabilitiesSums.get(i).getProbability())
-                    .append("%)");
+                    .append(probabilityToConstLengthString(cardProbabilities.get(i).getProbability(), false))
+                    .append(probabilityToConstLengthString(cardProbabilitiesSums.get(i).getProbability(), true));
             this.probabilities[i].setText(text.toString());
         }
         for (int i = cardProbabilities.size(); i < probabilities.length; i++) {
             this.probabilities[i].setText("");
         }
+    }
+
+    private String probabilityToConstLengthString(Double probability, boolean bracket) {
+        StringBuilder probabilityText = new StringBuilder();
+        if(bracket) {
+            probabilityText.append(" (");
+        }
+        probabilityText.append(probability.toString());
+        probabilityText.append("%");
+        while(!bracket && probabilityText.length() < 7) {
+            probabilityText.append(" ");
+        }
+        if(bracket) {
+            probabilityText.append(")");
+        }
+        return probabilityText.toString();
     }
 }

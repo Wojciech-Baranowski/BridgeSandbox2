@@ -26,7 +26,7 @@ public class ProbabilityModeSwitch {
     ProbabilityModeSwitch(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         Drawable background = drawableFactory.makeFramedRectangle(
                 10 + buttonsSpace.getX(),
-                470 + buttonsSpace.getY(),
+                520 + buttonsSpace.getY(),
                 263,
                 40,
                 2,

@@ -13,6 +13,7 @@ import static controllers.gameControllers.cardController.GameCardController.getG
 import static controllers.gameControllers.historyController.GameHistoryController.getGameHistoryController;
 import static controllers.gameControllers.textController.GameTextController.getGameTextController;
 import static engine.input.InputBean.getInput;
+import static engine.scene.SceneBean.getScene;
 import static gameLogic.game.Game.getGame;
 
 public class GameCreator {
@@ -53,7 +54,7 @@ public class GameCreator {
         DrawableComposition drawable = new DrawableComposition(background, text);
         InputCombination activationCombination = getInput().getInputCombinationFactory().makeLmbCombination();
         gameCreator = new SimpleButton(drawable, activationCombination, new CreateGameCommand());
-        //getScene().addObjectHigherThan(gameCreator, buttonsSpace);
+        getScene().addObjectHigherThan(gameCreator, buttonsSpace);
     }
 
 }

@@ -35,7 +35,7 @@ public class GameRestarter {
     GameRestarter(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         Drawable background = drawableFactory.makeFramedRectangle(
                 10 + buttonsSpace.getX(),
-                220 + buttonsSpace.getY(),
+                270 + buttonsSpace.getY(),
                 220,
                 40,
                 2,

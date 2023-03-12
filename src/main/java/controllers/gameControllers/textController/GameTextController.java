@@ -43,6 +43,7 @@ public class GameTextController {
     public void updatePoints() {
         int[] points = getGame().getPoints();
         this.points.updatePoints(points);
+        this.updatePredictedPoints(null);
     }
 
     public void updatePredictedPoints(int[] predictedPoints) {

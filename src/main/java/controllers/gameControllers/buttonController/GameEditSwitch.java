@@ -12,6 +12,7 @@ import gameLogic.game.Game;
 
 import static controllers.editGameControllers.buttonController.EditGameButtonController.getEditGameButtonController;
 import static controllers.editGameControllers.cardController.EditGameCardController.getEditGameCardController;
+import static controllers.gameControllers.buttonController.GameButtonController.getGameButtonController;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
 import static gameLogic.game.Game.getGame;
@@ -33,6 +34,7 @@ public class GameEditSwitch {
                 cardController.getChooseCards().updateChosenCards(game.getCards());
 
                 getScene().switchCollection("editGame");
+                getGameButtonController().getSolverTrigger().getSolverTrigger().setSelected(false);
             }
         }
 
@@ -43,7 +45,7 @@ public class GameEditSwitch {
     GameEditSwitch(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         Drawable background = drawableFactory.makeFramedRectangle(
                 10 + buttonsSpace.getX(),
-                370 + buttonsSpace.getY(),
+                420 + buttonsSpace.getY(),
                 166,
                 40,
                 2,

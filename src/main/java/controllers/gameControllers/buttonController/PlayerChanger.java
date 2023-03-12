@@ -9,6 +9,7 @@ import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
 import gameLogic.game.Game;
 
+import static controllers.gameControllers.buttonController.GameButtonController.getGameButtonController;
 import static engine.input.InputBean.getInput;
 import static engine.scene.SceneBean.getScene;
 import static gameLogic.game.Game.getGame;
@@ -23,6 +24,7 @@ public class PlayerChanger {
             if (!game.isGameOngoing()) {
                 game.switchToNextPlayer();
                 GameCardController.getGameCardController().updateOverlays(game.getCurrentPlayer());
+                getGameButtonController().getSolverTrigger().getSolverTrigger().setSelected(false);
             }
         }
     }

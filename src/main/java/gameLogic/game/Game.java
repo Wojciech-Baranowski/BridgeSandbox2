@@ -17,6 +17,7 @@ import static gameLogic.player.Player.N;
 public class Game {
 
     private static Game game;
+    private static Game lastGame;
     private final MoveValidator moveValidator;
     private final RoundJudge roundJudge;
     private final Deck deck;
@@ -67,6 +68,12 @@ public class Game {
         return game;
     }
 
+    public void switchBackToLastGame() {
+        if(lastGame != null) {
+            game = new Game(lastGame);
+        }
+    }
+
     public static Game getGameMultipliedInstance() {
         return new Game();
     }
@@ -86,6 +93,7 @@ public class Game {
         this.startingPlayer = startingPlayer;
         this.playedCards = new LinkedList<>();
         Arrays.fill(points, 0);
+        lastGame = new Game(game);
     }
 
     public void initializeGame(Color atu, List<Card>[] cards, List<Card> playedCards,

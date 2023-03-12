@@ -12,6 +12,7 @@ public class GameButtonController {
     private static GameButtonController gameButtonController;
     private final CardsNumberChanger cardsNumberChanger;
     private final PlayerChanger playerChanger;
+    private final GameCreator gameCreator;
     private final GameRestarter gameRestarter;
     private final CardsOrderChanger cardsOrderChanger;
     private final GameEditSwitch gameEditSwitch;
@@ -26,6 +27,7 @@ public class GameButtonController {
 
         cardsNumberChanger = new CardsNumberChanger(drawableFactory, gameButtonsSpace);
         playerChanger = new PlayerChanger(drawableFactory, gameButtonsSpace);
+        gameCreator = new GameCreator(drawableFactory, gameButtonsSpace);
         gameRestarter = new GameRestarter(drawableFactory, gameButtonsSpace);
         cardsOrderChanger = new CardsOrderChanger(drawableFactory, gameButtonsSpace);
         gameEditSwitch = new GameEditSwitch(drawableFactory, gameButtonsSpace);

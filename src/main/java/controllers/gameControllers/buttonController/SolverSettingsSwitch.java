@@ -26,7 +26,7 @@ public class SolverSettingsSwitch {
     SolverSettingsSwitch(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         Drawable background = drawableFactory.makeFramedRectangle(
                 10 + buttonsSpace.getX(),
-                420 + buttonsSpace.getY(),
+                470 + buttonsSpace.getY(),
                 242,
                 40,
                 2,

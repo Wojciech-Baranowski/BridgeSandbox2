@@ -49,23 +49,27 @@ public class ProbabilitySolver {
                             probabilities[j].get(probabilities[j].size() - 1).getProbability()));
                 }
             } else {
+                int numberOfConsideredGames = 0;
                 int[] numberOfSuccessfulGames = new int[MIN_CARDS_PER_PLAYER + 1];
                 Arrays.fill(numberOfSuccessfulGames, 0);
                 for (int j = 0; j < Math.pow(2, remainingCards.size()); j++) {
-                    Game game = prepareGame(getCopyOfCards(cards), playedCards, new ArrayList<>(playedCardsList),
-                            remainingCards, startingPlayer, currentPlayer, j);
-                    game.playCard(card);
-                    if (game.hasRoundEnded()) {
-                        game.summarizeRound();
-                    }
-                    Algorithm algorithm = new PVSWithCutoff();
-                    int taken = algorithm.solve(game).getPoints()[0];
-                    if (numberOfCardsToTake - taken <= MAX_CARDS_PER_PLAYER) {
-                        numberOfSuccessfulGames[numberOfCardsToTake - taken]++;
+                    if (isDistributionNumberInBounds(j, remainingCards.size(), numberOfCardsToTake)) {
+                        numberOfConsideredGames++;
+                        Game game = prepareGame(getCopyOfCards(cards), playedCards, new ArrayList<>(playedCardsList),
+                                remainingCards, startingPlayer, currentPlayer, j);
+                        game.playCard(card);
+                        if (game.hasRoundEnded()) {
+                            game.summarizeRound();
+                        }
+                        Algorithm algorithm = new PVSWithCutoff();
+                        int taken = algorithm.solve(game).getPoints()[0];
+                        if (numberOfCardsToTake - taken <= MAX_CARDS_PER_PLAYER) {
+                            numberOfSuccessfulGames[numberOfCardsToTake - taken]++;
+                        }
                     }
                 }
                 for (int j = 0; j < MIN_CARDS_PER_PLAYER + 1; j++) {
-                    double probability = (numberOfSuccessfulGames[j] / Math.pow(2, remainingCards.size()));
+                    double probability = ((double) numberOfSuccessfulGames[j] / numberOfConsideredGames);
                     double probabilityPercents = NumberRounder.round(100 * probability, 2);
                     probabilities[j].add(new CardProbability(card, probabilityPercents));
                 }
@@ -139,6 +143,15 @@ public class ProbabilitySolver {
             }
         }
         return copyOfCards;
+    }
+
+    private boolean isDistributionNumberInBounds(int number, int binarySize, int bound) {
+        int ones = 0;
+        while (number != 0) {
+            ones += (number & 1);
+            number >>= 1;
+        }
+        return ones <= bound && binarySize - ones <= bound;
     }
 
 }

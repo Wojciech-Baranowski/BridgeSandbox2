@@ -92,6 +92,9 @@ public class GameState {
         this.currentPlayer = this.previousStartingPlayers[this.numberOfPreviousStartingPlayers];
         this.startingPlayer = this.previousStartingPlayers[this.numberOfPreviousStartingPlayers];
         this.points[this.startingPlayer / 2]--;
+        for (int i = 0; i < PLAYER_NUMBER; i++) {
+            this.tableCards[i] = this.playedTableCards[this.numberOfPlayedRounds][i];
+        }
     }
 
     private int resolveRoundWinner() {
@@ -112,7 +115,7 @@ public class GameState {
         int startingPairPoints = getStartingPairPoints();
         if (this.results[startingPairPoints][0] == -1) {
             for (int i = 0; i < this.totalNumberOfCards; i++) {
-                this.results[startingPairPoints][i] = playedCards[i];
+                this.results[startingPairPoints][i] = this.playedCards[i];
             }
         }
     }

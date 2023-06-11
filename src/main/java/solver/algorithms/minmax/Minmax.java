@@ -17,12 +17,7 @@ public class Minmax implements Algorithm {
         numberOfVisitedNodes = 0;
         MinmaxNode minmaxNode = new MinmaxNode(game);
         byte bestScore = minMax(minmaxNode);
-        return Result.mapResponseToResult(game, minmaxNode.allOutcomeCards, bestScore);
-    }
-
-    @Override
-    public long getNumberOfVisitedNodes() {
-        return numberOfVisitedNodes;
+        return Result.mapResponseToResult(game, minmaxNode.allOutcomeCards, bestScore, numberOfVisitedNodes);
     }
 
     protected byte minMax(MinmaxNode minmaxNode) {

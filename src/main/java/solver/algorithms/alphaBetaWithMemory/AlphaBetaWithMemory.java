@@ -23,12 +23,7 @@ public class AlphaBetaWithMemory implements Algorithm {
         AlphaBetaWithMemoryNode alphaBetaWithMemoryNode = new AlphaBetaWithMemoryNode(game);
         memory = new TreeMap<>(NodeInfo::compareTo);
         byte bestOutcome = alphaBetaWithMemory(alphaBetaWithMemoryNode);
-        return Result.mapResponseToResult(game, alphaBetaWithMemoryNode.allOutcomeCards, bestOutcome);
-    }
-
-    @Override
-    public long getNumberOfVisitedNodes() {
-        return numberOfVisitedNodes;
+        return Result.mapResponseToResult(game, alphaBetaWithMemoryNode.allOutcomeCards, bestOutcome, numberOfVisitedNodes);
     }
 
     private byte alphaBetaWithMemory(AlphaBetaWithMemoryNode alphaBetaWithMemoryNode) {

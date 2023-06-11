@@ -14,7 +14,7 @@ public class PVSKillerHeuristicHighestFirst extends PrincipalVariationSearch {
         PVSNode PVSNode = new PVSNode(game);
         orderByFiguresDescending(PVSNode);
         byte bestOutcome = principalVariationSearch(PVSNode);
-        return Result.mapResponseToResult(game, PVSNode.allOutcomeCards, bestOutcome);
+        return Result.mapResponseToResult(game, PVSNode.allOutcomeCards, bestOutcome, numberOfVisitedNodes);
     }
 
     protected void orderByFiguresDescending(PVSNode PVSNode) {

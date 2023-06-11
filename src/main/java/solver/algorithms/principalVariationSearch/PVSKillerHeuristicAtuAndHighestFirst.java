@@ -17,7 +17,7 @@ public class PVSKillerHeuristicAtuAndHighestFirst extends PrincipalVariationSear
         atu = PVSNode.atu;
         moveHighestAndAtuToFirstPosition(PVSNode);
         byte bestOutcome = principalVariationSearch(PVSNode);
-        return Result.mapResponseToResult(game, PVSNode.allOutcomeCards, bestOutcome);
+        return Result.mapResponseToResult(game, PVSNode.allOutcomeCards, bestOutcome, numberOfVisitedNodes);
     }
 
     protected void moveHighestAndAtuToFirstPosition(PVSNode PVSNode) {

@@ -64,7 +64,7 @@ public class SolverTrigger {
     SolverTrigger(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         Drawable inactiveBackground = drawableFactory.makeFramedRectangle(
                 10 + buttonsSpace.getX(),
-                370 + buttonsSpace.getY(),
+                320 + buttonsSpace.getY(),
                 224,
                 40,
                 2,
@@ -97,6 +97,7 @@ public class SolverTrigger {
                 new StartSolverCommand(),
                 new StopSolverCommand());
         getScene().addObjectHigherThan(solverTrigger, buttonsSpace);
+
     }
 
 }

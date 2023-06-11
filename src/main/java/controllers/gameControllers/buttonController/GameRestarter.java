@@ -6,7 +6,6 @@ import engine.display.Drawable;
 import engine.display.DrawableComposition;
 import engine.display.DrawableFactory;
 import engine.input.inputCombination.InputCombination;
-import gameLogic.game.Game;
 
 import static controllers.gameControllers.buttonController.GameButtonController.getGameButtonController;
 import static controllers.gameControllers.cardController.GameCardController.getGameCardController;
@@ -36,7 +35,7 @@ public class GameRestarter {
     GameRestarter(DrawableFactory drawableFactory, Drawable buttonsSpace) {
         Drawable background = drawableFactory.makeFramedRectangle(
                 10 + buttonsSpace.getX(),
-                270 + buttonsSpace.getY(),
+                220 + buttonsSpace.getY(),
                 220,
                 40,
                 2,

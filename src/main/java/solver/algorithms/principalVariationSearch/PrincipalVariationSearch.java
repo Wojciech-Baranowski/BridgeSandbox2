@@ -19,12 +19,7 @@ public class PrincipalVariationSearch implements Algorithm {
         numberOfVisitedNodes = 0;
         PVSNode PVSNode = new PVSNode(game);
         byte bestOutcome = principalVariationSearch(PVSNode);
-        return Result.mapResponseToResult(game, PVSNode.allOutcomeCards, bestOutcome);
-    }
-
-    @Override
-    public long getNumberOfVisitedNodes() {
-        return numberOfVisitedNodes;
+        return Result.mapResponseToResult(game, PVSNode.allOutcomeCards, bestOutcome, numberOfVisitedNodes);
     }
 
     protected byte principalVariationSearch(PVSNode PVSNode) {

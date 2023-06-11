@@ -5,6 +5,7 @@ import gameLogic.card.Color;
 import gameLogic.game.Game;
 import lombok.Getter;
 import solver.Algorithm;
+import solver.result.Result;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
@@ -69,9 +70,9 @@ public class MultipleGamesSolver {
         }
         game.initializeGame(Color.values()[randomNumber % 5], cardNumber);
         long time = System.currentTimeMillis();
-        algorithm.solve(game);
+        Result result = algorithm.solve(game);
         time = System.currentTimeMillis() - time;
-        long numberOfVisitedNodes = algorithm.getNumberOfVisitedNodes();
+        long numberOfVisitedNodes = result.getNumberOfVisitedNodes();
         double computationTime = round(time / 1000.0, 4);
         synchronized (this) {
             numberOfVisitedNodesList.add(numberOfVisitedNodes);

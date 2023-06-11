@@ -21,8 +21,10 @@ public class Result {
     private final List<ResultRound> resultRounds;
     @Setter
     private int[] points;
+    private final long numberOfVisitedNodes;
 
-    public Result(List<Card> cards, Player startingPlayer, Color atu) {
+    public Result(List<Card> cards, Player startingPlayer, Color atu, long numberOfVisitedNodes) {
+        this.numberOfVisitedNodes = numberOfVisitedNodes;
         resultRounds = new ArrayList<>();
         points = new int[PLAYER_NUMBER / 2];
         List<Card> roundCards = new ArrayList<>();
@@ -44,7 +46,7 @@ public class Result {
 
     }
 
-    public static Result mapResponseToResult(Game game, byte[][] allOutcomeCards, byte bestScore) {
+    public static Result mapResponseToResult(Game game, byte[][] allOutcomeCards, byte bestScore, long numberOfVisitedNodes) {
         Deck deck = getDeck();
         List<Card> cards = new ArrayList<>();
         bestScore = bestScore < 0 ? (byte) (bestScore * -1) : bestScore;
@@ -54,7 +56,7 @@ public class Result {
         for (byte cardId : allOutcomeCards[bestScore]) {
             cards.add(deck.getCard(cardId));
         }
-        return new Result(cards, game.getStartingPlayer(), game.getAtu());
+        return new Result(cards, game.getStartingPlayer(), game.getAtu(), numberOfVisitedNodes);
     }
 
 }

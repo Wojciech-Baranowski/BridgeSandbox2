@@ -16,12 +16,7 @@ public class Mtd implements Algorithm {
         numberOfVisitedNodes = 0;
         MtdNode mtdNode = new MtdNode(game);
         byte bestOutcome = mtd(mtdNode, (byte) ((byte) game.getStartingNumberOfCardsPerPlayer() / 2));
-        return Result.mapResponseToResult(game, mtdNode.allOutcomeCards, bestOutcome);
-    }
-
-    @Override
-    public long getNumberOfVisitedNodes() {
-        return numberOfVisitedNodes;
+        return Result.mapResponseToResult(game, mtdNode.allOutcomeCards, bestOutcome, numberOfVisitedNodes);
     }
 
     private byte mtd(MtdNode mtdNode, byte f) {

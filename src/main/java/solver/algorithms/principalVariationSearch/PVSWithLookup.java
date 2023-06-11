@@ -13,7 +13,7 @@ public class PVSWithLookup extends PVSWithCutoff {
         PVSLookupNode pvsNode = new PVSLookupNode(game);
         orderByFiguresDescending(pvsNode);
         byte bestOutcome = principalVariationSearch(pvsNode);
-        return Result.mapResponseToResult(game, pvsNode.allOutcomeCards, bestOutcome);
+        return Result.mapResponseToResult(game, pvsNode.allOutcomeCards, bestOutcome, numberOfVisitedNodes);
     }
 
     @Override

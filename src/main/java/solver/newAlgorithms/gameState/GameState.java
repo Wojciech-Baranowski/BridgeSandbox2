@@ -4,19 +4,20 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import static gameLogic.game.GameConstants.FIGURE_NUMBER;
-import static gameLogic.game.GameConstants.PLAYER_NUMBER;
+import static gameLogic.game.GameConstants.*;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class GameState {
 
+    private static final int[] helperArray = new int[DECK_SIZE / PLAYER_NUMBER];
     private final int totalNumberOfCards;
     private final int initialPlayer;
     private final int atu;
 
     private int[][] handsCards;
-    private int[] numberOfCardsPerHand;
+    private int[][] numberOfHandsCardsPerColor;
+    private int[] numberOfHandsCards;
     private int[] tableCards;
     private int[] points;
     private int startingPlayer;
@@ -55,10 +56,11 @@ public class GameState {
         this.tableCards[this.currentPlayer] = this.handsCards[this.currentPlayer][cardToPlayIndexInHand];
         this.playedCards[this.numberOfPlayedCards] = this.handsCards[this.currentPlayer][cardToPlayIndexInHand];
         this.playedCardsIndicesInHands[this.numberOfPlayedCards] = cardToPlayIndexInHand;
-        for (int i = cardToPlayIndexInHand; i < this.numberOfCardsPerHand[this.currentPlayer] - 1; i++) {
+        for (int i = cardToPlayIndexInHand; i < this.numberOfHandsCards[this.currentPlayer] - 1; i++) {
             this.handsCards[this.currentPlayer][i] = this.handsCards[this.currentPlayer][i + 1];
         }
-        this.numberOfCardsPerHand[this.currentPlayer]--;
+        this.numberOfHandsCardsPerColor[this.currentPlayer][this.playedCards[this.numberOfPlayedCards] / FIGURE_NUMBER]--;
+        this.numberOfHandsCards[this.currentPlayer]--;
         this.currentPlayer = (this.currentPlayer + 1) % PLAYER_NUMBER;
         this.numberOfPlayedCards++;
         this.numberOfGeneratedGameStates++;
@@ -67,8 +69,9 @@ public class GameState {
     private void unplayCard() {
         this.numberOfPlayedCards--;
         this.currentPlayer = (this.currentPlayer - 1 + PLAYER_NUMBER) % PLAYER_NUMBER;
-        this.numberOfCardsPerHand[this.currentPlayer]++;
-        for (int i = this.numberOfCardsPerHand[this.currentPlayer] - 1; i > this.playedCardsIndicesInHands[this.numberOfPlayedCards]; i--) {
+        this.numberOfHandsCards[this.currentPlayer]++;
+        this.numberOfHandsCardsPerColor[this.currentPlayer][this.playedCards[this.numberOfPlayedCards] / FIGURE_NUMBER]++;
+        for (int i = this.numberOfHandsCards[this.currentPlayer] - 1; i > this.playedCardsIndicesInHands[this.numberOfPlayedCards]; i--) {
             this.handsCards[this.currentPlayer][i] = this.handsCards[this.currentPlayer][i - 1];
         }
         this.handsCards[this.currentPlayer][this.playedCardsIndicesInHands[this.numberOfPlayedCards]] = this.playedCards[this.numberOfPlayedCards];
@@ -119,6 +122,24 @@ public class GameState {
                 this.results[startingPairPoints][i] = this.playedCards[i];
             }
         }
+    }
+
+    public int[] getIndicesOfPlayableCardsOnCurrentPlayerHand() {
+        int numberOfPlayableCardsOnCurrentPlayerHand = 0;
+        for (int i = 0; i < this.numberOfHandsCards[this.currentPlayer]; i++) {
+            boolean currentPlayerStartsTheRound = this.startingPlayer == this.currentPlayer;
+            boolean cardColorMatchesStartingPlayerTableCardColor = this.handsCards[this.currentPlayer][i] / FIGURE_NUMBER == this.tableCards[this.startingPlayer] / FIGURE_NUMBER;
+            boolean playerHasVoidInStartingPlayerTableCardColor = this.numberOfHandsCardsPerColor[this.currentPlayer][this.handsCards[this.currentPlayer][i] / FIGURE_NUMBER] == 0;
+            if (currentPlayerStartsTheRound || cardColorMatchesStartingPlayerTableCardColor || playerHasVoidInStartingPlayerTableCardColor) {
+                helperArray[numberOfPlayableCardsOnCurrentPlayerHand] = i;
+                numberOfPlayableCardsOnCurrentPlayerHand++;
+            }
+        }
+        int[] indicesOfPlayableCardsOnCurrentPlayerHand = new int[numberOfPlayableCardsOnCurrentPlayerHand];
+        for (int i = 0; i < numberOfPlayableCardsOnCurrentPlayerHand; i++) {
+            indicesOfPlayableCardsOnCurrentPlayerHand[i] = helperArray[i];
+        }
+        return indicesOfPlayableCardsOnCurrentPlayerHand;
     }
 
     public int getStartingPairPoints() {

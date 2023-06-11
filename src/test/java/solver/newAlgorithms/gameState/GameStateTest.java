@@ -11,6 +11,7 @@ import java.util.stream.IntStream;
 
 import static gameLogic.card.Color.*;
 import static gameLogic.card.Figure.*;
+import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 import static gameLogic.player.Player.N;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -52,15 +53,17 @@ public class GameStateTest {
         assertArrayEquals(playedCardsIdsOrder, this.gameState.getPlayedCards());
         assertArrayEquals(startingPlayersOrder, this.gameState.getPreviousStartingPlayers());
         assertArrayEquals(resultPoints, this.gameState.getPoints());
-        assertArrayEquals(new int[]{0, 0, 0, 0}, this.gameState.getNumberOfCardsPerHand());
+        assertArrayEquals(new int[PLAYER_NUMBER], this.gameState.getNumberOfHandsCards());
+        IntStream.range(0, PLAYER_NUMBER).forEach(i -> assertArrayEquals(new int[PLAYER_NUMBER], this.gameState.getNumberOfHandsCardsPerColor()[i]));
         assertEquals(16, this.gameState.getNumberOfPlayedCards());
-        assertEquals(4, this.gameState.getNumberOfPlayedRounds());
+        assertEquals(16 / PLAYER_NUMBER, this.gameState.getNumberOfPlayedRounds());
     }
 
     @Test
     public void gameState_undoMove_test() {
         //Given
         GameState initialGameState = initializeGameState();
+        int[][] startingNumberOfHandsCardsPerColor = new int[][]{{2, 0, 0, 2}, {2, 0, 2, 0}, {1, 3, 0, 0}, {1, 1, 1, 1}};
         int[] indicesInHandsOfCardsToPlay = new int[]{0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0};
 
         //When
@@ -68,8 +71,9 @@ public class GameStateTest {
         Arrays.stream(indicesInHandsOfCardsToPlay).forEach(i -> this.gameState.undoMove());
 
         //Then
-        IntStream.range(0, 4).forEach(i -> assertArrayEquals(initialGameState.getHandsCards()[i], this.gameState.getHandsCards()[i]));
-        assertArrayEquals(initialGameState.getNumberOfCardsPerHand(), this.gameState.getNumberOfCardsPerHand());
+        IntStream.range(0, PLAYER_NUMBER).forEach(i -> assertArrayEquals(initialGameState.getHandsCards()[i], this.gameState.getHandsCards()[i]));
+        IntStream.range(0, PLAYER_NUMBER).forEach(i -> assertArrayEquals(startingNumberOfHandsCardsPerColor[i], this.gameState.getNumberOfHandsCardsPerColor()[i]));
+        assertArrayEquals(initialGameState.getNumberOfHandsCards(), this.gameState.getNumberOfHandsCards());
         assertArrayEquals(initialGameState.getPoints(), this.gameState.getPoints());
         assertEquals(initialGameState.getStartingPlayer(), this.gameState.getStartingPlayer());
         assertEquals(initialGameState.getCurrentPlayer(), this.gameState.getCurrentPlayer());

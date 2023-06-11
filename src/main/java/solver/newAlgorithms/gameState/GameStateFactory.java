@@ -8,8 +8,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static gameLogic.game.GameConstants.DECK_SIZE;
-import static gameLogic.game.GameConstants.PLAYER_NUMBER;
+import static gameLogic.game.GameConstants.*;
 
 public class GameStateFactory {
 
@@ -19,7 +18,8 @@ public class GameStateFactory {
         int atu = game.getAtu().ordinal();
 
         int[][] handsCards = rewriteHandsCards(game.getCards());
-        int[] numberOfCardsPerHand = rewriteNumberOfCardsPerHand(game.getCards());
+        int[][] numberOfHandsCardsPerColor = rewriteNumberOfHandsCardsPerColor(game.getCards());
+        int[] numberOfHandsCards = rewriteNumberOfHandsCards(game.getCards());
         int[] tableCards = rewriteTableCards(game.getPlayedCards());
         int[] points = rewritePoints(game.getPoints());
         int startingPlayer = game.getStartingPlayer().ordinal();
@@ -41,7 +41,8 @@ public class GameStateFactory {
                 initialPlayer,
                 atu,
                 handsCards,
-                numberOfCardsPerHand,
+                numberOfHandsCardsPerColor,
+                numberOfHandsCards,
                 tableCards,
                 points,
                 startingPlayer,
@@ -76,12 +77,22 @@ public class GameStateFactory {
         return handsCardsCopy;
     }
 
-    private int[] rewriteNumberOfCardsPerHand(List<Card>[] handsCards) {
-        int[] numberOfCardsPerHand = new int[PLAYER_NUMBER];
+    private int[][] rewriteNumberOfHandsCardsPerColor(List<Card>[] handsCards) {
+        int[][] handsCardsPerColor = new int[PLAYER_NUMBER][PLAYER_NUMBER];
         for (int i = 0; i < PLAYER_NUMBER; i++) {
-            numberOfCardsPerHand[i] = handsCards[i].size();
+            for (int j = 0; j < handsCards[i].size(); j++) {
+                handsCardsPerColor[i][handsCards[i].get(j).getId() / FIGURE_NUMBER]++;
+            }
         }
-        return numberOfCardsPerHand;
+        return handsCardsPerColor;
+    }
+
+    private int[] rewriteNumberOfHandsCards(List<Card>[] handsCards) {
+        int[] numberOfHandsCards = new int[PLAYER_NUMBER];
+        for (int i = 0; i < PLAYER_NUMBER; i++) {
+            numberOfHandsCards[i] = handsCards[i].size();
+        }
+        return numberOfHandsCards;
     }
 
     private int[] rewriteTableCards(List<Card> playedCards) {

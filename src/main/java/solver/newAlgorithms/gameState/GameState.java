@@ -4,7 +4,8 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import static gameLogic.game.GameConstants.*;
+import static gameLogic.game.GameConstants.FIGURE_NUMBER;
+import static gameLogic.game.GameConstants.PLAYER_NUMBER;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
@@ -79,7 +80,7 @@ public class GameState {
             this.playedTableCards[this.numberOfPlayedRounds][i] = this.tableCards[i];
         }
         this.previousStartingPlayers[this.numberOfPreviousStartingPlayers] = this.startingPlayer;
-        this.points[winnerPlayer / 2]++;
+        this.points[winnerPlayer % 2]++;
         this.startingPlayer = winnerPlayer;
         this.currentPlayer = winnerPlayer;
         this.numberOfPreviousStartingPlayers++;
@@ -89,9 +90,9 @@ public class GameState {
     private void unresolveRound() {
         this.numberOfPlayedRounds--;
         this.numberOfPreviousStartingPlayers--;
+        this.points[this.startingPlayer % 2]--;
         this.currentPlayer = this.previousStartingPlayers[this.numberOfPreviousStartingPlayers];
         this.startingPlayer = this.previousStartingPlayers[this.numberOfPreviousStartingPlayers];
-        this.points[this.startingPlayer / 2]--;
         for (int i = 0; i < PLAYER_NUMBER; i++) {
             this.tableCards[i] = this.playedTableCards[this.numberOfPlayedRounds][i];
         }
@@ -99,9 +100,9 @@ public class GameState {
 
     private int resolveRoundWinner() {
         int winner = this.startingPlayer;
-        for (int i = this.startingPlayer + 1, j = 1; j < PLAYER_NUMBER; i = (i + 1) % PLAYER_NUMBER, j++) {
+        for (int i = (this.startingPlayer + 1) % PLAYER_NUMBER, j = 1; j < PLAYER_NUMBER; i = (i + 1) % PLAYER_NUMBER, j++) {
             boolean cardColorEqualsWinnerCardColor = this.tableCards[i] / FIGURE_NUMBER == this.tableCards[winner] / FIGURE_NUMBER;
-            boolean cardFigureIsGreaterThanWinnerCardFigure = this.tableCards[i] % COLOR_NUMBER > this.tableCards[winner] % COLOR_NUMBER;
+            boolean cardFigureIsGreaterThanWinnerCardFigure = this.tableCards[i] % FIGURE_NUMBER > this.tableCards[winner] % FIGURE_NUMBER;
             boolean cardColorEqualsAtuColor = this.tableCards[i] / FIGURE_NUMBER == this.atu;
             boolean winnerCardColorNotEqualsAtu = this.tableCards[winner] / FIGURE_NUMBER != this.atu;
             if ((cardColorEqualsWinnerCardColor && cardFigureIsGreaterThanWinnerCardFigure) || (cardColorEqualsAtuColor && winnerCardColorNotEqualsAtu)) {
@@ -121,6 +122,6 @@ public class GameState {
     }
 
     public int getStartingPairPoints() {
-        return this.points[this.initialPlayer / 2];
+        return this.points[this.initialPlayer % 2];
     }
 }

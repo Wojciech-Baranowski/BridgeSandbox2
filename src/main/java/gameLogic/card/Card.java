@@ -20,7 +20,7 @@ public class Card {
         this.color = Color.values()[id / FIGURE_NUMBER];
     }
 
-    Card(Figure figure, Color color) {
+    public Card(Figure figure, Color color) {
         this.figure = figure;
         this.color = color;
     }

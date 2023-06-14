@@ -3,11 +3,8 @@ package solver.tester;
 import gameLogic.card.Color;
 import gameLogic.game.Game;
 import solver.Algorithm;
-import solver.algorithms.alphaBeta.AlphaBeta;
-import solver.algorithms.alphaBetaWithMemory.AlphaBetaWithMemory;
-import solver.algorithms.minmax.Minmax;
-import solver.algorithms.mtd.Mtd;
-import solver.algorithms.principalVariationSearch.*;
+import solver.algorithms.principalVariationSearch.PVSWithCutoff;
+import solver.newAlgorithms.Negamax;
 import solver.result.Result;
 
 public class Tester {
@@ -20,8 +17,8 @@ public class Tester {
     public Tester() {
         numberOfCards = 4;
         numberOfTests = 10000;
-        tested = new PVSWithLookup();
-        correct = new Minmax();
+        tested = new Negamax();
+        correct = new PVSWithCutoff();
         test();
     }
 
@@ -33,8 +30,7 @@ public class Tester {
             game.initializeGame(Color.CLUB, numberOfCards);
             Result correctResult = correct.solve(game);
             Result testedResult = tested.solve(game);
-            if (correctResult.getPoints()[0] + 100 * correctResult.getPoints()[1] !=
-                    testedResult.getPoints()[0] + 100 * testedResult.getPoints()[1]) {
+            if (correctResult.getPoints()[0] + 100 * correctResult.getPoints()[1] != testedResult.getPoints()[0] + 100 * testedResult.getPoints()[1]) {
                 System.out.println("ALGORITHM ISN'T CORRECT!");
                 return;
             }
@@ -46,5 +42,4 @@ public class Tester {
         new Tester();
         System.out.println("DONE!");
     }
-
 }

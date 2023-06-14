@@ -93,7 +93,7 @@ public class Game {
         this.startingPlayer = startingPlayer;
         this.playedCards = new LinkedList<>();
         Arrays.fill(points, 0);
-        lastGame = new Game(game);
+        lastGame = game != null ? new Game(game) : null;
     }
 
     public void initializeGame(Color atu, List<Card>[] cards, List<Card> playedCards,

@@ -6,7 +6,7 @@ import solver.newAlgorithms.gameState.GameState;
 @Getter
 public class BaseNode implements Node {
 
-    private final GameState gameState;
+    public final GameState gameState;
     private final boolean repeatedNode;
 
     public BaseNode(GameState gameState) {

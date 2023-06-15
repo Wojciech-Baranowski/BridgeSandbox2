@@ -146,6 +146,10 @@ public class ArrayBasedGameState implements GameState {
         return this.points[this.initialPlayer % 2];
     }
 
+    public int getTotalNumberOfPoints() {
+        return this.initialNumberOfCards + this.numberOfPlayedCards;
+    }
+
     public boolean isGameFinished() {
         return this.initialNumberOfCards == this.numberOfPlayedCards;
     }

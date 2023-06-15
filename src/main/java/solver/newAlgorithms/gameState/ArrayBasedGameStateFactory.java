@@ -13,7 +13,7 @@ import static gameLogic.game.GameConstants.*;
 
 public class ArrayBasedGameStateFactory implements GameStateFactory {
 
-    public ArrayBasedGameState createGameState(Game game) {
+    public GameState createGameState(Game game) {
         int initialNumberOfCards = getNumberOfCards(game.getCards(), game.getPlayedCards());
         int initialPlayer = game.getStartingPlayer().ordinal();
         int atu = game.getAtu().ordinal();

@@ -5,12 +5,10 @@ import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import lombok.Getter;
 import solver.Algorithm;
-import solver.algorithms.alphaBeta.AlphaBeta;
-import solver.algorithms.alphaBetaWithMemory.AlphaBetaWithMemory;
-import solver.algorithms.minmax.Minmax;
-import solver.algorithms.mtd.Mtd;
 import solver.algorithms.principalVariationSearch.*;
-import solver.newAlgorithms.Negamax;
+import solver.newAlgorithms.algorithm.Mtdf;
+import solver.newAlgorithms.algorithm.Negamax;
+import solver.newAlgorithms.algorithm.NegamaxAlphaBeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,17 +62,11 @@ public class AlgorithmsChanger {
         algorithms.add(new PrincipalVariationSearch());
         algorithmNames.add("Principal Variation Search");
 
-        algorithms.add(new Mtd());
+        algorithms.add(new Mtdf());
         algorithmNames.add("MTD(f)");
 
-        algorithms.add(new AlphaBetaWithMemory());
-        algorithmNames.add("Alpha-beta with memory");
-
-        algorithms.add(new AlphaBeta());
-        algorithmNames.add("Alpha-beta");
-
-        algorithms.add(new Minmax());
-        algorithmNames.add("Minmax");
+        algorithms.add(new NegamaxAlphaBeta());
+        algorithmNames.add("Negamax Alpha-Beta");
 
         algorithms.add(new Negamax());
         algorithmNames.add("Negamax");

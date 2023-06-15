@@ -5,6 +5,7 @@ import gameLogic.game.Game;
 import solver.Algorithm;
 import solver.newAlgorithms.gameState.ArrayBasedGameStateFactory;
 import solver.newAlgorithms.gameState.GameState;
+import solver.newAlgorithms.gameState.GameStateFactory;
 import solver.result.Result;
 
 import java.util.Arrays;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public abstract class AlgorithmProxy implements Algorithm {
 
-    private static final ArrayBasedGameStateFactory gameStateFactory = new ArrayBasedGameStateFactory();
+    private static final GameStateFactory gameStateFactory = new ArrayBasedGameStateFactory();
 
     public abstract int solve(GameState gameState);
 

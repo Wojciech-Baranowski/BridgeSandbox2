@@ -1,5 +1,6 @@
-package solver.newAlgorithms;
+package solver.newAlgorithms.algorithm;
 
+import solver.newAlgorithms.AlgorithmProxy;
 import solver.newAlgorithms.gameState.GameState;
 import solver.newAlgorithms.node.BaseNode;
 
@@ -8,11 +9,10 @@ public class Negamax extends AlgorithmProxy {
     @Override
     public int solve(GameState gameState) {
         int result = negamax(new BaseNode(gameState), gameState.isNSOnMove() ? 1 : -1);
-        int res = Math.abs(result);
-        return res;
+        return Math.abs(result);
     }
 
-    public int negamax(BaseNode node, int color) {
+    private int negamax(BaseNode node, int color) {
         if (node.isTerminal()) {
             return color * node.getValue();
         }

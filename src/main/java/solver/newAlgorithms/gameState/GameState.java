@@ -14,6 +14,8 @@ public interface GameState {
 
     int getStartingPairPoints();
 
+    int getTotalNumberOfPoints();
+
     boolean isGameFinished();
 
     boolean isRoundBeginning();

@@ -4,5 +4,5 @@ import gameLogic.game.Game;
 
 public interface GameStateFactory {
 
-    ArrayBasedGameState createGameState(Game game);
+    GameState createGameState(Game game);
 }

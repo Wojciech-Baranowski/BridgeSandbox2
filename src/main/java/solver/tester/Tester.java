@@ -4,7 +4,7 @@ import gameLogic.card.Color;
 import gameLogic.game.Game;
 import solver.Algorithm;
 import solver.algorithms.principalVariationSearch.PVSWithCutoff;
-import solver.newAlgorithms.Negamax;
+import solver.newAlgorithms.algorithm.Mtdf;
 import solver.result.Result;
 
 public class Tester {
@@ -17,7 +17,7 @@ public class Tester {
     public Tester() {
         numberOfCards = 4;
         numberOfTests = 10000;
-        tested = new Negamax();
+        tested = new Mtdf();
         correct = new PVSWithCutoff();
         test();
     }

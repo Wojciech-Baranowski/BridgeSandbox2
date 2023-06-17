@@ -5,10 +5,8 @@ import engine.display.Drawable;
 import engine.display.DrawableFactory;
 import lombok.Getter;
 import solver.Algorithm;
-import solver.algorithms.principalVariationSearch.*;
-import solver.newAlgorithms.algorithm.Mtdf;
-import solver.newAlgorithms.algorithm.Negamax;
-import solver.newAlgorithms.algorithm.NegamaxAlphaBeta;
+import solver.algorithms.principalVariationSearch.PVSWithLookup;
+import solver.newAlgorithms.algorithm.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +26,6 @@ public class AlgorithmsChanger {
         algorithmNames = new ArrayList<>();
         algorithmChangerOptions = new ArrayList<>();
         addAlgorithms();
-
         for (int i = 0; i < algorithms.size(); i++) {
             AlgorithmChangerOption algorithmChangerOption = new AlgorithmChangerOption(
                     drawableFactory, background, algorithmNames.get(i), algorithms.get(i), i);
@@ -47,29 +44,26 @@ public class AlgorithmsChanger {
         algorithms.add(new PVSWithLookup());
         algorithmNames.add("PVS with lookup");
 
-        algorithms.add(new PVSWithCutoff());
-        algorithmNames.add("PVS with cutoff");
-
-        algorithms.add(new PVSKillerHeuristicAtuAndHighestFirst());
-        algorithmNames.add("PVS killer heuristic atu then highest first");
-
-        algorithms.add(new PVSKillerHeuristicHighestFirst());
-        algorithmNames.add("PVS killer heuristic highest first");
-
-        algorithms.add(new PVSKillerHeuristicAtuFirst());
-        algorithmNames.add("PVS killer heuristic atu first");
-
         algorithms.add(new PrincipalVariationSearch());
         algorithmNames.add("Principal Variation Search");
+
+        algorithms.add(new NegaScout());
+        algorithmNames.add("NegaScout");
 
         algorithms.add(new Mtdf());
         algorithmNames.add("MTD(f)");
 
+        algorithms.add(new NegaCStar());
+        algorithmNames.add("NegaC*");
+
+        algorithms.add(new SssStar());
+        algorithmNames.add("SSS*");
+
+        algorithms.add(new DualStar());
+        algorithmNames.add("Dual*");
+
         algorithms.add(new NegamaxAlphaBeta());
         algorithmNames.add("Negamax Alpha-Beta");
-
-        algorithms.add(new Negamax());
-        algorithmNames.add("Negamax");
     }
 
 }
